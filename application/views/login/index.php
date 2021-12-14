@@ -43,6 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   
   <main class="main-content  mt-0">
     <section>
+      <?php echo form_open('login/autenticar');?>
       <div class="page-header min-vh-75">
         <div class="container">
           <div class="row">
@@ -50,8 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="card card-plain mt-6">
                 <div class="card-header pb-0 text-left bg-transparent">
                   <!-- <h3 class="font-weight-bolder text-info text-gradient">App HMDCC</h3> -->
-				  <img src="<?php echo base_url()."assets/img/logo/logo1.jpg";?>">
-				  <p class="mb-0">Digite seu e-mail e senha para entrar</p>
+                  <img src="<?php echo base_url()."assets/img/logo/logo1.jpg";?>">
+                  <p class="mb-0">Digite seu e-mail e senha para entrar</p>
                 </div>
                 <div class="card-body">
                   <form role="form">
@@ -64,7 +65,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <input type="email" class="form-control" placeholder="Senha" aria-label="Password" aria-describedby="password-addon">
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Entrar</button>
+                      <!-- <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Entrar</button> -->
+                      <?php 
+                        echo form_button(array("class"=>"btn bg-gradient-info w-100 mt-4 mb-0", "type"=>"submit", "content"=>"Entrar"));
+                        echo form_close();
+                      ?>
                     </div>
                   </form>
                 </div>
@@ -132,7 +137,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     // }
   </script>
   <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- <script async defer src="https://buttons.github.io/buttons.js"></script> -->
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>

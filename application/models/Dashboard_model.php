@@ -1,9 +1,5 @@
 <?php
-class Login_model extends CI_Model {
-    function __construct ()
-    {
-        parent::__construct();
-    }
+class Dashboard_model extends CI_Model {
     // public function listaPacientes(){
     //     return $this->db->get('atendimento_paciente')->result_array();
     // }
@@ -21,37 +17,10 @@ class Login_model extends CI_Model {
     //                                 db_dev.atendimento_paciente AP 
     //                                 INNER JOIN prescr_medica PME ON (PME.NR_ATENDIMENTO=AP.NR_ATENDIMENTO)
     //                                 INNER JOIN setor_atendimento SA ON (SA.cd_setor_atendimento=PME.CD_SETOR_ATENDIMENTO);")->result_array();
-        
-
     // }
 
-    public function logar($email,$senha){
-        return $this->db->query("SELECT * FROM USERS WHERE EMAIL='$email' AND SENHA='$senha'")->row_array();
-    }
-
-    public function atualizaToken($id,$data_atual,$token,$validade){
-        $this->db->query("UPDATE
-                            USERS
-                        SET
-                            ULTIMO_LOGIN='".$data_atual."',
-                            TOKEN='".$token."',
-                            VALIDADE_TOKEN='".$validade."'
-                        WHERE
-                            ID=$id");
-    }
-
-    public function cadastrarPrimeiroAcesso($email,$senha){
-        $ok = $this->db->query("UPDATE
-                            USERS
-                        SET
-                            SENHA='$senha'
-                        WHERE
-                            EMAIL='$email'");
-        if($ok==true){
-            return true;
-        }else{
-            return false;
-        }
+    public function percentuaisGeraisOcupacao(){
+        return $this->db->query("SELECT * FROM HMDCC_APP_TOTAL_OCUPACAO")->result_array();
     }
 }
 ?>

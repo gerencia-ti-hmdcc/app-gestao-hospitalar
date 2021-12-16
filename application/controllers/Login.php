@@ -34,15 +34,63 @@ class Login extends CI_Controller {
                 $usuario = $this->login_model->logar($email,$senha);
                 if($usuario && isset($usuario)){
                         $this->session->unset_userdata("usuario_logado");
-                        //exit(print_r($usuario));
-                        $this->login_model->atualizaToken($usuario["ID"],$data_atual,$token,$validade);
-                        $this->session->set_userdata("usuario_logado",$usuario);
-                        $this->session->set_flashdata("success","Usuário logado!");
-                        redirect('../dashboard');
+                        if($senha=='e10adc3949ba59abbe56e057f20f883e'){
+                                $this->session->set_flashdata("warning","<br />Primeiro acesso. Por favor, atualize sua senha!");
+                                //redirect("/primeiroAcesso");
+                                //$this->primeiroAcesso($email);
+                                $this->load->helper('form');
+                                $dados["email"] = $email;
+                                $this->load->view('login/primeiro_acesso.php',$dados);
+                        }else{
+                                //exit(print_r($usuario));
+                                $this->login_model->atualizaToken($usuario["ID"],$data_atual,$token,$validade);
+                                $this->session->set_userdata("usuario_logado",$usuario);
+                                //$this->session->set_flashdata("success","Usuário logado!");
+                                redirect('../dashboard');
+                        }
                 }else{
                         $this->session->set_flashdata("danger","Usuário ou senha inválido(s)!");
                         $this->load->helper('form');
                         redirect('../');
+                }
+        }
+
+        public function autenticarPrimeiroAcesso(){
+                $this->load->model("login_model");
+                if($this->input->post()){
+                        $nova_senha1    = $this->input->post('nova_senha1');
+                        $nova_senha2    = $this->input->post('nova_senha2');
+                        $email          = $this->input->post("email");
+                        if(strlen($nova_senha1)>=6 OR strlen($nova_senha2)>=6){
+                                $nova_senha1 = md5($nova_senha1);
+                                $nova_senha2 = md5($nova_senha2);
+                                if($nova_senha1==$nova_senha2){
+                                        if($nova_senha1=='e10adc3949ba59abbe56e057f20f883e'){
+                                                $this->session->set_flashdata("danger","<br />A senha utilizada não pode ser '123456'");
+                                                $this->load->helper('form');
+                                                $dados["email"] = $email;
+                                                $this->load->view('login/primeiro_acesso.php',$dados);
+                                        }else{
+                                                $c_primeiro_acesso = $this->login_model->cadastrarPrimeiroAcesso($email,$nova_senha1);
+                                                if($c_primeiro_acesso==true){
+                                                        $this->session->set_flashdata("success","Nova senha cadastrada com sucesso.<br />Efetue Login!");
+                                                }else{
+                                                        $this->session->set_flashdata("danger","<br />Há um erro em seu cadastro. Por favor, comunique ao TI.");
+                                                }
+                                                redirect('../');
+                                        }
+                                }else{  
+                                        $this->session->set_flashdata("danger","As senhas não coincidem!");
+                                        $this->load->helper('form');
+                                        $dados["email"] = $email;
+                                        $this->load->view('login/primeiro_acesso.php',$dados);
+                                }
+                        }else{
+                                $this->session->set_flashdata("danger","<br />A senha deve conter pelo menos 6 caracteres!");
+                                $this->load->helper('form');
+                                $dados["email"] = $email;
+                                $this->load->view('login/primeiro_acesso.php',$dados);
+                        }
                 }
         }
 

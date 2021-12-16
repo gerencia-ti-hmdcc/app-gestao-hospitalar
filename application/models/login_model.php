@@ -39,5 +39,19 @@ class Login_model extends CI_Model {
                         WHERE
                             ID=$id");
     }
+
+    public function cadastrarPrimeiroAcesso($email,$senha){
+        $ok = $this->db->query("UPDATE
+                            USERS
+                        SET
+                            SENHA='$senha'
+                        WHERE
+                            EMAIL='$email'");
+        if($ok==true){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 ?>

@@ -17,16 +17,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/favicon.png">
-  <title>
-    App Gerencial
-  </title>
+  <title>HMDCC</title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
@@ -48,6 +46,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="container">
           <div class="row">
             <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+              <?php 
+                if($this->session->flashdata("danger")){
+                  echo '<div class="alert alert-danger" role="alert">
+                            <strong>Erro!</strong>'.$this->session->flashdata("danger").'
+                        </div>';
+                }
+              ?>
               <div class="card card-plain mt-6">
                 <div class="card-header pb-0 text-left bg-transparent">
                   <!-- <h3 class="font-weight-bolder text-info text-gradient">App HMDCC</h3> -->
@@ -58,11 +63,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <form role="form">
                     <label>Email</label>
                     <div class="mb-3">
-                      <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                      <input type="email" class="form-control" id="email" name="email" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
                     </div>
                     <label>Senha</label>
                     <div class="mb-3">
-                      <input type="email" class="form-control" placeholder="Senha" aria-label="Password" aria-describedby="password-addon">
+                      <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" aria-label="Password" aria-describedby="password-addon">
                     </div>
                     <div class="text-center">
                       <!-- <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Entrar</button> -->
@@ -87,10 +92,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </main>
   <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   <footer class="footer py-5">
-    <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div class="col-lg-8 mb-4 mx-auto text-center">
-          <!-- <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
             Company
           </a>
           <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
@@ -107,7 +112,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </a>
           <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
             Pricing
-          </a> -->
+          </a>
         </div>
       </div>
       <div class="row">
@@ -115,11 +120,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <p class="mb-0 text-secondary">
             Copyright © <script>
               document.write(new Date().getFullYear())
-            </script> Soft by Creative Tim.
+            </script> desenvolvido por TI HMDCC.
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
   </footer>
   <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   <!--   Core JS Files   -->

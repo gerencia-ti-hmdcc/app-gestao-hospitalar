@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li class="nav-item px-3 d-flex align-items-center">
-                <a href="javascript:;" class="nav-link text-body p-0">
+                <a href="javascript:;" onclick="logout()" class="nav-link text-body p-0">
                     <i class="fas fa-sign-out-alt cursor-pointer"></i>
                 </a>
             </li>
@@ -117,3 +117,8 @@
     </div>
     </div>
 </nav>
+<script>
+    function logout(){
+        window.location.href = "login/logout";
+    }
+</script>

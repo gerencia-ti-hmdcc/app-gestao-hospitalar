@@ -1,5 +1,9 @@
 <?php
 class Login_model extends CI_Model {
+    function __construct ()
+    {
+        parent::__construct();
+    }
     // public function listaPacientes(){
     //     return $this->db->get('atendimento_paciente')->result_array();
     // }
@@ -20,5 +24,20 @@ class Login_model extends CI_Model {
         
 
     // }
+
+    public function logar($email,$senha){
+        return $this->db->query("SELECT * FROM USERS WHERE EMAIL='$email' AND SENHA='$senha'")->row_array();
+    }
+
+    public function atualizaToken($id,$data_atual,$token,$validade){
+        $this->db->query("UPDATE
+                            USERS
+                        SET
+                            ULTIMO_LOGIN='".$data_atual."',
+                            TOKEN='".$token."',
+                            VALIDADE_TOKEN='".$validade."'
+                        WHERE
+                            ID=$id");
+    }
 }
 ?>

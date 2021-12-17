@@ -63,6 +63,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   echo '<div style="color:#fff" class="alert alert-success" role="alert">
                             <strong>OK! </strong>'.$this->session->flashdata("success").'
                         </div>';
+                }else if($this->session->flashdata("warning")){
+                  echo '<div style="color:#fff" class="alert alert-warning" role="alert">
+                            <strong>Atenção! </strong>'.$this->session->flashdata("warning").'
+                        </div>';
                 }
               ?>
               <div class="card card-plain mt-6">

@@ -740,21 +740,101 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script>
     $(document).ready(function(){
         //$("#cor_padrao_icone").click();
-        /*if('<?php echo $link_pagina;?>'=='dashboard'){
-            $.ajax({
-                'url' : "<?php echo site_url('/dashboard/percentuaisGeraisOcupacao')?>",
-                'type' : 'POST',
-                'success' : function(data){ 
-                    var result = JSON.parse( data );                             	                        
-                    // $('#result').html( '<p>'+ result.date +'</p>' );
-                    // $('button').html( 'Atualizar hora' );
-                    //alert('ok');
+        if('<?php echo $link_pagina;?>'=='dashboard'){
+            // $.ajax({
+            //     'url' : "<?php echo site_url('/dashboard/percentuaisGeraisOcupacao')?>",
+            //     'type' : 'POST',
+            //     'success' : function(data){ 
+            //         var result = JSON.parse( data );                             	                        
+            //         // $('#result').html( '<p>'+ result.date +'</p>' );
+            //         // $('button').html( 'Atualizar hora' );
+            //         //alert('ok');
+            //     },
+            //     'error' : function(data){
+            //         //alert('erro');
+            //     }
+            // });
+            var ctx = document.getElementById("chart-bars").getContext("2d");
+
+            new Chart(ctx, {
+              type: "bar",
+              data: {
+                labels: ["Ocupação"],
+                datasets: [
+                  {
+                    label: "UTI",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    borderRadius: 4,
+                    borderSkipped: false,
+                    backgroundColor: "#fff",
+                    data: [100],
+                    maxBarThickness: 50
+                  },
+                  {
+                    label: "Unidades de internação",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    borderRadius: 4,
+                    borderSkipped: false,
+                    backgroundColor: "red",
+                    data: [30],
+                    maxBarThickness: 50
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    display: true,
+                    labels: {
+                      color: '#fff'
+                    }
+                  }
                 },
-                'error' : function(data){
-                    //alert('erro');
-                }
-            });         
-        }*/
+                interaction: {
+                  intersect: false,
+                  mode: 'index',
+                },
+                scales: {
+                  y: {
+                    grid: {
+                      drawBorder: true,
+                      display: true,
+                      drawOnChartArea: true,
+                      drawTicks: true,
+                    },
+                    ticks: {
+                      suggestedMin: 0,
+                      suggestedMax: 500,
+                      beginAtZero: true,
+                      padding: 15,
+                      font: {
+                        size: 14,
+                        family: "Open Sans",
+                        style: 'normal',
+                        lineHeight: 2
+                      },
+                      color: "#fff"
+                    },
+                  },
+                  x: {
+                    grid: {
+                      drawBorder: false,
+                      display: false,
+                      drawOnChartArea: false,
+                      drawTicks: false
+                    },
+                    ticks: {
+                      display: false
+                    },
+                  },
+                },
+              },
+            });
+        }
     });
 
     // var ctx = document.getElementById("chart-bars").getContext("2d");

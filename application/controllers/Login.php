@@ -5,6 +5,11 @@ class Login extends CI_Controller {
 
         public function __construct(){
                 parent::__construct();
+                /*if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != "on") {
+        		$url = "https://". $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+        		redirect($url);
+        		exit;
+    		}*/
         }
 
 	public function index()
@@ -32,6 +37,7 @@ class Login extends CI_Controller {
                 $senha          = md5($senha);
                 
                 $usuario = $this->login_model->logar($email,$senha);
+                unset($usuario['SENHA']);
                 if($usuario && isset($usuario)){
                         $this->session->unset_userdata("usuario_logado");
                         if($senha=='e10adc3949ba59abbe56e057f20f883e'){
@@ -43,8 +49,9 @@ class Login extends CI_Controller {
                                 $this->load->view('login/primeiro_acesso.php',$dados);
                         }else{
                                 //exit(print_r($usuario));
-                                $this->login_model->atualizaToken($usuario["ID"],$data_atual,$token,$validade);
                                 $this->session->set_userdata("usuario_logado",$usuario);
+                                $_SESSION['usuario_logado']['TOKEN'] = $token;
+                                $this->login_model->atualizaToken($usuario["ID"],$data_atual,$token,$validade);
                                 //$this->session->set_flashdata("success","Usuário logado!");
                                 redirect('../dashboard');
                         }

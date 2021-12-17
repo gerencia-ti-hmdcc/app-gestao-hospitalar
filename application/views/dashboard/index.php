@@ -1,14 +1,54 @@
 <div class="row">
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <div class="col-lg-12 mb-4">
+        <div class="card z-index-2">
+        <div class="card-header pb-0">
+            <h6>Gráfico geral de ocupação</h6>
+            <!-- <p class="text-sm">
+                <i class="fa fa-arrow-up text-success"></i>
+                <span class="font-weight-bold">4% more</span> in 2021
+            </p> -->
+        </div>
+        <div class="card-body p-3">
+            <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
+                <div class="chart">
+                  <canvas id="chart-bars" class="chart-canvas" height="300"></canvas>
+                </div>
+              </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
         <div class="card cursor-pointer" onclick="abrirDivDetalhes('+id_area+')">
             <div class="card-body p-3">
                 <div class="row">
+                    <div class="col-8">
+                        <div class="numbers">
+                        <p class="text-sm mb-0 text-capitalize font-weight-bold">UTI</p>
+                        <h5 class="font-weight-bolder mb-0">
+                            55%
+                            <!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
+                        </h5>
+                        </div>
+                    </div>
+                    <div class="col-4 text-end">
+                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                        <i class="ni ni-building text-lg opacity-10" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+        <div class="card cursor-pointer">
+        <div class="card-body p-3">
+            <div class="row">
                 <div class="col-8">
                     <div class="numbers">
-                    <p class="text-sm mb-0 text-capitalize font-weight-bold">UTI</p>
+                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Unidades de internação</p>
                     <h5 class="font-weight-bolder mb-0">
-                        55%
-                        <!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
+                        89%
+                        <!-- <span class="text-success text-sm font-weight-bolder">+3%</span> -->
                     </h5>
                     </div>
                 </div>
@@ -17,33 +57,11 @@
                     <i class="ni ni-building text-lg opacity-10" aria-hidden="true"></i>
                     </div>
                 </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-        <div class="card-body p-3">
-            <div class="row">
-            <div class="col-8">
-                <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
-                <h5 class="font-weight-bolder mb-0">
-                    2,300
-                    <span class="text-success text-sm font-weight-bolder">+3%</span>
-                </h5>
-                </div>
-            </div>
-            <div class="col-4 text-end">
-                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
-                </div>
-            </div>
             </div>
         </div>
         </div>
     </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <!-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <div class="card">
         <div class="card-body p-3">
             <div class="row">
@@ -86,7 +104,7 @@
             </div>
         </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 

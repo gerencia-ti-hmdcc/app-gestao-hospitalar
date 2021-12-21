@@ -20,7 +20,12 @@ class Dashboard_model extends CI_Model {
     // }
 
     public function percentuaisGeraisOcupacao(){
-        return $this->db->query("SELECT * FROM HMDCC_APP_TOTAL_OCUPACAO")->result_array();
+        return $this->db->query("SELECT * FROM OCUPACAO_TOTAL WHERE date_format(dt_atualizacao, '%Y-%m-%d %H:%m') = (SELECT MAX(date_format(dt_atualizacao, '%Y-%m-%d %H:%m')) FROM OCUPACAO_TOTAL)")->result_array();
+    }
+
+    public function percentuaisSetorOcupacao($id_area){
+        //return $this->db->query("SELECT * FROM `OCUPACAO_SETOR` WHERE DT_ATUALIZACAO >= DATE_SUB(NOW(), INTERVAL 1 HOUR) AND CD_CLASSIF_SETOR = $id_area")->result_array();
+        return $this->db->query("SELECT * FROM `OCUPACAO_SETOR` WHERE date_format(dt_atualizacao, '%Y-%m-%d %H:%m') = (SELECT MAX(date_format(dt_atualizacao, '%Y-%m-%d %H:%m')) FROM `OCUPACAO_SETOR`) AND CD_CLASSIF_SETOR = $id_area")->result_array();
     }
 }
 ?>

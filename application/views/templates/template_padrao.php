@@ -22,21 +22,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/hmdcc2.ico">
+  <link rel="icon" type="image/png" href="assets/img/hmdcc2.ico">
   <title>
     HMDCC
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <link id="pagestyle" href="assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -154,9 +154,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
                 <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
                   <div class="bg-gradient-primary border-radius-lg h-100">
-                    <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
+                    <img src="assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                     <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                      <img class="w-100 position-relative z-index-2 pt-4" src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/illustrations/rocket-white.png" alt="rocket">
+                      <img class="w-100 position-relative z-index-2 pt-4" src="assets/img/illustrations/rocket-white.png" alt="rocket">
                     </div>
                   </div>
                 </div>
@@ -166,7 +166,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div class="col-lg-5">
           <div class="card h-100 p-3">
-            <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/ivancik.jpg');">
+            <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('assets/img/ivancik.jpg');">
               <span class="mask bg-gradient-dark"></span>
               <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
                 <h5 class="text-white font-weight-bolder mb-4 pt-2">Work with the rockets</h5>
@@ -356,7 +356,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+                            <img src="assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">Soft UI XD Version</h6>
@@ -366,16 +366,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="avatar-group mt-2">
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-1.jpg" alt="team1">
+                            <img src="assets/img/team-1.jpg" alt="team1">
                           </a>
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-2.jpg" alt="team2">
+                            <img src="assets/img/team-2.jpg" alt="team2">
                           </a>
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-3.jpg" alt="team3">
+                            <img src="assets/img/team-3.jpg" alt="team3">
                           </a>
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-4.jpg" alt="team4">
+                            <img src="assets/img/team-4.jpg" alt="team4">
                           </a>
                         </div>
                       </td>
@@ -399,7 +399,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm me-3" alt="atlassian">
+                            <img src="assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm me-3" alt="atlassian">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">Add Progress Track</h6>
@@ -409,10 +409,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="avatar-group mt-2">
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-2.jpg" alt="team5">
+                            <img src="assets/img/team-2.jpg" alt="team5">
                           </a>
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-4.jpg" alt="team6">
+                            <img src="assets/img/team-4.jpg" alt="team6">
                           </a>
                         </div>
                       </td>
@@ -436,7 +436,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm me-3" alt="team7">
+                            <img src="assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm me-3" alt="team7">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">Fix Platform Errors</h6>
@@ -446,10 +446,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="avatar-group mt-2">
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-3.jpg" alt="team8">
+                            <img src="assets/img/team-3.jpg" alt="team8">
                           </a>
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-1.jpg" alt="team9">
+                            <img src="assets/img/team-1.jpg" alt="team9">
                           </a>
                         </div>
                       </td>
@@ -473,7 +473,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm me-3" alt="spotify">
+                            <img src="assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm me-3" alt="spotify">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">Launch our Mobile App</h6>
@@ -483,16 +483,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="avatar-group mt-2">
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-4.jpg" alt="user1">
+                            <img src="assets/img/team-4.jpg" alt="user1">
                           </a>
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Romina Hadid">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-3.jpg" alt="user2">
+                            <img src="assets/img/team-3.jpg" alt="user2">
                           </a>
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Alexander Smith">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-4.jpg" alt="user3">
+                            <img src="assets/img/team-4.jpg" alt="user3">
                           </a>
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-1.jpg" alt="user4">
+                            <img src="assets/img/team-1.jpg" alt="user4">
                           </a>
                         </div>
                       </td>
@@ -516,7 +516,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm me-3" alt="jira">
+                            <img src="assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm me-3" alt="jira">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">Add the New Pricing Page</h6>
@@ -526,7 +526,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="avatar-group mt-2">
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-4.jpg" alt="user5">
+                            <img src="assets/img/team-4.jpg" alt="user5">
                           </a>
                         </div>
                       </td>
@@ -550,7 +550,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm me-3" alt="invision">
+                            <img src="assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm me-3" alt="invision">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
                             <h6 class="mb-0 text-sm">Redesign New Online Shop</h6>
@@ -560,10 +560,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td>
                         <div class="avatar-group mt-2">
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-1.jpg" alt="user6">
+                            <img src="assets/img/team-1.jpg" alt="user6">
                           </a>
                           <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Jessica Doe">
-                            <img src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/img/team-4.jpg" alt="user7">
+                            <img src="assets/img/team-4.jpg" alt="user7">
                           </a>
                         </div>
                       </td>
@@ -667,7 +667,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="fa fa-cog py-2"> </i>
         </a>
-        <div class="card shadow-lg ">
+        <div class="card shadow-lg">
             <div class="card-header pb-0 pt-3 ">
                     <div class="float-start">
                     <h5 class="mt-3 mb-0">Soft UI Configurator</h5>
@@ -730,179 +730,133 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </div>
   <!--   Core JS Files   -->
-  <script src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/js/core/popper.min.js"></script>
-  <script src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/js/core/bootstrap.min.js"></script>
-  <script src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/js/plugins/chartjs.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="assets/js/plugins/chartjs.min.js"></script>
   <script src="user_guide/_static/jquery-3.1.0.js"></script>
   <script src="user_guide/_static/jquery.js"></script>
   <script>
     $(document).ready(function(){
         //$("#cor_padrao_icone").click();
         if('<?php echo $link_pagina;?>'=='dashboard'){
-            // $.ajax({
-            //     'url' : "<?php echo site_url('/dashboard/percentuaisGeraisOcupacao')?>",
-            //     'type' : 'POST',
-            //     'success' : function(data){ 
-            //         var result = JSON.parse( data );                             	                        
-            //         // $('#result').html( '<p>'+ result.date +'</p>' );
-            //         // $('button').html( 'Atualizar hora' );
-            //         //alert('ok');
-            //     },
-            //     'error' : function(data){
-            //         //alert('erro');
-            //     }
-            // });
-            var ctx = document.getElementById("chart-bars").getContext("2d");
-
-            new Chart(ctx, {
-              type: "bar",
-              data: {
-                labels: ["Ocupação"],
-                datasets: [
-                  {
-                    label: "UTI",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    borderRadius: 4,
-                    borderSkipped: false,
-                    backgroundColor: "#fff",
-                    data: [100],
-                    maxBarThickness: 50
-                  },
-                  {
-                    label: "Unidades de internação",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    borderRadius: 4,
-                    borderSkipped: false,
-                    backgroundColor: "red",
-                    data: [30],
-                    maxBarThickness: 50
-                  },
-                ],
-              },
-              options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  legend: {
-                    display: true,
-                    labels: {
-                      color: '#fff'
+            $("#tabela_detalhes").hide();
+            $.ajax({
+                url : "<?php echo site_url('/dashboard/percentuaisGeraisOcupacao')?>",
+                type : 'POST',
+                dataType: "JSON",
+                success : function(data){
+                    var result  = data;
+                    var htmlPercentual = "";
+                    var dataSets_grafico = [];
+                    for(var i = 0; i<result.length; i++){
+                      htmlPercentual += '<div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">'+
+                                          '<div class="card cursor-pointer" onclick="abrirDivDetalhes('+parseInt(result[i].CD_CLASSIF_SETOR)+')">'+
+                                              '<div class="card-body p-3">'+
+                                                  '<div class="row">'+
+                                                      '<div class="col-8">'+
+                                                          '<div class="numbers">'+
+                                                            '<p class="text-sm mb-0 text-capitalize" id="titulo'+result[i].CD_CLASSIF_SETOR+'" name="titulo'+result[i].CD_CLASSIF_SETOR+'" font-weight-bold">'+result[i].DS_SETOR_ATENDIMENTO+'</p>'+
+                                                            '<h5 class="font-weight-bolder mb-0">'+parseFloat(result[i].PR_OCUPACAO).toFixed(2)+'%</h5>'+
+                                                          '</div>'+
+                                                      '</div>'+
+                                                      '<div class="col-4 text-end">'+
+                                                          '<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">'+
+                                                            '<i class="ni ni-building text-lg opacity-10" aria-hidden="true"></i>'+
+                                                            '<input id="id_area_antigo" name="id_area_antigo" value="'+parseInt(result[i].CD_CLASSIF_SETOR)+'" type="hidden"/>'+
+                                                          '</div>'+
+                                                      '</div>'+
+                                                  '</div>'+
+                                              '</div>'+
+                                          '</div>'+
+                                      '</div>';
+                      dataSets_grafico.push({
+                        label: result[i].DS_SETOR_ATENDIMENTO,
+                        tension: 0.4,
+                        borderWidth: 0,
+                        borderRadius: 4,
+                        borderSkipped: false,
+                        backgroundColor: gerar_cor(),
+                        data: [parseFloat(result[i].PR_OCUPACAO).toFixed(2)],
+                        maxBarThickness: 50
+                      });
                     }
-                  }
-                },
-                interaction: {
-                  intersect: false,
-                  mode: 'index',
-                },
-                scales: {
-                  y: {
-                    grid: {
-                      drawBorder: true,
-                      display: true,
-                      drawOnChartArea: true,
-                      drawTicks: true,
-                    },
-                    ticks: {
-                      suggestedMin: 0,
-                      suggestedMax: 500,
-                      beginAtZero: true,
-                      padding: 15,
-                      font: {
-                        size: 14,
-                        family: "Open Sans",
-                        style: 'normal',
-                        lineHeight: 2
+                    $("#divPercentualGeral").html(htmlPercentual);
+                    var ctx = document.getElementById("chart-bars").getContext("2d");
+
+                    new Chart(ctx, {
+                      type: "bar",
+                      data: {
+                        labels: ["Ocupação"],
+                        datasets: dataSets_grafico,
                       },
-                      color: "#fff"
-                    },
-                  },
-                  x: {
-                    grid: {
-                      drawBorder: false,
-                      display: false,
-                      drawOnChartArea: false,
-                      drawTicks: false
-                    },
-                    ticks: {
-                      display: false
-                    },
-                  },
+                      options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                          legend: {
+                            display: true,
+                            labels: {
+                              color: '#fff'
+                            }
+                          }
+                        },
+                        interaction: {
+                          intersect: false,
+                          mode: 'index',
+                        },
+                        scales: {
+                          y: {
+                            grid: {
+                              drawBorder: true,
+                              display: true,
+                              drawOnChartArea: true,
+                              drawTicks: true,
+                            },
+                            ticks: {
+                              suggestedMin: 0,
+                              suggestedMax: 500,
+                              beginAtZero: true,
+                              padding: 15,
+                              font: {
+                                size: 14,
+                                family: "Open Sans",
+                                style: 'normal',
+                                lineHeight: 2
+                              },
+                              color: "#fff"
+                            },
+                          },
+                          x: {
+                            grid: {
+                              drawBorder: false,
+                              display: false,
+                              drawOnChartArea: false,
+                              drawTicks: false
+                            },
+                            ticks: {
+                              display: false
+                            },
+                          },
+                        },
+                      },
+                    });
                 },
-              },
+                error : function(data){
+                    alert('erro');
+                }
             });
-        }
+          } 
     });
 
-    // var ctx = document.getElementById("chart-bars").getContext("2d");
-
-    // new Chart(ctx, {
-    //   type: "bar",
-    //   data: {
-    //     labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    //     datasets: [{
-    //       label: "Sales",
-    //       tension: 0.4,
-    //       borderWidth: 0,
-    //       borderRadius: 4,
-    //       borderSkipped: false,
-    //       backgroundColor: "#fff",
-    //       data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-    //       maxBarThickness: 6
-    //     }, ],
-    //   },
-    //   options: {
-    //     responsive: true,
-    //     maintainAspectRatio: false,
-    //     plugins: {
-    //       legend: {
-    //         display: false,
-    //       }
-    //     },
-    //     interaction: {
-    //       intersect: false,
-    //       mode: 'index',
-    //     },
-    //     scales: {
-    //       y: {
-    //         grid: {
-    //           drawBorder: false,
-    //           display: false,
-    //           drawOnChartArea: false,
-    //           drawTicks: false,
-    //         },
-    //         ticks: {
-    //           suggestedMin: 0,
-    //           suggestedMax: 500,
-    //           beginAtZero: true,
-    //           padding: 15,
-    //           font: {
-    //             size: 14,
-    //             family: "Open Sans",
-    //             style: 'normal',
-    //             lineHeight: 2
-    //           },
-    //           color: "#fff"
-    //         },
-    //       },
-    //       x: {
-    //         grid: {
-    //           drawBorder: false,
-    //           display: false,
-    //           drawOnChartArea: false,
-    //           drawTicks: false
-    //         },
-    //         ticks: {
-    //           display: false
-    //         },
-    //       },
-    //     },
-    //   },
-    // });
-
+    function gerar_cor(opacidade = 1) {
+      let r = parseInt(Math.random() * 255);
+      let g = parseInt(Math.random() * 255);
+      let b = parseInt(Math.random() * 255);
+      return `rgba(${r}, ${g}, ${b}, ${opacidade})`;
+    }
+    
 
     // var ctx2 = document.getElementById("chart-line").getContext("2d");
 
@@ -1018,7 +972,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="<?php echo base_url()."soft-ui-dashboard-main";?>/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+  <script src="assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>

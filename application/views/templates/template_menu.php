@@ -30,11 +30,12 @@
                 </div>
                 </a>
             </li>
-            <li class="nav-item px-3 d-flex align-items-center">
+            <!-- CHAMA O MENU DE CONFIGURAÇÃO FLUTUANTE -->
+            <!-- <li class="nav-item px-3 d-flex align-items-center">
                 <a href="javascript:;" class="nav-link text-body p-0">
                     <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item px-3 d-flex align-items-center">
                 <a href="javascript:;" onclick="logout()" class="nav-link text-body p-0">
                     <i class="fas fa-sign-out-alt cursor-pointer"></i>

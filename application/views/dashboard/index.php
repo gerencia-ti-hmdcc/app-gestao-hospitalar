@@ -156,8 +156,8 @@
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
+                                <th style="background-color: white" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Setor</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Linha Cuidado</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Setor</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ocupação</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total de leitos</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Isolados</th>
@@ -238,25 +238,43 @@
                         var porcentagem_ocup = parseInt(result[i].PR_OCUPACAO_TOTAL);
                         porcentagem_ocup = Math.ceil(porcentagem_ocup/5)*5;
                         var cor_per = "";
-                        if(porcentagem_ocup<=30){
-                            cor_per = "success";
-                        }else if(porcentagem_ocup>30 && porcentagem_ocup<=60){
-                            cor_per = "info";
-                        }else if(porcentagem_ocup>60 && porcentagem_ocup<80){
-                            cor_per = "info";
-                        }else if(porcentagem_ocup>=80 && porcentagem_ocup<=90){
-                            cor_per = "warning";
-                        }else{
+                        // if(porcentagem_ocup<=30){
+                        //     cor_per = "success";
+                        // }else if(porcentagem_ocup>30 && porcentagem_ocup<=60){
+                        //     cor_per = "info";
+                        // }else if(porcentagem_ocup>60 && porcentagem_ocup<80){
+                        //     cor_per = "info";
+                        // }else if(porcentagem_ocup>=80 && porcentagem_ocup<=90){
+                        //     cor_per = "warning";
+                        // }else{
+                        //     cor_per = "danger";
+                        // }
+                        if(porcentagem_ocup<=75){
                             cor_per = "danger";
+                            cor_per = 'bg-gradient-'+cor_per;
+                        }else if(porcentagem_ocup>75 && porcentagem_ocup<=85){
+                            cor_per = "primary";
+                            cor_per = 'bg-gradient-'+cor_per;
+                        }else if(porcentagem_ocup>85 && porcentagem_ocup<=90){
+                            cor_per = "bg-warning";
+                        }else if(porcentagem_ocup>90 && porcentagem_ocup<=95){
+                            cor_per = "info";
+                            cor_per = 'bg-gradient-'+cor_per;
+                        }else{
+                            cor_per = "success";
+                            cor_per = 'bg-gradient-'+cor_per;
                         }
+                        var qt_ocupadas = result[i].QT_OCUPADAS;
+                        //if(result[i].CD_SETOR_ATENDIMENTO==129){qt_ocupadas = (result[i].QT_OCUPADAS)*-1}else{qt_ocupadas = result[i].QT_OCUPADAS}
+
                         html_corpo_tabela += '<tr>'+
+                                                '<td>'+
+                                                    result[i]["DS_SETOR_ATENDIMENTO"]+
+                                                '</td>'+
                                                 '<td>'+
                                                     '<div class="d-flex px-2 py-1">'+
                                                         result[i].DS_LINHA_CUIDADO+
                                                     '</div>'+
-                                                '</td>'+
-                                                '<td>'+
-                                                    result[i]["DS_SETOR_ATENDIMENTO"]+
                                                 '</td>'+
                                                 '<td class="align-middle">'+
                                                    '<div class="progress-wrapper w-75 mx-auto">'+
@@ -266,7 +284,7 @@
                                                             '</div>'+
                                                         '</div>'+
                                                         '<div class="progress">'+
-                                                            '<div class="progress-bar bg-gradient-'+cor_per+' w-'+porcentagem_ocup.toString()+'" role="progressbar" aria-valuenow="'+porcentagem_ocup+'" aria-valuemin="0" aria-valuemax="100"></div>'+
+                                                            '<div class="progress-bar '+cor_per+' w-'+porcentagem_ocup.toString()+'" role="progressbar" aria-valuenow="'+porcentagem_ocup+'" aria-valuemin="0" aria-valuemax="100"></div>'+
                                                         '</div>'+
                                                     '</div>'+
                                                 '</td>'+
@@ -277,7 +295,7 @@
                                                     '<span class="text-xs font-weight-bold">'+result[i].QT_UNIDADES_ISOLAMENTO+'</span>'+
                                                 '</td>'+
                                                 '<td class="align-middle text-center text-sm">'+
-                                                    '<span class="text-xs font-weight-bold">'+result[i].QT_OCUPADAS+'</span>'+
+                                                    '<span class="text-xs font-weight-bold">'+qt_ocupadas+'</span>'+
                                                 '</td>'+
                                                 '<td class="align-middle text-center text-sm">'+
                                                     '<span class="text-xs font-weight-bold">'+result[i].QT_LIVRES+'</span>'+

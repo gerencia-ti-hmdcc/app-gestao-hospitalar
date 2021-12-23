@@ -16,7 +16,7 @@ class Dashboard extends MY_Controller {
         }else{
                 $this->load->helper('form');
                 $dados['pagina']        = 'dashboard/index.php';
-                $dados['nome_pagina']   = 'Dashboard';
+                $dados['nome_pagina']   = 'Ocupação Hospitalar';
                 $dados["link_pagina"]   = 'dashboard';
                 $this->load->view('templates/template_padrao.php',$dados);   
         }

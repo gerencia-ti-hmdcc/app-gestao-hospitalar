@@ -108,8 +108,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </main>
   <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   <footer class="footer py-5">
-    <!-- <div class="container">
-      <div class="row">
+    <div class="container">
+      <!-- <div class="row">
         <div class="col-lg-8 mb-4 mx-auto text-center">
           <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
             Company
@@ -130,17 +130,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Pricing
           </a>
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-8 mx-auto text-center mt-1">
           <p class="mb-0 text-secondary">
             Copyright © <script>
               document.write(new Date().getFullYear())
-            </script> desenvolvido por TI HMDCC.
+            </script> desenvolvido pela <a href="https://www.hmdcc.com.br" class="font-weight-bold" target="_blank">Assessoria de TI HMDCC</a>.
           </p>
         </div>
       </div>
-    </div> -->
+    </div>
   </footer>
   <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   <!--   Core JS Files   -->

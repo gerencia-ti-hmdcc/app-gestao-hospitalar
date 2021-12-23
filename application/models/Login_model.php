@@ -53,5 +53,14 @@ class Login_model extends CI_Model {
             return false;
         }
     }
+
+    public function atualizaDisp($dispositivo,$id){
+        $this->db->query("UPDATE
+                            USERS
+                        SET
+                            DISP_ULTIMO_LOGIN='".$dispositivo."'
+                        WHERE
+                            ID=$id");
+    }
 }
 ?>

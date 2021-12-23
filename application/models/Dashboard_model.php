@@ -24,11 +24,11 @@ class Dashboard_model extends CI_Model {
     }
 
     public function percentuaisSetorOcupacao($id_area){
-        if($id_area==3){
-            $condicao = "in (1, $id_area)";
-        }else{
+        // if($id_area==3){
+        //     $condicao = "in (1, $id_area)";
+        // }else{
             $condicao = "in ($id_area)";
-        }
+        // }
         //return $this->db->query("SELECT * FROM `OCUPACAO_SETOR` WHERE DT_ATUALIZACAO >= DATE_SUB(NOW(), INTERVAL 1 HOUR) AND CD_CLASSIF_SETOR = $id_area")->result_array();
         return $this->db->query("SELECT * FROM `OCUPACAO_SETOR` WHERE date_format(dt_atualizacao, '%Y-%m-%d %H:%i') = (SELECT MAX(date_format(dt_atualizacao, '%Y-%m-%d %H:%i')) FROM `OCUPACAO_SETOR`) AND CD_CLASSIF_SETOR $condicao")->result_array();
     }

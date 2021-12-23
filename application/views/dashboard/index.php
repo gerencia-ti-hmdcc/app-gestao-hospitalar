@@ -160,10 +160,10 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Setor</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ocupação</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total de leitos</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Isolados</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ocupados</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Livres</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Reservados</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Isolados</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Higienização</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alta</th>
                             </tr>
@@ -274,6 +274,9 @@
                                                     '<span class="text-xs font-weight-bold">'+result[i].NR_UNIDADES_SETOR+'</span>'+
                                                 '</td>'+
                                                 '<td class="align-middle text-center text-sm">'+
+                                                    '<span class="text-xs font-weight-bold">'+result[i].QT_UNIDADES_ISOLAMENTO+'</span>'+
+                                                '</td>'+
+                                                '<td class="align-middle text-center text-sm">'+
                                                     '<span class="text-xs font-weight-bold">'+result[i].QT_OCUPADAS+'</span>'+
                                                 '</td>'+
                                                 '<td class="align-middle text-center text-sm">'+
@@ -281,9 +284,6 @@
                                                 '</td>'+
                                                 '<td class="align-middle text-center text-sm">'+
                                                     '<span class="text-xs font-weight-bold">'+result[i].NR_UNIDADES_RESERVADAS+'</span>'+
-                                                '</td>'+
-                                                '<td class="align-middle text-center text-sm">'+
-                                                    '<span class="text-xs font-weight-bold">'+result[i].QT_UNIDADES_ISOLAMENTO+'</span>'+
                                                 '</td>'+
                                                 '<td class="align-middle text-center text-sm">'+
                                                     '<span class="text-xs font-weight-bold">'+(parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN))+'</span>'+
@@ -379,6 +379,9 @@
                     //                                             '<span class="text-xs font-weight-bold">'+result[i].NR_UNIDADES_SETOR+'</span>'+
                     //                                         '</td>'+
                     //                                         '<td class="align-middle text-center text-sm">'+
+                    //                                             '<span class="text-xs font-weight-bold">'+result[i].QT_UNIDADES_ISOLAMENTO+'</span>'+
+                    //                                         '</td>'+
+                    //                                         '<td class="align-middle text-center text-sm">'+
                     //                                             '<span class="text-xs font-weight-bold">'+result[i].QT_OCUPADAS+'</span>'+
                     //                                         '</td>'+
                     //                                         '<td class="align-middle text-center text-sm">'+
@@ -386,9 +389,6 @@
                     //                                         '</td>'+
                     //                                         '<td class="align-middle text-center text-sm">'+
                     //                                             '<span class="text-xs font-weight-bold">'+result[i].NR_UNIDADES_RESERVADAS+'</span>'+
-                    //                                         '</td>'+
-                    //                                         '<td class="align-middle text-center text-sm">'+
-                    //                                             '<span class="text-xs font-weight-bold">'+result[i].QT_UNIDADES_ISOLAMENTO+'</span>'+
                     //                                         '</td>'+
                     //                                         '<td class="align-middle text-center text-sm">'+
                     //                                             '<span class="text-xs font-weight-bold">'+(parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN))+'</span>'+

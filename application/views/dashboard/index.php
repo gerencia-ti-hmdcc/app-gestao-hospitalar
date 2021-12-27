@@ -434,6 +434,7 @@
                     //     });
                     // }
                     $("#tabela_detalhes").show();
+                    location.href = "#tabela_detalhes";
                 },
                 error : function(data){
                     alert('erro');

@@ -9,17 +9,11 @@ class Dashboard extends MY_Controller {
 
 	public function index()
 	{
-        //$this->load->model('login_model');
-        //$this->load->view('templates/template_login.php');
-        if($this->input->is_ajax_request()){
-
-        }else{
-                $this->load->helper('form');
-                $dados['pagina']        = 'dashboard/index.php';
-                $dados['nome_pagina']   = 'Ocupação Hospitalar';
-                $dados["link_pagina"]   = 'dashboard';
-                $this->load->view('templates/template_padrao.php',$dados);   
-        }
+        $this->load->helper('form');
+        $dados['pagina']        = 'dashboard/index.php';
+        $dados['nome_pagina']   = 'Ocupação Hospitalar';
+        $dados["link_pagina"]   = 'dashboard';
+        $this->load->view('templates/template_padrao.php',$dados);   
 	}
 
     public function percentuaisGeraisOcupacao(){

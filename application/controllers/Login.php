@@ -48,13 +48,19 @@ class Login extends CI_Controller {
                                 $dados["email"] = $email;
                                 $this->load->view('login/primeiro_acesso.php',$dados);
                         }else{
-                                //exit(print_r($usuario));
-                                $this->session->set_userdata("usuario_logado",$usuario);
-                                $_SESSION['usuario_logado']['TOKEN'] = $token;
-                                $this->login_model->atualizaToken($usuario["ID"],$data_atual,$token,$validade);
-                                $this->login_model->atualizaDisp($this->PegarDispositivo(),$usuario["ID"]);
-                                //$this->session->set_flashdata("success","Usuário logado!");
-                                redirect('../dashboard');
+                                if($usuario["IE_STATUS"]=='A'){
+                                        //exit(print_r($usuario));
+                                        $this->session->set_userdata("usuario_logado",$usuario);
+                                        $_SESSION['usuario_logado']['TOKEN'] = $token;
+                                        $this->login_model->atualizaToken($usuario["ID"],$data_atual,$token,$validade);
+                                        $this->login_model->atualizaDisp($this->PegarDispositivo(),$usuario["ID"]);
+                                        //$this->session->set_flashdata("success","Usuário logado!");
+                                        redirect('../dashboard');
+                                }else{
+                                        $this->session->set_flashdata("danger","Permissão negada. Comunique a TI!");
+                                        $this->load->helper('form');
+                                        redirect('../');
+                                }
                         }
                 }else{
                         $this->session->set_flashdata("danger","Usuário ou senha inválido(s)!");

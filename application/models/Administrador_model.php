@@ -1,0 +1,39 @@
+<?php
+class Administrador_model extends CI_Model {
+    
+    public function retornaUsuarios(){
+        return $this->db->query("SELECT * FROM USERS")->result_array();
+    }
+
+    public function retornaUsuario($id){
+        return $this->db->query("SELECT * FROM USERS WHERE ID=$id")->row_array();
+    }
+
+    public function retornaTodosStatus(){
+        return $this->db->query("SELECT DISTINCT IE_STATUS FROM USERS")->result_array();
+    }
+
+    public function retornaTodosTiposPerfis(){
+        return $this->db->query("SELECT DISTINCT TIPO_PERFIL FROM USERS")->result_array();
+    }
+
+    public function resetaSenha($id){
+        return $this->db->query("UPDATE USERS SET SENHA='e10adc3949ba59abbe56e057f20f883e' WHERE ID=$id");
+    }
+
+    public function atualizaUsuario($id,$nome,$email,$status,$tipo_perfil){
+        return $this->db->query("UPDATE USERS SET NOME='$nome', EMAIL='$email', IE_STATUS='$status', TIPO_PERFIL='$tipo_perfil' WHERE ID=$id");
+    }
+
+    public function tipoPerfilUsuario($id){
+        return $this->db->query("SELECT TIPO_PERFIL FROM USERS WHERE ID=$id")->row_array();
+    }
+
+    public function cadastraUsuario($nome,$email,$status,$perfil){
+        return $this->db->query("INSERT INTO
+                                    USERS(NOME,EMAIL,IE_STATUS,TIPO_PERFIL,SENHA)
+                                VALUES
+                                    ('$nome','$email','$status','$perfil','e10adc3949ba59abbe56e057f20f883e')");
+    }
+}
+?>

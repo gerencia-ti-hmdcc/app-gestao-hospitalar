@@ -6,6 +6,10 @@
                     © <script>
                         document.write(new Date().getFullYear())
                     </script>, desenvolvido pela <a href="https://www.hmdcc.com.br" class="font-weight-bold" target="_blank"> Assessoria de TI HMDCC</a>.
+                    <br />
+                </div>
+                <div style="text-align:right">
+                    <small>Usuário logado: <?php echo " <b>".explode(' ',$_SESSION["usuario_logado"]["NOME"])[0]."</b>";?></small>
                 </div>
             </div>
             <!--<div class="col-lg-6">

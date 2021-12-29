@@ -38,7 +38,7 @@
             </li> -->
             <li class="nav-item px-3 d-flex align-items-center">
                 <a href="javascript:;" onclick="logout()" class="nav-link text-body p-0">
-                    <i class="fas fa-sign-out-alt cursor-pointer"></i>
+                    <b>SAIR <i class="fas fa-sign-out-alt cursor-pointer"></i></b>
                 </a>
             </li>
             <!-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
@@ -116,10 +116,10 @@
             </li> -->
         </ul>
     </div>
-    </div>
+</div>
 </nav>
 <script>
     function logout(){
-        window.location.href = "login/logout";
+        window.location.href = "<?php echo $diretorio_raiz;?>login/logout";
     }
 </script>

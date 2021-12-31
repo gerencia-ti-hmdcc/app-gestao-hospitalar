@@ -35,5 +35,15 @@ class Administrador_model extends CI_Model {
                                 VALUES
                                     ('$nome','$email','$status','$perfil','e10adc3949ba59abbe56e057f20f883e')");
     }
+
+    public function existeEmailUsuario($email,$id=0){
+        if($id==0){
+            $condicao = "";
+        }else{
+            $condicao = "AND ID <>$id";
+        }
+        return $this->db->query("SELECT EMAIL FROM USERS WHERE EMAIL='$email' $condicao")->row_array();
+    }
+
 }
 ?>

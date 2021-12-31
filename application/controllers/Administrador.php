@@ -151,30 +151,36 @@ class Administrador extends MY_Controller {
             $this->session->set_flashdata("danger","<br />Perfil inválido!");
             $this->editarUsuario($id);   
         }else{
-            if($status=='Ativo'){
-                $status = "A";
-            }else if($status=='Inativo'){
-                $status = "I";
-            }
-    
-            if($tipo_perfil=='Administrador'){
-                $tipo_perfil = "A";
-            }else if($tipo_perfil=='Comum'){
-                $tipo_perfil = "C";
-            }else if($tipo_perfil=='Diretoria'){
-                $tipo_perfil = "D";
-            }else if($tipo_perfil=='Gerência'){
-                $tipo_perfil = "G";
-            }
-    
-            $atualizado = $this->administrador_model->atualizaUsuario($id,$nome,$email,$status,$tipo_perfil);
-            
-            if($atualizado==true){
-                if($this->input->post("resetar_senha")){
-                    $this->administrador_model->resetaSenha($id);
+            $email_verifica = $this->administrador_model->existeEmailUsuario($email,$id);
+            if(strlen($email_verifica["EMAIL"])>0){
+                $this->session->set_flashdata("danger","<br />Este e-mail já está cadastrado no sistema!");
+                $this->editarUsuario($id);
+            }else{
+                if($status=='Ativo'){
+                    $status = "A";
+                }else if($status=='Inativo'){
+                    $status = "I";
                 }
-                $this->session->set_flashdata("success","<br />Usuário atualizado com sucesso!");
-                redirect("usuarios");
+        
+                if($tipo_perfil=='Administrador'){
+                    $tipo_perfil = "A";
+                }else if($tipo_perfil=='Comum'){
+                    $tipo_perfil = "C";
+                }else if($tipo_perfil=='Diretoria'){
+                    $tipo_perfil = "D";
+                }else if($tipo_perfil=='Gerência'){
+                    $tipo_perfil = "G";
+                }
+        
+                $atualizado = $this->administrador_model->atualizaUsuario($id,$nome,$email,$status,$tipo_perfil);
+                
+                if($atualizado==true){
+                    if($this->input->post("resetar_senha")){
+                        $this->administrador_model->resetaSenha($id);
+                    }
+                    $this->session->set_flashdata("success","<br />Usuário atualizado com sucesso!");
+                    redirect("usuarios");
+                }
             }
         }
         
@@ -232,27 +238,33 @@ class Administrador extends MY_Controller {
             $this->session->set_flashdata("danger","<br />Perfil inválido!");
             $this->novoUsuario();
         }else{
-            if($status=='Ativo'){
-                $status = "A";
-            }else if($status=='Inativo'){
-                $status = "I";
-            }
-    
-            if($tipo_perfil=='Administrador'){
-                $tipo_perfil = "A";
-            }else if($tipo_perfil=='Comum'){
-                $tipo_perfil = "C";
-            }else if($tipo_perfil=='Diretoria'){
-                $tipo_perfil = "D";
-            }else if($tipo_perfil=='Gerência'){
-                $tipo_perfil = "G";
-            }
-    
-            $cadastrado = $this->administrador_model->cadastraUsuario($nome,$email,$status,$tipo_perfil);
-            
-            if($cadastrado==true){
-                $this->session->set_flashdata("success","<br />Usuário cadastrado com sucesso!");
-                redirect("usuarios");
+            $email_verifica = $this->administrador_model->existeEmailUsuario($email);
+            if(strlen($email_verifica["EMAIL"])>0){
+                $this->session->set_flashdata("danger","<br />Este e-mail já existe no sistema!");
+                $this->novoUsuario();
+            }else{
+                if($status=='Ativo'){
+                    $status = "A";
+                }else if($status=='Inativo'){
+                    $status = "I";
+                }
+        
+                if($tipo_perfil=='Administrador'){
+                    $tipo_perfil = "A";
+                }else if($tipo_perfil=='Comum'){
+                    $tipo_perfil = "C";
+                }else if($tipo_perfil=='Diretoria'){
+                    $tipo_perfil = "D";
+                }else if($tipo_perfil=='Gerência'){
+                    $tipo_perfil = "G";
+                }
+        
+                $cadastrado = $this->administrador_model->cadastraUsuario($nome,$email,$status,$tipo_perfil);
+                
+                if($cadastrado==true){
+                    $this->session->set_flashdata("success","<br />Usuário cadastrado com sucesso!");
+                    redirect("usuarios");
+                }
             }
         }
     }

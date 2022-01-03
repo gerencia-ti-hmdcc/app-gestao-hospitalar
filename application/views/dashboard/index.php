@@ -5,10 +5,6 @@
                 <div class="row">
                     <div class="col-lg-6 col-7">
                         <h6>Gráfico Geral de ocupação</h6>
-                        <!-- <p class="text-sm">
-                            <i class="fa fa-arrow-up text-success"></i>
-                            <span class="font-weight-bold">4% more</span> in 2021
-                        </p> -->
                     </div>
                     <div class="col-lg-6 col-5 my-auto text-end">
                         <div class="dropdown float-lg-end pe-4">
@@ -31,94 +27,7 @@
     <div class="row" id="divPercentualGeral" name="divPercentualGeral">
 
     </div>
-    <!-- <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-        <div class="card cursor-pointer" onclick="abrirDivDetalhes(3)">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">UTI</p>
-                        <h5 class="font-weight-bolder mb-0">
-                            55%
-                            <span class="text-success text-sm font-weight-bolder">+55%</span>
-                        </h5>
-                        </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-building text-lg opacity-10" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-        <div class="card cursor-pointer">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Unidades de internação</p>
-                        <h5 class="font-weight-bolder mb-0">
-                            89%
-                            <span class="text-success text-sm font-weight-bolder">+3%</span>
-                        </h5>
-                        </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-building text-lg opacity-10" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card">
-        <div class="card-body p-3">
-            <div class="row">
-            <div class="col-8">
-                <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
-                <h5 class="font-weight-bolder mb-0">
-                    +3,462
-                    <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                </h5>
-                </div>
-            </div>
-            <div class="col-4 text-end">
-                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-sm-6">
-        <div class="card">
-        <div class="card-body p-3">
-            <div class="row">
-            <div class="col-8">
-                <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
-                <h5 class="font-weight-bolder mb-0">
-                    $103,430
-                    <span class="text-success text-sm font-weight-bolder">+5%</span>
-                </h5>
-                </div>
-            </div>
-            <div class="col-4 text-end">
-                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div> -->
+    
 </div>
 
 
@@ -132,21 +41,12 @@
                 <div class="row">
                     <div class="col-lg-6 col-7">
                         <h6 id='nome_area' name='nome_area'></h6>
-                        <!-- <p class="text-sm mb-0">
-                        <i class="fa fa-check text-info" aria-hidden="true"></i>
-                        <span class="font-weight-bold ms-1">30 done</span> this month
-                        </p> -->
                     </div>
                     <div class="col-lg-6 col-5 my-auto text-end">
                         <div class="dropdown float-lg-end pe-4">
                             <a class="cursor-pointer" onclick="abrirModalInformacoes('modal_tabela_setor')" aria-expanded="false"> <!-- id="dropdownTable" data-bs-toggle="dropdown" -->
                                 <i class="fa fa-question-circle text-secondary"></i>
                             </a>
-                            <!-- <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                            </ul> -->
                         </div>
                     </div>
                 </div>
@@ -236,8 +136,14 @@
                 success : function(data){
                     var result  = data;
                     var html_corpo_tabela = "";
+                    var percent = 0.0;
+                    var livres_1 = 0;
                     for(var i = 0; i<result.length; i++){
-                        var porcentagem_ocup = parseInt(result[i].PR_OCUPACAO_TOTAL);
+                        if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129){
+                            var porcentagem_ocup = (((parseInt(result[i].NR_UNID_OCUP) + parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN)) / parseInt(result[i].NR_UNIDADES_SETOR))*100);
+                        }else{
+                            var porcentagem_ocup = parseInt(result[i].PR_OCUPACAO_TOTAL);
+                        }
                         porcentagem_ocup = Math.ceil(porcentagem_ocup/5)*5;
                         var cor_per = "";
                         // if(porcentagem_ocup<=30){
@@ -268,6 +174,14 @@
                         }
                         var qt_ocupadas = result[i].NR_UNID_OCUP;
                         //if(result[i].CD_SETOR_ATENDIMENTO==129){qt_ocupadas = (result[i].NR_UNID_OCUP)*-1}else{qt_ocupadas = result[i].NR_UNID_OCUP}
+                        
+                        if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129){
+                            percent   = (((parseInt(result[i].NR_UNID_OCUP) + parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2); 
+                            livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) - parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN);
+                        }else{
+                            percent   = result[i].PR_OCUPACAO_TOTAL;
+                            livres_1  = result[i].NR_UNIDADES_LIVRES;
+                        }
 
                         html_corpo_tabela += '<tr>'+
                                                 '<td>'+
@@ -282,7 +196,7 @@
                                                    '<div class="progress-wrapper w-75 mx-auto">'+
                                                         '<div class="progress-info">'+
                                                             '<div class="progress-percentage">'+
-                                                                '<span class="text-xs font-weight-bold">'+result[i].PR_OCUPACAO_TOTAL+'%</span>'+
+                                                                '<span class="text-xs font-weight-bold">'+percent+'%</span>'+
                                                             '</div>'+
                                                         '</div>'+
                                                         '<div class="progress">'+
@@ -300,7 +214,7 @@
                                                     '<span class="text-xs font-weight-bold">'+qt_ocupadas+'</span>'+
                                                 '</td>'+
                                                 '<td class="align-middle text-center text-sm">'+
-                                                    '<span class="text-xs font-weight-bold">'+result[i].NR_UNIDADES_LIVRES+'</span>'+
+                                                    '<span class="text-xs font-weight-bold">'+livres_1+'</span>'+
                                                 '</td>'+
                                                 '<td class="align-middle text-center text-sm">'+
                                                     '<span class="text-xs font-weight-bold">'+result[i].NR_UNIDADES_RESERVADAS+'</span>'+

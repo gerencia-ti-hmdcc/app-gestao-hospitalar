@@ -2,7 +2,7 @@
 class Administrador_model extends CI_Model {
     
     public function retornaUsuarios(){
-        return $this->db->query("SELECT * FROM USERS")->result_array();
+        return $this->db->query("SELECT * FROM USERS ORDER BY NOME ASC")->result_array();
     }
 
     public function retornaUsuario($id){

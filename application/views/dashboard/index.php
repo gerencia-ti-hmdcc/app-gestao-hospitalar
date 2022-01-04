@@ -1,3 +1,4 @@
+<meta http-equiv="refresh" content="600" />
 <div class="row">
     <div class="col-lg-12 mb-4">
         <div class="card z-index-2">

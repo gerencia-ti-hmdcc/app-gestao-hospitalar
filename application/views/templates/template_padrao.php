@@ -198,7 +198,7 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                   borderRadius: 4,
                   borderSkipped: false,
                   backgroundColor: gerar_cor(),
-                  data: [parseFloat(result[i].PR_OCUPACAO_TOTAL).toFixed(2)],
+                  data: [parseFloat(percent).toFixed(2)],
                   maxBarThickness: 50
                 });
               }

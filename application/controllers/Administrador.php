@@ -6,10 +6,15 @@ class Administrador extends MY_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model("administrador_model");
-        //DESLOGA USUARIO QUE TENTA ACESSAR O MÓDULO ADMINISTRADOR QUE NÃO É ADM
-        $perfil = $this->administrador_model->tipoPerfilUsuario($_SESSION["usuario_logado"]["ID"]);
-        if($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' OR $perfil["TIPO_PERFIL"]!='A'){
+        $usuario = $this->session->userdata("usuario_logado");
+        if(!$usuario){
             header('Location: '.base_url('../').'login/logout');
+        }else{
+            //DESLOGA USUARIO QUE TENTA ACESSAR O MÓDULO ADMINISTRADOR QUE NÃO É ADM
+            $perfil = $this->administrador_model->tipoPerfilUsuario($_SESSION["usuario_logado"]["ID"]);
+            if($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' OR $perfil["TIPO_PERFIL"]!='A'){
+                header('Location: '.base_url('../').'login/logout');
+            }
         }
     }
 

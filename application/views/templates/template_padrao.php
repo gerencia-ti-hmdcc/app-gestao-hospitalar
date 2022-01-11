@@ -190,9 +190,9 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                                                       '<div class="">'+
                                                         '<p class="text-sm">'+
                                                           '<i class="fa fa-hospital"></i>'+
-                                                          '<span class="font-weight-bold"> Total - '+result[i].NR_UNIDADES_SETOR+'</span><br />'+
+                                                          '<span class="font-weight-bold"> Total : '+result[i].NR_UNIDADES_SETOR+'</span><br />'+
                                                           '<i class="fa fa-check text-success"></i>'+
-                                                          '<span class="font-weight-bold" style="color: green"> Livres - '+livres_1+'</span>'+
+                                                          '<span class="font-weight-bold" style="color: green"> Livres : '+livres_1+'</span>'+
                                                         '</p>'+
                                                       '</div>'+
                                                     '</div>'+

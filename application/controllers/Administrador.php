@@ -62,6 +62,8 @@ class Administrador extends MY_Controller {
                 $usuarios[$i]["TIPO_PERFIL"] = "Diretoria";
             }else if($usuarios[$i]["TIPO_PERFIL"]=='G'){
                 $usuarios[$i]["TIPO_PERFIL"] = "Gerência";
+            }else if($usuarios[$i]["TIPO_PERFIL"]=='P'){
+                $usuarios[$i]["TIPO_PERFIL"] = "Painel";
             }
             
             if($usuarios[$i]["IE_STATUS"]=='A'){
@@ -94,6 +96,8 @@ class Administrador extends MY_Controller {
                 $dados["usuario"]["TIPO_PERFIL"] = "Diretoria";
             }else if($dados["usuario"]["TIPO_PERFIL"]=='G'){
                 $dados["usuario"]["TIPO_PERFIL"] = "Gerência";
+            }else if($dados["usuario"]["TIPO_PERFIL"]=='P'){
+                $dados["usuario"]["TIPO_PERFIL"] = "Painel";
             }
 
             if($dados["usuario"]["IE_STATUS"]=='A'){
@@ -112,6 +116,8 @@ class Administrador extends MY_Controller {
                     $dados["tipos_perfil"][$i] = "Diretoria";
                 }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='G'){
                     $dados["tipos_perfil"][$i] = "Gerência";
+                }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='P'){
+                    $dados["tipos_perfil"][$i] = "Painel";
                 }
             }
             
@@ -175,6 +181,8 @@ class Administrador extends MY_Controller {
                     $tipo_perfil = "D";
                 }else if($tipo_perfil=='Gerência'){
                     $tipo_perfil = "G";
+                }else if($tipo_perfil=='Painel'){
+                    $tipo_perfil = "P";
                 }
         
                 $atualizado = $this->administrador_model->atualizaUsuario($id,$nome,$email,$status,$tipo_perfil);
@@ -205,6 +213,8 @@ class Administrador extends MY_Controller {
                 $dados["tipos_perfil"][$i] = "Diretoria";
             }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='G'){
                 $dados["tipos_perfil"][$i] = "Gerência";
+            }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='P'){
+                $dados["tipos_perfil"][$i] = "Painel";
             }
         }
         
@@ -262,6 +272,8 @@ class Administrador extends MY_Controller {
                     $tipo_perfil = "D";
                 }else if($tipo_perfil=='Gerência'){
                     $tipo_perfil = "G";
+                }else if($tipo_perfil=='Painel'){
+                    $tipo_perfil = "P";
                 }
         
                 $cadastrado = $this->administrador_model->cadastraUsuario($nome,$email,$status,$tipo_perfil);

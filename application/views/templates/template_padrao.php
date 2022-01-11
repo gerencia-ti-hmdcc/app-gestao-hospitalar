@@ -54,10 +54,26 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-  <?php include("template_menu_lateral.php");?>
+  <?php
+    if(isset($mostrar_menus)){
+      if($mostrar_menus==1){
+        include("template_menu_lateral.php");
+      }
+    }else{
+      include("template_menu_lateral.php");
+    }
+  ?>
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
     <!-- Navbar -->
-    <?php include("template_menu.php");?>
+    <?php
+      if(isset($mostrar_menus)){ 
+        if($mostrar_menus==1){
+          include("template_menu.php");
+        }
+      }else{
+        include("template_menu.php");
+      }
+    ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <?php $this->load->view($pagina);?>
@@ -202,6 +218,17 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                   maxBarThickness: 50
                 });
               }
+              var d = new Date(result[0].DT_ATUALIZACAO);
+              var curr_day = d.getDate(result[0].DT_ATUALIZACAO);
+              var curr_month = d.getMonth(result[0].DT_ATUALIZACAO);
+              var curr_year = d.getFullYear(result[0].DT_ATUALIZACAO);
+              var curr_hour = d.getHours(result[0].DT_ATUALIZACAO);
+              var curr_min = d.getMinutes(result[0].DT_ATUALIZACAO);
+              var curr_sec = d.getSeconds(result[0].DT_ATUALIZACAO);
+              curr_month++ ; // In js, first month is 0, not 1
+              year_2d = curr_year.toString().substring(2, 4)
+
+              $("#data_ult_att").html("<small>Atualizado em: "+String(curr_day).padStart(2, "0") +"/"+ String(curr_month).padStart(2, "0") +"/"+ year_2d+" "+String(curr_hour).padStart(2, "0")+":"+String(curr_min).padStart(2, "0")+"</small>");
               $("#divPercentualGeral").html(htmlPercentual);
               var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -267,6 +294,21 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                 alert('erro');
             }
           });
+          <?php if($link_pagina=='dashboard'){ if($tipo_perfil=='P'){ ?>
+            setTimeout(function(){
+              $.ajax({
+                url : "<?php echo site_url('dashboard/retornaSetorLoopPainel')?>",
+                type : 'POST',
+                dataType: "json",
+                success : function(data){
+                  abrirDivDetalhes(data.PROXIMO);
+                },
+                error : function(data){
+                  alert('erro');
+                }
+              });
+            },90000);/*150000*/
+          <?php } } ?>
         }else if('<?php echo $link_pagina;?>'=='administrador/usuarios'){ 
           $.ajax({
             url : "<?php echo site_url('retornaUsuarios')?>",

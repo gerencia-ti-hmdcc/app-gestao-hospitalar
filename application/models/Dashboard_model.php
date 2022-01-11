@@ -32,5 +32,18 @@ class Dashboard_model extends CI_Model {
         //return $this->db->query("SELECT * FROM `OCUPACAO_SETOR` WHERE DT_ATUALIZACAO >= DATE_SUB(NOW(), INTERVAL 1 HOUR) AND CD_CLASSIF_SETOR = $id_area")->result_array();
         return $this->db->query("SELECT * FROM `OCUPACAO_SETOR` WHERE date_format(dt_atualizacao, '%Y-%m-%d %H:%i') = (SELECT MAX(date_format(dt_atualizacao, '%Y-%m-%d %H:%i')) FROM `OCUPACAO_SETOR`) $condicao")->result_array();
     }
+
+    public function retornaSetorLoopPainel(){
+        return $this->db->query("SELECT * FROM CONFIG_PAINEL_OCUPACAO ORDER BY ID ASC")->result_array();
+    }
+
+    public function atualizaSetorLoopPainel($setor_anterior,$proximo_setor){
+        $anterior = $this->db->query("UPDATE CONFIG_PAINEL_OCUPACAO SET ULT_MOSTRADO = 0 WHERE NR_SETOR=$setor_anterior");
+        if($anterior==true){
+            return $this->db->query("UPDATE CONFIG_PAINEL_OCUPACAO SET ULT_MOSTRADO = 1 WHERE NR_SETOR=$proximo_setor");
+        }else{
+            return false;
+        }
+    }
 }
 ?>

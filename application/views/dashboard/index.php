@@ -1,11 +1,18 @@
-<meta http-equiv="refresh" content="600" />
+<?php
+    if($link_pagina=='dashboard'){ 
+        if($tipo_perfil=='P'){ ?>
+            <meta http-equiv="refresh" content="180" />
+<?php 
+        } 
+    } ?>
+
 <div class="row">
     <div class="col-lg-12 mb-4">
         <div class="card z-index-2">
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col-lg-6 col-7">
-                        <h6>Gráfico Geral de ocupação</h6>
+                        <h6>Gráfico Geral de ocupação - <span style='font-size: 12px' id='data_ult_att' name='data_ult_att'></span></h6>
                     </div>
                     <div class="col-lg-6 col-5 my-auto text-end">
                         <div class="dropdown float-lg-end pe-4">
@@ -19,7 +26,7 @@
             <div class="card-body p-3">
                 <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
                     <div class="chart">
-                    <canvas id="chart-bars" class="chart-canvas" height="300"></canvas>
+                    <canvas id="chart-bars" class="chart-canvas" height="<?php echo $tamanho_grafico;?>"></canvas>
                     </div>
                 </div>
             </div>

@@ -50,6 +50,11 @@ class Login extends CI_Controller {
                         }else{
                                 if($usuario["IE_STATUS"]=='A'){
                                         //exit(print_r($usuario));
+                                        if($usuario["TIPO_PERFIL"]=="P"){
+                                                $this->session->sess_expiration = 60*60*8;      
+                                        }else{
+                                                $this->session->sess_expiration = 60*60*2;  
+                                        }
                                         $this->session->set_userdata("usuario_logado",$usuario);
                                         $_SESSION['usuario_logado']['TOKEN'] = $token;
                                         $this->login_model->atualizaToken($usuario["ID"],$data_atual,$token,$validade);

@@ -9,10 +9,19 @@ class Dashboard extends MY_Controller {
 
 	public function index()
 	{
+        $usuario  = $_SESSION["usuario_logado"];
+        if($usuario["TIPO_PERFIL"]=="P"){
+            $dados["mostrar_menus"]      = 0;
+            $dados["tamanho_grafico"]   = "250";
+        }else{
+            $dados["mostrar_menus"]      = 1;
+            $dados["tamanho_grafico"]   = "300";
+        }
         $this->load->helper('form');
         $dados['pagina']        = 'dashboard/index.php';
         $dados['nome_pagina']   = 'Ocupação Hospitalar';
         $dados["link_pagina"]   = 'dashboard';
+        $dados["tipo_perfil"]   = $usuario["TIPO_PERFIL"];
         $this->load->view('templates/template_padrao.php',$dados);   
 	}
 
@@ -44,6 +53,27 @@ class Dashboard extends MY_Controller {
         }else{
             $this->session->set_flashdata("danger","Houve um erro inesperado. Atualize a página!");
             return;
+        }
+    }
+
+    public function retornaSetorLoopPainel(){
+        $this->load->model("dashboard_model");
+        $setores_painel = $this->dashboard_model->retornaSetorLoopPainel();
+        for($i = 0;$i<count($setores_painel);$i++){
+            if($setores_painel[$i]["ULT_MOSTRADO"]==1){
+                $anterior   = $setores_painel[$i]["NR_SETOR"];
+                //$proximo    = $setores_painel[$i+1]["NR_SETOR"];
+                if($i+1==count($setores_painel)){
+                    $proximo = $setores_painel[0]["NR_SETOR"];
+                }else{
+                    $proximo    = $setores_painel[$i+1]["NR_SETOR"];
+                } 
+            }
+        }
+        //exit("$anterior | $proximo");
+        $atualizado = $this->dashboard_model->atualizaSetorLoopPainel($anterior,$proximo);
+        if($atualizado==true){
+            print json_encode(array("PROXIMO"=>$proximo));
         }
     }
 

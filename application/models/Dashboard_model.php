@@ -37,13 +37,13 @@ class Dashboard_model extends CI_Model {
         return $this->db->query("SELECT * FROM CONFIG_PAINEL_OCUPACAO ORDER BY ID ASC")->result_array();
     }
 
-    public function atualizaSetorLoopPainel($setor_anterior,$proximo_setor){
-        $anterior = $this->db->query("UPDATE CONFIG_PAINEL_OCUPACAO SET ULT_MOSTRADO = 0 WHERE NR_SETOR=$setor_anterior");
-        if($anterior==true){
-            return $this->db->query("UPDATE CONFIG_PAINEL_OCUPACAO SET ULT_MOSTRADO = 1 WHERE NR_SETOR=$proximo_setor");
-        }else{
-            return false;
-        }
-    }
+    // public function atualizaSetorLoopPainel($setor_anterior,$proximo_setor){
+    //     $anterior = $this->db->query("UPDATE CONFIG_PAINEL_OCUPACAO SET ULT_MOSTRADO = 0 WHERE NR_SETOR=$setor_anterior");
+    //     if($anterior==true){
+    //         return $this->db->query("UPDATE CONFIG_PAINEL_OCUPACAO SET ULT_MOSTRADO = 1 WHERE NR_SETOR=$proximo_setor");
+    //     }else{
+    //         return false;
+    //     }
+    // }
 }
 ?>

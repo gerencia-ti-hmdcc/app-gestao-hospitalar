@@ -1,6 +1,13 @@
 <?php
     if($link_pagina=='dashboard'){ 
-        if($tipo_perfil=='P'){ ?>
+        if($tipo_perfil=='P'){ 
+            $usuario_logado = $this->session->userdata("usuario_logado");
+            if(isset($usuario_logado["painel_variavel_controle"])){
+                $usuario_logado["painel_variavel_controle"] = $usuario_logado["painel_variavel_controle"];
+            }else{
+                $usuario_logado["painel_variavel_controle"] = 129;
+            }
+?>
             <meta http-equiv="refresh" content="180" />
 <?php 
         } 
@@ -82,6 +89,7 @@
                         </tbody>
                     </table>
                 </div>
+                <input type='hidden' value='<?php echo $usuario_logado["painel_variavel_controle"];?>' id='painel_variavel_controle' name='painel_variavel_controle'/>
             </div>
         </div>
     </div>
@@ -359,7 +367,7 @@
                     location.href = "#tabela_detalhes";
                 },
                 error : function(data){
-                    alert('erro');
+                    alert('Não foi possível definir os detalhes do setor');
                 }
             });
         //}

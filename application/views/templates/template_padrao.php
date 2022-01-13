@@ -299,12 +299,25 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
               $.ajax({
                 url : "<?php echo site_url('dashboard/retornaSetorLoopPainel')?>",
                 type : 'POST',
+                data: {"atual" : $("#painel_variavel_controle").val()},
                 dataType: "json",
                 success : function(data){
-                  abrirDivDetalhes(data.PROXIMO);
+                  var proximo_att = data.PROXIMO;
+                  $.ajax({
+                    url : "<?php echo site_url('dashboard/atualizarVariavelPainelControleSessao')?>",
+                    type : 'POST',
+                    data: {"proximo" : proximo_att},
+                    dataType: "json",
+                    success : function(a){
+                      abrirDivDetalhes(data.PROXIMO);
+                    },
+                    error : function(data){
+                      alert('Não foi possível definir próximo detalhe!');
+                    }
+                  });
                 },
                 error : function(data){
-                  alert('erro');
+                  alert('Não foi possível retornar detalhe atual!');
                 }
               });
             },90000);/*150000*/

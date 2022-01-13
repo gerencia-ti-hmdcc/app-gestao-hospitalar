@@ -58,9 +58,10 @@ class Dashboard extends MY_Controller {
 
     public function retornaSetorLoopPainel(){
         $this->load->model("dashboard_model");
+        $atual = $this->input->post("atual");
         $setores_painel = $this->dashboard_model->retornaSetorLoopPainel();
         for($i = 0;$i<count($setores_painel);$i++){
-            if($setores_painel[$i]["ULT_MOSTRADO"]==1){
+            if($setores_painel[$i]["NR_SETOR"]==$atual){
                 $anterior   = $setores_painel[$i]["NR_SETOR"];
                 //$proximo    = $setores_painel[$i+1]["NR_SETOR"];
                 if($i+1==count($setores_painel)){
@@ -71,10 +72,19 @@ class Dashboard extends MY_Controller {
             }
         }
         //exit("$anterior | $proximo");
-        $atualizado = $this->dashboard_model->atualizaSetorLoopPainel($anterior,$proximo);
-        if($atualizado==true){
+        //$atualizado = $this->dashboard_model->atualizaSetorLoopPainel($anterior,$proximo);
+        //if($atualizado==true){
+        if($proximo){
             print json_encode(array("PROXIMO"=>$proximo));
         }
+    }
+
+    function atualizarVariavelPainelControleSessao(){
+        $proximo = $this->input->post("proximo");
+        $usuario = $this->session->userdata("usuario_logado");
+        $usuario["painel_variavel_controle"] = $proximo;
+        $this->session->set_userdata("usuario_logado",$usuario);
+        print json_encode(array("RES"=>"OK"));
     }
 
        

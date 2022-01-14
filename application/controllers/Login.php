@@ -51,7 +51,7 @@ class Login extends CI_Controller {
                                 if($usuario["IE_STATUS"]=='A'){
                                         //exit(print_r($usuario));
                                         if($usuario["TIPO_PERFIL"]=="P"){
-                                                $this->session->sess_expiration = 60*60*8;      
+                                                $this->session->sess_expiration = 0;      
                                         }else{
                                                 $this->session->sess_expiration = 60*60*2;  
                                         }

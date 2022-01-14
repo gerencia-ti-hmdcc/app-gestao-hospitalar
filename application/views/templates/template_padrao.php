@@ -49,6 +49,9 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
         left:0px;
         background-color:white;
       }
+      .semPaddingCima{
+        padding-top:0px !important;
+      }
     <?php } ?>
   </style>
 </head>
@@ -75,7 +78,7 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
       }
     ?>
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
+    <div id='div_pagina_geral' name='div_pagina_geral' class="container-fluid py-4">
       <?php $this->load->view($pagina);?>
       <?php include("template_footer.php");?>
     </div>
@@ -295,6 +298,7 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
             }
           });
           <?php if($link_pagina=='dashboard'){ if($tipo_perfil=='P'){ ?>
+            $('#div_pagina_geral').addClass('semPaddingCima');
             setTimeout(function(){
               $.ajax({
                 url : "<?php echo site_url('dashboard/retornaSetorLoopPainel')?>",

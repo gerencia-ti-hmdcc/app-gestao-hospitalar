@@ -1,6 +1,8 @@
 <?php
+    $variavel_controle_margem_tv = 4;
     if($link_pagina=='dashboard'){ 
         if($tipo_perfil=='P'){ 
+            $variavel_controle_margem_tv = 2;
             $usuario_logado = $this->session->userdata("usuario_logado");
             if(isset($usuario_logado["painel_variavel_controle"])){
                 $usuario_logado["painel_variavel_controle"] = $usuario_logado["painel_variavel_controle"];
@@ -14,7 +16,7 @@
     } ?>
 
 <div class="row">
-    <div class="col-lg-12 mb-4">
+    <div class="col-lg-12 mb-<?php echo $variavel_controle_margem_tv;?>">
         <div class="card z-index-2">
             <div class="card-header pb-0">
                 <div class="row">
@@ -50,7 +52,7 @@
 
 
 <div class="row my-4">
-    <div class="col-lg-12 col-md-12 mb-4" id="divGeral" name="divGeral"><!--mb-md-0-->
+    <div class="col-lg-12 col-md-12 mb-<?php echo $variavel_controle_margem_tv;?>" id="divGeral" name="divGeral"><!--mb-md-0-->
         <div class="card" id="tabela_detalhes" name="tabela_detalhes">
             <div class="card-header pb-0">
                 <div class="row">
@@ -155,10 +157,22 @@
                     var percent = 0.0;
                     var livres_1 = 0;
                     for(var i = 0; i<result.length; i++){
-                        if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129){
-                            var porcentagem_ocup = (((parseInt(result[i].NR_UNID_OCUP) + parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN)) / parseInt(result[i].NR_UNIDADES_SETOR))*100);
+                        // if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129){
+                        //     var porcentagem_ocup = (((parseInt(result[i].NR_UNID_OCUP) + parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN)) / parseInt(result[i].NR_UNIDADES_SETOR))*100);
+                        // }else{
+                        //     var porcentagem_ocup = parseInt(result[i].PR_OCUPACAO_TOTAL);
+                        // }
+                        temp_indisponiveis = parseInt(result[i].NR_UNIDADES_RESERVADAS)+parseInt(result[i].NR_UNIDADES_HIGIENIZACAO)+parseInt(result[i].QT_UNIDADES_ALTA)+parseInt(result[i].QT_UNIDADE_MANUTENCAO)+parseInt(result[i].NR_UNID_AGUARD_HIGIEN)+parseInt(result[i].QT_UNIDADES_ISOLAMENTO);
+                        if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129 || (parseInt(result[i].CD_SETOR_ATENDIMENTO)==145)){
+                            var porcentagem_ocup   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);
+                            livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) -temp_indisponiveis; /*- parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN) - parseInt(result[i].QT_UNIDADES_ALTA)*/
                         }else{
-                            var porcentagem_ocup = parseInt(result[i].PR_OCUPACAO_TOTAL);
+                            if((parseInt(result[i].CD_SETOR_ATENDIMENTO)==83) ){
+                                var porcentagem_ocup   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);; 
+                            }else{
+                                var porcentagem_ocup   = parseFloat(result[i].PR_OCUPACAO).toFixed(2);
+                            }
+                            livres_1  = result[i].NR_UNIDADES_LIVRES;
                         }
                         porcentagem_ocup = Math.ceil(porcentagem_ocup/5)*5;
                         var cor_per = "";
@@ -191,11 +205,23 @@
                         var qt_ocupadas = result[i].NR_UNID_OCUP;
                         //if(result[i].CD_SETOR_ATENDIMENTO==129){qt_ocupadas = (result[i].NR_UNID_OCUP)*-1}else{qt_ocupadas = result[i].NR_UNID_OCUP}
                         
-                        if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129){
-                            percent   = (((parseInt(result[i].NR_UNID_OCUP) + parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2); 
-                            livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) - parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN);
+                        // if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129){
+                        //     percent   = (((parseInt(result[i].NR_UNID_OCUP) + parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2); 
+                        //     livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) - parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN);
+                        // }else{
+                        //     percent   = result[i].PR_OCUPACAO_TOTAL;
+                        //     livres_1  = result[i].NR_UNIDADES_LIVRES;
+                        // }
+
+                        if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129 || (parseInt(result[i].CD_SETOR_ATENDIMENTO)==145)){
+                            percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);
+                            livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) -temp_indisponiveis; /*- parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN) - parseInt(result[i].QT_UNIDADES_ALTA)*/
                         }else{
-                            percent   = result[i].PR_OCUPACAO_TOTAL;
+                            if((parseInt(result[i].CD_SETOR_ATENDIMENTO)==83) ){
+                                percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);; 
+                            }else{
+                                percent   = parseFloat(result[i].PR_OCUPACAO).toFixed(2);
+                            }
                             livres_1  = result[i].NR_UNIDADES_LIVRES;
                         }
 

@@ -173,18 +173,32 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
               var dataSets_grafico = [];
               var percent = 0.0;
               var livres_1 = 0;
+              var temp_indisponiveis = 0;
               for(var i = 0; i<result.length; i++){
-                if(parseInt(result[i].CD_CLASSIF_SETOR)==129){
-                  percent   = (((parseInt(result[i].NR_UNID_OCUP) + parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);; 
-                  livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) - parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN);
+                temp_indisponiveis = parseInt(result[i].NR_UNIDADES_RESERVADAS)+parseInt(result[i].NR_UNIDADES_HIGIENIZACAO)+parseInt(result[i].QT_UNIDADES_ALTA)+parseInt(result[i].QT_UNIDADE_MANUTENCAO)+parseInt(result[i].NR_UNID_AGUARD_HIGIEN)+parseInt(result[i].QT_UNIDADES_ISOLAMENTO);
+                if(parseInt(result[i].CD_CLASSIF_SETOR)==129 || (parseInt(result[i].CD_CLASSIF_SETOR)==145)){
+                  percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);
+                  livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) -temp_indisponiveis; /*- parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN) - parseInt(result[i].QT_UNIDADES_ALTA)*/
                 }else{
-                  percent   = parseFloat(result[i].PR_OCUPACAO_TOTAL).toFixed(2);
+                  if((parseInt(result[i].CD_CLASSIF_SETOR)==83) ){
+                    percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);; 
+                  }else{
+                    percent   = parseFloat(result[i].PR_OCUPACAO).toFixed(2);
+                  }
                   livres_1  = result[i].NR_UNIDADES_LIVRES;
                 }
-
-                htmlPercentual += '<div class="col-xl-4 col-sm-12 mb-xl-4 mb-4">'+
+                <?php if($link_pagina=='dashboard'){ if($tipo_perfil=='P'){?>
+                  var margem_baixo_acerto_tv = 2;  
+                  var espaco_card_acerto_tv = 2;
+                <?php }else{ ?>
+                  var margem_baixo_acerto_tv = 4;  
+                  var espaco_card_acerto_tv = 3;
+                <?php } } ?>
+              
+                
+                htmlPercentual += '<div class="col-xl-4 col-sm-12 mb-xl-'+margem_baixo_acerto_tv.toString()+' mb-'+margem_baixo_acerto_tv.toString()+'">'+
                                     '<div class="card cursor-pointer" onclick="abrirDivDetalhes('+parseInt(result[i].CD_CLASSIF_SETOR)+')">'+
-                                        '<div class="card-body p-3">'+
+                                        '<div class="card-body p-'+espaco_card_acerto_tv.toString()+'">'+
                                             '<div class="row">'+
                                                 '<div class="col-8">'+
                                                     '<div class="numbers">'+
@@ -195,7 +209,11 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                                                           '<i class="fa fa-hospital"></i>'+
                                                           '<span class="font-weight-bold"> Total : '+result[i].NR_UNIDADES_SETOR+'</span><br />'+
                                                           '<i class="fa fa-check text-success"></i>'+
-                                                          '<span class="font-weight-bold" style="color: green"> Livres : '+livres_1+'</span>'+
+                                                          '<span class="font-weight-bold" style="color: green"> Livres : '+livres_1+'</span><br />'+
+                                                          '<i class="fas fa-ban text-danger"></i>'+
+                                                          '<span class="font-weight-bold" style="color: red"> Ocupados : '+result[i].NR_UNID_OCUP+'</span><br />'+
+                                                          '<i class="fas fa-asterisk text-warning"></i>'+
+                                                          '<span class="font-weight-bold" style="color: #ffa500"> Indisponíveis : '+temp_indisponiveis+'</span>'+
                                                         '</p>'+
                                                       '</div>'+
                                                     '</div>'+

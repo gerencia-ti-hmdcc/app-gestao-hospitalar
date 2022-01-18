@@ -62,5 +62,9 @@ class Login_model extends CI_Model {
                         WHERE
                             ID=$id");
     }
+
+    public function retornaUsuarioPainel(){
+        return $this->db->query("SELECT * FROM USERS WHERE TIPO_PERFIL='P' AND IE_STATUS='A'")->row_array();
+    }
 }
 ?>

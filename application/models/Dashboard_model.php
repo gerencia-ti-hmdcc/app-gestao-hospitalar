@@ -34,7 +34,7 @@ class Dashboard_model extends CI_Model {
     }
 
     public function retornaSetorLoopPainel(){
-        return $this->db->query("SELECT * FROM CONFIG_PAINEL_OCUPACAO ORDER BY ID ASC")->result_array();
+        return $this->db->query("SELECT * FROM CONFIG_PAINEL_OCUPACAO WHERE ATIVO=1 ORDER BY ID ASC")->result_array();
     }
 
     // public function atualizaSetorLoopPainel($setor_anterior,$proximo_setor){

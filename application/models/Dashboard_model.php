@@ -37,6 +37,10 @@ class Dashboard_model extends CI_Model {
         return $this->db->query("SELECT * FROM CONFIG_PAINEL_OCUPACAO WHERE ATIVO=1 ORDER BY ID ASC")->result_array();
     }
 
+    public function retornaUltimoSetorGeralAtivo(){
+        return $this->db->query("SELECT * FROM CONFIG_PAINEL_OCUPACAO WHERE ATIVO=1 ORDER BY ID DESC LIMIT 1")->row_array();
+    }
+
     // public function atualizaSetorLoopPainel($setor_anterior,$proximo_setor){
     //     $anterior = $this->db->query("UPDATE CONFIG_PAINEL_OCUPACAO SET ULT_MOSTRADO = 0 WHERE NR_SETOR=$setor_anterior");
     //     if($anterior==true){

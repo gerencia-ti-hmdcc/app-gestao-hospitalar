@@ -22,6 +22,11 @@ class Dashboard extends MY_Controller {
         $dados['nome_pagina']   = 'Ocupação Hospitalar';
         $dados["link_pagina"]   = 'dashboard';
         $dados["tipo_perfil"]   = $usuario["TIPO_PERFIL"];
+        if($dados["tipo_perfil"]=="P"){
+            $this->load->model('dashboard_model');
+            $ultimo_usuario_painel = $this->dashboard_model->retornaUltimoSetorGeralAtivo();
+            $dados["setor_ultimo_painel"] = $ultimo_usuario_painel["NR_SETOR"];
+        }
         $this->load->view('templates/template_padrao.php',$dados);   
 	}
 

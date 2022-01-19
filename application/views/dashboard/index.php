@@ -7,7 +7,7 @@
             if(isset($usuario_logado["painel_variavel_controle"])){
                 $usuario_logado["painel_variavel_controle"] = $usuario_logado["painel_variavel_controle"];
             }else{
-                $usuario_logado["painel_variavel_controle"] = 129;
+                $usuario_logado["painel_variavel_controle"] = $setor_ultimo_painel;
             }
 ?>
             <meta http-equiv="refresh" content="180" />

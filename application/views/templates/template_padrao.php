@@ -174,11 +174,13 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
               var percent = 0.0;
               var livres_1 = 0;
               var temp_indisponiveis = 0;
+              var outros_leitos      = 0;
               for(var i = 0; i<result.length; i++){
-                temp_indisponiveis = parseInt(result[i].NR_UNIDADES_RESERVADAS)+parseInt(result[i].NR_UNIDADES_HIGIENIZACAO)+parseInt(result[i].QT_UNIDADES_ALTA)+parseInt(result[i].QT_UNIDADE_MANUTENCAO)+parseInt(result[i].NR_UNID_AGUARD_HIGIEN)+parseInt(result[i].QT_UNIDADES_ISOLAMENTO);
+                temp_indisponiveis = parseInt(result[i].QT_UNIDADE_MANUTENCAO)+parseInt(result[i].QT_UNIDADES_ISOLAMENTO);
+                outros_leitos      = parseInt(result[i].NR_UNIDADES_RESERVADAS)+parseInt(result[i].NR_UNIDADES_HIGIENIZACAO)+parseInt(result[i].QT_UNIDADES_ALTA)+parseInt(result[i].NR_UNID_AGUARD_HIGIEN);
                 if(parseInt(result[i].CD_CLASSIF_SETOR)==129 || (parseInt(result[i].CD_CLASSIF_SETOR)==145)){
                   percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);
-                  livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) -temp_indisponiveis; /*- parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN) - parseInt(result[i].QT_UNIDADES_ALTA)*/
+                  livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) - (temp_indisponiveis + outros_leitos); /*- parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN) - parseInt(result[i].QT_UNIDADES_ALTA)*/
                 }else{
                   if((parseInt(result[i].CD_CLASSIF_SETOR)==83) ){
                     percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);; 
@@ -212,8 +214,10 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                                                           '<span class="font-weight-bold" style="color: green"> Livres : '+livres_1+'</span><br />'+
                                                           '<i class="fas fa-ban text-danger"></i>'+
                                                           '<span class="font-weight-bold" style="color: red"> Ocupados : '+result[i].NR_UNID_OCUP+'</span><br />'+
-                                                          '<i class="fas fa-asterisk text-warning"></i>'+
-                                                          '<span class="font-weight-bold" style="color: #ffa500"> Indisponíveis : '+temp_indisponiveis+'</span>'+
+                                                          '<i class="fas fa-hourglass-half text-warning"></i>'+
+                                                          '<span class="font-weight-bold" style="color: #ffa500"> Indisponíveis : '+temp_indisponiveis+'</span><br />'+
+                                                          '<i class="fas fa-asterisk text-info" style="color: #2c387e !important"></i>'+
+                                                          '<span class="font-weight-bold" style="color: #2c387e"> Reserv./ Higien./ Alta : '+outros_leitos+'</span>'+
                                                         '</p>'+
                                                       '</div>'+
                                                     '</div>'+

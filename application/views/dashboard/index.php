@@ -136,7 +136,7 @@
                                     '<b>Higienização</b> - Leitos que estão em higienização ou aguardando higienização.<br />'+
                                     '<b>Manutenção</b> - Leitos que estão em manutenção e/ou interditados.<br />'+
                                     '<b>Alta</b> - Leitos em processo de alta.<br />'+
-                                    '<b>Indisponíveis</b> - Leitos isolados e em manutenção<br />'+
+                                    '<b>Indisponíveis</b> - Leitos isolados e em manutenção.<br />'+
                                     '<b>Reserv./ Higien./ Alta</b> - Leitos reservados, em higienização ou aguardando higienização e em processo de alta.');
             $("#modal_info").modal('show');
         }

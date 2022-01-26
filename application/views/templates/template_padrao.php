@@ -197,32 +197,72 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                   var espaco_card_acerto_tv = 3;
                 <?php } } ?>
               
-                
-                htmlPercentual += '<div class="col-xl-4 col-sm-12 mb-xl-'+margem_baixo_acerto_tv.toString()+' mb-'+margem_baixo_acerto_tv.toString()+'">'+
+                <?php if($link_pagina=='dashboard'){ if($tipo_perfil=='P'){?>
+                  htmlPercentual += '<div class="col-xl-4 col-sm-12 mb-xl-'+margem_baixo_acerto_tv.toString()+' mb-'+margem_baixo_acerto_tv.toString()+'">'+
+                                      '<div class="card cursor-pointer" onclick="abrirDivDetalhes('+parseInt(result[i].CD_CLASSIF_SETOR)+')">'+
+                                        '<div class="card-body p-'+espaco_card_acerto_tv.toString()+'">'+
+                                          '<div class="row">'+
+                                          '<div class="numbers col-12">'+
+                                            '<div style="float: left" class="col-9">'+
+                                            '<p class="text-sm mb-0 text-capitalize" id="titulo'+result[i].CD_CLASSIF_SETOR+'" name="titulo'+result[i].CD_CLASSIF_SETOR+'" font-weight-bold">'+result[i].DS_SETOR_ATENDIMENTO+'</p>'+
+                                            '<h5 class="font-weight-bolder mb-0">'+percent+'%</h5>'+
+                                            '</div>'+
+                                            '<div style="float: left" class="col-3 text-end">'+
+                                            '<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">'+
+                                              '<i class="ni ni-building text-lg opacity-10" aria-hidden="true"></i>'+
+                                              '<input id="id_area_antigo" name="id_area_antigo" value="'+parseInt(result[i].CD_CLASSIF_SETOR)+'" type="hidden"/>'+
+                                            '</div>'+
+                                            '</div>'+
+                                          '</div>'+   
+                                          '<div class="numbers col-12">'+
+                                            '<table width="100%" class="text-sm">'+
+                                            '<tr>'+
+                                              '<td class="font-weight-bold" style="color: green"><i class="fa fa-check text-success"></i> Livres</td>'+
+                                              '<td class="font-weight-bold" style="color: green">'+livres_1+'</td>'+
+                                              '<td class="font-weight-bold" style="color: #2c387e;padding-left:30px"><i class="fas fa-asterisk text-info" style="color: #2c387e !important"></i> Resv./ Hig./ Alta</td>'+
+                                              '<td class="font-weight-bold" style="color: #2c387e;padding-left:30px">'+outros_leitos+'</td>'+
+                                            '</tr>'+
+                                            '<tr>'+
+                                              '<td class="font-weight-bold" style="color: red"><i class="fas fa-ban text-danger"></i> Ocupados</td>'+
+                                              '<td class="font-weight-bold" style="color: red">'+result[i].NR_UNID_OCUP+'</td>'+
+                                              '<td class="font-weight-bold" style="color: #ffa500;padding-left:30px"><i class="fas fa-hourglass-half text-warning"></i> Indisponíveis</td>'+
+                                              '<td class="font-weight-bold" style="color: #ffa500;padding-left:30px">'+temp_indisponiveis+'</td>'+
+                                            '</tr>'+
+                                            '<tr>'+
+                                              '<td class="font-weight-bold"><i class="fa fa-hospital"></i> Total</td>'+
+                                              '<td class="font-weight-bold">'+result[i].NR_UNIDADES_SETOR+'</td>'+
+                                              '<td colspan="2" class="font-weight-bold"></td>'+
+                                            '</tr>'+
+                                            '</table>'+
+                                          '</div>'+   
+                                          '</div>'+
+                                        '</div>'+
+                                      '</div>'+
+                                    '</div>';
+                <?php }else{ ?>
+                  htmlPercentual += '<div class="col-xl-4 col-sm-12 mb-xl-'+margem_baixo_acerto_tv.toString()+' mb-'+margem_baixo_acerto_tv.toString()+'">'+
                                     '<div class="card cursor-pointer" onclick="abrirDivDetalhes('+parseInt(result[i].CD_CLASSIF_SETOR)+')">'+
                                         '<div class="card-body p-'+espaco_card_acerto_tv.toString()+'">'+
                                             '<div class="row">'+
-                                                '<div class="col-8">'+
+                                                '<div class="col-9">'+
                                                     '<div class="numbers">'+
                                                       '<p class="text-sm mb-0 text-capitalize" id="titulo'+result[i].CD_CLASSIF_SETOR+'" name="titulo'+result[i].CD_CLASSIF_SETOR+'" font-weight-bold">'+result[i].DS_SETOR_ATENDIMENTO+'</p>'+
                                                       '<h5 class="font-weight-bolder mb-0">'+percent+'%</h5>'+
-                                                      '<div class="">'+
-                                                        '<p class="text-sm">'+
-                                                          '<i class="fa fa-hospital"></i>'+
-                                                          '<span class="font-weight-bold"> Total : '+result[i].NR_UNIDADES_SETOR+'</span><br />'+
-                                                          '<i class="fa fa-check text-success"></i>'+
-                                                          '<span class="font-weight-bold" style="color: green"> Livres : '+livres_1+'</span><br />'+
-                                                          '<i class="fas fa-ban text-danger"></i>'+
-                                                          '<span class="font-weight-bold" style="color: red"> Ocupados : '+result[i].NR_UNID_OCUP+'</span><br />'+
-                                                          '<i class="fas fa-hourglass-half text-warning"></i>'+
-                                                          '<span class="font-weight-bold" style="color: #ffa500"> Indisponíveis : '+temp_indisponiveis+'</span><br />'+
-                                                          '<i class="fas fa-asterisk text-info" style="color: #2c387e !important"></i>'+
-                                                          '<span class="font-weight-bold" style="color: #2c387e"> Reserv./ Higien./ Alta : '+outros_leitos+'</span>'+
-                                                        '</p>'+
+                                                      '<div class="text-sm">'+
+                                                        '<i class="fa fa-hospital"></i>'+
+                                                        '<span class="font-weight-bold"> Total : '+result[i].NR_UNIDADES_SETOR+'</span><br />'+
+                                                        '<i class="fa fa-check text-success"></i>'+
+                                                        '<span class="font-weight-bold" style="color: green"> Livres : '+livres_1+'</span><br />'+
+                                                        '<i class="fas fa-ban text-danger"></i>'+
+                                                        '<span class="font-weight-bold" style="color: red"> Ocupados : '+result[i].NR_UNID_OCUP+'</span><br />'+
+                                                        '<i class="fas fa-hourglass-half text-warning"></i>'+
+                                                        '<span class="font-weight-bold" style="color: #ffa500"> Indisponíveis : '+temp_indisponiveis+'</span><br />'+
+                                                        '<i class="fas fa-asterisk text-info" style="color: #2c387e !important"></i>'+
+                                                        '<span class="font-weight-bold" style="color: #2c387e"> Reserv./ Higien./ Alta : '+outros_leitos+'</span>'+
                                                       '</div>'+
                                                     '</div>'+
                                                 '</div>'+
-                                                '<div class="col-4 text-end">'+
+                                                '<div class="col-3 text-end">'+
                                                     '<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">'+
                                                       '<i class="ni ni-building text-lg opacity-10" aria-hidden="true"></i>'+
                                                       '<input id="id_area_antigo" name="id_area_antigo" value="'+parseInt(result[i].CD_CLASSIF_SETOR)+'" type="hidden"/>'+
@@ -232,6 +272,8 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                                         '</div>'+
                                     '</div>'+
                                 '</div>';
+                <?php } } ?>
+
                 dataSets_grafico.push({
                   label: result[i].DS_SETOR_ATENDIMENTO,
                   tension: 0.4,

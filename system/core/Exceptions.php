@@ -120,13 +120,13 @@ class CI_Exceptions {
 	{
 		if (is_cli())
 		{
-			$heading = 'Not Found';
-			$message = 'The controller/method pair you requested was not found.';
+			$heading = 'Não encontrado';
+			$message = 'O controller/method requisitado não foi encontrado.';
 		}
 		else
 		{
-			$heading = '404 Page Not Found';
-			$message = 'The page you requested was not found.';
+			$heading = '404 - Página não encontrada';
+			$message = 'A página que você requisitou não foi encontrada.';
 		}
 
 		// By default we log this, but allow a dev to skip it

@@ -52,6 +52,12 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
       .semPaddingCima{
         padding-top:0px !important;
       }
+      .margemTV{
+        margin-left: 1%;
+      }
+      .redimensionaTabela{
+        width: 30% !important;
+      }
     <?php } ?>
   </style>
 </head>
@@ -198,7 +204,7 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                 <?php } } ?>
               
                 <?php if($link_pagina=='dashboard'){ if($tipo_perfil=='P'){?>
-                  htmlPercentual += '<div class="col-xl-4 col-sm-12 mb-xl-'+margem_baixo_acerto_tv.toString()+' mb-'+margem_baixo_acerto_tv.toString()+'">'+
+                  htmlPercentual += '<div name="cardGeral_'+result[i].CD_CLASSIF_SETOR.toString()+'" id="cardGeral_'+result[i].CD_CLASSIF_SETOR.toString()+'" class="cardGeral col-xl-4 col-sm-12 mb-xl-'+margem_baixo_acerto_tv.toString()+' mb-'+margem_baixo_acerto_tv.toString()+'">'+
                                       '<div class="card cursor-pointer" onclick="abrirDivDetalhes('+parseInt(result[i].CD_CLASSIF_SETOR)+')">'+
                                         '<div class="card-body p-'+espaco_card_acerto_tv.toString()+'">'+
                                           '<div class="row">'+
@@ -215,7 +221,7 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                                             '</div>'+
                                           '</div>'+   
                                           '<div class="numbers col-12">'+
-                                            '<table width="100%" class="text-sm">'+
+                                            '<table name="tabelaGeral_'+result[i].CD_CLASSIF_SETOR.toString()+'" id="tabelaGeral_'+result[i].CD_CLASSIF_SETOR.toString()+'" width="100%" class="text-sm">'+
                                             '<tr>'+
                                               '<td class="font-weight-bold" style="color: green"><i class="fa fa-check text-success"></i> Livres</td>'+
                                               '<td class="font-weight-bold" style="color: green">'+livres_1+'</td>'+
@@ -377,7 +383,12 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                     data: {"proximo" : proximo_att},
                     dataType: "json",
                     success : function(a){
-                      abrirDivDetalhes(data.PROXIMO);
+                      //abrirDivDetalhes(data.PROXIMO);
+                      $(".cardGeral").hide();
+                      $("#cardGeral_"+$("#painel_variavel_controle").val().toString()).removeClass("col-xl-4").addClass("col-xl-4 margemTV");
+                      // $("#tabelaGeral_"+$("#painel_variavel_controle").val().toString()).addClass("redimensionaTabela");
+                      $("#cardGeral_"+$("#painel_variavel_controle").val().toString()).show();
+                      abrirDivDetalhes($("#painel_variavel_controle").val());
                     },
                     error : function(data){
                       alert('Não foi possível definir próximo detalhe!');

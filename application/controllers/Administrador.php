@@ -107,28 +107,9 @@ class Administrador extends MY_Controller {
             }
 
             $dados["tipos_perfil"]      = $this->administrador_model->retornaTodosTiposPerfis();
-            for($i=0;$i<count($dados["tipos_perfil"]);$i++){
-                if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='A'){
-                    $dados["tipos_perfil"][$i] = "Administrador";
-                }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='C'){
-                    $dados["tipos_perfil"][$i] = "Comum";
-                }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='D'){
-                    $dados["tipos_perfil"][$i] = "Diretoria";
-                }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='G'){
-                    $dados["tipos_perfil"][$i] = "Gerência";
-                }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='P'){
-                    $dados["tipos_perfil"][$i] = "Painel";
-                }
-            }
             
             $dados["status_possiveis"]  = $this->administrador_model->retornaTodosStatus();
-            for($i=0;$i<count($dados["status_possiveis"]);$i++){
-                if($dados["status_possiveis"][$i]["IE_STATUS"]=='A'){
-                    $dados["status_possiveis"][$i] = "Ativo";
-                }else if($dados["status_possiveis"][$i]["IE_STATUS"]=='I'){
-                    $dados["status_possiveis"][$i] = "Inativo";
-                }
-            }
+            
             $dados["id_usuario"]        = $id;
             $dados['pagina']            = 'administrador/editar_usuario.php';
             $dados['nome_pagina']       = 'Editar Usuário';
@@ -155,7 +136,7 @@ class Administrador extends MY_Controller {
         }else if(strlen($email)<3){
             $this->session->set_flashdata("danger","<br />E-mail inválido!");
             $this->editarUsuario($id);         
-        }else if(strlen($status)<1){
+        }else if(strlen($status)<1 OR strlen($status)>1){
             $this->session->set_flashdata("danger","<br />Status inválido!");
             $this->editarUsuario($id);       
         }else if(strlen($tipo_perfil)<1){
@@ -167,24 +148,6 @@ class Administrador extends MY_Controller {
                 $this->session->set_flashdata("danger","<br />Este e-mail já está cadastrado no sistema!");
                 $this->editarUsuario($id);
             }else{
-                if($status=='Ativo'){
-                    $status = "A";
-                }else if($status=='Inativo'){
-                    $status = "I";
-                }
-        
-                if($tipo_perfil=='Administrador'){
-                    $tipo_perfil = "A";
-                }else if($tipo_perfil=='Comum'){
-                    $tipo_perfil = "C";
-                }else if($tipo_perfil=='Diretoria'){
-                    $tipo_perfil = "D";
-                }else if($tipo_perfil=='Gerência'){
-                    $tipo_perfil = "G";
-                }else if($tipo_perfil=='Painel'){
-                    $tipo_perfil = "P";
-                }
-        
                 $atualizado = $this->administrador_model->atualizaUsuario($id,$nome,$email,$status,$tipo_perfil);
                 
                 if($atualizado==true){
@@ -204,28 +167,9 @@ class Administrador extends MY_Controller {
         $this->load->helper('form');
 
         $dados["tipos_perfil"]      = $this->administrador_model->retornaTodosTiposPerfis();
-        for($i=0;$i<count($dados["tipos_perfil"]);$i++){
-            if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='A'){
-                $dados["tipos_perfil"][$i] = "Administrador";
-            }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='C'){
-                $dados["tipos_perfil"][$i] = "Comum";
-            }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='D'){
-                $dados["tipos_perfil"][$i] = "Diretoria";
-            }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='G'){
-                $dados["tipos_perfil"][$i] = "Gerência";
-            }else if($dados["tipos_perfil"][$i]["TIPO_PERFIL"]=='P'){
-                $dados["tipos_perfil"][$i] = "Painel";
-            }
-        }
         
         $dados["status_possiveis"]  = $this->administrador_model->retornaTodosStatus();
-        for($i=0;$i<count($dados["status_possiveis"]);$i++){
-            if($dados["status_possiveis"][$i]["IE_STATUS"]=='A'){
-                $dados["status_possiveis"][$i] = "Ativo";
-            }else if($dados["status_possiveis"][$i]["IE_STATUS"]=='I'){
-                $dados["status_possiveis"][$i] = "Inativo";
-            }
-        }
+        
         $dados['pagina']            = 'administrador/adicionar_usuario.php';
         $dados['nome_pagina']       = 'Adicionar Usuário';
         $dados["link_pagina"]       = 'administrador/novoUsuario';
@@ -246,7 +190,7 @@ class Administrador extends MY_Controller {
         }else if(strlen($email)<3){
             $this->session->set_flashdata("danger","<br />E-mail inválido!");
             $this->novoUsuario();
-        }else if(strlen($status)<1){
+        }else if(strlen($status)<1 OR strlen($status)>1){
             $this->session->set_flashdata("danger","<br />Status inválido!");
             $this->novoUsuario();
         }else if(strlen($tipo_perfil)<1){
@@ -258,12 +202,6 @@ class Administrador extends MY_Controller {
                 $this->session->set_flashdata("danger","<br />Este e-mail já existe no sistema!");
                 $this->novoUsuario();
             }else{
-                if($status=='Ativo'){
-                    $status = "A";
-                }else if($status=='Inativo'){
-                    $status = "I";
-                }
-        
                 if($tipo_perfil=='Administrador'){
                     $tipo_perfil = "A";
                 }else if($tipo_perfil=='Comum'){

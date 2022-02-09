@@ -10,11 +10,11 @@ class Administrador_model extends CI_Model {
     }
 
     public function retornaTodosStatus(){
-        return $this->db->query("SELECT DISTINCT IE_STATUS FROM USERS")->result_array();
+        return $this->db->query("SELECT DISTINCT SIGLA_STATUS, NOME_STATUS FROM CONFIG_USUARIO_STATUS WHERE ATIVO=1")->result_array();
     }
 
     public function retornaTodosTiposPerfis(){
-        return $this->db->query("SELECT DISTINCT TIPO_PERFIL FROM USERS")->result_array();
+        return $this->db->query("SELECT DISTINCT SIGLA_TIPO_PERFIL, NOME_TIPO_PERFIL FROM CONFIG_USUARIO_TIPO_PERFIL WHERE ATIVO=1")->result_array();
     }
 
     public function resetaSenha($id){

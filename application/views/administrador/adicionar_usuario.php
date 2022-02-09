@@ -35,7 +35,7 @@
                         <?php
                             echo "<option selected value=''>Selecione uma opção</option>";
                             for($i=0; $i<count($status_possiveis);$i++){
-                                echo "<option $c_slc value='".$status_possiveis[$i]."'>".$status_possiveis[$i]."</option>";
+                                echo "<option $c_slc value='".$status_possiveis[$i]["SIGLA_STATUS"]."'>".$status_possiveis[$i]["NOME_STATUS"]."</option>";
                             }
                         ?>
                     </select>
@@ -46,7 +46,7 @@
                         <?php
                             echo "<option selected value=''>Selecione uma opção</option>";
                             for($i=0; $i<count($tipos_perfil);$i++){
-                                echo "<option $c_slc value='".$tipos_perfil[$i]."'>".$tipos_perfil[$i]."</option>";
+                                echo "<option $c_slc value='".$tipos_perfil[$i]["SIGLA_TIPO_PERFIL"]."'>".$tipos_perfil[$i]["NOME_TIPO_PERFIL"]."</option>";
                             }
                         ?>
                     </select>

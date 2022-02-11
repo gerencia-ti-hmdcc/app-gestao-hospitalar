@@ -114,7 +114,7 @@ class Login extends CI_Controller {
         }
 
         public function PegarDispositivo(){
-                $ip             =   $_SERVER["SERVER_ADDR"];
+                $ip             =   $_SERVER['REMOTE_ADDR'];
                 $user_agent     =   $_SERVER['HTTP_USER_AGENT'];
                 $os_platform    =   "Unknown OS Platform";
 

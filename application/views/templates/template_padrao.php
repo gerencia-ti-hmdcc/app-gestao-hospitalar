@@ -184,15 +184,11 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
               for(var i = 0; i<result.length; i++){
                 temp_indisponiveis = parseInt(result[i].QT_UNIDADE_MANUTENCAO)+parseInt(result[i].QT_UNIDADES_ISOLAMENTO);
                 outros_leitos      = parseInt(result[i].NR_UNIDADES_RESERVADAS)+parseInt(result[i].NR_UNIDADES_HIGIENIZACAO)+parseInt(result[i].QT_UNIDADES_ALTA)+parseInt(result[i].NR_UNID_AGUARD_HIGIEN);
-                if(parseInt(result[i].CD_CLASSIF_SETOR)==129 || (parseInt(result[i].CD_CLASSIF_SETOR)==145)){
+                if(parseInt(result[i].CD_CLASSIF_SETOR)==129 || (parseInt(result[i].CD_CLASSIF_SETOR)==145) || (parseInt(result[i].CD_CLASSIF_SETOR)==83)){
                   percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);
                   livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) - (temp_indisponiveis + outros_leitos); /*- parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN) - parseInt(result[i].QT_UNIDADES_ALTA)*/
                 }else{
-                  if((parseInt(result[i].CD_CLASSIF_SETOR)==83) ){
-                    percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);; 
-                  }else{
-                    percent   = parseFloat(result[i].PR_OCUPACAO).toFixed(2);
-                  }
+                  percent   = parseFloat(result[i].PR_OCUPACAO).toFixed(2);
                   livres_1  = result[i].NR_UNIDADES_LIVRES;
                 }
                 <?php if($link_pagina=='dashboard'){ if($tipo_perfil=='P'){?>

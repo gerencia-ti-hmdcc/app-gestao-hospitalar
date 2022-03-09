@@ -181,12 +181,20 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
               var livres_1 = 0;
               var temp_indisponiveis = 0;
               var outros_leitos      = 0;
+              var unidades_reservadas = 0;
               for(var i = 0; i<result.length; i++){
+                unidades_reservadas = parseInt(result[i].NR_UNIDADES_RESERVADAS);
                 temp_indisponiveis = parseInt(result[i].QT_UNIDADE_MANUTENCAO)+parseInt(result[i].QT_UNIDADES_ISOLAMENTO);
-                outros_leitos      = parseInt(result[i].NR_UNIDADES_RESERVADAS)+parseInt(result[i].NR_UNIDADES_HIGIENIZACAO)+parseInt(result[i].QT_UNIDADES_ALTA)+parseInt(result[i].NR_UNID_AGUARD_HIGIEN);
+                outros_leitos      = parseInt(unidades_reservadas)+parseInt(result[i].NR_UNIDADES_HIGIENIZACAO)+parseInt(result[i].QT_UNIDADES_ALTA)+parseInt(result[i].NR_UNID_AGUARD_HIGIEN);
                 if(parseInt(result[i].CD_CLASSIF_SETOR)==129 || (parseInt(result[i].CD_CLASSIF_SETOR)==145) || (parseInt(result[i].CD_CLASSIF_SETOR)==83)){
                   percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);
                   livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) - (temp_indisponiveis + outros_leitos); /*- parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN) - parseInt(result[i].QT_UNIDADES_ALTA)*/
+                  if(livres_1<0 && parseInt(result[i].CD_CLASSIF_SETOR)==129){
+                    //ALTERAÇÃO REALIZADA POR CONTA DO NÚMERO NEGATIVO EM "LEITOS LIVRES" - O NUMERO DE OCUPADOS VEM COM DISTINCT POR LEITO DO BANCO E NO CÓDIGO ABATE-SE AGORA A QUANTIDADE NEGATIVA DOS LEITOS RESERVADOS
+                    unidades_reservadas = unidades_reservadas - (livres_1*-1);
+                    livres_1            = 0;
+                    outros_leitos       = parseInt(unidades_reservadas)+parseInt(result[i].NR_UNIDADES_HIGIENIZACAO)+parseInt(result[i].QT_UNIDADES_ALTA)+parseInt(result[i].NR_UNID_AGUARD_HIGIEN);
+                  }
                 }else{
                   percent   = parseFloat(result[i].PR_OCUPACAO).toFixed(2);
                   livres_1  = result[i].NR_UNIDADES_LIVRES;

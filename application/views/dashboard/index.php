@@ -158,22 +158,26 @@
                     var html_corpo_tabela = "";
                     var percent = 0.0;
                     var livres_1 = 0;
+
+                    var unidades_reservadas = 0;
                     for(var i = 0; i<result.length; i++){
                         // if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129){
                         //     var porcentagem_ocup = (((parseInt(result[i].NR_UNID_OCUP) + parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN)) / parseInt(result[i].NR_UNIDADES_SETOR))*100);
                         // }else{
                         //     var porcentagem_ocup = parseInt(result[i].PR_OCUPACAO_TOTAL);
                         // }
-                        temp_indisponiveis = parseInt(result[i].NR_UNIDADES_RESERVADAS)+parseInt(result[i].NR_UNIDADES_HIGIENIZACAO)+parseInt(result[i].QT_UNIDADES_ALTA)+parseInt(result[i].QT_UNIDADE_MANUTENCAO)+parseInt(result[i].NR_UNID_AGUARD_HIGIEN)+parseInt(result[i].QT_UNIDADES_ISOLAMENTO);
-                        if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129 || (parseInt(result[i].CD_SETOR_ATENDIMENTO)==145)){
+                        unidades_reservadas = parseInt(result[i].NR_UNIDADES_RESERVADAS);
+                        temp_indisponiveis  = parseInt(unidades_reservadas)+parseInt(result[i].NR_UNIDADES_HIGIENIZACAO)+parseInt(result[i].QT_UNIDADES_ALTA)+parseInt(result[i].QT_UNIDADE_MANUTENCAO)+parseInt(result[i].NR_UNID_AGUARD_HIGIEN)+parseInt(result[i].QT_UNIDADES_ISOLAMENTO);
+                        if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129 || (parseInt(result[i].CD_SETOR_ATENDIMENTO)==145) || (parseInt(result[i].CD_SETOR_ATENDIMENTO)==83)){
                             var porcentagem_ocup   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);
                             livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) -temp_indisponiveis; /*- parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN) - parseInt(result[i].QT_UNIDADES_ALTA)*/
-                        }else{
-                            if((parseInt(result[i].CD_SETOR_ATENDIMENTO)==83) ){
-                                var porcentagem_ocup   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);; 
-                            }else{
-                                var porcentagem_ocup   = parseFloat(result[i].PR_OCUPACAO).toFixed(2);
+                            if(parseInt(livres_1)<0 && parseInt(result[i].CD_SETOR_ATENDIMENTO)==129){
+                                //ALTERAÇÃO REALIZADA POR CONTA DO NÚMERO NEGATIVO EM "LEITOS LIVRES" - O NUMERO DE OCUPADOS VEM COM DISTINCT POR LEITO DO BANCO E NO CÓDIGO ABATE-SE AGORA A QUANTIDADE NEGATIVA DOS LEITOS RESERVADOS
+                                unidades_reservadas = unidades_reservadas - (livres_1*-1);
+                                livres_1 = 0
                             }
+                        }else{
+                            var porcentagem_ocup   = parseFloat(result[i].PR_OCUPACAO).toFixed(2);
                             livres_1  = result[i].NR_UNIDADES_LIVRES;
                         }
                         porcentagem_ocup = Math.ceil(porcentagem_ocup/5)*5;
@@ -215,15 +219,16 @@
                         //     livres_1  = result[i].NR_UNIDADES_LIVRES;
                         // }
 
-                        if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129 || (parseInt(result[i].CD_SETOR_ATENDIMENTO)==145)){
+                        unidades_reservadas = parseInt(result[i].NR_UNIDADES_RESERVADAS);
+                        if(parseInt(result[i].CD_SETOR_ATENDIMENTO)==129 || (parseInt(result[i].CD_SETOR_ATENDIMENTO)==145) || (parseInt(result[i].CD_SETOR_ATENDIMENTO)==83)){
                             percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);
                             livres_1  = parseInt(result[i].NR_UNIDADES_SETOR) - parseInt(result[i].NR_UNID_OCUP) -temp_indisponiveis; /*- parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) - parseInt(result[i].NR_UNID_AGUARD_HIGIEN) - parseInt(result[i].QT_UNIDADES_ALTA)*/
-                        }else{
-                            if((parseInt(result[i].CD_SETOR_ATENDIMENTO)==83) ){
-                                percent   = (((parseInt(result[i].NR_UNID_OCUP)) / parseInt(result[i].NR_UNIDADES_SETOR))*100.00).toFixed(2);; 
-                            }else{
-                                percent   = parseFloat(result[i].PR_OCUPACAO).toFixed(2);
+                            if(parseInt(livres_1)<0 && parseInt(result[i].CD_SETOR_ATENDIMENTO)==129){
+                                unidades_reservadas = unidades_reservadas - (livres_1*-1);
+                                livres_1 = 0
                             }
+                        }else{
+                            percent   = parseFloat(result[i].PR_OCUPACAO).toFixed(2);
                             livres_1  = result[i].NR_UNIDADES_LIVRES;
                         }
 
@@ -261,7 +266,7 @@
                                                     '<span class="text-xs font-weight-bold">'+livres_1+'</span>'+
                                                 '</td>'+
                                                 '<td class="align-middle text-center text-sm">'+
-                                                    '<span class="text-xs font-weight-bold">'+result[i].NR_UNIDADES_RESERVADAS+'</span>'+
+                                                    '<span class="text-xs font-weight-bold">'+unidades_reservadas+'</span>'+
                                                 '</td>'+
                                                 '<td class="align-middle text-center text-sm">'+
                                                     '<span class="text-xs font-weight-bold">'+(parseInt(result[i].NR_UNIDADES_HIGIENIZACAO) + parseInt(result[i].NR_UNID_AGUARD_HIGIEN))+'</span>'+

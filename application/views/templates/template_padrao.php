@@ -305,7 +305,14 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
               curr_month++ ; // In js, first month is 0, not 1
               year_2d = curr_year.toString().substring(2, 4)
 
-              $("#data_ult_att").html("<small>Atualizado em: "+String(curr_day).padStart(2, "0") +"/"+ String(curr_month).padStart(2, "0") +"/"+ year_2d+" "+String(curr_hour).padStart(2, "0")+":"+String(curr_min).padStart(2, "0")+"</small>");
+              if(isNaN(curr_day) || isNaN(curr_hour)){//SAFARI E IE - HORÁRIO ESTAVA VINDO NULO EM IPHONES (13/04/22) - RESOLVIDO
+                var hora_iphone = result[0].DT_ATUALIZACAO.split(" ");
+                hora_iphone = hora_iphone[1];
+                $("#data_ult_att").html("<small>Atualizado em: "+result[0].DT_ATUALIZACAO.substr(0, 10).split('-').reverse().join('/')+" "+hora_iphone+"</small>");
+              }else{
+                $("#data_ult_att").html("<small>Atualizado em: "+String(curr_day).padStart(2, "0") +"/"+ String(curr_month).padStart(2, "0") +"/"+ year_2d+" "+String(curr_hour).padStart(2, "0")+":"+String(curr_min).padStart(2, "0")+"</small>");
+              }
+
               $("#divPercentualGeral").html(htmlPercentual);
               var ctx = document.getElementById("chart-bars").getContext("2d");
 

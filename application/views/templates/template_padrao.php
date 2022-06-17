@@ -412,50 +412,6 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
               });
             },90000);/*150000*/
           <?php } } ?>
-        }else if('<?php echo $link_pagina;?>'=='administrador/usuarios'){ 
-          $.ajax({
-            url : "<?php echo site_url('retornaUsuarios')?>",
-            type : 'POST',
-            dataType: "json",
-            success : function(data){
-              var result = data;
-              var html_tabela = "";
-              var cor_status= "";
-              for(var i = 0;i<result.length;i++){
-                if(result[i].IE_STATUS=="Ativo"){
-                  cor_status = "bg-success";
-                }else{
-                  cor_status = "bg-danger";
-                }
-                html_tabela += '<tr>'+
-                                  '<td>'+
-                                    '<div class="d-flex px-2">'+
-                                        result[i].NOME+
-                                    '</div>'+
-                                  '</td>'+
-                                  '<td>'+
-                                    result[i].EMAIL+
-                                  '</td>'+
-                                  '<td>'+
-                                    '<span class="'+cor_status+' text-xs text-center font-weight-bold">'+result[i].IE_STATUS+'</span>'+
-                                  '</td>'+
-                                  '<td class="align-middle text-center">'+
-                                    '<span class="text-xs font-weight-bold">'+result[i].TIPO_PERFIL+'</span>'+
-                                  '</td>'+
-                                  '<td class="align-middle text-center">'+
-                                    result[i].ULTIMO_LOGIN+ 
-                                  '</td>'+
-                                  '<td class="align-middle text-center">'+
-                                    '<a onclick="editarUsuario('+result[i].ID+')" href="#"><i class="fas fa-edit cursor-pointer"></i></a>'+ 
-                                  '</td>'+      
-                              '</tr>';
-              }
-              $("#tabela_usuarios").html(html_tabela);
-            },
-            error : function(data){
-              alert('erro');
-            }
-          });
         }
     });
 

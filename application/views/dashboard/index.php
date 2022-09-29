@@ -193,21 +193,33 @@
                         // }else{
                         //     cor_per = "danger";
                         // }
-                        if(porcentagem_ocup<=75){
+
+                        // if(porcentagem_ocup<=75){
+                        //     cor_per = "danger";
+                        //     cor_per = 'bg-gradient-'+cor_per;
+                        // }else if(porcentagem_ocup>75 && porcentagem_ocup<=85){
+                        //     cor_per = "primary";
+                        //     cor_per = 'bg-gradient-'+cor_per;
+                        // }else if(porcentagem_ocup>85 && porcentagem_ocup<=90){
+                        //     cor_per = "bg-warning";
+                        // }else if(porcentagem_ocup>90 && porcentagem_ocup<=95){
+                        //     cor_per = "info";
+                        //     cor_per = 'bg-gradient-'+cor_per;
+                        // }else{
+                        //     cor_per = "success";
+                        //     cor_per = 'bg-gradient-'+cor_per;
+                        // }
+
+                        if(porcentagem_ocup<75){
                             cor_per = "danger";
                             cor_per = 'bg-gradient-'+cor_per;
-                        }else if(porcentagem_ocup>75 && porcentagem_ocup<=85){
-                            cor_per = "primary";
-                            cor_per = 'bg-gradient-'+cor_per;
-                        }else if(porcentagem_ocup>85 && porcentagem_ocup<=90){
+                        }else if(porcentagem_ocup>=75 && porcentagem_ocup<=85){
                             cor_per = "bg-warning";
-                        }else if(porcentagem_ocup>90 && porcentagem_ocup<=95){
-                            cor_per = "info";
-                            cor_per = 'bg-gradient-'+cor_per;
                         }else{
                             cor_per = "success";
                             cor_per = 'bg-gradient-'+cor_per;
                         }
+                        
                         var qt_ocupadas = result[i].NR_UNID_OCUP;
                         //if(result[i].CD_SETOR_ATENDIMENTO==129){qt_ocupadas = (result[i].NR_UNID_OCUP)*-1}else{qt_ocupadas = result[i].NR_UNID_OCUP}
                         

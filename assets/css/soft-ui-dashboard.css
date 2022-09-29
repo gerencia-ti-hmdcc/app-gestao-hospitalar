@@ -8289,6 +8289,14 @@ fieldset:disabled .btn {
   min-height: 100vh !important;
 }
 
+.flex{
+  display: flex;
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
 .flex-fill {
   flex: 1 1 auto !important;
 }
@@ -20082,6 +20090,10 @@ label,
   background-image: linear-gradient(310deg, #7928CA 0%, #FF0080 100%);
 }
 
+.bg-gradient-primary-hmdcc {
+  background-image: linear-gradient(310deg, #00AB97 0%, #00C4AD 100%);
+}
+
 .bg-gradient-secondary {
   background-image: linear-gradient(310deg, #627594 0%, #A8B8D8 100%);
 }
@@ -21625,6 +21637,10 @@ hr.horizontal.gray-light {
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
   background-image: linear-gradient(310deg, #cb0c9f 0%, #cb0c9f 100%);
+}
+
+.hmdcc-color {
+  background-image: linear-gradient(310deg, #00AB97 0%, #00AB97 100%) !important;
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-background,
@@ -24926,4 +24942,15 @@ pre[class*="language-"] {
   }
 }
 
+.w-1\/7{
+  width: 12.8% !important;
+}
+
+.justify-center{
+  justify-content: center;
+}
+
+.w-full{
+  width: 100%;
+}
 /*# <!-- sourceMappingURL=dashboard-free.css.map--> */

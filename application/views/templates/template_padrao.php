@@ -250,8 +250,8 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                                       '</div>'+
                                     '</div>';
                 <?php }else{ ?>
-                  htmlPercentual += '<div class="col-xl-4 col-sm-12 mb-xl-'+margem_baixo_acerto_tv.toString()+' mb-'+margem_baixo_acerto_tv.toString()+'">'+
-                                    '<div class="card cursor-pointer" onclick="abrirDivDetalhes('+parseInt(result[i].CD_CLASSIF_SETOR)+')">'+
+                  htmlPercentual += '<div class="col-xl-4 flex flex-wrap col-sm-12 mb-xl-'+margem_baixo_acerto_tv.toString()+' mb-'+margem_baixo_acerto_tv.toString()+'">'+
+                                    '<div class="card cursor-pointer flex flex-wrap w-full" onclick="abrirDivDetalhes('+parseInt(result[i].CD_CLASSIF_SETOR)+')">'+
                                         '<div class="card-body p-'+espaco_card_acerto_tv.toString()+'">'+
                                             '<div class="row">'+
                                                 '<div class="col-9">'+

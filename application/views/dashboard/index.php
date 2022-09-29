@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="row" id="divPercentualGeral" name="divPercentualGeral">
+    <div class="row w-full flex" id="divPercentualGeral" name="divPercentualGeral">
 
     </div>
     

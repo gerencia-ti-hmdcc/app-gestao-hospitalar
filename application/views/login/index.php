@@ -88,7 +88,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="text-center">
                       <!-- <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Entrar</button> -->
                       <?php 
-                        echo form_button(array("class"=>"btn bg-gradient-info w-100 mt-4 mb-0", "type"=>"submit", "content"=>"Entrar"));
+                        echo form_button(array("class"=>"btn bg-gradient-primary-hmdcc text-white w-100 mt-4 mb-0", "type"=>"submit", "content"=>"Entrar"));
                         echo form_close();
                       ?>
                     </div>

@@ -1,0 +1,103 @@
+<?php
+class Admissoes_model extends CI_Model {
+
+    public function retornaAdmissoesMes($mes,$ano){
+        if($mes==0 || $ano==0){
+            $mes = date('m');
+            $ano = date("Y");
+        }
+        return $this->db->query("SELECT * FROM ADMISSAO_DIARIA WHERE MES_REFERENCIA='$mes' AND ANO_REFERENCIA='$ano'")->result_array();
+    }
+    
+    public function retornaQuantAdmissoesMes($mes,$ano){
+        if($mes==0 || $ano==0){
+            $mes = date('m');
+            $ano = date("Y");
+        }
+        return $this->db->query("SELECT 
+                                    IE_TIPO_ADMISSAO,DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA, COUNT(*) QUANTIDADE 
+                                FROM 
+                                    ADMISSAO_DIARIA 
+                                WHERE
+                                    MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                GROUP BY 
+                                    IE_TIPO_ADMISSAO,DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA
+                                ORDER BY
+                                    DIA_REFERENCIA,MES_REFERENCIA,ANO_REFERENCIA,IE_TIPO_ADMISSAO")->result_array();
+    }
+
+    public function retornaDetalhesAdmissoesMes($dia,$mes,$ano){
+        if($mes==0 || $ano==0 || $dia==0){
+            $dia = date('d');
+            $mes = date('m');
+            $ano = date("Y");
+        }
+        return $this->db->query("SELECT 
+                                    IE_TIPO_ADMISSAO,
+                                    CD_SETOR_ATENDIMENTO,
+                                    DS_SETOR_ATENDIMENTO,
+                                    COUNT(*) QUANTIDADE
+                                FROM 
+                                    ADMISSAO_DIARIA 
+                                WHERE
+                                    DIA_REFERENCIA='$dia'
+                                    AND MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                GROUP BY 
+                                    IE_TIPO_ADMISSAO,
+                                    CD_SETOR_ATENDIMENTO,
+                                    DS_SETOR_ATENDIMENTO
+                                ORDER BY
+                                    IE_TIPO_ADMISSAO,
+                                    DS_SETOR_ATENDIMENTO,
+                                    QUANTIDADE")->result_array();
+    }
+
+
+    // public function retornaUsuarios(){
+    //     return $this->db->query("SELECT * FROM USERS ORDER BY NOME ASC")->result_array();
+    // }
+
+    // public function retornaUsuario($id){
+    //     return $this->db->query("SELECT * FROM USERS WHERE ID=$id")->row_array();
+    // }
+
+    // public function retornaTodosStatus(){
+    //     return $this->db->query("SELECT DISTINCT SIGLA_STATUS, NOME_STATUS FROM CONFIG_USUARIO_STATUS WHERE ATIVO=1")->result_array();
+    // }
+
+    // public function retornaTodosTiposPerfis(){
+    //     return $this->db->query("SELECT DISTINCT SIGLA_TIPO_PERFIL, NOME_TIPO_PERFIL FROM CONFIG_USUARIO_TIPO_PERFIL WHERE ATIVO=1")->result_array();
+    // }
+
+    // public function resetaSenha($id){
+    //     return $this->db->query("UPDATE USERS SET SENHA='e10adc3949ba59abbe56e057f20f883e' WHERE ID=$id");
+    // }
+
+    // public function atualizaUsuario($id,$nome,$email,$status,$tipo_perfil){
+    //     return $this->db->query("UPDATE USERS SET NOME='$nome', EMAIL='$email', IE_STATUS='$status', TIPO_PERFIL='$tipo_perfil' WHERE ID=$id");
+    // }
+
+    // public function tipoPerfilUsuario($id){
+    //     return $this->db->query("SELECT TIPO_PERFIL FROM USERS WHERE ID=$id")->row_array();
+    // }
+
+    // public function cadastraUsuario($nome,$email,$status,$perfil){
+    //     return $this->db->query("INSERT INTO
+    //                                 USERS(NOME,EMAIL,IE_STATUS,TIPO_PERFIL,SENHA)
+    //                             VALUES
+    //                                 ('$nome','$email','$status','$perfil','e10adc3949ba59abbe56e057f20f883e')");
+    // }
+
+    // public function existeEmailUsuario($email,$id=0){
+    //     if($id==0){
+    //         $condicao = "";
+    //     }else{
+    //         $condicao = "AND ID <>$id";
+    //     }
+    //     return $this->db->query("SELECT EMAIL FROM USERS WHERE EMAIL='$email' $condicao")->row_array();
+    // }
+
+}
+?>

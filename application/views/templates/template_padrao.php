@@ -420,6 +420,11 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
       document.getElementById("form_usuarios").submit();
     }
 
+    function editarMeta(id){
+      $("#form_metas").append("<input type='hidden' id='meta_escolhida' name='meta_escolhida' value='"+id+"'/>")
+      document.getElementById("form_metas").submit();
+    }
+
     function luminanace(r, g, b) {
       var a = [r, g, b].map(function (v) {
           v /= 255;

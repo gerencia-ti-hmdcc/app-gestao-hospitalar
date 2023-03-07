@@ -224,5 +224,143 @@ class Administrador extends MY_Controller {
         }
     }
 
+    public function metas_admissoes(){
+        $this->load->model('administrador_model');
+        $this->load->helper('form');
+        $dados['pagina']            = 'administrador/metas_admissoes.php';
+        $dados['nome_pagina']       = 'Gerenciar Metas';
+        $dados["link_pagina"]       = 'administrador/metas_admissoes';
+        $dados["diretorio_raiz"]    = '../';
+        $this->load->view('templates/template_padrao.php',$dados); 
+    }
+
+    public function retornaMetasAdmissoes(){
+        $this->load->model('administrador_model');
+        $metas = $this->administrador_model->retornaMetasAdmissoes();
+        $i = 0;
+        for($i = 0; $i<count($metas);$i++){
+            if($metas[$i]["TIPO_ADMISSAO"]=="I"){
+                $metas[$i]["TIPO_ADMISSAO_COMPLETO"] = "Internas";
+            }else if($metas[$i]["TIPO_ADMISSAO"]=="E"){
+                $metas[$i]["TIPO_ADMISSAO_COMPLETO"] = "Externas";
+            }
+        }
+        print json_encode($metas);
+    }
+
+    public function novaMeta(){
+        $this->load->model('administrador_model');
+        $this->load->helper('form');
+
+        $dados["agrupamentos"]      = $this->administrador_model->retornaTodosAgrupamentos();
+        
+        $dados['pagina']            = 'administrador/adicionar_meta.php';
+        $dados['nome_pagina']       = 'Adicionar Meta';
+        $dados["link_pagina"]       = 'administrador/novaMeta';
+        $dados["diretorio_raiz"]    = '../';
+        $this->load->view('templates/template_padrao.php',$dados); 
+    }
+
+    public function cadastrarMeta(){
+        $this->load->model('administrador_model');
+        $ano            = addslashes(trim($this->input->post("ano")));
+        $quadrimestre   = addslashes($this->input->post("quadrimestre"));
+        $tipo           = addslashes($this->input->post("tipo"));
+        $linha          = addslashes($this->input->post("linha"));
+        $quantidade     = addslashes(trim($this->input->post("quantidade")));
+
+        if(strlen($ano)<4){
+            $this->session->set_flashdata("danger","<br />O ano deve conter pelo menos 4 caracteres!");
+            $this->novaMeta();
+        }else if(strlen($quadrimestre)<1){
+            $this->session->set_flashdata("danger","<br />O campo quadrimestre é obrigatório!");
+            $this->novaMeta();
+        }else if(strlen($tipo)<1){
+            $this->session->set_flashdata("danger","<br />O campo tipo é obrigatório!");
+            $this->novaMeta();
+        }else if(strlen($linha)<1){
+            $this->session->set_flashdata("danger","<br />O campo linha é obrigatório!");
+            $this->novaMeta();
+        }else if(strlen($quantidade)<1 || $quantidade<=0){
+            $this->session->set_flashdata("danger","<br />A quantidade é obrigatória e deve ser diferente de 0!");
+            $this->novaMeta();
+        }else{
+           
+            $cadastrado = $this->administrador_model->cadastraMeta($ano,$quadrimestre,$tipo,$linha,$quantidade);
+            
+            if($cadastrado==true){
+                $this->session->set_flashdata("success","<br />Meta cadastrada com sucesso!");
+                redirect("metas_admissoes");
+            }
+        }
+    }
+
+    public function editarMeta($id=0){
+
+        //exit(print_r($this->input->post()));
+        if($id==0){
+            $id = $this->input->post("meta_escolhida");
+        }else{
+            $id = $id;
+        }
+
+        if($id>0){
+            $this->load->model('administrador_model');
+            $this->load->helper('form');
+            $dados["meta"]           = $this->administrador_model->retornaMeta($id);
+            
+            $dados["agrupamentos"]      = $this->administrador_model->retornaTodosAgrupamentos();
+            
+            $dados["id_meta"]        = $id;
+            $dados['pagina']            = 'administrador/editar_meta.php';
+            $dados['nome_pagina']       = 'Editar Meta';
+            $dados["link_pagina"]       = 'administrador/editarMeta';
+            $dados["diretorio_raiz"]    = '../';
+            $this->load->view("templates/template_padrao.php",$dados);
+        }else{
+            redirect("metas_admissoes");
+        }
+    }
+
+    public function atualizarMeta(){
+        //exit(print_r($this->input->post()));
+        $this->load->model('administrador_model');
+        $id             = (int) $this->input->post("id_meta");
+        $ano            = addslashes(trim($this->input->post("ano")));
+        $quadrimestre   = addslashes($this->input->post("quadrimestre"));
+        $tipo           = addslashes($this->input->post("tipo"));
+        $linha          = addslashes($this->input->post("linha"));
+        $quantidade     = addslashes(trim($this->input->post("quantidade")));
+
+        if($this->input->post("excluir_meta")){
+            $this->administrador_model->excluirMeta($id);
+            $this->session->set_flashdata("success","<br />Meta excluída com sucesso!");
+            redirect("metas_admissoes");
+        }else if(strlen($ano)<4){
+            $this->session->set_flashdata("danger","<br />O ano deve conter pelo menos 4 caracteres!");
+            $this->novaMeta();
+        }else if(strlen($quadrimestre)<1){
+            $this->session->set_flashdata("danger","<br />O campo quadrimestre é obrigatório!");
+            $this->novaMeta();
+        }else if(strlen($tipo)<1){
+            $this->session->set_flashdata("danger","<br />O campo tipo é obrigatório!");
+            $this->novaMeta();
+        }else if(strlen($linha)<1){
+            $this->session->set_flashdata("danger","<br />O campo linha é obrigatório!");
+            $this->novaMeta();
+        }else if(strlen($quantidade)<1 || $quantidade<=0){
+            $this->session->set_flashdata("danger","<br />A quantidade é obrigatória e deve ser diferente de 0!");
+            $this->novaMeta();
+        }else{
+            $atualizado = $this->administrador_model->atualizaMeta($id,$ano,$quadrimestre,$tipo,$linha,$quantidade);
+            
+            if($atualizado==true){
+                $this->session->set_flashdata("success","<br />Meta atualizada com sucesso!");
+                redirect("metas_admissoes");
+            }
+        }
+        
+    }
+
        
 }

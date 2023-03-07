@@ -982,6 +982,11 @@ progress {
   width: 16.666667%;
 }
 
+.col-2emeio {
+  flex: 0 0 auto;
+  width: 20%;
+}
+
 .col-3 {
   flex: 0 0 auto;
   width: 25%;
@@ -24959,6 +24964,24 @@ pre[class*="language-"] {
   color: white;
 }
 
+.roxo-hospital{
+  background-color:#951C7F;
+  color: white;
+}
+
+.amarelo-hospital{
+  background-color:#F7A80E;
+  color: white;
+}
+
+.botao-inverso-amarelo-hospital:hover{
+  border-color: #F7A80E;
+  border-style: solid;
+  color: #F7A80E;
+  border-width: 1px;
+  background-color: white;
+}
+
 .botao-inverso-hospital:hover{
   border-color: #00AB97;
   border-style: solid;
@@ -24976,6 +24999,10 @@ pre[class*="language-"] {
     flex: 0 0 auto;
     width: 25%;
   }
+}
+
+.md\:w-3\/12 {
+  width: 25%;
 }
 /*   CSS CALENDÁRIO    */
 

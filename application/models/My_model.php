@@ -4,5 +4,9 @@ class My_model extends CI_Model {
         $usuario = $this->db->query("SELECT ID FROM USERS WHERE TOKEN='$token' LIMIT 1")->row_array();
         return $usuario;
     }
+
+    public function tipoPerfilUsuario($id){
+        return $this->db->query("SELECT TIPO_PERFIL FROM USERS WHERE ID=$id")->row_array();
+    }
 }
 ?>

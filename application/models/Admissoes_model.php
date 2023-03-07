@@ -27,6 +27,33 @@ class Admissoes_model extends CI_Model {
                                     DIA_REFERENCIA,MES_REFERENCIA,ANO_REFERENCIA,IE_TIPO_ADMISSAO")->result_array();
     }
 
+    public function retornaQuantAdmissoesMesPorLinha($mes,$ano,$agrupamento){
+        if($mes==0 || $ano==0){
+            $mes = date('m');
+            $ano = date("Y");
+        }
+
+        if($agrupamento==1){
+            //AGRUPAMENTOS CTI
+            $cond_agrupamento = "AND AGRUPAMENTO_ATUAL in ($agrupamento,2,3,4,5,6,7,8)";
+        }else{
+            $cond_agrupamento = "AND AGRUPAMENTO_ATUAL=$agrupamento";
+        }
+
+        return $this->db->query("SELECT 
+                                    IE_TIPO_ADMISSAO,DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA, COUNT(*) QUANTIDADE 
+                                FROM 
+                                    ADMISSAO_DIARIA 
+                                WHERE
+                                    MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                    $cond_agrupamento
+                                GROUP BY 
+                                    IE_TIPO_ADMISSAO,DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA
+                                ORDER BY
+                                    DIA_REFERENCIA,MES_REFERENCIA,ANO_REFERENCIA,IE_TIPO_ADMISSAO")->result_array();
+    }
+
     public function retornaDetalhesAdmissoesMes($dia,$mes,$ano){
         if($mes==0 || $ano==0 || $dia==0){
             $dia = date('d');
@@ -52,6 +79,262 @@ class Admissoes_model extends CI_Model {
                                     IE_TIPO_ADMISSAO,
                                     DS_SETOR_ATENDIMENTO,
                                     QUANTIDADE")->result_array();
+    }
+
+    public function retornaDetalhesAdmissoesMesPorLinha($dia,$mes,$ano,$agrupamento){
+        if($mes==0 || $ano==0 || $dia==0){
+            $dia = date('d');
+            $mes = date('m');
+            $ano = date("Y");
+        }
+
+        if($agrupamento==1){
+            //AGRUPAMENTOS CTI
+            $cond_agrupamento = "AND AGRUPAMENTO_ATUAL in ($agrupamento,2,3,4,5,6,7,8)";
+        }else{
+            $cond_agrupamento = "AND AGRUPAMENTO_ATUAL=$agrupamento";
+        }
+
+        return $this->db->query("SELECT 
+                                    IE_TIPO_ADMISSAO,
+                                    CD_SETOR_ATENDIMENTO,
+                                    DS_SETOR_ATENDIMENTO,
+                                    COUNT(*) QUANTIDADE
+                                FROM 
+                                    ADMISSAO_DIARIA 
+                                WHERE
+                                    DIA_REFERENCIA='$dia'
+                                    AND MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                    $cond_agrupamento
+                                GROUP BY 
+                                    IE_TIPO_ADMISSAO,
+                                    CD_SETOR_ATENDIMENTO,
+                                    DS_SETOR_ATENDIMENTO
+                                ORDER BY
+                                    IE_TIPO_ADMISSAO,
+                                    DS_SETOR_ATENDIMENTO,
+                                    QUANTIDADE")->result_array();
+    }
+
+    public function retornaTotaisMesSemCTI($mes,$ano){
+        if($mes==0 || $ano==0){
+            $mes = date('m');
+            $ano = date("Y");
+        }
+        return $this->db->query("SELECT 
+                                    AD.IE_TIPO_ADMISSAO,
+                                    AD.AGRUPAMENTO_ATUAL,
+                                    CA.DESC_AGRUPAMENTO,
+                                    COUNT(*) QUANTIDADE
+                                FROM 
+                                    ADMISSAO_DIARIA AD
+                                    JOIN CONFIG_AGRUPAMENTO CA ON (AD.AGRUPAMENTO_ATUAL=CA.NR_AGRUPAMENTO)
+                                WHERE
+                                    MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                    AND AD.AGRUPAMENTO_ATUAL > 8
+                                GROUP BY 
+                                    AD.IE_TIPO_ADMISSAO,
+                                    AD.AGRUPAMENTO_ATUAL,
+                                    CA.DESC_AGRUPAMENTO
+                                ORDER BY
+                                    AD.AGRUPAMENTO_ATUAL,
+                                    AD.IE_TIPO_ADMISSAO,
+                                    QUANTIDADE")->result_array();
+    }
+
+    public function retornaTotaisMesCTI($mes,$ano){
+        if($mes==0 || $ano==0){
+            $mes = date('m');
+            $ano = date("Y");
+        }
+        return $this->db->query("SELECT 
+                                    AD.IE_TIPO_ADMISSAO,
+                                    CA.DESC_AGRUPAMENTO,
+                                    COUNT(*) QUANTIDADE
+                                FROM 
+                                    ADMISSAO_DIARIA AD
+                                    JOIN CONFIG_AGRUPAMENTO CA ON (AD.AGRUPAMENTO_ATUAL=CA.NR_AGRUPAMENTO)
+                                WHERE
+                                    MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                    AND AD.AGRUPAMENTO_ATUAL <= 8
+                                GROUP BY 
+                                    AD.IE_TIPO_ADMISSAO,
+                                    CA.DESC_AGRUPAMENTO
+                                ORDER BY
+                                    AD.IE_TIPO_ADMISSAO,
+                                    AD.AGRUPAMENTO_ATUAL,
+                                    QUANTIDADE")->result_array();
+    }
+
+    public function retornaTotaisMesPorLinha($mes,$ano,$agrupamento){
+        if($mes==0 || $ano==0){
+            $mes = date('m');
+            $ano = date("Y");
+        }
+
+        if($agrupamento==1){
+            //AGRUPAMENTOS CTI
+            $cond_agrupamento = "AND AD.AGRUPAMENTO_ATUAL in ($agrupamento,2,3,4,5,6,7,8)";
+        }else{
+            $cond_agrupamento = "AND AD.AGRUPAMENTO_ATUAL=$agrupamento";
+        }
+
+        return $this->db->query("SELECT 
+                                    AD.IE_TIPO_ADMISSAO,
+                                    CA.DESC_AGRUPAMENTO,
+                                    COUNT(*) QUANTIDADE
+                                FROM 
+                                    ADMISSAO_DIARIA AD
+                                    JOIN CONFIG_AGRUPAMENTO CA ON (AD.AGRUPAMENTO_ATUAL=CA.NR_AGRUPAMENTO)
+                                WHERE
+                                    MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                    $cond_agrupamento
+                                GROUP BY 
+                                    AD.IE_TIPO_ADMISSAO,
+                                    CA.DESC_AGRUPAMENTO
+                                ORDER BY
+                                    AD.IE_TIPO_ADMISSAO,
+                                    AD.AGRUPAMENTO_ATUAL,
+                                    QUANTIDADE")->result_array();
+    }
+
+    public function retornaMetasAnuaisPorLinha($ano,$quadrimestre,$agrupamento,$tipo_admissao=''){
+        if($ano==0){
+            $ano = date("Y");
+        }
+
+        if(strlen($tipo_admissao)>0){
+            $and_tipo_admissao = "AND TIPO_ADMISSAO='$tipo_admissao'";
+        }else{
+            $and_tipo_admissao = "";
+        }
+
+        return $this->db->query("SELECT 
+                                    * 
+                                FROM 
+                                    CONFIG_META_ADMISSAO 
+                                WHERE 
+                                    NR_AGRUPAMENTO=$agrupamento
+                                    AND QUADRIMESTRE=$quadrimestre
+                                    AND ANO = '$ano' $and_tipo_admissao")->result_array();
+    }
+
+    public function retornaOfertasDiarias($mes,$ano){
+        if($ano==0 || $mes==0){
+            $ano = date("Y");
+            $mes = date("m");
+        }
+
+        return $this->db->query("SELECT 
+                                    ds_setor_solicitado, 
+                                    ds_tipo_vaga, 
+                                    YEAR(dt_solicitacao) ano, 
+                                    MONTH(dt_solicitacao) mes, 
+                                    DAY(dt_solicitacao) dia,
+                                    COUNT(*) quantidade
+                                FROM 
+                                    OFERTA_DIARIA 
+                                WHERE 
+                                    YEAR(dt_solicitacao)='$ano' AND 
+                                    MONTH(dt_solicitacao)='$mes' 
+                                GROUP BY
+                                    ds_setor_solicitado, ds_tipo_vaga, YEAR(dt_solicitacao), MONTH(dt_solicitacao), DAY(dt_solicitacao)
+                                ORDER BY
+                                    dia, mes, ano, ds_setor_solicitado ASC, quantidade DESC")->result_array();
+    }
+
+    public function retornaDetalhesOfertasDiarias($ano,$mes,$dia){
+        if($ano==0 || $mes==0 || $dia==0){
+            $ano = date("Y");
+            $mes = date("m");
+            $dia = date('d');
+        }
+
+        return $this->db->query("SELECT 
+                                    ds_setor_solicitado, 
+                                    ds_tipo_vaga, 
+                                    YEAR(dt_solicitacao) ano, 
+                                    MONTH(dt_solicitacao) mes, 
+                                    COUNT(*) quantidade
+                                FROM 
+                                    OFERTA_DIARIA 
+                                WHERE 
+                                    YEAR(dt_solicitacao)='$ano' AND 
+                                    MONTH(dt_solicitacao)='$mes' AND
+                                    DAY(dt_solicitacao)='$dia'
+                                GROUP BY
+                                    ds_setor_solicitado, ds_tipo_vaga, YEAR(dt_solicitacao), MONTH(dt_solicitacao)
+                                ORDER BY
+                                    ds_setor_solicitado ASC, quantidade DESC")->result_array();
+    }
+
+    public function retornaTotaisOfertasMes($ano,$mes){
+        if($ano==0 || $mes==0){
+            $ano = date("Y");
+            $mes = date("m");
+        }
+
+        return $this->db->query("SELECT 
+                                    ds_setor_solicitado, 
+                                    YEAR(dt_solicitacao) ano, 
+                                    MONTH(dt_solicitacao) mes, 
+                                    COUNT(*) quantidade
+                                FROM 
+                                    OFERTA_DIARIA 
+                                WHERE 
+                                    YEAR(dt_solicitacao)='$ano' AND 
+                                    MONTH(dt_solicitacao)='$mes'
+                                GROUP BY
+                                    ds_setor_solicitado, YEAR(dt_solicitacao), MONTH(dt_solicitacao)
+                                ORDER BY
+                                    ds_setor_solicitado ASC, quantidade DESC")->result_array();
+    }
+
+    public function retornaTotalOfertasMes($ano,$mes){
+        if($ano==0 || $mes==0){
+            $ano = date("Y");
+            $mes = date("m");
+        }
+
+        return $this->db->query("SELECT 
+                                    YEAR(dt_solicitacao) ano, 
+                                    MONTH(dt_solicitacao) mes, 
+                                    COUNT(*) quantidade
+                                FROM 
+                                    OFERTA_DIARIA 
+                                WHERE 
+                                    YEAR(dt_solicitacao)='$ano' AND 
+                                    MONTH(dt_solicitacao)='$mes'
+                                GROUP BY
+                                    YEAR(dt_solicitacao), MONTH(dt_solicitacao)
+                                ORDER BY
+                                    ds_setor_solicitado ASC, quantidade DESC")->result_array();
+    }
+
+    public function retornaTotaisOfertasPorDia($mes,$ano){
+        if($ano==0 || $mes==0){
+            $ano = date("Y");
+            $mes = date("m");
+        }
+
+        return $this->db->query("SELECT 
+                                    YEAR(dt_solicitacao) ano, 
+                                    MONTH(dt_solicitacao) mes, 
+                                    DAY(dt_solicitacao) dia, 
+                                    COUNT(*) quantidade
+                                FROM 
+                                    OFERTA_DIARIA 
+                                WHERE 
+                                    YEAR(dt_solicitacao)='$ano' AND 
+                                    MONTH(dt_solicitacao)='$mes'
+                                GROUP BY
+                                    YEAR(dt_solicitacao), MONTH(dt_solicitacao),  DAY(dt_solicitacao)
+                                ORDER BY
+                                    dia, mes, ano, ds_setor_solicitado ASC, quantidade DESC")->result_array();
     }
 
 

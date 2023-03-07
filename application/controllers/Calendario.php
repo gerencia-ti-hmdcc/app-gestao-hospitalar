@@ -1,7 +1,6 @@
 <?php
 /*
 class Calendario {
-
     private $active_year, $active_month, $active_day;
     private $events = [];
 

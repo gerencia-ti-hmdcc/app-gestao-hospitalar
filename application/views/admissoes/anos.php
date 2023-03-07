@@ -4,34 +4,17 @@
         // echo $calendario->display(date('2022-01-01')); 
         // echo $calendario->display(date('2022-02-01')); 
         // echo '<a href="admissoes/meses" class="azul-hospital botao-inverso-hospital btn btn-rounded">Outros meses</a>';
-        $calendario->stylesheetMonths();
-        if($ano_calendario==0){
-          $ano_calendario = date("Y");
-        }
-        $n_formatado = 0;
-        echo '<a href="anos" class="azul-hospital botao-inverso-hospital btn btn-rounded">Outros anos</a>';
-        echo("<div class='flex w-full row'>");
-        for($i=1;$i<=12;$i++){
-          echo("<div class='md:col-3 mb-2'>");
-          if($i<10){
-            $n_formatado = "0".$i;
-          }else{
-            $n_formatado = $i;
-          }
-          echo("<div class='text-center justify-center text-xs flex flex-nowrap row'>
-                  <div class='col-2 rounded amarelo-hospital p-2 m-1'><a class='text-white' href='".$diretorio_raiz."admissoes/admissoes_por_linha?m=".$n_formatado."&s=10&a=".$ano_calendario."'>CLM</a></div>
-                  <div class='col-2 rounded amarelo-hospital p-2 m-1'><a class='text-white' href='".$diretorio_raiz."admissoes/admissoes_por_linha?m=".$n_formatado."&s=9&a=".$ano_calendario."'>AVC</a></div>
-                  <div class='col-2 rounded amarelo-hospital p-2 m-1'><a class='text-white' href='".$diretorio_raiz."admissoes/admissoes_por_linha?m=".$n_formatado."&s=1&a=".$ano_calendario."'>CTI</a></div>
-                  <div class='col-2 rounded amarelo-hospital p-2 m-1'><a class='text-white' href='".$diretorio_raiz."admissoes/admissoes_por_linha?m=".$n_formatado."&s=11&a=".$ano_calendario."'>CIR</a></div>
-                  <div class='col-2 rounded amarelo-hospital p-2 m-1'><a class='text-white' href='".$diretorio_raiz."admissoes/admissoes_por_linha?m=".$n_formatado."&s=13&a=".$ano_calendario."'>HD</a></div>
-                </div>");
-          echo("<a href='".$diretorio_raiz."admissoes?m=".$n_formatado."&a=".$ano_calendario."'>");
-          if(date('m')==$i && ($ano_calendario==date("Y"))){
-            echo($calendario->draw(date($ano_calendario.'-'.$i.'-01')));
-          }else{
-            echo($calendario->draw(date($ano_calendario.'-'.$i.'-01'),'purple'));
-          }
-          echo("</a></div>");
+        // $calendario->stylesheetMonths();
+        
+        echo("<div class='flex w-full flex-wrap row'>");
+        for($i=2022;$i<=date("Y");$i++){
+            echo("<div class='flex col-sm-12 col-xl-4 flex-wrap mb-2'><a href='".$diretorio_raiz."admissoes/meses?a=$i'>");
+            if(date('Y')==$i){
+                echo('<button class="flex azul-hospital text-white p-6" style="width: 80%;border-width:0px;margin: 30px;border-radius:2.5%;">'.$i.'</button>');
+            }else{
+                echo('<button class="flex roxo-hospital text-white p-6" style="width: 80%;border-width:0px;margin: 30px;border-radius:2.5%;">'.$i.'</button>');
+            }
+            echo("</a></div>");
         }
         echo("</div>");
     ?>

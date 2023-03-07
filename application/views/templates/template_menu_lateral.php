@@ -17,7 +17,7 @@
         </li>
         <?php
           $usuario_sessao = $this->session->userdata("usuario_logado");
-          if($usuario_sessao["TIPO_PERFIL"]=='A' /*|| $usuario_sessao["TIPO_PERFIL"]=='D' || $usuario_sessao["TIPO_PERFIL"]=='G'*/){?>
+          if($usuario_sessao["TIPO_PERFIL"]=='A' || $usuario_sessao["TIPO_PERFIL"]=='D' || $usuario_sessao["TIPO_PERFIL"]=='G'){?>
             <li class="nav-item mt-7">
               <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Prod. Hospitalar</h6>
             </li>

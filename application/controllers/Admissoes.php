@@ -13,9 +13,9 @@ class Admissoes extends MY_Controller {
         }else{
             //REDIRECIONA USUARIO QUE TENTA ACESSAR O MÓDULO ADMISSOES QUE NÃO É ADM, GERENCIA OU DIRETORIA
             $perfil = $this->my_model->tipoPerfilUsuario($_SESSION["usuario_logado"]["ID"]);
-            if(($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' || $perfil["TIPO_PERFIL"]!='A') /*&&
+            if(($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' || $perfil["TIPO_PERFIL"]!='A') &&
             ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='D' || $perfil["TIPO_PERFIL"]!='D') &&
-            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='G' || $perfil["TIPO_PERFIL"]!='G')*/){
+            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='G' || $perfil["TIPO_PERFIL"]!='G')){
                 header('Location: /../dashboard');
             }
         }

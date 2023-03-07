@@ -287,7 +287,8 @@
                 var result  = data;
                 var html_corpo_tabela = "<span class='font-weight-bolder justify-center'>Admissões</span><table class='table align-items-center justify-content-center' width='100%'><thead><tr><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Tipo</th><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Setor</th><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Quantidade</th></tr></thead><tbody>";
                 var tipo_geral_ad = "";
-                
+                let total = 0;
+
                 for(var i = 0; i<result.length; i++){
                     if(result[i].IE_TIPO_ADMISSAO=='E'){
                         tipo_geral_ad = "Externa";
@@ -296,6 +297,9 @@
                     }else if(result[i].IE_TIPO_ADMISSAO=='HD'){
                         tipo_geral_ad = "Hosp. Dia";
                     }
+
+                    total = total+parseInt(result[i].QUANTIDADE);
+
                     html_corpo_tabela += "<tr>"+
                                             "<td class='text-xs text-center font-weight-bold'>"+
                                                 tipo_geral_ad+
@@ -309,7 +313,14 @@
                                         "</tr>";
                     
                 }
-                
+                html_corpo_tabela += "<tr>"+
+                                            "<td colspan='2' class='text-xs text-center font-weight-bolder'>"+
+                                                "Total"+
+                                            "</td>"+
+                                            "<td class='text-xs text-center font-weight-bold'>"+
+                                                total+
+                                            "</td>"+
+                                        "</tr>";
                 html_corpo_tabela += "</tbody></table>";
                 
                 
@@ -333,8 +344,12 @@
                     success : function(data1){
                         var result1  = data1;
                         var html_corpo_adicional = "<span class='font-weight-bolder justify-center mt-2'>Ofertas</span><table class='table align-items-center justify-content-center' width='100%'><thead><tr><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Setor</th><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Tipo</th><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Quantidade</th></tr></thead><tbody>";
-                        
+                        let total = 0;
                         for(var i = 0; i<result1.length; i++){
+                            if(result1[i].ds_setor_solicitado=="UDC - Unidade de Decisão Clínica"){
+                                result1[i].ds_setor_solicitado = "UDC";
+                            }
+                            total = total+parseInt(result1[i].quantidade);
                            
                             html_corpo_adicional += "<tr>"+
                                                         "<td class='text-xs text-center font-weight-bold'>"+
@@ -349,7 +364,14 @@
                                                     "</tr>";
                             
                         }
-
+                        html_corpo_adicional += "<tr>"+
+                                                    "<td colspan='2' class='text-xs text-center font-weight-bolder'>"+
+                                                        "Total"+
+                                                    "</td>"+
+                                                    "<td class='text-xs text-center font-weight-bold'>"+
+                                                        total+
+                                                    "</td>"+
+                                                "</tr>";
                         html_corpo_adicional += "</tbody></table>";
                         
                         // $("#corpo_tabela_ocupacao").html(html_corpo_tabela);

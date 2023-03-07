@@ -343,48 +343,40 @@
                             },
                     success : function(data1){
                         var result1  = data1;
-                        var html_corpo_adicional = "<span class='font-weight-bolder justify-center mt-2'>Ofertas</span><table class='table align-items-center justify-content-center' width='100%'><thead><tr><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Setor</th><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Tipo</th><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Quantidade</th></tr></thead><tbody>";
-                        let total = 0;
-                        for(var i = 0; i<result1.length; i++){
-                            if(result1[i].ds_setor_solicitado=="UDC - Unidade de Decisão Clínica"){
-                                result1[i].ds_setor_solicitado = "UDC";
+                        if(result1.length>0){
+                            var html_corpo_adicional = "<span class='font-weight-bolder justify-center mt-2'>Ofertas</span><table class='table align-items-center justify-content-center' width='100%'><thead><tr><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Setor</th><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Tipo</th><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Quantidade</th></tr></thead><tbody>";
+                            let total = 0;
+                            for(var i = 0; i<result1.length; i++){
+                                if(result1[i].ds_setor_solicitado=="UDC - Unidade de Decisão Clínica"){
+                                    result1[i].ds_setor_solicitado = "UDC";
+                                }
+                                total = total+parseInt(result1[i].quantidade);
+                            
+                                html_corpo_adicional += "<tr>"+
+                                                            "<td class='text-xs text-center font-weight-bold'>"+
+                                                                result1[i].ds_setor_solicitado+
+                                                            "</td>"+
+                                                            "<td class='text-xs text-center font-weight-bold'>"+
+                                                                result1[i].ds_tipo_vaga+
+                                                            "</td>"+
+                                                            "<td class='text-xs text-center font-weight-bold'>"+
+                                                                result1[i].quantidade+
+                                                            "</td>"+
+                                                        "</tr>";
+                                
                             }
-                            total = total+parseInt(result1[i].quantidade);
-                           
                             html_corpo_adicional += "<tr>"+
-                                                        "<td class='text-xs text-center font-weight-bold'>"+
-                                                            result1[i].ds_setor_solicitado+
+                                                        "<td colspan='2' class='text-xs text-center font-weight-bolder'>"+
+                                                            "Total"+
                                                         "</td>"+
                                                         "<td class='text-xs text-center font-weight-bold'>"+
-                                                            result1[i].ds_tipo_vaga+
-                                                        "</td>"+
-                                                        "<td class='text-xs text-center font-weight-bold'>"+
-                                                            result1[i].quantidade+
+                                                            total+
                                                         "</td>"+
                                                     "</tr>";
+                            html_corpo_adicional += "</tbody></table>";
                             
+                            $("#corpo_modal").append(html_corpo_adicional);
                         }
-                        html_corpo_adicional += "<tr>"+
-                                                    "<td colspan='2' class='text-xs text-center font-weight-bolder'>"+
-                                                        "Total"+
-                                                    "</td>"+
-                                                    "<td class='text-xs text-center font-weight-bold'>"+
-                                                        total+
-                                                    "</td>"+
-                                                "</tr>";
-                        html_corpo_adicional += "</tbody></table>";
-                        
-                        // $("#corpo_tabela_ocupacao").html(html_corpo_tabela);
-                        // $("#nome_area").text($("#titulo"+id_area).text());
-                        
-                        // $("#tabela_detalhes").show();
-                        // location.href = "#tabela_detalhes";
-
-                        // $("#corpo_modal").html(html_corpo_tabela);
-                        // $("#modal_info").modal('show');
-
-                        
-                        $("#corpo_modal").append(html_corpo_adicional);
                     },
                     error : function(data1){
                         alert('Não foi possível buscar os detalhes das admissões.');

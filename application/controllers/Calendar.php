@@ -915,7 +915,7 @@ class Calendar
 
             $today_class = ($running_day->format('Y-m-d') == $today->format('Y-m-d')) ? ' today' : '';
 
-            $calendar .= '<td class="day cal-day cal-day-' . strtolower($running_day->format('l')) . ' ' . $class . $today_class . '" title="' . htmlentities($event_summary) . '">';
+            $calendar .= '<td class="day cal-day cal-day-' . strtolower($running_day->format('l')) . ' ' . $class . $today_class . '" title="Clique para ver os detalhes">';
 
             $calendar .= '<div class="cal-day-box">';
 

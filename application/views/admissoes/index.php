@@ -288,6 +288,9 @@
                 var html_corpo_tabela = "<span class='font-weight-bolder justify-center'>Admissões</span><table class='table align-items-center justify-content-center' width='100%'><thead><tr><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Tipo</th><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Setor</th><th class='text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2'>Quantidade</th></tr></thead><tbody>";
                 var tipo_geral_ad = "";
                 let total = 0;
+                let total_internas = 0;
+                let total_externas = 0;
+                let total_hd       = 0;
 
                 for(var i = 0; i<result.length; i++){
                     if(result[i].IE_TIPO_ADMISSAO=='E'){
@@ -299,6 +302,14 @@
                     }
 
                     total = total+parseInt(result[i].QUANTIDADE);
+
+                    if(tipo_geral_ad=='Interna'){
+                        total_internas = total_internas+parseInt(result[i].QUANTIDADE);
+                    }else if(tipo_geral_ad=='Externa'){
+                        total_externas = total_externas+parseInt(result[i].QUANTIDADE);
+                    }else if(tipo_geral_ad=='Hosp. Dia'){
+                        total_hd = total_hd+parseInt(result[i].QUANTIDADE);
+                    }
 
                     html_corpo_tabela += "<tr>"+
                                             "<td class='text-xs text-center font-weight-bold'>"+
@@ -313,9 +324,33 @@
                                         "</tr>";
                     
                 }
-                html_corpo_tabela += "<tr>"+
+                html_corpo_tabela +=    "<tr>"+
                                             "<td colspan='2' class='text-xs text-center font-weight-bolder'>"+
-                                                "Total"+
+                                                "Total Internas"+
+                                            "</td>"+
+                                            "<td class='text-xs text-center font-weight-bold'>"+
+                                                total_internas+
+                                            "</td>"+
+                                        "</tr>"+
+                                        "<tr>"+
+                                            "<td colspan='2' class='text-xs text-center font-weight-bolder'>"+
+                                                "Total Externas"+
+                                            "</td>"+
+                                            "<td class='text-xs text-center font-weight-bold'>"+
+                                                total_externas+
+                                            "</td>"+
+                                        "</tr>"+
+                                        "<tr>"+
+                                            "<td colspan='2' class='text-xs text-center font-weight-bolder'>"+
+                                                "Total HD"+
+                                            "</td>"+
+                                            "<td class='text-xs text-center font-weight-bold'>"+
+                                                total_hd+
+                                            "</td>"+
+                                        "</tr>"+
+                                        "<tr>"+
+                                            "<td colspan='2' class='text-xs text-center font-weight-bolder'>"+
+                                                "Total Geral"+
                                             "</td>"+
                                             "<td class='text-xs text-center font-weight-bold'>"+
                                                 total+

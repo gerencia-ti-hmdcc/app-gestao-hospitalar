@@ -388,6 +388,9 @@
                                     if(result1[i].ds_setor_solicitado=="UDC - Unidade de Decisão Clínica"){
                                         result1[i].ds_setor_solicitado = "UDC";
                                     }
+                                    if(result1[i].ds_setor_solicitado=="UEC – Unidade de Estabilização Clínica"){
+                                        result1[i].ds_setor_solicitado = "UEC";
+                                    }
                                     total = total+parseInt(result1[i].quantidade);
                                 
                                     html_corpo_adicional += "<tr>"+
@@ -542,6 +545,9 @@
                                 for(var i = 0; i<result1.length; i++){
                                     if(result1[i].ds_setor_solicitado=="UDC - Unidade de Decisão Clínica"){
                                         result1[i].ds_setor_solicitado = "UDC";
+                                    }
+                                    if(result1[i].ds_setor_solicitado=="UEC – Unidade de Estabilização Clínica"){
+                                        result1[i].ds_setor_solicitado = "UEC";
                                     }
                                     total = total+parseInt(result1[i].quantidade);
                                 

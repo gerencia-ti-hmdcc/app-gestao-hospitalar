@@ -60,6 +60,8 @@ class Administrador extends MY_Controller {
                 $usuarios[$i]["TIPO_PERFIL"] = "Comum";
             }else if($usuarios[$i]["TIPO_PERFIL"]=='D'){
                 $usuarios[$i]["TIPO_PERFIL"] = "Diretoria";
+            }else if($usuarios[$i]["TIPO_PERFIL"]=='E'){
+                $usuarios[$i]["TIPO_PERFIL"] = "Diretor Executivo";
             }else if($usuarios[$i]["TIPO_PERFIL"]=='G'){
                 $usuarios[$i]["TIPO_PERFIL"] = "Gerência";
             }else if($usuarios[$i]["TIPO_PERFIL"]=='P'){
@@ -94,6 +96,8 @@ class Administrador extends MY_Controller {
                 $dados["usuario"]["TIPO_PERFIL"] = "Comum";
             }else if($dados["usuario"]["TIPO_PERFIL"]=='D'){
                 $dados["usuario"]["TIPO_PERFIL"] = "Diretoria";
+            }else if($dados["usuario"]["TIPO_PERFIL"]=='E'){
+                $dados["usuario"]["TIPO_PERFIL"] = "Diretor Executivo";
             }else if($dados["usuario"]["TIPO_PERFIL"]=='G'){
                 $dados["usuario"]["TIPO_PERFIL"] = "Gerência";
             }else if($dados["usuario"]["TIPO_PERFIL"]=='P'){
@@ -208,6 +212,8 @@ class Administrador extends MY_Controller {
                     $tipo_perfil = "C";
                 }else if($tipo_perfil=='Diretoria'){
                     $tipo_perfil = "D";
+                }else if($tipo_perfil=='Diretor Executivo'){
+                    $tipo_perfil = "E";
                 }else if($tipo_perfil=='Gerência'){
                     $tipo_perfil = "G";
                 }else if($tipo_perfil=='Painel'){

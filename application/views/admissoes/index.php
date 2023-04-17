@@ -256,12 +256,12 @@
 <div class="modal fade" id="modal_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Detalhes</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+        <div class="modal-header text-center" style='align-items: baseline'>
+            <h5 class="w-full modal-title text-center" id="exampleModalLabel">Detalhes</h5>
+            <button type="button" class="btn-close text-black-50" data-bs-dismiss="modal" aria-label="Close">
+                <span class="h3" aria-hidden="true">&times;</span>
+            </button>
+        </div>
       <div class="modal-body" id="corpo_modal" name="corpo_modal">
        
       </div>
@@ -274,6 +274,11 @@
 
 <script>
     function abrirModalInformacoes(dia,mes,ano){
+        var dateObj = new Date();
+        var month   = dateObj.getUTCMonth()+1; //months from 1-12
+        var day     = dateObj.getUTCDate();
+        var year    = dateObj.getUTCFullYear();
+        $("#exampleModalLabel").html("Detalhes "+("00" + dia).slice(-2)+"/"+("00" + mes).slice(-2)+"/"+ano+"");
         $.ajax({
             url : "<?php echo site_url('/admissoes/retornaDetalhesAdmissoesMes');?>",
             type : 'POST',

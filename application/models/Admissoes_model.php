@@ -337,6 +337,215 @@ class Admissoes_model extends CI_Model {
                                     dia, mes, ano, ds_setor_solicitado ASC, quantidade DESC")->result_array();
     }
 
+    public function retornaAdmissoesDiaPeriodicas($dia,$mes,$ano){
+        if($mes==0 || $ano==0 || $dia==0){
+            $dia = date('d');
+            $mes = date('m');
+            $ano = date("Y");
+        }
+
+        return $this->db->query("SELECT 
+                                    IE_TIPO_ADMISSAO,DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA, COUNT(*) QUANTIDADE 
+                                FROM 
+                                    ADMISSAO_DIARIA_PERIODICA 
+                                WHERE
+                                    DIA_REFERENCIA='$dia'
+                                    AND MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                GROUP BY 
+                                    IE_TIPO_ADMISSAO, DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA
+                                ORDER BY
+                                    DIA_REFERENCIA,MES_REFERENCIA,ANO_REFERENCIA,IE_TIPO_ADMISSAO")->result_array();
+    }
+
+    public function retornaOfertasDiaPeriodicas($dia,$mes,$ano){
+        if($mes==0 || $ano==0 || $dia==0){
+            $dia = date('d');
+            $mes = date('m');
+            $ano = date("Y");
+        }
+
+        return $this->db->query("SELECT 
+                                    YEAR(dt_solicitacao) ano, 
+                                    MONTH(dt_solicitacao) mes, 
+                                    DAY(dt_solicitacao) dia, 
+                                    COUNT(*) quantidade
+                                FROM 
+                                    OFERTA_DIARIA_PERIODICA 
+                                WHERE 
+                                    YEAR(dt_solicitacao)='$ano' AND 
+                                    MONTH(dt_solicitacao)='$mes' AND
+                                    DAY(dt_solicitacao)='$dia'
+                                GROUP BY
+                                    YEAR(dt_solicitacao), MONTH(dt_solicitacao),  DAY(dt_solicitacao)
+                                ORDER BY
+                                    dia, mes, ano, ds_setor_solicitado ASC, quantidade DESC")->result_array();
+    }
+
+    public function retornaDetalhesAdmissoesMesPeriodicas($dia,$mes,$ano){
+        if($mes==0 || $ano==0 || $dia==0){
+            $dia = date('d');
+            $mes = date('m');
+            $ano = date("Y");
+        }
+        return $this->db->query("SELECT 
+                                    IE_TIPO_ADMISSAO,
+                                    CD_SETOR_ATENDIMENTO,
+                                    DS_SETOR_ATENDIMENTO,
+                                    COUNT(*) QUANTIDADE
+                                FROM 
+                                    ADMISSAO_DIARIA_PERIODICA 
+                                WHERE
+                                    DIA_REFERENCIA='$dia'
+                                    AND MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                GROUP BY 
+                                    IE_TIPO_ADMISSAO,
+                                    CD_SETOR_ATENDIMENTO,
+                                    DS_SETOR_ATENDIMENTO
+                                ORDER BY
+                                    IE_TIPO_ADMISSAO,
+                                    DS_SETOR_ATENDIMENTO,
+                                    QUANTIDADE")->result_array();
+    }
+
+    public function retornaDetalhesOfertasDiariasPeriodicas($ano,$mes,$dia){
+        if($ano==0 || $mes==0 || $dia==0){
+            $ano = date("Y");
+            $mes = date("m");
+            $dia = date('d');
+        }
+
+        return $this->db->query("SELECT 
+                                    ds_setor_solicitado, 
+                                    ds_tipo_vaga, 
+                                    YEAR(dt_solicitacao) ano, 
+                                    MONTH(dt_solicitacao) mes, 
+                                    COUNT(*) quantidade
+                                FROM 
+                                    OFERTA_DIARIA_PERIODICA 
+                                WHERE 
+                                    YEAR(dt_solicitacao)='$ano' AND 
+                                    MONTH(dt_solicitacao)='$mes' AND
+                                    DAY(dt_solicitacao)='$dia'
+                                GROUP BY
+                                    ds_setor_solicitado, ds_tipo_vaga, YEAR(dt_solicitacao), MONTH(dt_solicitacao)
+                                ORDER BY
+                                    ds_setor_solicitado ASC, quantidade DESC")->result_array();
+    }
+
+    public function retornaTotaisMesSemCTIPeriodicas($dia=0,$mes=0,$ano=0){
+        if($mes==0 || $ano==0 || $dia==0){
+            $mes = date('m');
+            $ano = date("Y");
+            $dia = date("d");
+        }
+        return $this->db->query("SELECT 
+                                    AD.IE_TIPO_ADMISSAO,
+                                    AD.AGRUPAMENTO_ATUAL,
+                                    CA.DESC_AGRUPAMENTO,
+                                    (SELECT 
+                                        COUNT(*)  
+                                    FROM 
+                                        ADMISSAO_DIARIA_PERIODICA ADP  
+                                    WHERE 
+                                        ADP.IE_TIPO_ADMISSAO = AD.IE_TIPO_ADMISSAO 
+                                        and ADP.AGRUPAMENTO_ATUAL =  AD.AGRUPAMENTO_ATUAL  	
+                                        and DIA_REFERENCIA='$dia'
+                                        AND MES_REFERENCIA='$mes' 
+                                        AND ANO_REFERENCIA='$ano'
+                                        AND ADP.AGRUPAMENTO_ATUAL > 8) ADMISSAO_DIA
+                                    , 
+                                    COUNT(*) DIARIA,
+                                    COUNT(*) + 
+                                        (SELECT 
+                                            COUNT(*)  
+                                        FROM 
+                                            ADMISSAO_DIARIA_PERIODICA ADP  
+                                        WHERE 
+                                            ADP.IE_TIPO_ADMISSAO = AD.IE_TIPO_ADMISSAO 
+                                            and ADP.AGRUPAMENTO_ATUAL =  AD.AGRUPAMENTO_ATUAL  	
+                                            and DIA_REFERENCIA='$dia'
+                                            AND MES_REFERENCIA='$mes' 
+                                            AND ANO_REFERENCIA='$ano'
+                                            AND ADP.AGRUPAMENTO_ATUAL > 8) QUANTIDADE
+                                FROM 
+                                    ADMISSAO_DIARIA AD
+                                    JOIN CONFIG_AGRUPAMENTO CA ON (AD.AGRUPAMENTO_ATUAL=CA.NR_AGRUPAMENTO)
+                                WHERE
+                                    MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                    AND AD.AGRUPAMENTO_ATUAL > 8
+                                GROUP BY 
+                                    AD.IE_TIPO_ADMISSAO,
+                                    AD.AGRUPAMENTO_ATUAL,
+                                    CA.DESC_AGRUPAMENTO")->result_array();
+    }
+
+    public function retornaTotaisMesCTIPeriodicas($dia=0,$mes=0,$ano=0){
+        if($mes==0 || $ano==0 || $dia==0){
+            $mes = date('m');
+            $ano = date("Y");
+            $dia = date("d");
+        }
+        return $this->db->query("SELECT 
+                                    AD.IE_TIPO_ADMISSAO,
+                                    CA.DESC_AGRUPAMENTO,
+                                    (SELECT 
+                                        COUNT(*)  
+                                    FROM 
+                                        ADMISSAO_DIARIA_PERIODICA ADP  
+                                    WHERE 
+                                        ADP.IE_TIPO_ADMISSAO = AD.IE_TIPO_ADMISSAO 
+                                        and ADP.AGRUPAMENTO_ATUAL =  AD.AGRUPAMENTO_ATUAL  	
+                                        and DIA_REFERENCIA='$dia'
+                                        AND MES_REFERENCIA='$mes' 
+                                        AND ANO_REFERENCIA='$ano'
+                                        AND ADP.AGRUPAMENTO_ATUAL <= 8) ADMISSAO_DIA, 
+                                    COUNT(*) DIARIA,
+                                    COUNT(*) + 
+                                        (SELECT 
+                                            COUNT(*)  
+                                        FROM 
+                                            ADMISSAO_DIARIA_PERIODICA ADP  
+                                        WHERE 
+                                            ADP.IE_TIPO_ADMISSAO = AD.IE_TIPO_ADMISSAO 
+                                            and ADP.AGRUPAMENTO_ATUAL =  AD.AGRUPAMENTO_ATUAL  	
+                                            and DIA_REFERENCIA='$dia'
+                                            AND MES_REFERENCIA='$mes' 
+                                            AND ANO_REFERENCIA='$ano'
+                                            AND ADP.AGRUPAMENTO_ATUAL <= 8) QUANTIDADE
+                                FROM 
+                                    ADMISSAO_DIARIA AD
+                                    JOIN CONFIG_AGRUPAMENTO CA ON (AD.AGRUPAMENTO_ATUAL=CA.NR_AGRUPAMENTO)
+                                WHERE
+                                    MES_REFERENCIA='$mes' 
+                                    AND ANO_REFERENCIA='$ano'
+                                    AND AD.AGRUPAMENTO_ATUAL <= 8
+                                GROUP BY 
+                                    AD.IE_TIPO_ADMISSAO,
+                                    CA.DESC_AGRUPAMENTO")->result_array();
+    }
+
+    public function retornaUltimaHoraAdmissoesPeriodicas(){
+        $ano = date("Y");
+        $mes = date("m");
+        $dia = date('d');
+
+        return $this->db->query("SELECT
+                                    MAX(HORARIO_REFERENCIA) ULTIMA_ATUALIZACAO,
+                                    DIA_REFERENCIA,
+                                    MES_REFERENCIA,
+                                    ANO_REFERENCIA
+                                FROM
+                                    ADMISSAO_DIARIA_PERIODICA
+                                WHERE
+                                    DIA_REFERENCIA='$dia'
+                                    AND MES_REFERENCIA='$mes'
+                                    AND ANO_REFERENCIA='$ano'
+                                ORDER BY
+                                    ANO_REFERENCIA, MES_REFERENCIA, DIA_REFERENCIA DESC")->row_array();
+    }
 
     // public function retornaUsuarios(){
     //     return $this->db->query("SELECT * FROM USERS ORDER BY NOME ASC")->result_array();

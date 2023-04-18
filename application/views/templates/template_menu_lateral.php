@@ -29,7 +29,7 @@
                 <span class="nav-link-text ms-1">Gestão de Admissões</span>
               </a>
             </li>
-            <?php if($usuario_sessao["TIPO_PERFIL"]=='A' || $usuario_sessao["TIPO_PERFIL"]=='E'){?>
+            <?php if($usuario_sessao["TIPO_PERFIL"]=='A' || $usuario_sessao["TIPO_PERFIL"]=='E' || $usuario_sessao["TIPO_PERFIL"]=='D'){?>
               <li class="nav-item">
                 <a class="nav-link active" href="<?php echo base_url()."$diretorio_raiz"."admissoes/admissoes_periodicas";?>">
                   <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">

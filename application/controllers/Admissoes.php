@@ -605,7 +605,7 @@ class Admissoes extends MY_Controller {
         $dados["tipo_perfil"]       = $usuario["TIPO_PERFIL"];
         $dados["diretorio_raiz"]    = '../';
 
-        if($dados["tipo_perfil"]!='A' && $dados["tipo_perfil"]!='E'){
+        if($dados["tipo_perfil"]!='A' && $dados["tipo_perfil"]!='E' && $dados["tipo_perfil"]!='D'){
             header('Location: ../dashboard');
         }
 

@@ -698,21 +698,31 @@ class Admissoes extends MY_Controller {
         //PEGANDO ADMISSOES E OFERTAS DE DUAS EM DUAS HORAS (PERIODICAS) -- DO DIA
         $admissoes_dia_periodicas   = $this->admissoes_model->retornaAdmissoesDiaPeriodicas(date("d"),date("m"),date("Y"));
         $oferta_dia_periodicas      = $this->admissoes_model->retornaOfertasDiaPeriodicas(date("d"),date("m"),date("Y"));
+        
+        $posicao_ofertadas  = array_search($admissoes_dia_periodicas[0]['DIA_REFERENCIA'],array_column($oferta_dia_periodicas,'dia'));
+        
+        if(count($oferta_dia_periodicas)>0){
+            if(isset($posicao_ofertadas) && $posicao_ofertadas>=0 && (!isset($oferta_dia_periodicas[$posicao_ofertadas]["ok"]) || $oferta_dia_periodicas[$posicao_ofertadas]["ok"] == 0)){
+                if($admissoes_dia_periodicas[0]['DIA_REFERENCIA']==$oferta_dia_periodicas[$posicao_ofertadas]["dia"]){
+                    $html_texto_ofertas = "Ofertas: ".$oferta_dia_periodicas[$posicao_ofertadas]['quantidade']."<br />";
+                    $oferta_dia_periodicas[$posicao_ofertadas]["ok"] = 1;
+                    $events[] = array(
+                        'start' => "2023-04-24",
+                        'end' => "2023-04-24",
+                        'summary' => $html_texto_ofertas,
+                        'mask' => false
+                    );
+                }
+            }
+        }
+       
+        
         if(isset($admissoes_dia_periodicas)){
             if(count($admissoes_dia_periodicas)>0){
                 
                 for($i=0;$i<count($admissoes_dia_periodicas);$i++){
                     $html_texto         = "<span onclick='abrirModalInformacoes(".$admissoes_dia_periodicas[$i]['DIA_REFERENCIA'].",".$admissoes_dia_periodicas[$i]['MES_REFERENCIA'].",".$admissoes_dia_periodicas[$i]['ANO_REFERENCIA'].")'>";
-                    $posicao_ofertadas  = array_search($admissoes_dia_periodicas[$i]['DIA_REFERENCIA'],array_column($oferta_dia_periodicas,'dia'));
                     
-                    if(count($oferta_dia_periodicas)>0){
-                        if(isset($posicao_ofertadas) && $posicao_ofertadas>=0 && (!isset($oferta_dia_periodicas[$posicao_ofertadas]["ok"]) || $oferta_dia_periodicas[$posicao_ofertadas]["ok"] == 0)){
-                            if($admissoes_dia_periodicas[$i]['DIA_REFERENCIA']==$oferta_dia_periodicas[$posicao_ofertadas]["dia"]){
-                                $html_texto .= "Ofertas: ".$oferta_dia_periodicas[$posicao_ofertadas]['quantidade']."<br />";
-                                $oferta_dia_periodicas[$posicao_ofertadas]["ok"] = 1;
-                            }
-                        }
-                    }
                     if($admissoes_dia_periodicas[$i]["IE_TIPO_ADMISSAO"]=="I"){
                         $html_texto .=  "Internas: ".$admissoes_dia_periodicas[$i]['QUANTIDADE'];
                     }else if($admissoes_dia_periodicas[$i]["IE_TIPO_ADMISSAO"]=="E"){

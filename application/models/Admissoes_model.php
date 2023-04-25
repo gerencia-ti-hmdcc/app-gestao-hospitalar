@@ -241,6 +241,7 @@ class Admissoes_model extends CI_Model {
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes' 
+                                    AND ds_status='L' 
                                 GROUP BY
                                     ds_setor_solicitado, ds_tipo_vaga, YEAR(dt_solicitacao), MONTH(dt_solicitacao), DAY(dt_solicitacao)
                                 ORDER BY
@@ -266,6 +267,7 @@ class Admissoes_model extends CI_Model {
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes' AND
                                     DAY(dt_solicitacao)='$dia'
+                                    AND ds_status='L'
                                 GROUP BY
                                     ds_setor_solicitado, ds_tipo_vaga, YEAR(dt_solicitacao), MONTH(dt_solicitacao)
                                 ORDER BY
@@ -288,6 +290,7 @@ class Admissoes_model extends CI_Model {
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes'
+                                    AND ds_status='L'
                                 GROUP BY
                                     ds_setor_solicitado, YEAR(dt_solicitacao), MONTH(dt_solicitacao)
                                 ORDER BY
@@ -309,6 +312,7 @@ class Admissoes_model extends CI_Model {
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes'
+                                    AND ds_status='L'
                                 GROUP BY
                                     YEAR(dt_solicitacao), MONTH(dt_solicitacao)
                                 ORDER BY
@@ -331,6 +335,7 @@ class Admissoes_model extends CI_Model {
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes'
+                                    AND ds_status='L'
                                 GROUP BY
                                     YEAR(dt_solicitacao), MONTH(dt_solicitacao),  DAY(dt_solicitacao)
                                 ORDER BY
@@ -376,6 +381,7 @@ class Admissoes_model extends CI_Model {
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes' AND
                                     DAY(dt_solicitacao)='$dia'
+                                    AND ds_status='L'
                                 GROUP BY
                                     YEAR(dt_solicitacao), MONTH(dt_solicitacao),  DAY(dt_solicitacao)
                                 ORDER BY
@@ -428,6 +434,7 @@ class Admissoes_model extends CI_Model {
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes' AND
                                     DAY(dt_solicitacao)='$dia'
+                                    AND ds_status='L'
                                 GROUP BY
                                     ds_setor_solicitado, ds_tipo_vaga, YEAR(dt_solicitacao), MONTH(dt_solicitacao)
                                 ORDER BY

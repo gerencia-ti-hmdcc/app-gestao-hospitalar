@@ -237,7 +237,7 @@ class Admissoes_model extends CI_Model {
                                     DAY(dt_solicitacao) dia,
                                     COUNT(*) quantidade
                                 FROM 
-                                    OFERTA_DIARIA 
+                                    OFERTAS_DIARIAS
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes' 
@@ -262,7 +262,7 @@ class Admissoes_model extends CI_Model {
                                     MONTH(dt_solicitacao) mes, 
                                     COUNT(*) quantidade
                                 FROM 
-                                    OFERTA_DIARIA 
+                                    OFERTAS_DIARIAS 
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes' AND
@@ -286,7 +286,7 @@ class Admissoes_model extends CI_Model {
                                     MONTH(dt_solicitacao) mes, 
                                     COUNT(*) quantidade
                                 FROM 
-                                    OFERTA_DIARIA 
+                                    OFERTAS_DIARIAS 
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes'
@@ -308,7 +308,7 @@ class Admissoes_model extends CI_Model {
                                     MONTH(dt_solicitacao) mes, 
                                     COUNT(*) quantidade
                                 FROM 
-                                    OFERTA_DIARIA 
+                                    OFERTAS_DIARIAS 
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes'
@@ -331,7 +331,7 @@ class Admissoes_model extends CI_Model {
                                     DAY(dt_solicitacao) dia, 
                                     COUNT(*) quantidade
                                 FROM 
-                                    OFERTA_DIARIA 
+                                    OFERTAS_DIARIAS 
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes'
@@ -376,7 +376,7 @@ class Admissoes_model extends CI_Model {
                                     DAY(dt_solicitacao) dia, 
                                     COUNT(*) quantidade
                                 FROM 
-                                    OFERTA_DIARIA_PERIODICA 
+                                    OFERTAS_DIARIAS
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes' AND
@@ -429,7 +429,7 @@ class Admissoes_model extends CI_Model {
                                     MONTH(dt_solicitacao) mes, 
                                     COUNT(*) quantidade
                                 FROM 
-                                    OFERTA_DIARIA_PERIODICA 
+                                    OFERTAS_DIARIAS
                                 WHERE 
                                     YEAR(dt_solicitacao)='$ano' AND 
                                     MONTH(dt_solicitacao)='$mes' AND

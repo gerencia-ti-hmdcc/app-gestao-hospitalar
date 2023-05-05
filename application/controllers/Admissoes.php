@@ -655,11 +655,27 @@ class Admissoes extends MY_Controller {
         
         $this->load->model('admissoes_model');
         
-        $ultima_atualizacao                     = $this->admissoes_model->retornaUltimaHoraAdmissoesPeriodicas();
+        $ultima_atualizacao                     = $this->admissoes_model->retornaUltimaHoraAdmissoesOuOfertas();
         $dados["horario_ultima_atualizacao"]    = $ultima_atualizacao["ULTIMA_ATUALIZACAO"];
+        
         $dados["dia_ultima_atualizacao"]        = $ultima_atualizacao["DIA_REFERENCIA"];
         $dados["mes_ultima_atualizacao"]        = $ultima_atualizacao["MES_REFERENCIA"];
         $dados["ano_ultima_atualizacao"]        = $ultima_atualizacao["ANO_REFERENCIA"];
+
+        $ultima_atualizacao_admissoes           = $this->admissoes_model->retornaUltimaHoraAdmissoesPeriodicas();
+        $dados["ultima_atualizacao_admissoes"]  = $ultima_atualizacao_admissoes["ULTIMA_ATUALIZACAO"];
+        
+        $dados["dia_ultima_atualizacao_admissoes"]        = $ultima_atualizacao_admissoes["DIA_REFERENCIA"];
+        $dados["mes_ultima_atualizacao_admissoes"]        = $ultima_atualizacao_admissoes["MES_REFERENCIA"];
+        $dados["ano_ultima_atualizacao_admissoes"]        = $ultima_atualizacao_admissoes["ANO_REFERENCIA"];
+
+        $ultima_atualizacao_ofertas             = $this->admissoes_model->retornaUltimaHoraOfertas();
+        $dados["ultima_atualizacao_ofertas"]    = $ultima_atualizacao_ofertas["ULTIMA_ATUALIZACAO"];
+        
+        $dados["dia_ultima_atualizacao_ofertas"]        = $ultima_atualizacao_ofertas["DIA_REFERENCIA"];
+        $dados["mes_ultima_atualizacao_ofertas"]        = $ultima_atualizacao_ofertas["MES_REFERENCIA"];
+        $dados["ano_ultima_atualizacao_ofertas"]        = $ultima_atualizacao_ofertas["ANO_REFERENCIA"];
+
 
         $admissoes_mes  = $this->admissoes_model->retornaQuantAdmissoesMes($dados["mes_calendario"],$dados["ano_calendario"]);
         $ofertas_mes    = $this->admissoes_model->retornaTotaisOfertasPorDia($dados["mes_calendario"],$dados["ano_calendario"]);

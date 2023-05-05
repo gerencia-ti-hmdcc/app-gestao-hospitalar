@@ -41,7 +41,9 @@
             $mes_consulta = date("m");
         }
 
-        echo '<span class="small text-bold" style="text-align: right">* Última carga de dados: '.str_pad($dia_ultima_atualizacao,2,"0",STR_PAD_LEFT).'/'.str_pad($mes_ultima_atualizacao,2,"0",STR_PAD_LEFT).'/'.$ano_ultima_atualizacao.' '.$horario_ultima_atualizacao.'</span>';
+        // echo '<span class="small text-bold" style="text-align: right">*Horário última oferta/admissão: '.str_pad($dia_ultima_atualizacao,2,"0",STR_PAD_LEFT).'/'.str_pad($mes_ultima_atualizacao,2,"0",STR_PAD_LEFT).'/'.$ano_ultima_atualizacao.' '.$horario_ultima_atualizacao.'</span>';
+        echo '<span class="small text-bold" style="text-align: right">*Horário última oferta: '.str_pad($dia_ultima_atualizacao_ofertas,2,"0",STR_PAD_LEFT).'/'.str_pad($mes_ultima_atualizacao_ofertas,2,"0",STR_PAD_LEFT).'/'.$ano_ultima_atualizacao_ofertas.' '.$ultima_atualizacao_ofertas.'</span>';
+        echo '<span class="small text-bold" style="text-align: right">*Horário última carga de admissões: '.str_pad($dia_ultima_atualizacao_admissoes,2,"0",STR_PAD_LEFT).'/'.str_pad($mes_ultima_atualizacao_admissoes,2,"0",STR_PAD_LEFT).'/'.$ano_ultima_atualizacao_admissoes.' '.$ultima_atualizacao_admissoes.'</span>';
 
         if($ano_calendario==0 || $mes_calendario==0){
             $calendario->display();

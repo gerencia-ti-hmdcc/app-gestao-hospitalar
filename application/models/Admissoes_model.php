@@ -534,6 +534,54 @@ class Admissoes_model extends CI_Model {
                                     CA.DESC_AGRUPAMENTO")->result_array();
     }
 
+    public function retornaUltimaHoraAdmissoesOuOfertas(){
+        $ano = date("Y");
+        $mes = date("m");
+        $dia = date('d');
+
+        // return $this->db->query("SELECT
+        //                             MAX(HORARIO_REFERENCIA) ULTIMA_ATUALIZACAO,
+        //                             DIA_REFERENCIA,
+        //                             MES_REFERENCIA,
+        //                             ANO_REFERENCIA
+        //                         FROM
+        //                             ADMISSAO_DIARIA_PERIODICA
+        //                         WHERE
+        //                             DIA_REFERENCIA='$dia'
+        //                             AND MES_REFERENCIA='$mes'
+        //                             AND ANO_REFERENCIA='$ano'
+        //                         ORDER BY
+        //                             ANO_REFERENCIA, MES_REFERENCIA, DIA_REFERENCIA DESC")->row_array();
+        return $this->db->query("SELECT
+                                    MAX(HORARIO_REFERENCIA) ULTIMA_ATUALIZACAO,
+                                    DIA_REFERENCIA,
+                                    MES_REFERENCIA,
+                                    ANO_REFERENCIA
+                                FROM
+                                    ADMISSAO_DIARIA_PERIODICA
+                                WHERE
+                                    DIA_REFERENCIA='$dia'
+                                    AND MES_REFERENCIA='$mes'
+                                    AND ANO_REFERENCIA='$ano'
+                                
+                                UNION ALL
+                                
+                                SELECT 
+                                    MAX(DATE_FORMAT(dt_solicitacao, '%H:%i')) ULTIMA_ATUALIZACAO,
+                                    DAY(dt_solicitacao) DIA_REFERENCIA,
+                                    MONTH(dt_solicitacao) MES_REFERENCIA,
+                                    YEAR(dt_solicitacao) ANO_REFERENCIA
+                                FROM
+                                    OFERTAS_DIARIAS
+                                WHERE
+                                    DAY(dt_solicitacao)='$dia'
+                                    AND MONTH(dt_solicitacao)='$mes'
+                                    AND YEAR(dt_solicitacao)='$ano'
+                                ORDER BY
+                                    ULTIMA_ATUALIZACAO DESC
+                                LIMIT 1")->row_array();
+    }
+
     public function retornaUltimaHoraAdmissoesPeriodicas(){
         $ano = date("Y");
         $mes = date("m");
@@ -551,7 +599,27 @@ class Admissoes_model extends CI_Model {
                                     AND MES_REFERENCIA='$mes'
                                     AND ANO_REFERENCIA='$ano'
                                 ORDER BY
-                                    ANO_REFERENCIA, MES_REFERENCIA, DIA_REFERENCIA DESC")->row_array();
+                                    ULTIMA_ATUALIZACAO DESC")->row_array();
+    }
+
+    public function retornaUltimaHoraOfertas(){
+        $ano = date("Y");
+        $mes = date("m");
+        $dia = date('d');
+
+        return $this->db->query("SELECT 
+                                    MAX(DATE_FORMAT(dt_solicitacao, '%H:%i')) ULTIMA_ATUALIZACAO,
+                                    DAY(dt_solicitacao) DIA_REFERENCIA,
+                                    MONTH(dt_solicitacao) MES_REFERENCIA,
+                                    YEAR(dt_solicitacao) ANO_REFERENCIA
+                                FROM
+                                    OFERTAS_DIARIAS
+                                WHERE
+                                    DAY(dt_solicitacao)='$dia'
+                                    AND MONTH(dt_solicitacao)='$mes'
+                                    AND YEAR(dt_solicitacao)='$ano'
+                                ORDER BY
+                                    ULTIMA_ATUALIZACAO DESC")->row_array();
     }
 
     // public function retornaUsuarios(){

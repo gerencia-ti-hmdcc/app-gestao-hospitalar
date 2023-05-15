@@ -83,10 +83,13 @@ class Admissoes extends MY_Controller {
         $posicao_ofertadas  = 0;
         
         $this->load->model('admissoes_model');
-        $admissoes_mes  = $this->admissoes_model->retornaQuantAdmissoesMes($dados["mes_calendario"],$dados["ano_calendario"]);
+        $admissoes_mes  = $this->admissoes_model->retornaQuantAdmissoesMes($dados["mes_calendario"],$dados["ano_calendario"],'periodica');
         $ofertas_mes    = $this->admissoes_model->retornaTotaisOfertasPorDia($dados["mes_calendario"],$dados["ano_calendario"]);
         if(count($admissoes_mes)>0){
             for($i=0;$i<count($admissoes_mes);$i++){
+                if($admissoes_mes[$i]['DIA_REFERENCIA']==date("d") && $admissoes_mes[$i]['MES_REFERENCIA']==date("m") && $admissoes_mes[$i]['ANO_REFERENCIA']==date("Y")){
+                    continue;
+                }
                 $html_texto         = "<span onclick='abrirModalInformacoes(".$admissoes_mes[$i]['DIA_REFERENCIA'].",".$admissoes_mes[$i]['MES_REFERENCIA'].",".$admissoes_mes[$i]['ANO_REFERENCIA'].")'>";
                 $posicao_ofertadas  = array_search($admissoes_mes[$i]['DIA_REFERENCIA'],array_column($ofertas_mes,'dia'));
                 
@@ -655,28 +658,45 @@ class Admissoes extends MY_Controller {
         
         $this->load->model('admissoes_model');
         
-        $ultima_atualizacao                     = $this->admissoes_model->retornaUltimaHoraAdmissoesOuOfertas();
-        $dados["horario_ultima_atualizacao"]    = $ultima_atualizacao["ULTIMA_ATUALIZACAO"];
+        // $ultima_atualizacao                     = $this->admissoes_model->retornaUltimaHoraAdmissoesOuOfertas();
+        // $dados["horario_ultima_atualizacao"]    = $ultima_atualizacao["ULTIMA_ATUALIZACAO"];
         
-        $dados["dia_ultima_atualizacao"]        = $ultima_atualizacao["DIA_REFERENCIA"];
-        $dados["mes_ultima_atualizacao"]        = $ultima_atualizacao["MES_REFERENCIA"];
-        $dados["ano_ultima_atualizacao"]        = $ultima_atualizacao["ANO_REFERENCIA"];
+        // $dados["dia_ultima_atualizacao"]        = $ultima_atualizacao["DIA_REFERENCIA"];
+        // $dados["mes_ultima_atualizacao"]        = $ultima_atualizacao["MES_REFERENCIA"];
+        // $dados["ano_ultima_atualizacao"]        = $ultima_atualizacao["ANO_REFERENCIA"];
 
         $ultima_atualizacao_admissoes           = $this->admissoes_model->retornaUltimaHoraAdmissoesPeriodicas();
-        $dados["ultima_atualizacao_admissoes"]  = $ultima_atualizacao_admissoes["ULTIMA_ATUALIZACAO"];
-        
-        $dados["dia_ultima_atualizacao_admissoes"]        = $ultima_atualizacao_admissoes["DIA_REFERENCIA"];
-        $dados["mes_ultima_atualizacao_admissoes"]        = $ultima_atualizacao_admissoes["MES_REFERENCIA"];
-        $dados["ano_ultima_atualizacao_admissoes"]        = $ultima_atualizacao_admissoes["ANO_REFERENCIA"];
+
+        for($i=0;$i<count($ultima_atualizacao_admissoes);$i++){
+            if(isset($ultima_atualizacao_admissoes[$i]["ULTIMA_ATUALIZACAO"]) && $ultima_atualizacao_admissoes[$i]["ULTIMA_ATUALIZACAO"] !=null){
+                if($ultima_atualizacao_admissoes[$i]["IE_TIPO_ADMISSAO"]=='I'){
+                    $dados["dia_ultima_atualizacao_admissoes_internas"] = $ultima_atualizacao_admissoes[$i]["DIA_REFERENCIA"];
+                    $dados["mes_ultima_atualizacao_admissoes_internas"] = $ultima_atualizacao_admissoes[$i]["MES_REFERENCIA"];
+                    $dados["ano_ultima_atualizacao_admissoes_internas"] = $ultima_atualizacao_admissoes[$i]["ANO_REFERENCIA"];
+                    $dados["ultima_atualizacao_admissoes_internas"]     = date('H:i', strtotime($ultima_atualizacao_admissoes[$i]["ULTIMA_ATUALIZACAO"]));
+                }else if($ultima_atualizacao_admissoes[$i]["IE_TIPO_ADMISSAO"]=='E'){
+                    $dados["dia_ultima_atualizacao_admissoes_externas"] = $ultima_atualizacao_admissoes[$i]["DIA_REFERENCIA"];
+                    $dados["mes_ultima_atualizacao_admissoes_externas"] = $ultima_atualizacao_admissoes[$i]["MES_REFERENCIA"];
+                    $dados["ano_ultima_atualizacao_admissoes_externas"] = $ultima_atualizacao_admissoes[$i]["ANO_REFERENCIA"];
+                    $dados["ultima_atualizacao_admissoes_externas"]     = date('H:i', strtotime($ultima_atualizacao_admissoes[$i]["ULTIMA_ATUALIZACAO"]));
+                }else if($ultima_atualizacao_admissoes[$i]["IE_TIPO_ADMISSAO"]=='HD'){
+                    $dados["dia_ultima_atualizacao_admissoes_hd"] = $ultima_atualizacao_admissoes[$i]["DIA_REFERENCIA"];
+                    $dados["mes_ultima_atualizacao_admissoes_hd"] = $ultima_atualizacao_admissoes[$i]["MES_REFERENCIA"];
+                    $dados["ano_ultima_atualizacao_admissoes_hd"] = $ultima_atualizacao_admissoes[$i]["ANO_REFERENCIA"];
+                    $dados["ultima_atualizacao_admissoes_hd"]     = date('H:i', strtotime($ultima_atualizacao_admissoes[$i]["ULTIMA_ATUALIZACAO"]));
+                }
+            }
+        }
 
         $ultima_atualizacao_ofertas             = $this->admissoes_model->retornaUltimaHoraOfertas();
-        $dados["ultima_atualizacao_ofertas"]    = $ultima_atualizacao_ofertas["ULTIMA_ATUALIZACAO"];
+        if(isset($ultima_atualizacao_ofertas) && $ultima_atualizacao_ofertas != null){
+            $dados["ultima_atualizacao_ofertas"]    = $ultima_atualizacao_ofertas["ULTIMA_ATUALIZACAO"];
         
-        $dados["dia_ultima_atualizacao_ofertas"]        = $ultima_atualizacao_ofertas["DIA_REFERENCIA"];
-        $dados["mes_ultima_atualizacao_ofertas"]        = $ultima_atualizacao_ofertas["MES_REFERENCIA"];
-        $dados["ano_ultima_atualizacao_ofertas"]        = $ultima_atualizacao_ofertas["ANO_REFERENCIA"];
-
-
+            $dados["dia_ultima_atualizacao_ofertas"]        = $ultima_atualizacao_ofertas["DIA_REFERENCIA"];
+            $dados["mes_ultima_atualizacao_ofertas"]        = $ultima_atualizacao_ofertas["MES_REFERENCIA"];
+            $dados["ano_ultima_atualizacao_ofertas"]        = $ultima_atualizacao_ofertas["ANO_REFERENCIA"];
+        }
+        
         $admissoes_mes  = $this->admissoes_model->retornaQuantAdmissoesMes($dados["mes_calendario"],$dados["ano_calendario"]);
         $ofertas_mes    = $this->admissoes_model->retornaTotaisOfertasPorDia($dados["mes_calendario"],$dados["ano_calendario"]);
         
@@ -711,47 +731,45 @@ class Admissoes extends MY_Controller {
             }
         }
 
-        //PEGANDO ADMISSOES E OFERTAS DE DUAS EM DUAS HORAS (PERIODICAS) -- DO DIA
-        $admissoes_dia_periodicas   = $this->admissoes_model->retornaAdmissoesDiaPeriodicas(date("d"),date("m"),date("Y"));
-        $oferta_dia_periodicas      = $this->admissoes_model->retornaOfertasDiaPeriodicas(date("d"),date("m"),date("Y"));
-        if(isset($admissoes_dia_periodicas)){
-            if(count($admissoes_dia_periodicas)>0){
+        // $admissoes_dia_periodicas   = $this->admissoes_model->retornaAdmissoesDiaPeriodicas(date("d"),date("m"),date("Y"));
+        // $oferta_dia_periodicas      = $this->admissoes_model->retornaOfertasDiaPeriodicas(date("d"),date("m"),date("Y"));
+        // if(isset($admissoes_dia_periodicas)){
+        //     if(count($admissoes_dia_periodicas)>0){
                 
-                for($i=0;$i<count($admissoes_dia_periodicas);$i++){
-                    $html_texto         = "<span onclick='abrirModalInformacoes(".$admissoes_dia_periodicas[$i]['DIA_REFERENCIA'].",".$admissoes_dia_periodicas[$i]['MES_REFERENCIA'].",".$admissoes_dia_periodicas[$i]['ANO_REFERENCIA'].")'>";
-                    $posicao_ofertadas  = array_search($admissoes_dia_periodicas[$i]['DIA_REFERENCIA'],array_column($oferta_dia_periodicas,'dia'));
+        //         for($i=0;$i<count($admissoes_dia_periodicas);$i++){
+        //             $html_texto         = "<span onclick='abrirModalInformacoes(".$admissoes_dia_periodicas[$i]['DIA_REFERENCIA'].",".$admissoes_dia_periodicas[$i]['MES_REFERENCIA'].",".$admissoes_dia_periodicas[$i]['ANO_REFERENCIA'].")'>";
+        //             $posicao_ofertadas  = array_search($admissoes_dia_periodicas[$i]['DIA_REFERENCIA'],array_column($oferta_dia_periodicas,'dia'));
                     
-                    if(count($oferta_dia_periodicas)>0){
-                        if(isset($posicao_ofertadas) && $posicao_ofertadas>=0 && (!isset($oferta_dia_periodicas[$posicao_ofertadas]["ok"]) || $oferta_dia_periodicas[$posicao_ofertadas]["ok"] == 0)){
-                            if($admissoes_dia_periodicas[$i]['DIA_REFERENCIA']==$oferta_dia_periodicas[$posicao_ofertadas]["dia"]){
-                                $html_texto .= "Ofertas: ".$oferta_dia_periodicas[$posicao_ofertadas]['quantidade']."<br />";
-                                $oferta_dia_periodicas[$posicao_ofertadas]["ok"] = 1;
-                            }
-                        }
-                    }
-                    if($admissoes_dia_periodicas[$i]["IE_TIPO_ADMISSAO"]=="I"){
-                        $html_texto .=  "Internas: ".$admissoes_dia_periodicas[$i]['QUANTIDADE'];
-                    }else if($admissoes_dia_periodicas[$i]["IE_TIPO_ADMISSAO"]=="E"){
-                        $html_texto .= "Externas: ".$admissoes_dia_periodicas[$i]['QUANTIDADE']."<br />";
-                    }else if($admissoes_dia_periodicas[$i]["IE_TIPO_ADMISSAO"]=="HD"){
-                        $html_texto .= "HD: ".$admissoes_dia_periodicas[$i]['QUANTIDADE']."<br />";
-                    }
+        //             if(count($oferta_dia_periodicas)>0){
+        //                 if(isset($posicao_ofertadas) && $posicao_ofertadas>=0 && (!isset($oferta_dia_periodicas[$posicao_ofertadas]["ok"]) || $oferta_dia_periodicas[$posicao_ofertadas]["ok"] == 0)){
+        //                     if($admissoes_dia_periodicas[$i]['DIA_REFERENCIA']==$oferta_dia_periodicas[$posicao_ofertadas]["dia"]){
+        //                         $html_texto .= "Ofertas: ".$oferta_dia_periodicas[$posicao_ofertadas]['quantidade']."<br />";
+        //                         $oferta_dia_periodicas[$posicao_ofertadas]["ok"] = 1;
+        //                     }
+        //                 }
+        //             }
+        //             if($admissoes_dia_periodicas[$i]["IE_TIPO_ADMISSAO"]=="I"){
+        //                 $html_texto .=  "Internas: ".$admissoes_dia_periodicas[$i]['QUANTIDADE'];
+        //             }else if($admissoes_dia_periodicas[$i]["IE_TIPO_ADMISSAO"]=="E"){
+        //                 $html_texto .= "Externas: ".$admissoes_dia_periodicas[$i]['QUANTIDADE']."<br />";
+        //             }else if($admissoes_dia_periodicas[$i]["IE_TIPO_ADMISSAO"]=="HD"){
+        //                 $html_texto .= "HD: ".$admissoes_dia_periodicas[$i]['QUANTIDADE']."<br />";
+        //             }
 
-                    $html_texto .="</span>";
-                    $events[] = array(
-                        'start' => $admissoes_dia_periodicas[$i]['ANO_REFERENCIA']."-".$admissoes_dia_periodicas[$i]['MES_REFERENCIA']."-".$admissoes_dia_periodicas[$i]['DIA_REFERENCIA'],
-                        'end' => $admissoes_dia_periodicas[$i]['ANO_REFERENCIA']."-".$admissoes_dia_periodicas[$i]['MES_REFERENCIA']."-".$admissoes_dia_periodicas[$i]['DIA_REFERENCIA'],
-                        'summary' => $html_texto,
-                        'mask' => false
-                    );
-                }
-            }
-        }
+        //             $html_texto .="</span>";
+        //             $events[] = array(
+        //                 'start' => $admissoes_dia_periodicas[$i]['ANO_REFERENCIA']."-".$admissoes_dia_periodicas[$i]['MES_REFERENCIA']."-".$admissoes_dia_periodicas[$i]['DIA_REFERENCIA'],
+        //                 'end' => $admissoes_dia_periodicas[$i]['ANO_REFERENCIA']."-".$admissoes_dia_periodicas[$i]['MES_REFERENCIA']."-".$admissoes_dia_periodicas[$i]['DIA_REFERENCIA'],
+        //                 'summary' => $html_texto,
+        //                 'mask' => false
+        //             );
+        //         }
+        //     }
+        // }
 
-        //PAREI AQUI ------------------------------------------------------ 
-        $totais_admissoes_mes               = $this->admissoes_model->retornaTotaisMesSemCTIPeriodicas();
+        $totais_admissoes_mes               = $this->admissoes_model->retornaTotaisMesSemCTIPeriodicas($dados["mes_calendario"],$dados["ano_calendario"]);
         $dados["totais_admissoes_mes"]      = $totais_admissoes_mes;
-        $totais_admissoes_mes_cti           = $this->admissoes_model->retornaTotaisMesCTIPeriodicas();
+        $totais_admissoes_mes_cti           = $this->admissoes_model->retornaTotaisMesCTIPeriodicas($dados["mes_calendario"],$dados["ano_calendario"]);
         $dados["totais_admissoes_mes_cti"]  = $totais_admissoes_mes_cti;
 
         $dados["admissoes_hd"]                   = 0;

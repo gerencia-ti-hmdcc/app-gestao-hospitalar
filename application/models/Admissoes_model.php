@@ -6,21 +6,30 @@ class Admissoes_model extends CI_Model {
             $mes = date('m');
             $ano = date("Y");
         }
-        return $this->db->query("SELECT * FROM ADMISSAO_DIARIA WHERE MES_REFERENCIA='$mes' AND ANO_REFERENCIA='$ano'")->result_array();
+        return $this->db->query("SELECT * FROM ADMISSOES_DIARIAS WHERE MES_REFERENCIA='$mes' AND IE_TIPO_ADMISSAO <> 'D' AND ANO_REFERENCIA='$ano'")->result_array();
     }
     
-    public function retornaQuantAdmissoesMes($mes,$ano){
+    public function retornaQuantAdmissoesMes($mes,$ano,$pagina='periodica'){
         if($mes==0 || $ano==0){
             $mes = date('m');
             $ano = date("Y");
         }
+        $dia = date('d');
+
+        if($mes == date("m") && $ano == date("Y") && $pagina=='periodica'){
+            $condicao_periodica = "AND DIA_REFERENCIA <> '$dia'";
+        }else{
+            $condicao_periodica = "";
+        }
+
         return $this->db->query("SELECT 
                                     IE_TIPO_ADMISSAO,DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA, COUNT(*) QUANTIDADE 
                                 FROM 
-                                    ADMISSAO_DIARIA 
+                                    ADMISSOES_DIARIAS 
                                 WHERE
                                     MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                 GROUP BY 
                                     IE_TIPO_ADMISSAO,DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA
                                 ORDER BY
@@ -43,10 +52,11 @@ class Admissoes_model extends CI_Model {
         return $this->db->query("SELECT 
                                     IE_TIPO_ADMISSAO,DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA, COUNT(*) QUANTIDADE 
                                 FROM 
-                                    ADMISSAO_DIARIA 
+                                    ADMISSOES_DIARIAS 
                                 WHERE
                                     MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                     $cond_agrupamento
                                 GROUP BY 
                                     IE_TIPO_ADMISSAO,DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA
@@ -66,11 +76,12 @@ class Admissoes_model extends CI_Model {
                                     DS_SETOR_ATENDIMENTO,
                                     COUNT(*) QUANTIDADE
                                 FROM 
-                                    ADMISSAO_DIARIA 
+                                    ADMISSOES_DIARIAS 
                                 WHERE
                                     DIA_REFERENCIA='$dia'
                                     AND MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                 GROUP BY 
                                     IE_TIPO_ADMISSAO,
                                     CD_SETOR_ATENDIMENTO,
@@ -101,11 +112,12 @@ class Admissoes_model extends CI_Model {
                                     DS_SETOR_ATENDIMENTO,
                                     COUNT(*) QUANTIDADE
                                 FROM 
-                                    ADMISSAO_DIARIA 
+                                    ADMISSOES_DIARIAS 
                                 WHERE
                                     DIA_REFERENCIA='$dia'
                                     AND MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                     $cond_agrupamento
                                 GROUP BY 
                                     IE_TIPO_ADMISSAO,
@@ -117,23 +129,33 @@ class Admissoes_model extends CI_Model {
                                     QUANTIDADE")->result_array();
     }
 
-    public function retornaTotaisMesSemCTI($mes,$ano){
+    public function retornaTotaisMesSemCTI($mes,$ano,$pagina='periodica'){
         if($mes==0 || $ano==0){
             $mes = date('m');
             $ano = date("Y");
         }
+        $dia = date("d");
+
+        if($mes == date("m") && $ano == date("Y") && $pagina=='periodica'){
+            $condicao_periodica = "AND DIA_REFERENCIA <> '$dia'";
+        }else{
+            $condicao_periodica = "";
+        }
+
         return $this->db->query("SELECT 
                                     AD.IE_TIPO_ADMISSAO,
                                     AD.AGRUPAMENTO_ATUAL,
                                     CA.DESC_AGRUPAMENTO,
                                     COUNT(*) QUANTIDADE
                                 FROM 
-                                    ADMISSAO_DIARIA AD
+                                    ADMISSOES_DIARIAS AD
                                     JOIN CONFIG_AGRUPAMENTO CA ON (AD.AGRUPAMENTO_ATUAL=CA.NR_AGRUPAMENTO)
                                 WHERE
                                     MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
+                                    $condicao_periodica
                                     AND AD.AGRUPAMENTO_ATUAL > 8
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                 GROUP BY 
                                     AD.IE_TIPO_ADMISSAO,
                                     AD.AGRUPAMENTO_ATUAL,
@@ -144,22 +166,32 @@ class Admissoes_model extends CI_Model {
                                     QUANTIDADE")->result_array();
     }
 
-    public function retornaTotaisMesCTI($mes,$ano){
+    public function retornaTotaisMesCTI($mes,$ano,$pagina='periodica'){
         if($mes==0 || $ano==0){
             $mes = date('m');
             $ano = date("Y");
         }
+        $dia = date("d");
+        // ESTÁ VINDO DUPLICADO O DIA ATUAL
+        if($mes == date("m") && $ano == date("Y") && $pagina=='periodica'){
+            $condicao_periodica = "AND DIA_REFERENCIA <> '$dia'";
+        }else{
+            $condicao_periodica = "";
+        }
+
         return $this->db->query("SELECT 
                                     AD.IE_TIPO_ADMISSAO,
                                     CA.DESC_AGRUPAMENTO,
                                     COUNT(*) QUANTIDADE
                                 FROM 
-                                    ADMISSAO_DIARIA AD
+                                    ADMISSOES_DIARIAS AD
                                     JOIN CONFIG_AGRUPAMENTO CA ON (AD.AGRUPAMENTO_ATUAL=CA.NR_AGRUPAMENTO)
                                 WHERE
                                     MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
+                                    $condicao_periodica
                                     AND AD.AGRUPAMENTO_ATUAL <= 8
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                 GROUP BY 
                                     AD.IE_TIPO_ADMISSAO,
                                     CA.DESC_AGRUPAMENTO
@@ -181,17 +213,18 @@ class Admissoes_model extends CI_Model {
         }else{
             $cond_agrupamento = "AND AD.AGRUPAMENTO_ATUAL=$agrupamento";
         }
-
+        $dia = date("d");
         return $this->db->query("SELECT 
                                     AD.IE_TIPO_ADMISSAO,
                                     CA.DESC_AGRUPAMENTO,
                                     COUNT(*) QUANTIDADE
                                 FROM 
-                                    ADMISSAO_DIARIA AD
+                                    ADMISSOES_DIARIAS AD
                                     JOIN CONFIG_AGRUPAMENTO CA ON (AD.AGRUPAMENTO_ATUAL=CA.NR_AGRUPAMENTO)
                                 WHERE
                                     MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                     $cond_agrupamento
                                 GROUP BY 
                                     AD.IE_TIPO_ADMISSAO,
@@ -352,11 +385,12 @@ class Admissoes_model extends CI_Model {
         return $this->db->query("SELECT 
                                     IE_TIPO_ADMISSAO,DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA, COUNT(*) QUANTIDADE 
                                 FROM 
-                                    ADMISSAO_DIARIA_PERIODICA 
+                                    ADMISSOES_DIARIAS 
                                 WHERE
                                     DIA_REFERENCIA='$dia'
                                     AND MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                 GROUP BY 
                                     IE_TIPO_ADMISSAO, DIA_REFERENCIA, MES_REFERENCIA, ANO_REFERENCIA
                                 ORDER BY
@@ -400,11 +434,12 @@ class Admissoes_model extends CI_Model {
                                     DS_SETOR_ATENDIMENTO,
                                     COUNT(*) QUANTIDADE
                                 FROM 
-                                    ADMISSAO_DIARIA_PERIODICA 
+                                    ADMISSOES_DIARIAS 
                                 WHERE
                                     DIA_REFERENCIA='$dia'
                                     AND MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                 GROUP BY 
                                     IE_TIPO_ADMISSAO,
                                     CD_SETOR_ATENDIMENTO,
@@ -451,42 +486,23 @@ class Admissoes_model extends CI_Model {
                                     AD.IE_TIPO_ADMISSAO,
                                     AD.AGRUPAMENTO_ATUAL,
                                     CA.DESC_AGRUPAMENTO,
-                                    (SELECT 
-                                        COUNT(*)  
-                                    FROM 
-                                        ADMISSAO_DIARIA_PERIODICA ADP  
-                                    WHERE 
-                                        ADP.IE_TIPO_ADMISSAO = AD.IE_TIPO_ADMISSAO 
-                                        and ADP.AGRUPAMENTO_ATUAL =  AD.AGRUPAMENTO_ATUAL  	
-                                        and DIA_REFERENCIA='$dia'
-                                        AND MES_REFERENCIA='$mes' 
-                                        AND ANO_REFERENCIA='$ano'
-                                        AND ADP.AGRUPAMENTO_ATUAL > 8) ADMISSAO_DIA
-                                    , 
-                                    COUNT(*) DIARIA,
-                                    COUNT(*) + 
-                                        (SELECT 
-                                            COUNT(*)  
-                                        FROM 
-                                            ADMISSAO_DIARIA_PERIODICA ADP  
-                                        WHERE 
-                                            ADP.IE_TIPO_ADMISSAO = AD.IE_TIPO_ADMISSAO 
-                                            and ADP.AGRUPAMENTO_ATUAL =  AD.AGRUPAMENTO_ATUAL  	
-                                            and DIA_REFERENCIA='$dia'
-                                            AND MES_REFERENCIA='$mes' 
-                                            AND ANO_REFERENCIA='$ano'
-                                            AND ADP.AGRUPAMENTO_ATUAL > 8) QUANTIDADE
+                                    COUNT(*) QUANTIDADE
                                 FROM 
-                                    ADMISSAO_DIARIA AD
+                                    ADMISSOES_DIARIAS AD
                                     JOIN CONFIG_AGRUPAMENTO CA ON (AD.AGRUPAMENTO_ATUAL=CA.NR_AGRUPAMENTO)
                                 WHERE
                                     MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
                                     AND AD.AGRUPAMENTO_ATUAL > 8
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                 GROUP BY 
                                     AD.IE_TIPO_ADMISSAO,
                                     AD.AGRUPAMENTO_ATUAL,
-                                    CA.DESC_AGRUPAMENTO")->result_array();
+                                    CA.DESC_AGRUPAMENTO
+                                ORDER BY
+                                    AD.AGRUPAMENTO_ATUAL,
+                                    AD.IE_TIPO_ADMISSAO,
+                                    QUANTIDADE")->result_array();
     }
 
     public function retornaTotaisMesCTIPeriodicas($dia=0,$mes=0,$ano=0){
@@ -498,40 +514,22 @@ class Admissoes_model extends CI_Model {
         return $this->db->query("SELECT 
                                     AD.IE_TIPO_ADMISSAO,
                                     CA.DESC_AGRUPAMENTO,
-                                    (SELECT 
-                                        COUNT(*)  
-                                    FROM 
-                                        ADMISSAO_DIARIA_PERIODICA ADP  
-                                    WHERE 
-                                        ADP.IE_TIPO_ADMISSAO = AD.IE_TIPO_ADMISSAO 
-                                        and ADP.AGRUPAMENTO_ATUAL =  AD.AGRUPAMENTO_ATUAL  	
-                                        and DIA_REFERENCIA='$dia'
-                                        AND MES_REFERENCIA='$mes' 
-                                        AND ANO_REFERENCIA='$ano'
-                                        AND ADP.AGRUPAMENTO_ATUAL <= 8) ADMISSAO_DIA, 
-                                    COUNT(*) DIARIA,
-                                    COUNT(*) + 
-                                        (SELECT 
-                                            COUNT(*)  
-                                        FROM 
-                                            ADMISSAO_DIARIA_PERIODICA ADP  
-                                        WHERE 
-                                            ADP.IE_TIPO_ADMISSAO = AD.IE_TIPO_ADMISSAO 
-                                            and ADP.AGRUPAMENTO_ATUAL =  AD.AGRUPAMENTO_ATUAL  	
-                                            and DIA_REFERENCIA='$dia'
-                                            AND MES_REFERENCIA='$mes' 
-                                            AND ANO_REFERENCIA='$ano'
-                                            AND ADP.AGRUPAMENTO_ATUAL <= 8) QUANTIDADE
+                                    COUNT(*) QUANTIDADE
                                 FROM 
-                                    ADMISSAO_DIARIA AD
+                                    ADMISSOES_DIARIAS AD
                                     JOIN CONFIG_AGRUPAMENTO CA ON (AD.AGRUPAMENTO_ATUAL=CA.NR_AGRUPAMENTO)
                                 WHERE
                                     MES_REFERENCIA='$mes' 
                                     AND ANO_REFERENCIA='$ano'
                                     AND AD.AGRUPAMENTO_ATUAL <= 8
+                                    AND IE_TIPO_ADMISSAO <> 'D'
                                 GROUP BY 
                                     AD.IE_TIPO_ADMISSAO,
-                                    CA.DESC_AGRUPAMENTO")->result_array();
+                                    CA.DESC_AGRUPAMENTO
+                                ORDER BY
+                                    AD.IE_TIPO_ADMISSAO,
+                                    AD.AGRUPAMENTO_ATUAL,
+                                    QUANTIDADE")->result_array();
     }
 
     public function retornaUltimaHoraAdmissoesOuOfertas(){
@@ -552,21 +550,7 @@ class Admissoes_model extends CI_Model {
         //                             AND ANO_REFERENCIA='$ano'
         //                         ORDER BY
         //                             ANO_REFERENCIA, MES_REFERENCIA, DIA_REFERENCIA DESC")->row_array();
-        return $this->db->query("SELECT
-                                    MAX(HORARIO_REFERENCIA) ULTIMA_ATUALIZACAO,
-                                    DIA_REFERENCIA,
-                                    MES_REFERENCIA,
-                                    ANO_REFERENCIA
-                                FROM
-                                    ADMISSAO_DIARIA_PERIODICA
-                                WHERE
-                                    DIA_REFERENCIA='$dia'
-                                    AND MES_REFERENCIA='$mes'
-                                    AND ANO_REFERENCIA='$ano'
-                                
-                                UNION ALL
-                                
-                                SELECT 
+        return $this->db->query("SELECT 
                                     MAX(DATE_FORMAT(dt_solicitacao, '%H:%i')) ULTIMA_ATUALIZACAO,
                                     DAY(dt_solicitacao) DIA_REFERENCIA,
                                     MONTH(dt_solicitacao) MES_REFERENCIA,
@@ -588,18 +572,53 @@ class Admissoes_model extends CI_Model {
         $dia = date('d');
 
         return $this->db->query("SELECT
-                                    MAX(HORARIO_REFERENCIA) ULTIMA_ATUALIZACAO,
+                                    MAX(DT_ENTRADA_UNIDADE) ULTIMA_ATUALIZACAO,
+                                    IE_TIPO_ADMISSAO,
                                     DIA_REFERENCIA,
                                     MES_REFERENCIA,
                                     ANO_REFERENCIA
                                 FROM
-                                    ADMISSAO_DIARIA_PERIODICA
+                                    ADMISSOES_DIARIAS
                                 WHERE
                                     DIA_REFERENCIA='$dia'
                                     AND MES_REFERENCIA='$mes'
                                     AND ANO_REFERENCIA='$ano'
+                                    AND IE_TIPO_ADMISSAO='E'
+                                    
+                                UNION ALL
+                                
+                                SELECT
+                                    MAX(DT_ENTRADA_UNIDADE) ULTIMA_ATUALIZACAO,
+                                    IE_TIPO_ADMISSAO,
+                                    DIA_REFERENCIA,
+                                    MES_REFERENCIA,
+                                    ANO_REFERENCIA
+                                FROM
+                                    ADMISSOES_DIARIAS
+                                WHERE
+                                    DIA_REFERENCIA='$dia'
+                                    AND MES_REFERENCIA='$mes'
+                                    AND ANO_REFERENCIA='$ano'
+                                    AND IE_TIPO_ADMISSAO='I'
+                                    
+                                UNION ALL
+                                
+                                SELECT
+                                    MAX(DT_ENTRADA_UNIDADE) ULTIMA_ATUALIZACAO,
+                                    IE_TIPO_ADMISSAO,
+                                    DIA_REFERENCIA,
+                                    MES_REFERENCIA,
+                                    ANO_REFERENCIA
+                                FROM
+                                    ADMISSOES_DIARIAS
+                                WHERE
+                                    DIA_REFERENCIA='$dia'
+                                    AND MES_REFERENCIA='$mes'
+                                    AND ANO_REFERENCIA='$ano'
+                                    AND IE_TIPO_ADMISSAO='HD'
+                                    
                                 ORDER BY
-                                    ULTIMA_ATUALIZACAO DESC")->row_array();
+                                    ULTIMA_ATUALIZACAO DESC")->result_array();
     }
 
     public function retornaUltimaHoraOfertas(){

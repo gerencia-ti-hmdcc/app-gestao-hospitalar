@@ -700,37 +700,101 @@ class Admissoes extends MY_Controller {
         $admissoes_mes  = $this->admissoes_model->retornaQuantAdmissoesMes($dados["mes_calendario"],$dados["ano_calendario"]);
         $ofertas_mes    = $this->admissoes_model->retornaTotaisOfertasPorDia($dados["mes_calendario"],$dados["ano_calendario"]);
         
-        if(count($admissoes_mes)>0){
-            for($i=0;$i<count($admissoes_mes);$i++){
-                $html_texto         = "<span onclick='abrirModalInformacoes(".$admissoes_mes[$i]['DIA_REFERENCIA'].",".$admissoes_mes[$i]['MES_REFERENCIA'].",".$admissoes_mes[$i]['ANO_REFERENCIA'].")'>";
-                $posicao_ofertadas  = array_search($admissoes_mes[$i]['DIA_REFERENCIA'],array_column($ofertas_mes,'dia'));
-                
-                if(count($ofertas_mes)>0){
-                    if(isset($posicao_ofertadas) && $posicao_ofertadas>=0 && (!isset($ofertas_mes[$posicao_ofertadas]["ok"]) || $ofertas_mes[$posicao_ofertadas]["ok"] == 0)){
-                        if($admissoes_mes[$i]['DIA_REFERENCIA']==$ofertas_mes[$posicao_ofertadas]["dia"]){
-                            $html_texto .= "Ofertas: ".$ofertas_mes[$posicao_ofertadas]['quantidade']."<br />";
-                            $ofertas_mes[$posicao_ofertadas]["ok"] = 1;
-                        }
+        if(($dia_atual_realizado==1 || $dia_atual_realizado==01)  && count($admissoes_mes)==0){
+            $html_texto         = "<span onclick='abrirModalInformacoes(".$dia_atual_realizado.",".date("m").",".date("Y").")'>";
+            $posicao_ofertadas  = array_search($dia_atual_realizado,array_column($ofertas_mes,'dia'));
+            if(count($ofertas_mes)>0){
+                if(isset($posicao_ofertadas) && $posicao_ofertadas>=0 && (!isset($ofertas_mes[$posicao_ofertadas]["ok"]) || $ofertas_mes[$posicao_ofertadas]["ok"] == 0)){
+                    if($dia_atual_realizado==$ofertas_mes[$posicao_ofertadas]["dia"]){
+                        $html_texto .= "Ofertas: ".$ofertas_mes[$posicao_ofertadas]['quantidade']."<br />";
+                        $ofertas_mes[$posicao_ofertadas]["ok"] = 1;
                     }
                 }
-                
-                if($admissoes_mes[$i]["IE_TIPO_ADMISSAO"]=="I"){
-                    $html_texto .=  "Internas: ".$admissoes_mes[$i]['QUANTIDADE'];
-                }else if($admissoes_mes[$i]["IE_TIPO_ADMISSAO"]=="E"){
-                    $html_texto .= "Externas: ".$admissoes_mes[$i]['QUANTIDADE']."<br />";
-                }else if($admissoes_mes[$i]["IE_TIPO_ADMISSAO"]=="HD"){
-                    $html_texto .= "HD: ".$admissoes_mes[$i]['QUANTIDADE']."<br />";
+            }
+            $html_texto .="</span>";
+            $events[] = array(
+                'start' => date("Y")."-".date("m")."-".$dia_atual_realizado,
+                'end' => date("Y")."-".date("m")."-".$dia_atual_realizado,
+                'summary' => $html_texto,
+                'mask' => false
+            );
+        }else{
+            if(count($admissoes_mes)>0){
+                for($i=0;$i<count($admissoes_mes);$i++){
+                    $html_texto         = "<span onclick='abrirModalInformacoes(".$admissoes_mes[$i]['DIA_REFERENCIA'].",".$admissoes_mes[$i]['MES_REFERENCIA'].",".$admissoes_mes[$i]['ANO_REFERENCIA'].")'>";
+                    
+                    if($dia_atual_realizado != $admissoes_mes[$i]['DIA_REFERENCIA']){
+                        $posicao_ofertadas  = array_search($admissoes_mes[$i]['DIA_REFERENCIA'],array_column($ofertas_mes,'dia'));
+                        if(count($ofertas_mes)>0){
+                            if(isset($posicao_ofertadas) && $posicao_ofertadas>=0 && (!isset($ofertas_mes[$posicao_ofertadas]["ok"]) || $ofertas_mes[$posicao_ofertadas]["ok"] == 0)){
+                                if($admissoes_mes[$i]['DIA_REFERENCIA']==$ofertas_mes[$posicao_ofertadas]["dia"]){
+                                    $html_texto .= "Ofertas: ".$ofertas_mes[$posicao_ofertadas]['quantidade']."<br />";
+                                    $ofertas_mes[$posicao_ofertadas]["ok"] = 1;
+                                }
+                            }
+                        }
+                    }else{
+                        $posicao_ofertadas  = array_search($dia_atual_realizado,array_column($ofertas_mes,'dia'));
+                        if(count($ofertas_mes)>0){
+                            if(isset($posicao_ofertadas) && $posicao_ofertadas>=0 && (!isset($ofertas_mes[$posicao_ofertadas]["ok"]) || $ofertas_mes[$posicao_ofertadas]["ok"] == 0)){
+                                if($dia_atual_realizado==$ofertas_mes[$posicao_ofertadas]["dia"]){
+                                    $html_texto .= "Ofertas: ".$ofertas_mes[$posicao_ofertadas]['quantidade']."<br />";
+                                    $ofertas_mes[$posicao_ofertadas]["ok"] = 1;
+                                }
+                            }
+                        }
+                    }
+                    
+                    if($admissoes_mes[$i]["IE_TIPO_ADMISSAO"]=="I"){
+                        $html_texto .=  "Internas: ".$admissoes_mes[$i]['QUANTIDADE'];
+                    }else if($admissoes_mes[$i]["IE_TIPO_ADMISSAO"]=="E"){
+                        $html_texto .= "Externas: ".$admissoes_mes[$i]['QUANTIDADE']."<br />";
+                    }else if($admissoes_mes[$i]["IE_TIPO_ADMISSAO"]=="HD"){
+                        $html_texto .= "HD: ".$admissoes_mes[$i]['QUANTIDADE']."<br />";
+                    }
+
+                    $html_texto .="</span>";
+                    $events[] = array(
+                        'start' => $admissoes_mes[$i]['ANO_REFERENCIA']."-".$admissoes_mes[$i]['MES_REFERENCIA']."-".$admissoes_mes[$i]['DIA_REFERENCIA'],
+                        'end' => $admissoes_mes[$i]['ANO_REFERENCIA']."-".$admissoes_mes[$i]['MES_REFERENCIA']."-".$admissoes_mes[$i]['DIA_REFERENCIA'],
+                        'summary' => $html_texto,
+                        'mask' => false
+                    );
                 }
-                $html_texto .="</span>";
-                $events[] = array(
-                    'start' => $admissoes_mes[$i]['ANO_REFERENCIA']."-".$admissoes_mes[$i]['MES_REFERENCIA']."-".$admissoes_mes[$i]['DIA_REFERENCIA'],
-                    'end' => $admissoes_mes[$i]['ANO_REFERENCIA']."-".$admissoes_mes[$i]['MES_REFERENCIA']."-".$admissoes_mes[$i]['DIA_REFERENCIA'],
-                    'summary' => $html_texto,
-                    'mask' => false
-                );
             }
         }
 
+        // TESTE ADMISSOES - OFERTAS 28/06/23
+        // if(count($admissoes_mes)>0){
+        //     for($i=0;$i<count($admissoes_mes);$i++){
+        //         $html_texto         = "<span onclick='abrirModalInformacoes(".$admissoes_mes[$i]['DIA_REFERENCIA'].",".$admissoes_mes[$i]['MES_REFERENCIA'].",".$admissoes_mes[$i]['ANO_REFERENCIA'].")'>";
+        //         $posicao_ofertadas  = array_search($admissoes_mes[$i]['DIA_REFERENCIA'],array_column($ofertas_mes,'dia'));
+                
+        //         if(count($ofertas_mes)>0){
+        //             if(isset($posicao_ofertadas) && $posicao_ofertadas>=0 && (!isset($ofertas_mes[$posicao_ofertadas]["ok"]) || $ofertas_mes[$posicao_ofertadas]["ok"] == 0)){
+        //                 if($admissoes_mes[$i]['DIA_REFERENCIA']==$ofertas_mes[$posicao_ofertadas]["dia"]){
+        //                     $html_texto .= "Ofertas: ".$ofertas_mes[$posicao_ofertadas]['quantidade']."<br />";
+        //                     $ofertas_mes[$posicao_ofertadas]["ok"] = 1;
+        //                 }
+        //             }
+        //         }
+                
+        //         if($admissoes_mes[$i]["IE_TIPO_ADMISSAO"]=="I"){
+        //             $html_texto .=  "Internas: ".$admissoes_mes[$i]['QUANTIDADE'];
+        //         }else if($admissoes_mes[$i]["IE_TIPO_ADMISSAO"]=="E"){
+        //             $html_texto .= "Externas: ".$admissoes_mes[$i]['QUANTIDADE']."<br />";
+        //         }else if($admissoes_mes[$i]["IE_TIPO_ADMISSAO"]=="HD"){
+        //             $html_texto .= "HD: ".$admissoes_mes[$i]['QUANTIDADE']."<br />";
+        //         }
+        //         $html_texto .="</span>";
+        //         $events[] = array(
+        //             'start' => $admissoes_mes[$i]['ANO_REFERENCIA']."-".$admissoes_mes[$i]['MES_REFERENCIA']."-".$admissoes_mes[$i]['DIA_REFERENCIA'],
+        //             'end' => $admissoes_mes[$i]['ANO_REFERENCIA']."-".$admissoes_mes[$i]['MES_REFERENCIA']."-".$admissoes_mes[$i]['DIA_REFERENCIA'],
+        //             'summary' => $html_texto,
+        //             'mask' => false
+        //         );
+        //     }
+        // }
         // $admissoes_dia_periodicas   = $this->admissoes_model->retornaAdmissoesDiaPeriodicas(date("d"),date("m"),date("Y"));
         // $oferta_dia_periodicas      = $this->admissoes_model->retornaOfertasDiaPeriodicas(date("d"),date("m"),date("Y"));
         // if(isset($admissoes_dia_periodicas)){

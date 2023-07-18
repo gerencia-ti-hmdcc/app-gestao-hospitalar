@@ -764,6 +764,34 @@ class Admissoes extends MY_Controller {
             }
         }
 
+        //RESOLUÇÃO OFERTAS-ADMISSOES
+        $existe_admissao_hoje = 0;
+        foreach ($admissoes_mes as $elemento) {
+            if ($elemento["DIA_REFERENCIA"] == $dia_atual_realizado) {
+                $existe_admissao_hoje = 1;
+            }
+        }
+
+        if($existe_admissao_hoje==0){
+            $posicao_ofertadas  = array_search($dia_atual_realizado,array_column($ofertas_mes,'dia'));
+            if(count($ofertas_mes)>0){
+                $html_texto         = "<span onclick='abrirModalInformacoes(".$dia_atual_realizado.",".date("m").",".date("Y").")'>";
+                if(isset($posicao_ofertadas) && $posicao_ofertadas>=0 && (!isset($ofertas_mes[$posicao_ofertadas]["ok"]) || $ofertas_mes[$posicao_ofertadas]["ok"] == 0)){
+                    if($dia_atual_realizado==$ofertas_mes[$posicao_ofertadas]["dia"]){
+                        $html_texto .= "Ofertas: ".$ofertas_mes[$posicao_ofertadas]['quantidade']."<br />";
+                        $ofertas_mes[$posicao_ofertadas]["ok"] = 1;
+                    }
+                }
+                $html_texto .="</span>";
+                $events[] = array(
+                    'start' => date("Y")."-".date("m")."-".$dia_atual_realizado,
+                    'end' => date("Y")."-".date("m")."-".$dia_atual_realizado,
+                    'summary' => $html_texto,
+                    'mask' => false
+                );
+            }
+        }
+
         // TESTE ADMISSOES - OFERTAS 28/06/23
         // if(count($admissoes_mes)>0){
         //     for($i=0;$i<count($admissoes_mes);$i++){

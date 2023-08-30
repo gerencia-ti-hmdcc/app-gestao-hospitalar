@@ -17,7 +17,17 @@
         </li>
         <?php
           $usuario_sessao = $this->session->userdata("usuario_logado");
-          if($usuario_sessao["TIPO_PERFIL"]=='A' || $usuario_sessao["TIPO_PERFIL"]=='D' || $usuario_sessao["TIPO_PERFIL"]=='E' || $usuario_sessao["TIPO_PERFIL"]=='G'){?>
+          if(($usuario_sessao["TIPO_PERFIL"]=='A' || $usuario_sessao["TIPO_PERFIL"]=='D' || $usuario_sessao["TIPO_PERFIL"]=='E') && $usuario_sessao["ID"]!=31){?>
+            <li class="nav-item">
+              <a class="nav-link active" href="<?php echo base_url()."$diretorio_raiz"."detalhada";?>">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-solid fa-hospital fa-2x"></i>
+                </div>
+                <span class="nav-link-text ms-1">Ocupação Detalhada</span>
+              </a>
+            </li>
+          <?php }?>
+          <?php if($usuario_sessao["TIPO_PERFIL"]=='A' || $usuario_sessao["TIPO_PERFIL"]=='D' || $usuario_sessao["TIPO_PERFIL"]=='E' || $usuario_sessao["TIPO_PERFIL"]=='G'){?>  
             <li class="nav-item mt-7">
               <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Prod. Hospitalar</h6>
             </li>

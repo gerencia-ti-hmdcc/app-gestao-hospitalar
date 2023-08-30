@@ -25004,6 +25004,40 @@ pre[class*="language-"] {
 .md\:w-3\/12 {
   width: 25%;
 }
+
+.responsividade_leitos{
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+  .responsividade_leitos {
+    width: 50%;
+  }
+}
+
+@media (min-width: 992px) {
+  .responsividade_leitos {
+    width: 25%;
+  }
+}
+
+.h-full{
+  height: 100%;
+}
+
+.bg-card-leito-livre {
+  background-color: #951c7f !important;
+}
+
+.icone-branco-svg path{
+  fill: #fff;
+}
+
+.cor_verde_mesmo_setor{
+  background-color: #e57373 !important;
+  opacity: 0.78;
+}
+
 /*   CSS CALENDÁRIO    */
 
 

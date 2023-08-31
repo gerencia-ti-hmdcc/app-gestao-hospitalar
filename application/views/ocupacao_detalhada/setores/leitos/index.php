@@ -121,39 +121,78 @@
                 $gambsClick                 = 'onclick="detalhesDoLeito('.$leitos[$i]["nr_atendimento"].',\''.$leito.'\')"';
                 $dados_atd                  = "<div class='text-end text-xs'>".$leitos[$i]["ds_nome_paciente"]."<br />".$leitos[$i]["nr_atendimento"]."</div>";
 
+                // $this->load->model('detalhada_model');
+                // $movimentacoes_atendimento  = $this->detalhada_model->retornaMovimentacoesAtendimento($leitos[$i]["nr_atendimento"]);
+
+                // //GUARDANDO PERMANENCIA (DIAS) NA MESMA LINHA DE CUIDADO
+                // $somatoria_dias_linha_cuidado_atendimento = 0;
+                // for($k=count($movimentacoes_atendimento)-1;$k>=0;$k--){
+                //     if($movimentacoes_atendimento[$k]["cd_agrupamento"]==$_GET["l"]){
+                //         $somatoria_dias_linha_cuidado_atendimento = $movimentacoes_atendimento[$k]["qt_dias_unidade"] + $somatoria_dias_linha_cuidado_atendimento;
+                //     }else{
+                //         break;
+                //     }
+                // }
+
                 if($leitos[$i]["cd_agrupamento"]==4){
                     //SE CTI            
-                    if($leitos[$i]["tempo_internacao"]>=6){
+                    // if($somatoria_dias_linha_cuidado_atendimento>=6){
+                    //     $classes_adicionais_card .= " bg-gray-700 text-white";
+                    // }
+                    // if($leitos[$i]["tempo_internacao"]>=6){
+                    //     $classes_adicionais_card .= " bg-gray-700 text-white";
+                    // }    
+                    if($leitos[$i]["permanencia_linha_cuidado"]>=6){
                         $classes_adicionais_card .= " bg-gray-700 text-white";
-                    }    
+                    }
                 }else if($leitos[$i]["cd_agrupamento"]==99){
                     //SE CIRURGICA
-                    if($leitos[$i]["tempo_internacao"]>=8){
+                    // if($somatoria_dias_linha_cuidado_atendimento>=8){
+                    //     $classes_adicionais_card .= " bg-gray-700 text-white";
+                    // } 
+                    // if($leitos[$i]["tempo_internacao"]>=8){
+                    //     $classes_adicionais_card .= " bg-gray-700 text-white";
+                    // } 
+                    if($leitos[$i]["permanencia_linha_cuidado"]>=8){
                         $classes_adicionais_card .= " bg-gray-700 text-white";
-                    } 
+                    }
                 }else if($leitos[$i]["cd_agrupamento"]==3){
                     //SE INTERNACAO
                     if($leitos[$i]["cd_setor_atendimento"]==145){
                         //SE AVC
-                        if($leitos[$i]["tempo_internacao"]>=6){
+                        // if($somatoria_dias_linha_cuidado_atendimento>=6){
+                        //     $classes_adicionais_card .= " bg-gray-700 text-white";
+                        // }
+                        // if($leitos[$i]["tempo_internacao"]>=6){
+                        //     $classes_adicionais_card .= " bg-gray-700 text-white";
+                        // }
+                        if($leitos[$i]["permanencia_linha_cuidado"]>=6){
                             $classes_adicionais_card .= " bg-gray-700 text-white";
                         }
                     }
                     if(in_array($leitos[$i]["cd_setor_atendimento"],[33,76,34,55,36,56])){
                         //SE 5 AO 7 ANDAR
-                        if($leitos[$i]["tempo_internacao"]>=10){
+                        // if($somatoria_dias_linha_cuidado_atendimento>=10){
+                        //     $classes_adicionais_card .= " bg-gray-700 text-white";
+                        // }
+                        // if($leitos[$i]["tempo_internacao"]>=10){
+                        //     $classes_adicionais_card .= " bg-gray-700 text-white";
+                        // }
+                        if($leitos[$i]["permanencia_linha_cuidado"]>=10){
                             $classes_adicionais_card .= " bg-gray-700 text-white";
                         }
                     }
                 }
+                $total_dias_internacao_atendimento = '<div class="text-xs mt-1">* '.$leitos[$i]["tempo_internacao"].' dia(s) de internação</div>';
             } else {
                 $classes_adicionais_card    = "bg-card-leito-livre text-white";
                 $gambsClick                 = "";
                 if(trim($leitos[$i]["ie_status_unidade"])!="Paciente"){
-                    $dados_atd                  = "<div class='text-right text-xs'>".$leitos[$i]["ie_status_unidade"]."<br /></div>";
+                    $dados_atd                      = "<div class='text-right text-xs'>".$leitos[$i]["ie_status_unidade"]."<br /></div>";
                 }else{
-                    $dados_atd                  = "<div class='text-right text-xs'><br /><br /></div>";
+                    $dados_atd                      = "<div class='text-right text-xs'><br /><br /></div>";
                 }
+                $total_dias_internacao_atendimento = "";
             }
             echo '<div class="h-full card '.$classes_adicionais_card.' my-1">
                     <div class="card-body">
@@ -168,6 +207,7 @@
                         <div '.$gambsClick.'>
                             '.$dados_atd.'
                             '.$cor_card_avaliacao_verde_vermelho .'
+                            '.$total_dias_internacao_atendimento.'
                         </div>
                     </div>
                 </div>
@@ -175,6 +215,7 @@
         }
         echo '</div>';
         echo "<input type='hidden' id='cd_setor_atendimento_id' name='cd_setor_atendimento_id' value='".$_GET["s"]."'/>";
+        echo "<input type='hidden' id='linha_cuidado_id' name='linha_cuidado_id' value='".$_GET["l"]."'/>";
     ?>
 </div>
 
@@ -396,8 +437,8 @@
                                 }
 
                                 let cor_linha_cond_mesmo_setor = "";
-                                if($("#cd_setor_atendimento_id").val()==resultadoMovimentacoes[j]["cd_setor_atendimento"]){
-                                    cor_linha_cond_mesmo_setor = "text-white cor_verde_mesmo_setor";
+                                if($("#linha_cuidado_id").val()==resultadoMovimentacoes[j]["cd_agrupamento"]){
+                                    cor_linha_cond_mesmo_setor = "text-white cor_card_mesma_linha_cuidado";
                                 }
 
 
@@ -419,7 +460,34 @@
                                                                     "</td>" +
                                                                 "</tr>";
                             }
-                            html_movimentacoes_atendimento  +=      "<tr>" +
+
+                            //GUARDANDO PERMANENCIA (DIAS) NA MESMA LINHA DE CUIDADO
+                            let somatoria_dias_linha_cuidado = 0;
+                            for(let k=resultadoMovimentacoes.length-1;k>=0;k--){
+                                if(resultadoMovimentacoes[k]["cd_agrupamento"]==$("#linha_cuidado_id").val()){
+                                    somatoria_dias_linha_cuidado = parseInt(resultadoMovimentacoes[k]["qt_dias_unidade"])+parseInt(somatoria_dias_linha_cuidado);
+                                }else{
+                                    break;
+                                }
+                            }
+
+                            html_movimentacoes_atendimento  +=      "<tr class='my-4'>" +
+                                                                        "<td colspan='4' class='text-xs font-weight-bold text-wrap text-white '>" +
+                                                                            
+                                                                        "</td>" +
+                                                                        "<td class='text-xs text-wrap font-weight-bold text-white'>" +
+                                                                            
+                                                                        "</td>" +
+                                                                    "</tr>"+
+                                                                    "<tr>" +
+                                                                        "<td colspan='4' class='text-xs font-weight-bold text-wrap text-white cor_card_mesma_linha_cuidado'>" +
+                                                                            "Total atual na Linha de Cuidado" +
+                                                                        "</td>" +
+                                                                        "<td class='text-xs text-wrap font-weight-bold text-white cor_card_mesma_linha_cuidado'>" +
+                                                                            somatoria_dias_linha_cuidado+" dia(s)"+
+                                                                        "</td>" +
+                                                                    "</tr>"+
+                                                                    "<tr >" +
                                                                         "<td colspan='4' class='text-xs font-weight-bold text-wrap'>" +
                                                                             "Total" +
                                                                         "</td>" +
@@ -677,7 +745,7 @@
                         }
                         html_avaliacao_isolada = "<tr>" +
                                                     "<td class='font-weight-bold text-wrap'>" +
-                                                        "Frequência Respirtória" +
+                                                        "Frequência Respiratória" +
                                                     "</td>" +
                                                     "<td class='font-weight-bold text-wrap'>" +
                                                         result['qt_freq_resp'] +" irpm"+

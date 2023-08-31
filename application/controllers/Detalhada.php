@@ -82,6 +82,21 @@ class Detalhada extends MY_Controller {
                 $this->load->model('detalhada_model');
                 $dados["leitos"]            = $this->detalhada_model->retornaLeitosClassifSetor($linha,$cd_setor_atendimento);
                 $dados["setor_atend"]       = $this->detalhada_model->retornaDadosSetorAtendimento($cd_setor_atendimento);
+
+                for($i=0;$i<count($dados["leitos"]);$i++){  
+                    $movimentacoes_atendimento  = $this->detalhada_model->retornaMovimentacoesAtendimento($dados["leitos"][$i]["nr_atendimento"]);
+                    //GUARDANDO PERMANENCIA (DIAS) NA MESMA LINHA DE CUIDADO
+                    $somatoria_dias_linha_cuidado_atendimento = 0;
+                    for($k=count($movimentacoes_atendimento)-1;$k>=0;$k--){
+                        if($movimentacoes_atendimento[$k]["cd_agrupamento"]==$_GET["l"]){
+                            $somatoria_dias_linha_cuidado_atendimento = $movimentacoes_atendimento[$k]["qt_dias_unidade"] + $somatoria_dias_linha_cuidado_atendimento;
+                        }else{
+                            break;
+                        }
+                    }
+                    $dados["leitos"][$i]["permanencia_linha_cuidado"] = $somatoria_dias_linha_cuidado_atendimento;
+                }
+
                 $dados['pagina']            = 'ocupacao_detalhada/setores/leitos/index.php';
                 $dados['nome_pagina']       = 'Leitos';
                 $dados["link_pagina"]       = 'leitos';

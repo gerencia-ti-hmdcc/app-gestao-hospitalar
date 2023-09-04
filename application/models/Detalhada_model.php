@@ -20,7 +20,7 @@ class Detalhada_model extends CI_Model {
     // }
 
     public function retornaLinhasDeCuidado($usuario){
-        if($usuario["TIPO_PERFIL"]=="A" || $usuario["TIPO_PERFIL"]=="E"){
+        if($usuario["TIPO_PERFIL"]=="A" || $usuario["TIPO_PERFIL"]=="E" || $usuario["TIPO_PERFIL"]=="D"){
             $condicao = "1=1";
         }else{
             $condicao = "IE_STATUS=1";

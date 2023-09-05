@@ -2,11 +2,11 @@
 class Administrador_model extends CI_Model {
     
     public function retornaUsuarios(){
-        return $this->db->query("SELECT * FROM USERS ORDER BY NOME ASC")->result_array();
+        return $this->db->query("SELECT U.*,C.NOME_TIPO_PERFIL FROM USERS U JOIN CONFIG_USUARIO_TIPO_PERFIL C ON (C.SIGLA_TIPO_PERFIL=U.TIPO_PERFIL) ORDER BY NOME ASC")->result_array();
     }
 
     public function retornaUsuario($id){
-        return $this->db->query("SELECT * FROM USERS WHERE ID=$id")->row_array();
+        return $this->db->query("SELECT U.*,C.NOME_TIPO_PERFIL FROM USERS U JOIN CONFIG_USUARIO_TIPO_PERFIL C ON (C.SIGLA_TIPO_PERFIL=U.TIPO_PERFIL) WHERE U.ID=$id")->row_array();
     }
 
     public function retornaTodosStatus(){

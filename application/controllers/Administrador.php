@@ -54,19 +54,20 @@ class Administrador extends MY_Controller {
                 $usuarios[$i]["ULTIMO_LOGIN"] = "-";
             }
 
-            if($usuarios[$i]["TIPO_PERFIL"]=='A'){
-                $usuarios[$i]["TIPO_PERFIL"] = "Administrador";
-            }else if($usuarios[$i]["TIPO_PERFIL"]=='C'){
-                $usuarios[$i]["TIPO_PERFIL"] = "Comum";
-            }else if($usuarios[$i]["TIPO_PERFIL"]=='D'){
-                $usuarios[$i]["TIPO_PERFIL"] = "Diretoria";
-            }else if($usuarios[$i]["TIPO_PERFIL"]=='E'){
-                $usuarios[$i]["TIPO_PERFIL"] = "Diretor Executivo";
-            }else if($usuarios[$i]["TIPO_PERFIL"]=='G'){
-                $usuarios[$i]["TIPO_PERFIL"] = "Gerência";
-            }else if($usuarios[$i]["TIPO_PERFIL"]=='P'){
-                $usuarios[$i]["TIPO_PERFIL"] = "Painel";
-            }
+            // if($usuarios[$i]["TIPO_PERFIL"]=='A'){
+            //     $usuarios[$i]["TIPO_PERFIL"] = "Administrador";
+            // }else if($usuarios[$i]["TIPO_PERFIL"]=='C'){
+            //     $usuarios[$i]["TIPO_PERFIL"] = "Comum";
+            // }else if($usuarios[$i]["TIPO_PERFIL"]=='D'){
+            //     $usuarios[$i]["TIPO_PERFIL"] = "Diretoria";
+            // }else if($usuarios[$i]["TIPO_PERFIL"]=='E'){
+            //     $usuarios[$i]["TIPO_PERFIL"] = "Diretor Executivo";
+            // }else if($usuarios[$i]["TIPO_PERFIL"]=='G'){
+            //     $usuarios[$i]["TIPO_PERFIL"] = "Gerência";
+            // }else if($usuarios[$i]["TIPO_PERFIL"]=='P'){
+            //     $usuarios[$i]["TIPO_PERFIL"] = "Painel";
+            // }
+            $usuarios[$i]["TIPO_PERFIL"] = $usuarios[$i]["NOME_TIPO_PERFIL"];
             
             if($usuarios[$i]["IE_STATUS"]=='A'){
                 $usuarios[$i]["IE_STATUS"] = "Ativo";
@@ -90,19 +91,20 @@ class Administrador extends MY_Controller {
             $this->load->model('administrador_model');
             $this->load->helper('form');
             $dados["usuario"]           = $this->administrador_model->retornaUsuario($id);
-            if($dados["usuario"]["TIPO_PERFIL"]=='A'){
-                $dados["usuario"]["TIPO_PERFIL"] = "Administrador";
-            }else if($dados["usuario"]["TIPO_PERFIL"]=='C'){
-                $dados["usuario"]["TIPO_PERFIL"] = "Comum";
-            }else if($dados["usuario"]["TIPO_PERFIL"]=='D'){
-                $dados["usuario"]["TIPO_PERFIL"] = "Diretoria";
-            }else if($dados["usuario"]["TIPO_PERFIL"]=='E'){
-                $dados["usuario"]["TIPO_PERFIL"] = "Diretor Executivo";
-            }else if($dados["usuario"]["TIPO_PERFIL"]=='G'){
-                $dados["usuario"]["TIPO_PERFIL"] = "Gerência";
-            }else if($dados["usuario"]["TIPO_PERFIL"]=='P'){
-                $dados["usuario"]["TIPO_PERFIL"] = "Painel";
-            }
+            // if($dados["usuario"]["TIPO_PERFIL"]=='A'){
+            //     $dados["usuario"]["TIPO_PERFIL"] = "Administrador";
+            // }else if($dados["usuario"]["TIPO_PERFIL"]=='C'){
+            //     $dados["usuario"]["TIPO_PERFIL"] = "Comum";
+            // }else if($dados["usuario"]["TIPO_PERFIL"]=='D'){
+            //     $dados["usuario"]["TIPO_PERFIL"] = "Diretoria";
+            // }else if($dados["usuario"]["TIPO_PERFIL"]=='E'){
+            //     $dados["usuario"]["TIPO_PERFIL"] = "Diretor Executivo";
+            // }else if($dados["usuario"]["TIPO_PERFIL"]=='G'){
+            //     $dados["usuario"]["TIPO_PERFIL"] = "Gerência";
+            // }else if($dados["usuario"]["TIPO_PERFIL"]=='P'){
+            //     $dados["usuario"]["TIPO_PERFIL"] = "Painel";
+            // }
+            $dados["usuario"]["TIPO_PERFIL"] = $dados["usuario"]["NOME_TIPO_PERFIL"];
 
             if($dados["usuario"]["IE_STATUS"]=='A'){
                 $dados["usuario"]["IE_STATUS"] = "Ativo";
@@ -218,6 +220,10 @@ class Administrador extends MY_Controller {
                     $tipo_perfil = "G";
                 }else if($tipo_perfil=='Painel'){
                     $tipo_perfil = "P";
+                }else if($tipo_perfil=='Ocupação (Internação)'){
+                    $tipo_perfil = "I";
+                }else if($tipo_perfil=='Central de Leitos'){
+                    $tipo_perfil = "L";
                 }
         
                 $cadastrado = $this->administrador_model->cadastraUsuario($nome,$email,$status,$tipo_perfil);

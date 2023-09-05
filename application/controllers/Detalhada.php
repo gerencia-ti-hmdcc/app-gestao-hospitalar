@@ -14,7 +14,8 @@ class Detalhada extends MY_Controller {
             $perfil = $this->my_model->tipoPerfilUsuario($_SESSION["usuario_logado"]["ID"]);
             if(($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' || $perfil["TIPO_PERFIL"]!='A') &&
             ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='D' || $perfil["TIPO_PERFIL"]!='D') &&
-            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='E' || $perfil["TIPO_PERFIL"]!='E') /*&&
+            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='E' || $perfil["TIPO_PERFIL"]!='E') &&
+            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='I' || $perfil["TIPO_PERFIL"]!='I')/*&&
             ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='G' || $perfil["TIPO_PERFIL"]!='G')*/ || $usuario["ID"]==31){
                 header('Location: /app/dashboard');
             }

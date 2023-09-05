@@ -16,7 +16,9 @@ class Admissoes extends MY_Controller {
             if(($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' || $perfil["TIPO_PERFIL"]!='A') &&
             ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='D' || $perfil["TIPO_PERFIL"]!='D') &&
             ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='E' || $perfil["TIPO_PERFIL"]!='E') &&
-            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='G' || $perfil["TIPO_PERFIL"]!='G')){
+            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='G' || $perfil["TIPO_PERFIL"]!='G')&&
+            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='L' || $perfil["TIPO_PERFIL"]!='L')&&
+            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='I' || $perfil["TIPO_PERFIL"]!='I')){
                 header('Location: /../dashboard');
             }
         }
@@ -608,7 +610,7 @@ class Admissoes extends MY_Controller {
         $dados["tipo_perfil"]       = $usuario["TIPO_PERFIL"];
         $dados["diretorio_raiz"]    = '../';
 
-        if($dados["tipo_perfil"]!='A' && $dados["tipo_perfil"]!='E' && $dados["tipo_perfil"]!='D'){
+        if($dados["tipo_perfil"]!='A' && $dados["tipo_perfil"]!='E' && $dados["tipo_perfil"]!='D' && $dados["tipo_perfil"]!='L'){
             header('Location: ../dashboard');
         }
 

@@ -17,6 +17,7 @@
 
 <div class="row">
     <div class="col-lg-12 mb-<?php echo $variavel_controle_margem_tv;?>">
+        <a class='btn btn-primary' href='../detalhada'>Voltar</a>
         <div class="card z-index-2">
             <div class="card-header pb-0">
                 <div class="row justify-center lead text-dark active breadcrumb-item font-weight-bolder">

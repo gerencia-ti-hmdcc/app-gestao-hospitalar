@@ -332,9 +332,13 @@
                                 cor = "#4CAF50";
                             }else{
                                 cor = "#FF5252";
+                            }
+
+                            if(result["ds_motivo_vermelho"].length>0){
+                                
                                 motivo_vermelho = "<tr>" +
                                                         "<td class='font-weight-bold text-wrap'>" +
-                                                            "Motivo vermelho" +
+                                                            "Motivo" +
                                                         "</td>" +
                                                         "<td class='text-wrap text-justify'>" +
                                                             result["ds_motivo_vermelho"]+

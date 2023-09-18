@@ -25038,6 +25038,27 @@ pre[class*="language-"] {
   opacity: 0.78;
 }
 
+.responsividade_leitos_painel{
+  width: 12.5%;
+}
+
+.card-body-painel-leitos{
+  flex: 1 1 auto;
+  padding: 4px 4px 4px 4px;
+}
+
+.card-painel-leitos {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px;
+}
+
 /*   CSS CALENDÁRIO    */
 
 

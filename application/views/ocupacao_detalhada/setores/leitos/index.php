@@ -1,48 +1,72 @@
 <?php
+    function iniciais($str){
+        if(mb_strpos(strtoupper(substr($str,0,4)),'SIC ')!==false){
+            $str = substr($str,3);
+        }
+        $pos = 0;
+        $saida = '';
+        while(($pos = strpos($str, ' ', $pos)) !== false ){
+            if(isset($str[$pos +1]) && $str[$pos +1] != ' '){
+                $saida .= substr($str, $pos +1, 1);
+            }   
+            $pos++;
+        }
+        return $str[0]. $saida;
+    }
+
     $variavel_controle_margem_tv = 4;
-    if($link_pagina=='dashboard'){ 
-        if($tipo_perfil=='P'){ 
-            $variavel_controle_margem_tv = 2;
-            $usuario_logado = $this->session->userdata("usuario_logado");
-            if(isset($usuario_logado["painel_variavel_controle"])){
-                $usuario_logado["painel_variavel_controle"] = $usuario_logado["painel_variavel_controle"];
-            }else{
-                $usuario_logado["painel_variavel_controle"] = $setor_ultimo_painel;
-            }
+    $usuario_logado = $this->session->userdata("usuario_logado");
+    if($usuario_logado["TIPO_PERFIL"]=='P'){ 
+        $variavel_controle_margem_tv = 2;
+        echo '<meta http-equiv="refresh" content="300" />';
+    } 
 ?>
-            <meta http-equiv="refresh" content="180" />
-<?php 
-        } 
-    } ?>
 
 <div class="row">
-    <div class="col-lg-12 mb-<?php echo $variavel_controle_margem_tv;?>">
-    <a class='btn btn-primary' href='../detalhada/setores?l=<?php echo $_GET["l"];?>'>Voltar</a>
-        <div class="card z-index-2">
-            <div class="card-header pb-0">
-                <div class="row justify-center lead text-dark active breadcrumb-item font-weight-bolder">
-                    Leitos
-                </div>
-                <div class="text-sm flex row justify-center">
-                    <?php echo $setor_atend["DS_SETOR_ATENDIMENTO"];?>
-                </div>
-            </div>
-            <div class="card-body p-3">
-            </div>
-        </div>
-    </div>
+    
+    <?php 
+        if($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='P'){
+            echo "<div class='col-lg-12 mb-".$variavel_controle_margem_tv."'>
+                    <a class='btn btn-primary' href='../detalhada/setores?l=".$_GET['l']."'>Voltar</a>
+                    <div class='card z-index-2'>
+                        <div class='card-header pb-0'>
+                            <div class='row justify-center lead text-dark active breadcrumb-item font-weight-bolder'>
+                                Leitos
+                            </div>
+                            <div class='text-sm flex row justify-center'>
+                                ".$setor_atend["DS_SETOR_ATENDIMENTO"]."
+                            </div>
+                        </div>
+                        <div class='card-body pt-2 text-end text-xs'>
+                            Última Atualização: ".date('d/m/Y H:i:s', strtotime($ultima_atualizacao["ultima_atualizacao"]))."
+                        </div>
+                    </div>
+                </div>";
+        }else{
+            echo "<div class='text-xs'>Última Atualização: ".date('d/m/Y H:i:s', strtotime($ultima_atualizacao["ultima_atualizacao"]))."</div>";
+        }
+    ?>
+    
+        
     <?php
         echo '<div class="flex flex-wrap">';
         for($i = 0; $i < count($leitos); $i++) {
             
-            echo '<div class="card-wrapper responsividade_leitos p-2">';
+            if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P' && $mostrar_menus==0){
+                echo '<div class="card-wrapper responsividade_leitos_painel p-2">';
+                $cor_card_avaliacao_verde_vermelho  = "<div class='mt-2' style='height:15px;'></div>";
+                $tipo_de_body_card                  = "card-body-painel-leitos";
+                $tamanho_linha_card_painel          = 'style="height:33px"';
+            }else{
+                echo '<div class="card-wrapper responsividade_leitos p-2">';
+                $cor_card_avaliacao_verde_vermelho  = "<div class='mt-4' style='height:15px;'></div>";
+                $tipo_de_body_card                  = "card-body";
+                $tamanho_linha_card_painel          = "";
+            }
 
             $icone_fugulin          = "";
             $icone_news             = "";
             $icones_sinais_vitais   = "";
-
-            $cor_card_avaliacao_verde_vermelho ="<div class='mt-4' style='height:15px;'></div>";
-            
 
             if($leitos[$i]["cd_agrupamento"]!=4){
                 //FUGULIN, 'VERDE E VERMELHO' E NEWS NAO DEVEM APARECER NO CTI
@@ -80,10 +104,15 @@
 
                 if($leitos[$i]["ds_verde_ou_vermelho"]){
                     //SE HOUVE AVALIAÇÃO VERDE_VERMELHO
-                    if(trim($leitos[$i]["ds_verde_ou_vermelho"])=='Verde'){
-                        $cor_card_avaliacao_verde_vermelho = '<div class="mt-4" style="height:15px; background-color:#20E200; border-radius:2px"></div>';
+                    if(trim($leitos[$i]["ds_verde_ou_vermelho"])=='VERDE'){
+                        $cor_avaliacao_verde_vermelho="#20E200";
                     }else{
-                        $cor_card_avaliacao_verde_vermelho = '<div class="mt-4" style="height:15px; background-color:#FF2E00; border-radius:2px"></div>';
+                        $cor_avaliacao_verde_vermelho="#FF2E00";
+                    }
+                    if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P' && $mostrar_menus==0){
+                        $cor_card_avaliacao_verde_vermelho = '<div class="mt-2" style="height:15px; background-color:'.$cor_avaliacao_verde_vermelho.'; border-radius:2px"></div>';
+                    }else{
+                        $cor_card_avaliacao_verde_vermelho = '<div class="mt-4" style="height:15px; background-color:'.$cor_avaliacao_verde_vermelho.'; border-radius:2px"></div>';
                     }
                 }
             }
@@ -120,40 +149,20 @@
                 $classes_adicionais_card    =  "cursor-pointer text-dark";
                 $leito                      = $leitos[$i]["ds_leito_atual"];
                 $gambsClick                 = 'onclick="detalhesDoLeito('.$leitos[$i]["nr_atendimento"].',\''.$leito.'\')"';
-                $dados_atd                  = "<div class='text-end text-xs'>".$leitos[$i]["ds_nome_paciente"]."<br />".$leitos[$i]["nr_atendimento"]."</div>";
-
-                // $this->load->model('detalhada_model');
-                // $movimentacoes_atendimento  = $this->detalhada_model->retornaMovimentacoesAtendimento($leitos[$i]["nr_atendimento"]);
-
-                // //GUARDANDO PERMANENCIA (DIAS) NA MESMA LINHA DE CUIDADO
-                // $somatoria_dias_linha_cuidado_atendimento = 0;
-                // for($k=count($movimentacoes_atendimento)-1;$k>=0;$k--){
-                //     if($movimentacoes_atendimento[$k]["cd_agrupamento"]==$_GET["l"]){
-                //         $somatoria_dias_linha_cuidado_atendimento = $movimentacoes_atendimento[$k]["qt_dias_unidade"] + $somatoria_dias_linha_cuidado_atendimento;
-                //     }else{
-                //         break;
-                //     }
-                // }
+                if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P' && $mostrar_menus==0){
+                    $dados_atd                  = "<div class='text-end text-xs'>".$leitos[$i]["ds_nome_paciente"]."</div>";
+                }else{
+                    $dados_atd                  = "<div class='text-end text-xs'>".$leitos[$i]["ds_nome_paciente"]."<br />".$leitos[$i]["nr_atendimento"]."</div>";
+                }
+                $info_paciente = iniciais($leitos[$i]["ds_nome_paciente"]);
 
                 if($leitos[$i]["cd_agrupamento"]==4){
                     //SE CTI            
-                    // if($somatoria_dias_linha_cuidado_atendimento>=6){
-                    //     $classes_adicionais_card .= " bg-gray-700 text-white";
-                    // }
-                    // if($leitos[$i]["tempo_internacao"]>=6){
-                    //     $classes_adicionais_card .= " bg-gray-700 text-white";
-                    // }    
                     if($leitos[$i]["permanencia_linha_cuidado"]>=6){
                         $classes_adicionais_card .= " bg-gray-700 text-white";
                     }
                 }else if($leitos[$i]["cd_agrupamento"]==99){
                     //SE CIRURGICA
-                    // if($somatoria_dias_linha_cuidado_atendimento>=8){
-                    //     $classes_adicionais_card .= " bg-gray-700 text-white";
-                    // } 
-                    // if($leitos[$i]["tempo_internacao"]>=8){
-                    //     $classes_adicionais_card .= " bg-gray-700 text-white";
-                    // } 
                     if($leitos[$i]["permanencia_linha_cuidado"]>=8){
                         $classes_adicionais_card .= " bg-gray-700 text-white";
                     }
@@ -161,30 +170,22 @@
                     //SE INTERNACAO
                     if($leitos[$i]["cd_setor_atendimento"]==145){
                         //SE AVC
-                        // if($somatoria_dias_linha_cuidado_atendimento>=6){
-                        //     $classes_adicionais_card .= " bg-gray-700 text-white";
-                        // }
-                        // if($leitos[$i]["tempo_internacao"]>=6){
-                        //     $classes_adicionais_card .= " bg-gray-700 text-white";
-                        // }
                         if($leitos[$i]["permanencia_linha_cuidado"]>=6){
                             $classes_adicionais_card .= " bg-gray-700 text-white";
                         }
                     }
                     if(in_array($leitos[$i]["cd_setor_atendimento"],[33,76,34,55,36,56])){
                         //SE 5 AO 7 ANDAR
-                        // if($somatoria_dias_linha_cuidado_atendimento>=10){
-                        //     $classes_adicionais_card .= " bg-gray-700 text-white";
-                        // }
-                        // if($leitos[$i]["tempo_internacao"]>=10){
-                        //     $classes_adicionais_card .= " bg-gray-700 text-white";
-                        // }
                         if($leitos[$i]["permanencia_linha_cuidado"]>=10){
                             $classes_adicionais_card .= " bg-gray-700 text-white";
                         }
                     }
                 }
-                $total_dias_internacao_atendimento = '<div class="text-xs mt-1">* '.$leitos[$i]["tempo_internacao"].' dia(s) de internação</div>';
+                if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P' && $mostrar_menus==0){
+                    $total_dias_internacao_atendimento = '<div class="text-xxs mt-2">*'.$leitos[$i]["tempo_internacao"].' dia(s) de internação</div>';
+                }else{
+                    $total_dias_internacao_atendimento = '<div class="text-xs mt-1">*'.$leitos[$i]["tempo_internacao"].' dia(s) de internação</div>';
+                }
             } else {
                 $classes_adicionais_card    = "bg-card-leito-livre text-white";
                 $gambsClick                 = "";
@@ -194,25 +195,50 @@
                     $dados_atd                      = "<div class='text-right text-xs'><br /><br /></div>";
                 }
                 $total_dias_internacao_atendimento = "";
+                $info_paciente = $leitos[$i]["ie_status_unidade"];
             }
-            echo '<div class="h-full card '.$classes_adicionais_card.' my-1">
-                    <div class="card-body">
-                        <div class="flex">
-                            <div class="col-4">
-                                <p class="lead font-weight-bolder" '.$gambsClick.'>' . $leitos[$i]["ds_leito_atual"] . '</p>
+
+            if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P' && $mostrar_menus==0){
+                echo '<div class="h-full card-painel-leitos '.$classes_adicionais_card.' my-1">
+                        <div class="'.$tipo_de_body_card.'">
+                            <div class="flex" '.$tamanho_linha_card_painel.'>
+                                <div class="col-6">
+                                    <p class="lead font-weight-bolder" '.$gambsClick.'>' . $leitos[$i]["ds_leito_atual"] . '</p>
+                                </div>
+                                <div class="col-6 text-xs justify-content-end flex">
+                                    '.$info_paciente.'
+                                </div>
+                            </div> 
+                            <div>
+                                <div class="col-12 gap-2 text-xs justify-content-start text-end flex">
+                                    '.$icone_fugulin.' '.$icone_news.' '.$icones_sinais_vitais.'
+                                </div>
+                                '.$cor_card_avaliacao_verde_vermelho .'
+                                '.$total_dias_internacao_atendimento.'
                             </div>
-                            <div style="" class="col-8 gap-1 text-xs justify-content-end text-end flex">
-                                '.$icone_fugulin.' '.$icone_news.' '.$icones_sinais_vitais.'
-                            </div>
-                        </div> 
-                        <div '.$gambsClick.'>
-                            '.$dados_atd.'
-                            '.$cor_card_avaliacao_verde_vermelho .'
-                            '.$total_dias_internacao_atendimento.'
                         </div>
                     </div>
-                </div>
-            </div>';
+                </div>';
+            }else{
+                echo '<div class="h-full card '.$classes_adicionais_card.' my-1">
+                        <div class="'.$tipo_de_body_card.'">
+                            <div class="flex" '.$tamanho_linha_card_painel.'>
+                                <div class="col-4">
+                                    <p class="lead font-weight-bolder" '.$gambsClick.'>' . $leitos[$i]["ds_leito_atual"] . '</p>
+                                </div>
+                                <div class="col-8 gap-1 text-xs justify-content-end text-end flex">
+                                    '.$icone_fugulin.' '.$icone_news.' '.$icones_sinais_vitais.'
+                                </div>
+                            </div> 
+                            <div '.$gambsClick.'>
+                                '.$dados_atd.'
+                                '.$cor_card_avaliacao_verde_vermelho .'
+                                '.$total_dias_internacao_atendimento.'
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+            }
         }
         echo '</div>';
         echo "<input type='hidden' id='cd_setor_atendimento_id' name='cd_setor_atendimento_id' value='".$_GET["s"]."'/>";
@@ -328,7 +354,7 @@
 
                         if(result["ds_verde_ou_vermelho"] && result["cd_agrupamento"]!=4){
                             let cor         = "";
-                            if(result["ds_verde_ou_vermelho"]=="Verde"){
+                            if(result["ds_verde_ou_vermelho"]=="VERDE"){
                                 cor = "#4CAF50";
                             }else{
                                 cor = "#FF5252";

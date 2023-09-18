@@ -27,13 +27,6 @@ class Admissoes extends MY_Controller {
 	public function index()
 	{
         $usuario  = $_SESSION["usuario_logado"];
-        if($usuario["TIPO_PERFIL"]=="P"){
-            $dados["mostrar_menus"]      = 0;
-            $dados["tamanho_grafico"]   = "250";
-        }else{
-            $dados["mostrar_menus"]      = 1;
-            $dados["tamanho_grafico"]   = "300";
-        }
         $this->load->helper('form');
         $dados['pagina']        = 'admissoes/index.php';
         $dados['nome_pagina']   = 'Gestão de Admissões';
@@ -365,13 +358,6 @@ class Admissoes extends MY_Controller {
 
     public function admissoes_por_linha(){
         $usuario  = $_SESSION["usuario_logado"];
-        if($usuario["TIPO_PERFIL"]=="P"){
-            $dados["mostrar_menus"]      = 0;
-            $dados["tamanho_grafico"]   = "250";
-        }else{
-            $dados["mostrar_menus"]      = 1;
-            $dados["tamanho_grafico"]   = "300";
-        }
         $this->load->helper('form');
         $dados['pagina']        = 'admissoes/admissoes_por_linha.php';
         $dados['nome_pagina']   = 'Gestão de Admissões';

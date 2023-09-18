@@ -15,7 +15,8 @@ class Detalhada extends MY_Controller {
             if(($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' || $perfil["TIPO_PERFIL"]!='A') &&
             ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='D' || $perfil["TIPO_PERFIL"]!='D') &&
             ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='E' || $perfil["TIPO_PERFIL"]!='E') &&
-            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='I' || $perfil["TIPO_PERFIL"]!='I')/*&&
+            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='I' || $perfil["TIPO_PERFIL"]!='I')&&
+            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='P' || $perfil["TIPO_PERFIL"]!='P')/*&&
             ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='G' || $perfil["TIPO_PERFIL"]!='G')*/ || $usuario["ID"]==31){
                 header('Location: /app/dashboard');
             }
@@ -25,13 +26,6 @@ class Detalhada extends MY_Controller {
 	public function index()
 	{
         $usuario  = $_SESSION["usuario_logado"];
-        if($usuario["TIPO_PERFIL"]=="P"){
-            $dados["mostrar_menus"]      = 0;
-            $dados["tamanho_grafico"]   = "250";
-        }else{
-            $dados["mostrar_menus"]      = 1;
-            $dados["tamanho_grafico"]   = "300";
-        }
         $this->load->helper('form');
         $this->load->model('detalhada_model');
         $dados["linhas_de_cuidado"] = $this->detalhada_model->retornaLinhasDeCuidado($usuario);
@@ -78,6 +72,12 @@ class Detalhada extends MY_Controller {
         $cd_setor_atendimento   = $_GET["s"];
         $linha                  = $_GET["l"];
 
+        if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=="P"){
+            $dados["mostrar_menus"]      = 0;
+        }else{
+            $dados["mostrar_menus"]      = 1;
+        }
+
         if($linha && $cd_setor_atendimento){
             if(trim(strlen($linha))>0 && trim(strlen($cd_setor_atendimento))>0){
                 $this->load->model('detalhada_model');
@@ -98,6 +98,7 @@ class Detalhada extends MY_Controller {
                     $dados["leitos"][$i]["permanencia_linha_cuidado"] = $somatoria_dias_linha_cuidado_atendimento;
                 }
 
+                $dados["ultima_atualizacao"] = $this->detalhada_model->retornaUltimaAtualizacaoLeitos();
                 $dados['pagina']            = 'ocupacao_detalhada/setores/leitos/index.php';
                 $dados['nome_pagina']       = 'Leitos';
                 $dados["link_pagina"]       = 'leitos';

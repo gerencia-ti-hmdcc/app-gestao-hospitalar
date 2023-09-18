@@ -17,7 +17,15 @@ class Login extends CI_Controller {
                 //$this->load->model('login_model');
                 //$this->load->view('templates/template_login.php');
                 if($this->session->userdata("usuario_logado")){
-                        redirect('dashboard');
+                        //LOGANDO PAINEL DE ACORDO COM SUA ESPECIFICIDADE
+                        if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P'){
+                                $this->load->model("my_model");
+                                $painel_acesso = $this->my_model->retornaLinkPainel($_SESSION["usuario_logado"]["ID"]);
+                                redirect($painel_acesso["LINK_PAINEL"]);
+                        }else{
+                                redirect('dashboard');
+                        }
+                        
                 }else{
                         $this->load->helper('form');
                         $this->load->view('login/index.php');   
@@ -27,7 +35,7 @@ class Login extends CI_Controller {
         public function autenticar(){
                 //exit("TESTE");
                 $this->load->model("login_model");
-
+                date_default_timezone_set('America/Sao_Paulo');
                 $data_atual     = date("Y-m-d H:i:s");
                 $token          = md5(uniqid()."".date("YmdHis")."@".uniqid());
  		$validade       = date("Y-m-d H:i:s",strtotime("+5 days")); 
@@ -60,7 +68,14 @@ class Login extends CI_Controller {
                                         $this->login_model->atualizaToken($usuario["ID"],$data_atual,$token,$validade);
                                         $this->login_model->atualizaDisp($this->PegarDispositivo(),$usuario["ID"]);
                                         //$this->session->set_flashdata("success","Usuário logado!");
-                                        redirect('../dashboard');
+                                        //LOGANDO PAINEL DE ACORDO COM SUA ESPECIFICIDADE
+                                        if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P'){
+                                                $this->load->model("my_model");
+                                                $painel_acesso = $this->my_model->retornaLinkPainel($_SESSION["usuario_logado"]["ID"]);
+                                                redirect('../'.$painel_acesso["LINK_PAINEL"]);
+                                        }else{
+                                                redirect('../dashboard');
+                                        }
                                 }else{
                                         $this->session->set_flashdata("danger","Permissão negada. Comunique a TI!");
                                         $this->load->helper('form');

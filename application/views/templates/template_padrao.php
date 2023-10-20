@@ -425,6 +425,11 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
       document.getElementById("form_metas").submit();
     }
 
+    function editarPerfil(id){
+      $("#form_perfis").append("<input type='hidden' id='perfil_escolhido' name='perfil_escolhido' value='"+id+"'/>")
+      document.getElementById("form_perfis").submit();
+    }
+
     function luminanace(r, g, b) {
       var a = [r, g, b].map(function (v) {
           v /= 255;

@@ -11,14 +11,18 @@ class Detalhada extends MY_Controller {
             header('Location: '.base_url('../').'login/logout');
         }else{
             //REDIRECIONA USUARIO QUE TENTA ACESSAR O MÓDULO DE OCUPAÇÃO DETALHADA QUE NÃO É ADM, GERENCIA OU DIRETORIA
-            $perfil = $this->my_model->tipoPerfilUsuario($_SESSION["usuario_logado"]["ID"]);
-            if(($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' || $perfil["TIPO_PERFIL"]!='A') &&
-            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='D' || $perfil["TIPO_PERFIL"]!='D') &&
-            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='E' || $perfil["TIPO_PERFIL"]!='E') &&
-            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='I' || $perfil["TIPO_PERFIL"]!='I')&&
-            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='P' || $perfil["TIPO_PERFIL"]!='P')/*&&
-            ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='G' || $perfil["TIPO_PERFIL"]!='G')*/ || $usuario["ID"]==31){
-                header('Location: /app/dashboard');
+            // $perfil = $this->my_model->tipoPerfilUsuario($_SESSION["usuario_logado"]["ID"]);
+            // if(($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' || $perfil["TIPO_PERFIL"]!='A') &&
+            // ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='D' || $perfil["TIPO_PERFIL"]!='D') &&
+            // ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='E' || $perfil["TIPO_PERFIL"]!='E') &&
+            // ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='I' || $perfil["TIPO_PERFIL"]!='I')&&
+            // ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='P' || $perfil["TIPO_PERFIL"]!='P')/*&&
+            // ($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='G' || $perfil["TIPO_PERFIL"]!='G')*/ || $usuario["ID"]==31){
+            //     header('Location: /app/dashboard');
+            // }
+            $funcao_permitida = $this->my_model->retornaSeFuncaoPermitida($usuario["ID"],'detalhada');
+            if(!count($funcao_permitida)>0){
+                header('Location: /../dashboard');
             }
         }
     }

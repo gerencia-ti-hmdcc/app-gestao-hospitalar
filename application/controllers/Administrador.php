@@ -10,11 +10,16 @@ class Administrador extends MY_Controller {
         if(!$usuario){
             header('Location: '.base_url('../').'login/logout');
         }else{
-            //DESLOGA USUARIO QUE TENTA ACESSAR O MÓDULO ADMINISTRADOR QUE NÃO É ADM
-            $perfil = $this->administrador_model->tipoPerfilUsuario($_SESSION["usuario_logado"]["ID"]);
-            if($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' OR $perfil["TIPO_PERFIL"]!='A'){
-                header('Location: '.base_url('../').'login/logout');
+            //REDIRECIONA USUARIO QUE TENTA ACESSAR O MÓDULO ADMINISTRADOR QUE NÃO É ADM
+            $this->load->model("my_model");
+            $funcao_permitida = $this->my_model->retornaSeFuncaoPermitida($usuario["ID"],'administrador');
+            if(!count($funcao_permitida)>0){
+                header('Location: /../dashboard');
             }
+            // $perfil = $this->administrador_model->tipoPerfilUsuario($_SESSION["usuario_logado"]["ID"]);
+            // if($_SESSION["usuario_logado"]["TIPO_PERFIL"]!='A' OR $perfil["TIPO_PERFIL"]!='A'){
+            //     header('Location: '.base_url('../').'login/logout');
+            // }
         }
     }
 
@@ -31,17 +36,24 @@ class Administrador extends MY_Controller {
         //         $dados["link_pagina"]   = 'dashboard';
         //         $this->load->view('templates/template_padrao.php',$dados);   
         // }
-	}
-
-    public function usuarios(){
         $this->load->model('administrador_model');
         $this->load->helper('form');
         $dados['pagina']            = 'administrador/gerenciar_usuarios.php';
         $dados['nome_pagina']       = 'Gerenciar Usuários';
-        $dados["link_pagina"]       = 'administrador/usuarios';
-        $dados["diretorio_raiz"]    = '../';
+        $dados["link_pagina"]       = 'administrador';
+        // $dados["diretorio_raiz"]    = '../';
         $this->load->view('templates/template_padrao.php',$dados); 
-    }
+	}
+
+    // public function usuarios(){
+    //     $this->load->model('administrador_model');
+    //     $this->load->helper('form');
+    //     $dados['pagina']            = 'administrador/gerenciar_usuarios.php';
+    //     $dados['nome_pagina']       = 'Gerenciar Usuários';
+    //     $dados["link_pagina"]       = 'administrador/usuarios';
+    //     $dados["diretorio_raiz"]    = '../';
+    //     $this->load->view('templates/template_padrao.php',$dados); 
+    // }
 
     public function retornaUsuarios(){
         $this->load->model('administrador_model');
@@ -123,7 +135,7 @@ class Administrador extends MY_Controller {
             $dados["diretorio_raiz"]    = '../';
             $this->load->view("templates/template_padrao.php",$dados);
         }else{
-            redirect("usuarios");
+            redirect("../administrador");
         }
     }
 
@@ -161,7 +173,7 @@ class Administrador extends MY_Controller {
                         $this->administrador_model->resetaSenha($id);
                     }
                     $this->session->set_flashdata("success","<br />Usuário atualizado com sucesso!");
-                    redirect("usuarios");
+                    redirect("../administrador");
                 }
             }
         }
@@ -230,12 +242,13 @@ class Administrador extends MY_Controller {
                 
                 if($cadastrado==true){
                     $this->session->set_flashdata("success","<br />Usuário cadastrado com sucesso!");
-                    redirect("usuarios");
+                    redirect("../administrador");
                 }
             }
         }
     }
 
+    /*
     public function metas_admissoes(){
         $this->load->model('administrador_model');
         $this->load->helper('form');
@@ -373,6 +386,5 @@ class Administrador extends MY_Controller {
         }
         
     }
-
-       
+    */
 }

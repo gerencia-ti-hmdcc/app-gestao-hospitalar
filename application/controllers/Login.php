@@ -69,11 +69,23 @@ class Login extends CI_Controller {
                                         $this->login_model->atualizaDisp($this->PegarDispositivo(),$usuario["ID"]);
                                         //$this->session->set_flashdata("success","Usuário logado!");
                                         //LOGANDO PAINEL DE ACORDO COM SUA ESPECIFICIDADE
+                                        $this->load->model("my_model");
                                         if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P'){
-                                                $this->load->model("my_model");
                                                 $painel_acesso = $this->my_model->retornaLinkPainel($_SESSION["usuario_logado"]["ID"]);
                                                 redirect('../'.$painel_acesso["LINK_PAINEL"]);
                                         }else{
+                                                //DEFININDO MENU DO USUARIO COM BASE EM TABELA GESTÃO DE ACESSOS
+                                                $menu_usuario_perfil    = $this->my_model->retornaModulosPermitidosPerfil($usuario["ID"]);
+                                                $funcoes_usuario_perfil = $this->my_model->retornaMenuPermitidoPerfil($usuario["ID"]);
+                                                for($i=0;$i<count($menu_usuario_perfil);$i++){
+                                                        $menu_usuario_perfil[$i]["funcoes_permitidas"] = [];
+                                                        for($j=0;$j<count($funcoes_usuario_perfil);$j++){
+                                                                if($menu_usuario_perfil[$i]["ID_MODULO"]==$funcoes_usuario_perfil[$j]["ID_MODULO"]){
+                                                                        array_push($menu_usuario_perfil[$i]["funcoes_permitidas"],$funcoes_usuario_perfil[$j]);
+                                                                }
+                                                        }
+                                                }
+                                                $_SESSION["usuario_logado"]["menu_permitido_usuario_perfil"] = $menu_usuario_perfil;
                                                 redirect('../dashboard');
                                         }
                                 }else{

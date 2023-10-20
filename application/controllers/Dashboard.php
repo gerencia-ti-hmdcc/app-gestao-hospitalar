@@ -5,6 +5,15 @@ class Dashboard extends MY_Controller {
 
     public function __construct(){
         parent::__construct();
+        $usuario = $this->session->userdata("usuario_logado");
+        if(!$usuario){
+            header('Location: '.base_url('../').'login/logout');
+        }else{
+            $funcao_permitida = $this->my_model->retornaSeFuncaoPermitida($usuario["ID"],'dashboard');
+            if(!count($funcao_permitida)>0){
+                header('Location: '.base_url('../app/').'login/logout');
+            }
+        }
     }
 
 	public function index()

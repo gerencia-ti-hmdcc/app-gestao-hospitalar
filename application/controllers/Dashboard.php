@@ -9,6 +9,7 @@ class Dashboard extends MY_Controller {
         if(!$usuario){
             header('Location: '.base_url('../').'login/logout');
         }else{
+            $this->load->model('my_model');
             $funcao_permitida = $this->my_model->retornaSeFuncaoPermitida($usuario["ID"],'dashboard');
             if(!count($funcao_permitida)>0){
                 header('Location: '.base_url('../app/').'login/logout');

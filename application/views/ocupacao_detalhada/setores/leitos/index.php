@@ -104,7 +104,7 @@
 
                 if($leitos[$i]["ds_verde_ou_vermelho"]){
                     //SE HOUVE AVALIAÇÃO VERDE_VERMELHO
-                    if(trim($leitos[$i]["ds_verde_ou_vermelho"])=='VERDE'){
+                    if(trim(strtoupper($leitos[$i]["ds_verde_ou_vermelho"]))=='VERDE'){
                         $cor_avaliacao_verde_vermelho="#20E200";
                     }else{
                         $cor_avaliacao_verde_vermelho="#FF2E00";
@@ -354,7 +354,7 @@
 
                         if(result["ds_verde_ou_vermelho"] && result["cd_agrupamento"]!=4){
                             let cor         = "";
-                            if(result["ds_verde_ou_vermelho"]=="VERDE"){
+                            if(result["ds_verde_ou_vermelho"].trim().toUpperCase()=="VERDE"){
                                 cor = "#4CAF50";
                             }else{
                                 cor = "#FF5252";
@@ -400,7 +400,7 @@
                                                                     "</td>" +
                                                                     "<td class='text-wrap'>" +
                                                                         "<div class='w-full text-center' style='border-radius:4px; color:#fff; background-color:"+cor+"'>"+
-                                                                            result["ds_verde_ou_vermelho"]+
+                                                                            result["ds_verde_ou_vermelho"].trim().toUpperCase()+
                                                                         "</div>"+
                                                                     "</td>" +
                                                                 "</tr>" +

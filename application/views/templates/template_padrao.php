@@ -412,6 +412,700 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
               });
             },90000);/*150000*/
           <?php } } ?>
+        }else if('<?php echo $link_pagina;?>'=='avaliacoesVerdeVermelho'){
+          let html_leito      = "";
+          let nr_atendimento  = $("#nr_atendimento_id").val();
+          $.ajax({
+            url : "<?php echo site_url('retornaTotaisAvaliacoesVerdeVermelho');?>",
+            type : 'POST',
+            data: 
+            {
+                "nr_atendimento" : nr_atendimento
+            },
+            dataType: "json",
+            success : function(totaisVerdeVemelho){
+              let html_totais_verde_vermelho  = "";
+
+              if(parseInt(totaisVerdeVemelho.total)>0){
+                  let regra3_verde                = Math.round(totaisVerdeVemelho.porcentagem_verde)*255/100
+                  let regra3_vermelho             = Math.round(totaisVerdeVemelho.porcentagem_vermelho)*255/100;
+
+                  html_totais_verde_vermelho =    "<tr><td colspan='2'></td></tr>"+
+                                                  "<tr>" +
+                                                      "<td class='font-weight-bold text-wrap text-xs'>" +
+                                                          "Total de avaliações" +
+                                                      "</td>" +
+                                                      "<td class='text-wrap text-end justify-content-end text-xs'>" +
+                                                          totaisVerdeVemelho.total+
+                                                      "</td>" +
+                                                  "</tr>"+
+                                                  "<tr>" +
+                                                      "<td class='font-weight-bold text-wrap text-xs'>" +
+                                                          "Total verde" +
+                                                      "</td>" +
+                                                      "<td class='text-wrap text-end justify-content-end text-xs'>" +
+                                                          totaisVerdeVemelho.total_verde+
+                                                      "</td>" +
+                                                  "</tr>"+
+                                                  "<tr>" +
+                                                      "<td class='font-weight-bold text-wrap text-xs'>" +
+                                                          "% verde" +
+                                                      "</td>" +
+                                                      "<td class='text-wrap text-end justify-content-end text-xs'>" +
+                                                          parseFloat(totaisVerdeVemelho.porcentagem_verde).toFixed(2)+"%"+
+                                                      "</td>" +
+                                                  "</tr>"+
+                                                  "<tr>" +
+                                                      "<td class='font-weight-bold text-wrap text-xs'>" +
+                                                          "Total vermelho" +
+                                                      "</td>" +
+                                                      "<td class='text-wrap text-end justify-content-end text-xs'>" +
+                                                          totaisVerdeVemelho.total_vermelho+
+                                                      "</td>" +
+                                                  "</tr>"+
+                                                  "<tr>" +
+                                                      "<td class='font-weight-bold text-wrap text-xs'>" +
+                                                          "% vermelho" +
+                                                      "</td>" +
+                                                      "<td class='text-wrap text-end justify-content-end text-xs'>" +
+                                                          parseFloat(totaisVerdeVemelho.porcentagem_vermelho).toFixed(2)+"%"+
+                                                      "</td>" +
+                                                  "</tr>"+
+                                                  "<tr>" +
+                                                      "<td colspan='2' class='text-wrap justify-content-center' style='text-align:-webkit-center'>" +
+                                                          "<div style='background-color: rgb("+regra3_vermelho+" "+regra3_verde+" 0); border-radius:50%; width:50px;height:50px' ></div>"+
+                                                      "</td>" +
+                                                  "</tr>";
+
+                  // $("#grafico_quantidade_verdes_vermelhos").html();
+              }
+              $.ajax({
+                  url : "<?php echo site_url('retornaDadosLeitoPorAtendimento');?>",
+                  type : 'POST',
+                  data: 
+                  {
+                      "nr_atendimento" : nr_atendimento
+                  },
+                  dataType: "json",
+                  success : function(result){
+          
+                      $.ajax({
+                          url : "<?php echo site_url('retornaMovimentacoesAtendimento');?>",
+                          type : 'POST',
+                          data: 
+                          {
+                              "nr_atendimento" : nr_atendimento
+                          },
+                          dataType: "json",
+                          success : function(resultadoMovimentacoes){
+                              let data_entrada    = new Date(result["dt_entrada"]);
+                              let data_prev_alta  = new Date(result["dt_previsao_alta"]);
+                              let dt_liberacao    = new Date(result["dt_liberacao"]);
+          
+                              let verde_verm = " - ";
+          
+                              let hora_entrada_geral = result["dt_entrada"].split(" ");
+                              hora_entrada_geral = hora_entrada_geral[1];
+                              data_entrada = result["dt_entrada"].substr(0, 10).split('-').reverse().join('/')+" "+hora_entrada_geral;
+                              if(data_entrada=="00/00/0000 00:00:00"){
+                                  data_entrada = " - ";
+                              }
+          
+                              let hora_liberacao = result["dt_liberacao"].split(" ");
+                              hora_liberacao = hora_liberacao[1];
+                              dt_liberacao = result["dt_liberacao"].substr(0, 10).split('-').reverse().join('/')+" "+hora_liberacao;
+                              if(dt_liberacao=="00/00/0000 00:00:00"){
+                                  dt_liberacao = " - ";
+                              }
+          
+                              if (data_prev_alta.toLocaleString() !== "Invalid Date"){
+                                  let dt_arr = result["dt_previsao_alta"].split('-');
+                                  data_prev_alta = dt_arr[2]+'/'+dt_arr[1]+'/'+dt_arr[0];
+                              } else {
+                                  data_prev_alta = " - ";
+                              }
+          
+                              let motivo_vermelho                 = "";
+                              let conteudo_template_avaliacao     = "";
+                              let html_movimentacoes_atendimento  = "";
+          
+                              let data_nascimento     = result["dt_nascimento"].split("/");
+                              let idade_paciente      = idade(data_nascimento[2],data_nascimento[1],data_nascimento[0]); 
+          
+                              /*INÍCIO PREENCHIMENTO TABELA DE AVALIAÇÃO VERDE/VERMELHO*/
+          
+                              if(result["ds_verde_ou_vermelho"] && result["cd_agrupamento"]!=4){
+                                  let cor         = "";
+                                  if(result["ds_verde_ou_vermelho"].trim().toUpperCase()=="VERDE"){
+                                      cor = "#00ff00";
+                                  }else{
+                                      cor = "#ff0000";
+                                  }
+          
+                                  if(result["ds_motivo_vermelho"].length>0){
+                                      
+                                      motivo_vermelho = "<tr>" +
+                                                              "<td class='font-weight-bold text-wrap'>" +
+                                                                  "Motivo" +
+                                                              "</td>" +
+                                                              "<td class='text-wrap text-justify'>" +
+                                                                  result["ds_motivo_vermelho"]+
+                                                              "</td>" +
+                                                          "</tr>";
+                                  }
+                                  
+                                  conteudo_template_avaliacao =   "<table class='table align-items-center justify-content-center' width='100%'>"+
+                                                                      html_totais_verde_vermelho+
+                                                                      "<tr>" +
+                                                                          "<td colspan='2' class='text-center text-uppercase font-weight-bold text-wrap'>" +
+                                                                              "Última Avaliação" +
+                                                                          "</td>" +
+                                                                      "</tr>"+
+                                                                      "<tr>" +
+                                                                          "<td class='font-weight-bold text-wrap'>" +
+                                                                              "Data avaliação" +
+                                                                          "</td>" +
+                                                                          "<td class='text-wrap text-justify'>" +
+                                                                              dt_liberacao.toLocaleString().replace(',','')+
+                                                                          "</td>" +
+                                                                      "</tr>"+
+                                                                      "<tr>" +
+                                                                          "<td class='font-weight-bold text-wrap'>" +
+                                                                              "Profissional" +
+                                                                          "</td>" +
+                                                                          "<td class='text-wrap text-justify'>" +
+                                                                              result["profissional_verde_vermelho"]+
+                                                                          "</td>" +
+                                                                      "</tr>"+
+                                                                      "<tr>" +
+                                                                          "<td class='font-weight-bold text-wrap'>" +
+                                                                              "Condição" +
+                                                                          "</td>" +
+                                                                          "<td class='text-wrap'>" +
+                                                                              "<div class='w-full text-center' style='border-radius:4px; color:#fff; background-color:"+cor+"'>"+
+                                                                                  result["ds_verde_ou_vermelho"].trim().toUpperCase()+
+                                                                              "</div>"+
+                                                                          "</td>" +
+                                                                      "</tr>" +
+                                                                      motivo_vermelho+
+                                                                      "<tr>" +
+                                                                          "<td class='font-weight-bold text-wrap'>" +
+                                                                              "Previsão de alta" +
+                                                                          "</td>" +
+                                                                          "<td class='text-wrap'>" +
+                                                                              data_prev_alta +
+                                                                          "</td>" +
+                                                                      "</tr>"+
+                                                                  "</table>";
+                              }
+          
+                              /*FIM PREENCHIMENTO TABELA DE AVALIAÇÃO VERDE/VERMELHO*/
+          
+                              /*INÍCIO PROCESSAMENTO MOVIMENTAÇÕES*/ 
+          
+                              if(resultadoMovimentacoes.length>0){
+                                  html_movimentacoes_atendimento =    "<table class='table align-items-center justify-content-center' width='100%'>"+
+                                                                          "<tr>" +
+                                                                              "<td class='text-center text-uppercase text-wrap font-weight-bold' colspan='5'>" +
+                                                                                  "Movimentações" +
+                                                                              "</td>" +
+                                                                          "</tr>"+
+                                                                          "<tr>" +
+                                                                              "<td class='text-xs font-weight-bold text-wrap'>" +
+                                                                                  "Setor" +
+                                                                              "</td>" +
+                                                                              "<td class='text-xs font-weight-bold text-wrap'>" +
+                                                                                  "Leito" +
+                                                                              "</td>" +
+                                                                              "<td class='text-xs text-wrap font-weight-bold '>" +
+                                                                                  "Entrada"+
+                                                                              "</td>"+
+                                                                              "<td class='text-xs text-wrap font-weight-bold '>" +
+                                                                                  "Saída"+
+                                                                              "</td>" +
+                                                                              "<td class='text-xs text-wrap font-weight-bold '>" +
+                                                                                  "Dias"+
+                                                                              "</td>" +
+                                                                          "</tr>";
+          
+                                  let data_entrada_unidade    = "";
+                                  let data_saida_unidade      = "";
+          
+                                  for(let j=0;j<resultadoMovimentacoes.length;j++){
+          
+                                      data_entrada_unidade    = new Date(resultadoMovimentacoes[j]["dt_entrada_unidade"]);
+                                      data_saida_unidade      = new Date(resultadoMovimentacoes[j]["dt_saida_unidade"]);
+          
+                                      let hora_entrada = resultadoMovimentacoes[j]["dt_entrada_unidade"].split(" ");
+                                      hora_entrada = hora_entrada[1];
+                                      data_entrada_unidade = resultadoMovimentacoes[j]["dt_entrada_unidade"].substr(0, 10).split('-').reverse().join('/')+" "+hora_entrada;
+                                      if(data_entrada_unidade=="00/00/0000 00:00:00"){
+                                          data_entrada_unidade = " - ";
+                                      }
+          
+                                      let hora_saida = resultadoMovimentacoes[j]["dt_saida_unidade"].split(" ");
+                                      hora_saida = hora_saida[1];
+                                      data_saida_unidade = resultadoMovimentacoes[j]["dt_saida_unidade"].substr(0, 10).split('-').reverse().join('/')+" "+hora_saida;
+                                      if(data_saida_unidade=="00/00/0000 00:00:00"){
+                                          data_saida_unidade = " - ";
+                                      }
+          
+                                      let cor_linha_cond_mesmo_setor = "";
+                                      if($("#linha_cuidado_id").val()==resultadoMovimentacoes[j]["cd_agrupamento"]){
+                                          cor_linha_cond_mesmo_setor = "text-white cor_card_mesma_linha_cuidado";
+                                      }
+          
+          
+                                      html_movimentacoes_atendimento += "<tr>" +
+                                                                          "<td class='"+cor_linha_cond_mesmo_setor+" font-weight-bold text-wrap text-xs'>" +
+                                                                              resultadoMovimentacoes[j]["ds_setor_atendimento"]+
+                                                                          "</td>" +
+                                                                          "<td class='"+cor_linha_cond_mesmo_setor+" text-wrap text-xs'>" +
+                                                                              resultadoMovimentacoes[j]["leito"]+' '+resultadoMovimentacoes[j]["ds_complemento_leito"] +
+                                                                          "</td>" +
+                                                                          "<td class='"+cor_linha_cond_mesmo_setor+" text-wrap text-xs'>" +
+                                                                              data_entrada_unidade+
+                                                                          "</td>"+
+                                                                          "<td class='"+cor_linha_cond_mesmo_setor+" text-wrap text-xs'>" +
+                                                                              data_saida_unidade+
+                                                                          "</td>" +
+                                                                          "<td class='"+cor_linha_cond_mesmo_setor+" text-wrap text-xs'>" +
+                                                                              resultadoMovimentacoes[j]["qt_dias_unidade"]+
+                                                                          "</td>" +
+                                                                      "</tr>";
+                                  }
+          
+                                  //GUARDANDO PERMANENCIA (DIAS) NA MESMA LINHA DE CUIDADO
+                                  let somatoria_dias_linha_cuidado = 0;
+                                  for(let k=resultadoMovimentacoes.length-1;k>=0;k--){
+                                      if(resultadoMovimentacoes[k]["cd_agrupamento"]==$("#linha_cuidado_id").val()){
+                                          somatoria_dias_linha_cuidado = parseInt(resultadoMovimentacoes[k]["qt_dias_unidade"])+parseInt(somatoria_dias_linha_cuidado);
+                                      }else{
+                                          break;
+                                      }
+                                  }
+          
+                                  html_movimentacoes_atendimento  +=      "<tr class='my-4'>" +
+                                                                              "<td colspan='4' class='text-xs font-weight-bold text-wrap text-white '>" +
+                                                                                  
+                                                                              "</td>" +
+                                                                              "<td class='text-xs text-wrap font-weight-bold text-white'>" +
+                                                                                  
+                                                                              "</td>" +
+                                                                          "</tr>"+
+                                                                          "<tr>" +
+                                                                              "<td colspan='4' class='text-xs font-weight-bold text-wrap text-white cor_card_mesma_linha_cuidado'>" +
+                                                                                  "Total atual na Linha de Cuidado" +
+                                                                              "</td>" +
+                                                                              "<td class='text-xs text-wrap font-weight-bold text-white cor_card_mesma_linha_cuidado'>" +
+                                                                                  somatoria_dias_linha_cuidado+" dia(s)"+
+                                                                              "</td>" +
+                                                                          "</tr>"+
+                                                                          "<tr >" +
+                                                                              "<td colspan='4' class='text-xs font-weight-bold text-wrap'>" +
+                                                                                  "Total" +
+                                                                              "</td>" +
+                                                                              "<td class='text-xs text-wrap font-weight-bold'>" +
+                                                                                  resultadoMovimentacoes[0]["total_dias_unidade"]+" dia(s)"+
+                                                                              "</td>" +
+                                                                          "</tr>"+
+                                                                      "</table>";
+                              }
+                              
+                              /*FIM PROCESSAMENTO MOVIMENTAÇÕES*/ 
+                              
+                              html_leito = "<table class='table align-items-center justify-content-center' width='100%'>" +
+                                  "<tr>" +
+                                      "<td class='font-weight-bold text-wrap'>" +
+                                          "Paciente" +
+                                      "</td>" +
+                                      "<td class='text-wrap'>" +
+                                          result['ds_nome_paciente'] +
+                                      "</td>" +
+                                  "</tr>" +
+                                  "<tr>" +
+                                      "<td class='font-weight-bold text-wrap'>" +
+                                          "Idade" +
+                                      "</td>" +
+                                      "<td class='text-wrap'>" +
+                                          idade_paciente + " anos"+
+                                      "</td>" +
+                                  "</tr>" +
+                                  "<tr>" +
+                                      "<td class='font-weight-bold text-wrap'>" +
+                                          "Nº atendimento" +
+                                      "</td>" +
+                                      "<td class='text-wrap'>" +
+                                          result['nr_atendimento'] +
+                                      "</td>" +
+                                  "</tr>" +
+                                  "<tr>" +
+                                      "<td class='font-weight-bold text-wrap'>" +
+                                          "Leito" +
+                                      "</td>" +
+                                      "<td class='text-wrap'>" +
+                                          result['ds_leito_atual'] +
+                                      "</td>" +
+                                  "</tr>" +
+                                  "<tr>" +
+                                      "<td class='font-weight-bold text-wrap'>" +
+                                          "Data de entrada" +
+                                      "</td>" +
+                                      "<td class='text-wrap'>" +
+                                          data_entrada +
+                                      "</td>" +
+                                  "</tr>" +
+                                  "<tr>" +
+                                      "<td class='font-weight-bold text-wrap'>" +
+                                          "Tempo de internação" +
+                                      "</td>" +
+                                      "<td class='text-wrap'>" +
+                                          result['tempo_internacao'] + " dia(s)"+
+                                      "</td>" +
+                                  "</tr>"+
+                              "</table>"+
+                              "<div class='bg-gradient border-radius-lg pe-1'>"+
+                                "<div class='chart'>"+
+                                    "<canvas name='grafico_quantidade_verdes_vermelhos' id='grafico_quantidade_verdes_vermelhos' class='chart-canvas' height='250'></canvas>"+
+                                "</div>"+
+                              "</div>"+
+                              conteudo_template_avaliacao+
+                              html_movimentacoes_atendimento;
+
+                              $("#info_principal").html(html_leito);
+
+                              let dataset_verde_vermelho = [];
+
+                              dataset_verde_vermelho.push({
+                                label: "Verdes",
+                                tension: 0.4,
+                                borderWidth: 0,
+                                borderRadius: 4,
+                                borderSkipped: false,
+                                backgroundColor: "#00ff00",
+                                data: [parseInt(totaisVerdeVemelho.total_verde)],
+                                maxBarThickness: 50
+                              });
+
+                              dataset_verde_vermelho.push({
+                                label: "Vermelhos",
+                                tension: 0.4,
+                                borderWidth: 0,
+                                borderRadius: 4,
+                                borderSkipped: false,
+                                backgroundColor: "#ff0000",
+                                data: [parseInt(totaisVerdeVemelho.total_vermelho)],
+                                maxBarThickness: 50
+                              });
+
+                              var ctx = document.getElementById("grafico_quantidade_verdes_vermelhos").getContext("2d");
+
+                              new Chart(ctx, {
+                                type: "bar",
+                                data: {
+                                  labels: ["Verdes e Vermelhos"],
+                                  datasets: dataset_verde_vermelho,
+                                },
+                                options: {
+                                  responsive: true,
+                                  maintainAspectRatio: false,
+                                  plugins: {
+                                    legend: {
+                                      display: true,
+                                      labels: {
+                                        color: '#000'
+                                      }
+                                    }
+                                  },
+                                  interaction: {
+                                    intersect: false,
+                                    mode: 'index',
+                                  },
+                                  scales: {
+                                    y: {
+                                      grid: {
+                                        drawBorder: true,
+                                        display: true,
+                                        drawOnChartArea: true,
+                                        drawTicks: true,
+                                      },
+                                      ticks: {
+                                        suggestedMin: 0,
+                                        suggestedMax: 500,
+                                        beginAtZero: true,
+                                        padding: 15,
+                                        font: {
+                                          size: 14,
+                                          family: "Open Sans",
+                                          style: 'normal',
+                                          lineHeight: 2
+                                        },
+                                        color: "#000"
+                                      },
+                                    },
+                                    x: {
+                                      grid: {
+                                        drawBorder: true,
+                                        display: true,
+                                        drawOnChartArea: true,
+                                        drawTicks: true
+                                      },
+                                      ticks: {
+                                        display: true
+                                      },
+                                    },
+                                  },
+                                },
+                              });
+                              // $("#modal_info").modal('show');
+                          },
+                          error : function(data){
+                              alert('Não foi possível abrir o detalhamento. Confira sua conexão!');
+                          }
+                      });
+                  },
+                  error : function(data){
+                      alert('Não foi possível abrir o detalhamento. Confira sua conexão!');
+                  }
+              });
+            },
+            error : function(data){
+                alert('Não foi possível abrir o detalhamento. Confira sua conexão!');
+            }
+          });
+        }else if('<?php echo $link_pagina;?>'=='historicoEvolucoesPaciente'){
+          let nr_atendimento  = $("#nr_atendimento_id").val();
+          $.ajax({
+            url : "<?php echo site_url('retornaDadosLeitoPorAtendimento');?>",
+            type : 'POST',
+            data: 
+            {
+                "nr_atendimento" : nr_atendimento
+            },
+            dataType: "json",
+            success : function(result){
+    
+                $.ajax({
+                    url : "<?php echo site_url('retornaMovimentacoesAtendimento');?>",
+                    type : 'POST',
+                    data: 
+                    {
+                        "nr_atendimento" : nr_atendimento
+                    },
+                    dataType: "json",
+                    success : function(resultadoMovimentacoes){
+                        let data_entrada    = new Date(result["dt_entrada"]);
+                        let data_prev_alta  = new Date(result["dt_previsao_alta"]);
+                        let dt_liberacao    = new Date(result["dt_liberacao"]);
+    
+                        let verde_verm = " - ";
+    
+                        let hora_entrada_geral = result["dt_entrada"].split(" ");
+                        hora_entrada_geral = hora_entrada_geral[1];
+                        data_entrada = result["dt_entrada"].substr(0, 10).split('-').reverse().join('/')+" "+hora_entrada_geral;
+                        if(data_entrada=="00/00/0000 00:00:00"){
+                            data_entrada = " - ";
+                        }
+    
+                        let hora_liberacao = result["dt_liberacao"].split(" ");
+                        hora_liberacao = hora_liberacao[1];
+                        dt_liberacao = result["dt_liberacao"].substr(0, 10).split('-').reverse().join('/')+" "+hora_liberacao;
+                        if(dt_liberacao=="00/00/0000 00:00:00"){
+                            dt_liberacao = " - ";
+                        }
+    
+                        if (data_prev_alta.toLocaleString() !== "Invalid Date"){
+                            let dt_arr = result["dt_previsao_alta"].split('-');
+                            data_prev_alta = dt_arr[2]+'/'+dt_arr[1]+'/'+dt_arr[0];
+                        } else {
+                            data_prev_alta = " - ";
+                        }
+    
+                        let conteudo_template_avaliacao     = "";
+                        let html_movimentacoes_atendimento  = "";
+    
+                        let data_nascimento     = result["dt_nascimento"].split("/");
+                        let idade_paciente      = idade(data_nascimento[2],data_nascimento[1],data_nascimento[0]); 
+    
+                       
+                        /*INÍCIO PROCESSAMENTO MOVIMENTAÇÕES*/ 
+    
+                        if(resultadoMovimentacoes.length>0){
+                            html_movimentacoes_atendimento =    "<table class='table align-items-center justify-content-center' width='100%'>"+
+                                                                    "<tr>" +
+                                                                        "<td class='text-center text-uppercase text-wrap font-weight-bold' colspan='5'>" +
+                                                                            "Movimentações" +
+                                                                        "</td>" +
+                                                                    "</tr>"+
+                                                                    "<tr>" +
+                                                                        "<td class='text-xs font-weight-bold text-wrap'>" +
+                                                                            "Setor" +
+                                                                        "</td>" +
+                                                                        "<td class='text-xs font-weight-bold text-wrap'>" +
+                                                                            "Leito" +
+                                                                        "</td>" +
+                                                                        "<td class='text-xs text-wrap font-weight-bold '>" +
+                                                                            "Entrada"+
+                                                                        "</td>"+
+                                                                        "<td class='text-xs text-wrap font-weight-bold '>" +
+                                                                            "Saída"+
+                                                                        "</td>" +
+                                                                        "<td class='text-xs text-wrap font-weight-bold '>" +
+                                                                            "Dias"+
+                                                                        "</td>" +
+                                                                    "</tr>";
+    
+                            let data_entrada_unidade    = "";
+                            let data_saida_unidade      = "";
+    
+                            for(let j=0;j<resultadoMovimentacoes.length;j++){
+    
+                                data_entrada_unidade    = new Date(resultadoMovimentacoes[j]["dt_entrada_unidade"]);
+                                data_saida_unidade      = new Date(resultadoMovimentacoes[j]["dt_saida_unidade"]);
+    
+                                let hora_entrada = resultadoMovimentacoes[j]["dt_entrada_unidade"].split(" ");
+                                hora_entrada = hora_entrada[1];
+                                data_entrada_unidade = resultadoMovimentacoes[j]["dt_entrada_unidade"].substr(0, 10).split('-').reverse().join('/')+" "+hora_entrada;
+                                if(data_entrada_unidade=="00/00/0000 00:00:00"){
+                                    data_entrada_unidade = " - ";
+                                }
+    
+                                let hora_saida = resultadoMovimentacoes[j]["dt_saida_unidade"].split(" ");
+                                hora_saida = hora_saida[1];
+                                data_saida_unidade = resultadoMovimentacoes[j]["dt_saida_unidade"].substr(0, 10).split('-').reverse().join('/')+" "+hora_saida;
+                                if(data_saida_unidade=="00/00/0000 00:00:00"){
+                                    data_saida_unidade = " - ";
+                                }
+    
+                                let cor_linha_cond_mesmo_setor = "";
+                                if($("#linha_cuidado_id").val()==resultadoMovimentacoes[j]["cd_agrupamento"]){
+                                    cor_linha_cond_mesmo_setor = "text-white cor_card_mesma_linha_cuidado";
+                                }
+    
+    
+                                html_movimentacoes_atendimento += "<tr>" +
+                                                                    "<td class='"+cor_linha_cond_mesmo_setor+" font-weight-bold text-wrap text-xs'>" +
+                                                                        resultadoMovimentacoes[j]["ds_setor_atendimento"]+
+                                                                    "</td>" +
+                                                                    "<td class='"+cor_linha_cond_mesmo_setor+" text-wrap text-xs'>" +
+                                                                        resultadoMovimentacoes[j]["leito"]+' '+resultadoMovimentacoes[j]["ds_complemento_leito"] +
+                                                                    "</td>" +
+                                                                    "<td class='"+cor_linha_cond_mesmo_setor+" text-wrap text-xs'>" +
+                                                                        data_entrada_unidade+
+                                                                    "</td>"+
+                                                                    "<td class='"+cor_linha_cond_mesmo_setor+" text-wrap text-xs'>" +
+                                                                        data_saida_unidade+
+                                                                    "</td>" +
+                                                                    "<td class='"+cor_linha_cond_mesmo_setor+" text-wrap text-xs'>" +
+                                                                        resultadoMovimentacoes[j]["qt_dias_unidade"]+
+                                                                    "</td>" +
+                                                                "</tr>";
+                            }
+    
+                            //GUARDANDO PERMANENCIA (DIAS) NA MESMA LINHA DE CUIDADO
+                            let somatoria_dias_linha_cuidado = 0;
+                            for(let k=resultadoMovimentacoes.length-1;k>=0;k--){
+                                if(resultadoMovimentacoes[k]["cd_agrupamento"]==$("#linha_cuidado_id").val()){
+                                    somatoria_dias_linha_cuidado = parseInt(resultadoMovimentacoes[k]["qt_dias_unidade"])+parseInt(somatoria_dias_linha_cuidado);
+                                }else{
+                                    break;
+                                }
+                            }
+    
+                            html_movimentacoes_atendimento  +=      "<tr class='my-4'>" +
+                                                                        "<td colspan='4' class='text-xs font-weight-bold text-wrap text-white '>" +
+                                                                            
+                                                                        "</td>" +
+                                                                        "<td class='text-xs text-wrap font-weight-bold text-white'>" +
+                                                                            
+                                                                        "</td>" +
+                                                                    "</tr>"+
+                                                                    "<tr>" +
+                                                                        "<td colspan='4' class='text-xs font-weight-bold text-wrap text-white cor_card_mesma_linha_cuidado'>" +
+                                                                            "Total atual na Linha de Cuidado" +
+                                                                        "</td>" +
+                                                                        "<td class='text-xs text-wrap font-weight-bold text-white cor_card_mesma_linha_cuidado'>" +
+                                                                            somatoria_dias_linha_cuidado+" dia(s)"+
+                                                                        "</td>" +
+                                                                    "</tr>"+
+                                                                    "<tr >" +
+                                                                        "<td colspan='4' class='text-xs font-weight-bold text-wrap'>" +
+                                                                            "Total" +
+                                                                        "</td>" +
+                                                                        "<td class='text-xs text-wrap font-weight-bold'>" +
+                                                                            resultadoMovimentacoes[0]["total_dias_unidade"]+" dia(s)"+
+                                                                        "</td>" +
+                                                                    "</tr>"+
+                                                                "</table>";
+                        }
+                        
+                        /*FIM PROCESSAMENTO MOVIMENTAÇÕES*/ 
+                        
+                        html_leito = "<table class='table align-items-center justify-content-center' width='100%'>" +
+                            "<tr>" +
+                                "<td class='font-weight-bold text-wrap'>" +
+                                    "Paciente" +
+                                "</td>" +
+                                "<td class='text-wrap'>" +
+                                    result['ds_nome_paciente'] +
+                                "</td>" +
+                            "</tr>" +
+                            "<tr>" +
+                                "<td class='font-weight-bold text-wrap'>" +
+                                    "Idade" +
+                                "</td>" +
+                                "<td class='text-wrap'>" +
+                                    idade_paciente + " anos"+
+                                "</td>" +
+                            "</tr>" +
+                            "<tr>" +
+                                "<td class='font-weight-bold text-wrap'>" +
+                                    "Nº atendimento" +
+                                "</td>" +
+                                "<td class='text-wrap'>" +
+                                    result['nr_atendimento'] +
+                                "</td>" +
+                            "</tr>" +
+                            "<tr>" +
+                                "<td class='font-weight-bold text-wrap'>" +
+                                    "Leito" +
+                                "</td>" +
+                                "<td class='text-wrap'>" +
+                                    result['ds_leito_atual'] +
+                                "</td>" +
+                            "</tr>" +
+                            "<tr>" +
+                                "<td class='font-weight-bold text-wrap'>" +
+                                    "Data de entrada" +
+                                "</td>" +
+                                "<td class='text-wrap'>" +
+                                    data_entrada +
+                                "</td>" +
+                            "</tr>" +
+                            "<tr>" +
+                                "<td class='font-weight-bold text-wrap'>" +
+                                    "Tempo de internação" +
+                                "</td>" +
+                                "<td class='text-wrap'>" +
+                                    result['tempo_internacao'] + " dia(s)"+
+                                "</td>" +
+                            "</tr>"+
+                        "</table>"+
+                        conteudo_template_avaliacao+
+                        html_movimentacoes_atendimento;
+
+                        $("#info_principal").html(html_leito);
+                        // $("#modal_info").modal('show');
+                    },
+                    error : function(data){
+                        alert('Não foi possível abrir o detalhamento. Confira sua conexão!');
+                    }
+                });
+            },
+            error : function(data){
+                alert('Não foi possível abrir o detalhamento. Confira sua conexão!');
+            }
+        });
         }
     });
 

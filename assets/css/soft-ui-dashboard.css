@@ -25059,6 +25059,19 @@ pre[class*="language-"] {
   border-radius: 10px;
 }
 
+
+@media (min-width: 992px) {
+  .md\:col-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+}
+
+.col-6{
+  flex: 0 0 auto;
+  width: 50%;
+}
+
 /*   CSS CALENDÁRIO    */
 
 

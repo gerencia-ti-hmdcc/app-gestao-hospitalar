@@ -35,8 +35,12 @@ class Login extends CI_Controller {
         public function autenticar(){
                 //exit("TESTE");
                 $this->load->model("login_model");
-                date_default_timezone_set('America/Sao_Paulo');
-                $data_atual     = date("Y-m-d H:i:s");
+                // date_default_timezone_set('America/Fortaleza');
+                // $data_atual     = date("Y-m-d H:i:s", time() - 1 * 60 * 60);
+                $dt = new DateTime();
+                $dt->setTimezone(new DateTimeZone('America/Fortaleza'));
+                $data_atual = $dt->format("Y-m-d H:i:s");
+
                 $token          = md5(uniqid()."".date("YmdHis")."@".uniqid());
  		$validade       = date("Y-m-d H:i:s",strtotime("+5 days")); 
 

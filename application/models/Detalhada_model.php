@@ -87,5 +87,93 @@ class Detalhada_model extends CI_Model {
         return $this->db->query("SELECT MAX(ultima_atualizacao) as ultima_atualizacao FROM `DETALHE_OCUPACAO` WHERE 1")->row_array();
     }
 
+    public function retornaDadosLeitoPorAtendimento($nr_atendimento){
+        return $this->db->query("SELECT 
+                                    * 
+                                FROM 
+                                    DETALHE_OCUPACAO 
+                                WHERE 
+                                    nr_atendimento = $nr_atendimento")->row_array();
+    }
+
+    public function retornaHistoricoAvaliacoesVerdeVermelho($nr_atendimento){
+        return $this->db->query("SELECT 
+                                    * 
+                                FROM 
+                                    PACIENTE_EVOLUCAO_VERDE_VERMELHO 
+                                WHERE 
+                                    nr_atendimento=$nr_atendimento
+                                ORDER BY 
+                                    dt_liberacao DESC")->result_array();
+    }
+
+    public function retornaTotaisAvaliacoesVerdeVermelho($nr_atendimento){
+        return $this->db->query("SELECT 
+                                    (SELECT    
+                                        COUNT(ds_verde_ou_vermelho)
+                                    FROM
+                                        PACIENTE_EVOLUCAO_VERDE_VERMELHO
+                                    WHERE 
+                                        nr_atendimento=$nr_atendimento) as total,
+                                    (SELECT    
+                                        COUNT(ds_verde_ou_vermelho)
+                                    FROM
+                                        PACIENTE_EVOLUCAO_VERDE_VERMELHO
+                                    WHERE 
+                                        nr_atendimento=$nr_atendimento
+                                        AND ds_verde_ou_vermelho='VERDE') as total_verde,
+                                    (
+                                        (SELECT    
+                                            COUNT(ds_verde_ou_vermelho)
+                                        FROM
+                                            PACIENTE_EVOLUCAO_VERDE_VERMELHO
+                                        WHERE 
+                                            nr_atendimento=$nr_atendimento
+                                            AND ds_verde_ou_vermelho='VERDE')*100/
+                                                (SELECT    
+                                                    COUNT(ds_verde_ou_vermelho)
+                                                FROM
+                                                    PACIENTE_EVOLUCAO_VERDE_VERMELHO
+                                                WHERE 
+                                                    nr_atendimento=$nr_atendimento)
+                                    ) as porcentagem_verde,
+                                    (SELECT    
+                                        COUNT(ds_verde_ou_vermelho)
+                                    FROM
+                                        PACIENTE_EVOLUCAO_VERDE_VERMELHO
+                                    WHERE 
+                                        nr_atendimento=$nr_atendimento
+                                        AND ds_verde_ou_vermelho='VERMELHO') as total_vermelho,
+                                    (
+                                        (SELECT    
+                                            COUNT(ds_verde_ou_vermelho)
+                                        FROM
+                                            PACIENTE_EVOLUCAO_VERDE_VERMELHO
+                                        WHERE 
+                                            nr_atendimento=$nr_atendimento
+                                            AND ds_verde_ou_vermelho='VERMELHO')*100/
+                                                (SELECT    
+                                                    COUNT(ds_verde_ou_vermelho)
+                                                FROM
+                                                    PACIENTE_EVOLUCAO_VERDE_VERMELHO
+                                                WHERE 
+                                                    nr_atendimento=$nr_atendimento)
+                                    ) as porcentagem_vermelho
+                                FROM 
+                                    dual")->row_array();
+    }
+
+    public function retornaHistoricoEvolucoesPaciente($nr_atendimento){
+        return $this->db->query("SELECT 
+                                    * 
+                                FROM 
+                                    PACIENTE_EVOLUCAO 
+                                WHERE 
+                                    nr_atendimento=$nr_atendimento
+                                ORDER BY 
+                                    dt_liberacao_evolucao DESC")->result_array();
+    }
+
+
 }
 ?>

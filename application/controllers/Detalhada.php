@@ -208,7 +208,7 @@ class Detalhada extends MY_Controller {
                 $reader     = new RtfReader();
                 $formatter  = new RtfHtml();
                 for($i=0;$i<count($historico_evolucoes);$i++){
-                    if($i==2){
+                    if($i==3){
                         break;
                     }
                     $result = $reader->Parse($historico_evolucoes[$i]["ds_conteudo"]);

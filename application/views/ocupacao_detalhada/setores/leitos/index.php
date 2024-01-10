@@ -428,19 +428,19 @@
                                         cor = "#ff0000";
                                     }
 
-                                    if($("#tipo_perfil_logado").val()=="A" || $("#tipo_perfil_logado").val()=="D" || 
-                                    $("#tipo_perfil_logado").val()=="E" || $("#tipo_perfil_logado").val()=="Y" || 
-                                    $("#tipo_perfil_logado").val()=="B" || $("#tipo_perfil_logado").val()=="F"){
-                                        html_botoes_evolucoes = "<tr>"+
-                                                                    "<td class='font-weight-bold text-wrap text-center' colspan='2'>"+
-                                                                        "<a class='btn btn-primary rounded' href='avaliacoesVerdeVermelho?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Histórico de avaliações</a>"+
-                                                                        "<br />"+
-                                                                        "<a class='btn hmdcc-color rounded text-white' href='historicoEvolucoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas evoluções</a>"+
-                                                                    "</td>"+
-                                                                "</tr>";
-                                    }else{
-                                        html_botoes_evolucoes = "";
-                                    }
+                                    // if($("#tipo_perfil_logado").val()=="A" || $("#tipo_perfil_logado").val()=="D" || 
+                                    // $("#tipo_perfil_logado").val()=="E" || $("#tipo_perfil_logado").val()=="Y" || 
+                                    // $("#tipo_perfil_logado").val()=="B" || $("#tipo_perfil_logado").val()=="F"){
+                                    html_botoes_evolucoes = "<tr>"+
+                                                                "<td class='font-weight-bold text-wrap text-center' colspan='2'>"+
+                                                                    "<a class='btn btn-primary rounded' href='avaliacoesVerdeVermelho?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Histórico de avaliações</a>"+
+                                                                    "<br />"+
+                                                                    "<a class='btn hmdcc-color rounded text-white' href='historicoEvolucoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas evoluções</a>"+
+                                                                "</td>"+
+                                                            "</tr>";
+                                    // }else{
+                                    //     html_botoes_evolucoes = "";
+                                    // }
 
                                     if(result["ds_motivo_vermelho"].length>0){
                                         
@@ -499,17 +499,17 @@
                                                                         html_botoes_evolucoes+
                                                                     "</table>";
                                 }else{
-                                    if($("#tipo_perfil_logado").val()=="A" || $("#tipo_perfil_logado").val()=="D" || 
-                                    $("#tipo_perfil_logado").val()=="E" || $("#tipo_perfil_logado").val()=="Y" || 
-                                    $("#tipo_perfil_logado").val()=="B" || $("#tipo_perfil_logado").val()=="F"){
+                                    // if($("#tipo_perfil_logado").val()=="A" || $("#tipo_perfil_logado").val()=="D" || 
+                                    // $("#tipo_perfil_logado").val()=="E" || $("#tipo_perfil_logado").val()=="Y" || 
+                                    // $("#tipo_perfil_logado").val()=="B" || $("#tipo_perfil_logado").val()=="F"){
                                         html_botoes_evolucoes = "<tr>"+
                                                                     "<td class='font-weight-bold text-wrap text-center' colspan='2'>"+
                                                                         "<a class='btn hmdcc-color rounded text-white' href='historicoEvolucoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas evoluções</a>"+
                                                                     "</td>"+
                                                                 "</tr>";
-                                    }else{
-                                        html_botoes_evolucoes = "";
-                                    }
+                                    // }else{
+                                    //     html_botoes_evolucoes = "";
+                                    // }
 
                                     conteudo_template_avaliacao = "<table class='table align-items-center justify-content-center' width='100%'>"+
                                                                         html_botoes_evolucoes+

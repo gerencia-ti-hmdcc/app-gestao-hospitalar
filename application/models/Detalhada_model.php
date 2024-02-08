@@ -174,6 +174,27 @@ class Detalhada_model extends CI_Model {
                                     dt_liberacao_evolucao DESC")->result_array();
     }
 
+    public function retornaHistoricoInterconsultasPaciente($nr_atendimento){
+        return $this->db->query("SELECT 
+                                    * 
+                                FROM 
+                                    PACIENTE_INTERCONSULTA 
+                                WHERE 
+                                    nr_atendimento=$nr_atendimento
+                                ORDER BY 
+                                    nr_parecer DESC, ds_tipo DESC")->result_array();
+    }
+
+    public function retornaHistoricoExamesLaboratoriaisPaciente($nr_atendimento){
+        return $this->db->query("SELECT 
+                                    * 
+                                FROM 
+                                    PACIENTE_EXAME_LABORATORIAL 
+                                WHERE 
+                                    nr_atendimento = $nr_atendimento
+                                ORDER BY
+                                    dt_baixa DESC, nr_prescricao DESC, nr_sequencia ASC")->result_array();
+    }
 
 }
 ?>

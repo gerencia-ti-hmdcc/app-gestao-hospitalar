@@ -1,21 +1,21 @@
 <?php
-    $variavel_controle_margem_tv = 4;
-    $usuario_logado = $this->session->userdata("usuario_logado");
-    if($usuario_logado["TIPO_PERFIL"]=='P'){ 
-        $variavel_controle_margem_tv = 2;
-        echo '<meta http-equiv="refresh" content="300" />';
-    } 
+    // $variavel_controle_margem_tv = 4;
+    // $usuario_logado = $this->session->userdata("usuario_logado");
+    // if($usuario_logado["TIPO_PERFIL"]=='P'){ 
+    //     $variavel_controle_margem_tv = 2;
+    //     echo '<meta http-equiv="refresh" content="300" />';
+    // } 
 ?>
 
 <div class="row">
     <?php 
-        echo "<div class='col-lg-12 mb-".$variavel_controle_margem_tv."'>
+        echo "<div class='col-lg-12'>
                 <div class='flex'>
                     <div class='col-6'>
                         <a class='btn btn-primary' href='../detalhada/leitos?l=".$_GET['l']."&s=".$_GET["s"]."'>Voltar</a>
                     </div>
                     <div class='col-6 text-end'>
-                        <a class='btn hmdcc-color rounded text-white' href='historicoEvolucoesPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Últimas evoluções</a>
+
                     </div>
                 </div>
                 
@@ -25,6 +25,24 @@
                             Avaliações Verdes e Vermelhos
                         </div>
                     </div>
+                </div>
+                <div class='mt-3 flex flex-wrap'>
+                    <div class='w-full px-2 botoes-ocupacao-detalhada'>
+                        <a class='btn text-xs hmdcc-color-1 flex rounded text-white' href='historicoEvolucoesPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Últimas evoluções</a>
+                    </div>
+                    <div class='w-full px-2 botoes-ocupacao-detalhada'>
+                        <a class='btn text-xs hmdcc-color-2 flex rounded text-white' href='historicoInterconsultasPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Últimas interconsultas</a>
+                    </div>
+                    <!--
+                    <div class='w-full px-2 botoes-ocupacao-detalhada'>
+                        <a class='btn text-xs hmdcc-color-3 flex rounded text-white' href='historicoExamesLabPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Exames laboratoriais</a>
+                    </div>
+                    <div class='w-full px-2 botoes-ocupacao-detalhada'>
+                        <a class='btn text-xs hmdcc-color-4 flex rounded text-white' href='historicoPrescricoesPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Últimas prescrições</a>
+                    </div>
+                    <div class='w-full px-2 botoes-ocupacao-detalhada'>
+                        <a class='btn text-xs hmdcc-color-5 flex rounded text-white' href='historicoLaudosPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Laudos</a>
+                    </div>-->
                 </div>
             </div>";
             /*.date('d/m/Y H:i:s', strtotime($ultima_atualizacao["ultima_atualizacao"])).*/

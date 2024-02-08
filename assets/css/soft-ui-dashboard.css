@@ -21644,8 +21644,29 @@ hr.horizontal.gray-light {
   background-image: linear-gradient(310deg, #cb0c9f 0%, #cb0c9f 100%);
 }
 
-.hmdcc-color {
+.hmdcc-color-1 {
+  /* VERDE AGUA PRIMARIO */
   background-image: linear-gradient(310deg, #00AB97 0%, #00AB97 100%) !important;
+}
+
+.hmdcc-color-2 {
+  /* AZUL PETROLEO */
+  background-image: linear-gradient(310deg, #0f4654 0%, #0f4654 100%) !important;
+}
+
+.hmdcc-color-3 {
+  /* ROYAL YELLOW */
+  background-image: linear-gradient(310deg, #f7a80e 0%, #f7a80e 100%) !important;
+}
+
+.hmdcc-color-4 {
+  /* ORANGIU */
+  background-image: linear-gradient(310deg, #ef7d1a 0%, #ef7d1a 100%) !important;
+}
+
+.hmdcc-color-5 {
+  /* SKY BLUE */
+  background-image: linear-gradient(310deg, #57BFCF 0%, #57BFCF 100%) !important;
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon svg .color-background,
@@ -25070,6 +25091,49 @@ pre[class*="language-"] {
 .col-6{
   flex: 0 0 auto;
   width: 50%;
+}
+
+/* 
+@media (min-width: 1200px) {
+  .col-lg-2emeio{
+    flex: 0 0 auto;
+    width: 20%;
+  }
+} */
+
+.botoes-ocupacao-detalhada{
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .botoes-ocupacao-detalhada{
+    flex: 1 0 auto;
+    width: 33%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .botoes-ocupacao-detalhada{
+    flex: 1 0 auto;
+    width: 20%;
+  }
+}
+
+.md\:flex {
+  display: flex;
+}
+
+.cor_solicitacao_interconsulta{
+  background-color: #f8f9fa !important;
+  opacity: 0.68;
+  color: #000;
+}
+
+.cor_parecer_interconsulta{
+  background-color: #e9ecef !important;
+  opacity: 0.58;
+  color: #000;
 }
 
 /*   CSS CALENDÁRIO    */

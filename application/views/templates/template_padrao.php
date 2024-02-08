@@ -873,7 +873,7 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                 alert('Não foi possível abrir o detalhamento. Confira sua conexão!');
             }
           });
-        }else if('<?php echo $link_pagina;?>'=='historicoEvolucoesPaciente'){
+        }else if('<?php echo $link_pagina;?>'=='historicoEvolucoesPaciente' || '<?php echo $link_pagina;?>'=='historicoInterconsultasPaciente' || '<?php echo $link_pagina;?>'=='historicoExamesLabPaciente'){
           let nr_atendimento  = $("#nr_atendimento_id").val();
           $.ajax({
             url : "<?php echo site_url('retornaDadosLeitoPorAtendimento');?>",

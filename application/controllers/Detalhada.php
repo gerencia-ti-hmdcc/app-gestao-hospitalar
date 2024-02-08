@@ -185,7 +185,7 @@ class Detalhada extends MY_Controller {
         include 'Rtf.php';
         if(strlen($nr_atendimento)>0){
             $this->load->model('detalhada_model');
-            $dados["dados_leito_atual"]     = $this->detalhada_model->retornaDadosLeitoPorAtendimento($nr_atendimento);
+            // $dados["dados_leito_atual"]     = $this->detalhada_model->retornaDadosLeitoPorAtendimento($nr_atendimento);
             $historico_evolucoes            = $this->detalhada_model->retornaHistoricoEvolucoesPaciente($nr_atendimento);
 
             if(count($historico_evolucoes)>0){
@@ -248,12 +248,12 @@ class Detalhada extends MY_Controller {
                         </td>
                     </tr>
                     <tr> 
-                        <td colspan='2' class='text-center font-weight-bold text-wrap text-uppercase' style='color:#000'>
+                        <td colspan='2' class='cor_solicitacao_interconsulta text-center font-weight-bold text-wrap text-uppercase' style='color:#000'>
                             <b>Evolução</b>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan='2' class='text-wrap text-justify'>
+                        <td colspan='2' class='cor_solicitacao_interconsulta text-wrap text-justify'>
                             ".$test."
                         </td>
                     </tr>";
@@ -284,6 +284,336 @@ class Detalhada extends MY_Controller {
             $dados['pagina']            = 'ocupacao_detalhada/setores/leitos/historico_evolucoes_paciente.php';
             $dados['nome_pagina']       = 'Histórico de Evoluções do Paciente';
             $dados["link_pagina"]       = 'historicoEvolucoesPaciente';
+            unset($dados["diretorio_raiz"]);
+            $dados["diretorio_raiz"]    = '../';
+            $this->load->view('templates/template_padrao.php',$dados);   
+
+        }else{
+            header('Location: '.base_url('../').'detalhada');
+        }
+
+    }
+
+    public function historicoInterconsultasPaciente(){
+        $nr_atendimento = (int) $_GET["a"];
+        include 'Rtf.php';
+        if(strlen($nr_atendimento)>0){
+            $this->load->model('detalhada_model');
+            // $dados["dados_leito_atual"]     = $this->detalhada_model->retornaDadosLeitoPorAtendimento($nr_atendimento);
+            $historico_interconsultas            = $this->detalhada_model->retornaHistoricoInterconsultasPaciente($nr_atendimento);
+
+            if(count($historico_interconsultas)>0){
+                $html_interconsultas_paciente =    
+                        "<div class='flex flex-wrap'>
+                            <div class='card z-index-2 w-full'>
+                                <div class='w-full flex card-header pb-0'>
+                                    
+                                </div>
+                                <div class='w-full card-body' style='padding-top:0px !important; padding-bottom:0px !important;' id='info_principal' name='info_principal'>
+                                    
+                                </div>
+
+                                <div class='card-body' style='padding-top:0px !important; padding-bottom:0px !important;' id='historico_interconsultas' name='historico_interconsultas'>
+                                    <table class='table align-items-center justify-content-center' width='100%'>
+                                        <tr>
+                                            <td colspan='2' class='text-center text-uppercase font-weight-bold text-wrap'>
+                                                Últimas Interconsultas
+                                            </td>
+                                        </tr>";
+                $reader     = new RtfReader();
+                $formatter  = new RtfHtml();
+                for($i=0;$i<count($historico_interconsultas);$i++){
+                    // if($i==3){
+                    //     break;
+                    // }
+                    $result     = $reader->Parse($historico_interconsultas[$i]["ds_motivo"]);
+                    $conteudo   = $formatter->Format($reader->root);
+
+                    $html_interconsultas_paciente .= 
+                    "<tr>
+                        <td class='cor_solicitacao_interconsulta font-weight-bold text-wrap text-uppercase'>
+                            <b>Data solicitação</b>
+                        </td>
+                        <td class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".date("d/m/Y H:i:s", strtotime($historico_interconsultas[$i]["dt_liberacao_solicitacao"]))."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class='cor_solicitacao_interconsulta font-weight-bold text-wrap text-uppercase'>
+                            <b>Leito</b>
+                        </td>
+                        <td class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".$historico_interconsultas[$i]["ds_leito"]."
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td class='cor_solicitacao_interconsulta font-weight-bold text-wrap text-uppercase'>
+                            <b>Solicitante</b>
+                        </td>
+                        <td class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".$historico_interconsultas[$i]["ds_medico_solicitante"]."
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td class='cor_solicitacao_interconsulta font-weight-bold text-wrap text-uppercase'>
+                            <b>Especialidade</b>
+                        </td>
+                        <td class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".$historico_interconsultas[$i]["ds_especialidade_solicitante"]."
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td colspan='2' class='cor_solicitacao_interconsulta text-center font-weight-bold text-wrap text-uppercase' >
+                            <b>Motivo</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='2' class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".$conteudo."
+                        </td>
+                    </tr>";
+
+                    if(strlen($historico_interconsultas[$i]["dt_liberacao_parecer"])>0){
+                        // exit("TESTE");
+                        $result1            = $reader->Parse($historico_interconsultas[$i]["ds_parecer"]);
+                        $conteudo_parecer   = $formatter->Format($reader->root);
+
+                        if(strlen($historico_interconsultas[$i]["ds_especialidade_parecer"])>0){
+                            $especialidade_parecer = $historico_interconsultas[$i]["ds_especialidade_parecer"];
+                        }else{
+                            $especialidade_parecer = " - ";
+                        }
+
+                        if(strlen($historico_interconsultas[$i]["ds_equipe_parecer"])>0){
+                            $equipe_parecer = $historico_interconsultas[$i]["ds_equipe_parecer"];
+                        }else{
+                            $equipe_parecer = " - ";
+                        }
+
+                        $html_interconsultas_paciente .= 
+                        "<tr>
+                            <td class='cor_parecer_interconsulta font-weight-bold text-wrap text-uppercase'>
+                                <b>Data parecer</b>
+                            </td>
+                            <td class='cor_parecer_interconsulta text-wrap text-justify'>
+                                ".date("d/m/Y H:i:s", strtotime($historico_interconsultas[$i]["dt_liberacao_parecer"]))."
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class='cor_parecer_interconsulta font-weight-bold text-wrap text-uppercase'>
+                                <b>Profissional parecer</b>
+                            </td>
+                            <td class='cor_parecer_interconsulta text-wrap text-justify'>
+                                ".$historico_interconsultas[$i]["ds_medico_parecer"]."
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class='cor_parecer_interconsulta font-weight-bold text-wrap text-uppercase'>
+                                <b>Especialidade parecer</b>
+                            </td>
+                            <td class='cor_parecer_interconsulta text-wrap text-justify'>
+                                ".$especialidade_parecer."
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class='cor_parecer_interconsulta font-weight-bold text-wrap text-uppercase'>
+                                <b>Equipe parecer</b>
+                            </td>
+                            <td class='cor_parecer_interconsulta text-wrap text-justify'>
+                                ".$equipe_parecer."
+                            </td>
+                        </tr>
+                        <tr> 
+                            <td colspan='2' class='cor_parecer_interconsulta text-center font-weight-bold text-wrap text-uppercase'>
+                                <b>Parecer</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='2' class='cor_parecer_interconsulta text-wrap text-justify'>
+                                ".$conteudo_parecer."
+                            </td>
+                        </tr>";
+                    }else{
+                        $html_interconsultas_paciente .= "";
+                    }
+
+                    $html_interconsultas_paciente .= "<tr><td colspan='2'><hr style='height: 2px;background-color:#000; color: #000' ></hr></td></tr>";
+                    // $reader->root->dump();
+                }
+                $html_interconsultas_paciente .=                "</table>
+                                </div>
+                            </div>
+                        </div>";
+            }else{
+                $html_interconsultas_paciente = "<div class='flex flex-wrap'>
+                                                    <div class='card z-index-2 w-full'>
+                                                        <div class='w-full flex card-header pb-0'>
+                                                            
+                                                        </div>
+                                                        <div class='w-full card-body' style='padding-top:0px !important; padding-bottom:0px !important;' id='info_principal' name='info_principal'>
+                                                            
+                                                        </div>
+                                                        <div class='card-body text-center' id='historico_interconsultas' name='historico_interconsultas'>
+                                                            O paciente ainda não possui interconsultas para serem mostradas.
+                                                        </div>
+                                                    </div>
+                                                </div>";
+            }
+            $dados["html_interconsultas_paciente"] = $html_interconsultas_paciente;
+
+            $dados['pagina']            = 'ocupacao_detalhada/setores/leitos/historico_interconsultas_paciente.php';
+            $dados['nome_pagina']       = 'Histórico de Interconsultas do Paciente';
+            $dados["link_pagina"]       = 'historicoInterconsultasPaciente';
+            unset($dados["diretorio_raiz"]);
+            $dados["diretorio_raiz"]    = '../';
+            $this->load->view('templates/template_padrao.php',$dados);   
+
+        }else{
+            header('Location: '.base_url('../').'detalhada');
+        }
+
+    }
+
+    public function historicoExamesLabPaciente(){
+        // exit();
+        $nr_atendimento = (int) $_GET["a"];
+        include 'Rtf.php';
+        if(strlen($nr_atendimento)>0){
+            $this->load->model('detalhada_model');
+            // $dados["dados_leito_atual"]     = $this->detalhada_model->retornaDadosLeitoPorAtendimento($nr_atendimento);
+            $historico_exames_lab            = $this->detalhada_model->retornaHistoricoExamesLaboratoriaisPaciente($nr_atendimento);
+
+            if(count($historico_exames_lab)>0){
+                $html_exames_lab_paciente =    
+                        "<div class='flex flex-wrap'>
+                            <div class='card z-index-2 w-full'>
+                                <div class='w-full flex card-header pb-0'>
+                                    
+                                </div>
+                                <div class='w-full card-body' style='padding-top:0px !important; padding-bottom:0px !important;' id='info_principal' name='info_principal'>
+                                    
+                                </div>
+
+                                <div class='card-body' style='padding-top:0px !important; padding-bottom:0px !important;' id='historico_exames_laboratoriais' name='historico_exames_laboratoriais'>
+                                    <table class='table text-break text-wrap align-items-center justify-content-center' width='100%'>
+                                        <tr>
+                                            <td colspan='2' class='text-center text-uppercase font-weight-bold text-wrap'>
+                                                Exames Laboratoriais
+                                            </td>
+                                        </tr>";
+                $reader     = new RtfReader();
+                $formatter  = new RtfHtml();
+                for($i=0;$i<count($historico_exames_lab);$i++){
+                    // if($i==3){
+                    //     break;
+                    // }
+                    $result     = $reader->Parse($historico_exames_lab[$i]["ds_resultado"]);
+                    $conteudo   = $formatter->Format($reader->root);
+
+                    $info_prescricao = 
+                    "<tr> 
+                        <td class='cor_solicitacao_interconsulta font-weight-bold text-wrap text-uppercase'>
+                            <b>Prescrição</b>
+                        </td>
+                        <td class='cor_solicitacao_interconsulta text-wrap text-justify' style='color:#cb0c9f'>
+                            <b>".$historico_exames_lab[$i]["nr_prescricao"]."</b>
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td class='cor_solicitacao_interconsulta font-weight-bold text-wrap text-uppercase'>
+                            <b>Data Prescrição</b>
+                        </td>
+                        <td class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".date("d/m/Y H:i:s", strtotime($historico_exames_lab[$i]["dt_liberacao_prescricao"]))."
+                        </td>
+                    </tr>";
+
+                    if($i==0){
+                        $html_exames_lab_paciente .= $info_prescricao;
+                        
+                    }else{
+                        if($historico_exames_lab[$i]["nr_prescricao"]!=$historico_exames_lab[$i-1]["nr_prescricao"]){
+                            $html_exames_lab_paciente .= $info_prescricao;
+                        }
+                    }
+
+                    $html_exames_lab_paciente .= 
+                    "<!--
+                    <tr> 
+                        <td class='cor_solicitacao_interconsulta font-weight-bold text-wrap text-uppercase'>
+                            <b>Prescrição</b>
+                        </td>
+                        <td class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".$historico_exames_lab[$i]["nr_prescricao"]."
+                        </td>
+                    </tr>
+                    -->
+                    <!--
+                    <tr>
+                        <td class='cor_solicitacao_interconsulta font-weight-bold text-wrap text-uppercase'>
+                            <b>Leito</b>
+                        </td>
+                        <td class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".$historico_exames_lab[$i]["ds_leito_atual"]."
+                        </td>
+                    </tr>
+                    -->
+                    <tr> 
+                        <td class='cor_solicitacao_interconsulta font-weight-bold text-wrap text-uppercase'>
+                            <b>Exame</b>
+                        </td>
+                        <td class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".$historico_exames_lab[$i]["nm_exame"]."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class='cor_solicitacao_interconsulta font-weight-bold text-wrap text-uppercase'>
+                            <b>Data baixa</b>
+                        </td>
+                        <td class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".date("d/m/Y H:i:s", strtotime($historico_exames_lab[$i]["dt_baixa"]))."
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td colspan='2' class='cor_solicitacao_interconsulta text-center font-weight-bold text-wrap text-uppercase' >
+                            <b>Resultado</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='2' class='cor_solicitacao_interconsulta text-wrap text-justify'>
+                            ".$conteudo."
+                        </td>
+                    </tr>";
+
+                    
+                    $html_exames_lab_paciente .= "<tr><td colspan='2'><hr style='height: 2px;background-color:#000; color: #000' ></hr></td></tr>";
+                    // $reader->root->dump();
+                }
+                $html_exames_lab_paciente .=                "</table>
+                                </div>
+                            </div>
+                        </div>";
+            }else{
+                $html_exames_lab_paciente = "<div class='flex flex-wrap'>
+                                                <div class='card z-index-2 w-full'>
+                                                    <div class='w-full flex card-header pb-0'>
+                                                        
+                                                    </div>
+                                                    <div class='w-full card-body' style='padding-top:0px !important; padding-bottom:0px !important;' id='info_principal' name='info_principal'>
+                                                        
+                                                    </div>
+                                                    <div class='card-body text-center' id='historico_exames_laboratoriais' name='historico_exames_laboratoriais'>
+                                                        O paciente ainda não possui exames laboratoriais para serem mostrados.
+                                                    </div>
+                                                </div>
+                                            </div>";
+            }
+            
+            $dados["html_exames_lab_paciente"] = $html_exames_lab_paciente;
+
+            $dados['pagina']            = 'ocupacao_detalhada/setores/leitos/historico_exames_laboratoriais_paciente.php';
+            $dados['nome_pagina']       = 'Histórico de Exames Laboratoriais do Paciente';
+            $dados["link_pagina"]       = 'historicoExamesLabPaciente';
             unset($dados["diretorio_raiz"]);
             $dados["diretorio_raiz"]    = '../';
             $this->load->view('templates/template_padrao.php',$dados);   

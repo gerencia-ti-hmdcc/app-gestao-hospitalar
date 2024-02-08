@@ -31,14 +31,14 @@
                 <div class='card z-index-2'>
                     <div class='card-body text-end text-xs'>
                         <div class='row justify-center lead text-dark active breadcrumb-item font-weight-bolder'>
-                            Evoluções
+                            Interconsultas
                         </div>
                     </div>
                 </div>
                 <div class='mt-3 flex flex-wrap'>
                     ".$botao_verdes_vermelhos."
                     <div class='w-full px-2 botoes-ocupacao-detalhada'>
-                        <a class='btn text-xs hmdcc-color-2 flex rounded text-white' href='historicoInterconsultasPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Últimas interconsultas</a>
+                        <a class='btn text-xs hmdcc-color-1 flex rounded text-white' href='historicoEvolucoesPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Últimas evoluções</a>
                     </div>
                     <!--
                     <div class='w-full px-2 botoes-ocupacao-detalhada'>
@@ -49,14 +49,15 @@
                     </div>
                     <div class='w-full px-2 botoes-ocupacao-detalhada'>
                         <a class='btn text-xs hmdcc-color-5 flex rounded text-white' href='historicoLaudosPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Laudos</a>
-                    </div>-->
+                    </div>
+                    -->
                 </div>
                 </div>";
             /*.date('d/m/Y H:i:s', strtotime($ultima_atualizacao["ultima_atualizacao"])).*/
     ?>
     
     <?php
-       echo $html_evolucoes_paciente;
+        echo $html_interconsultas_paciente;
         
         echo "<input type='hidden' id='cd_setor_atendimento_id' name='cd_setor_atendimento_id' value='".$_GET["s"]."'/>";
         echo "<input type='hidden' id='linha_cuidado_id' name='linha_cuidado_id' value='".$_GET["l"]."'/>";

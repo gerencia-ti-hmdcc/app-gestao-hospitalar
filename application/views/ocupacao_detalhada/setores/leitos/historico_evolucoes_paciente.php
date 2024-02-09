@@ -19,7 +19,7 @@
 
                         </div>
                     </div>";
-        if($_GET["l"]!=4){
+        if($_GET["l"]!=4 && $_GET["s"]!=145){
             $botao_verdes_vermelhos = "<div class='w-full px-2 botoes-ocupacao-detalhada'>
                                             <a class='btn text-xs btn-primary flex rounded text-white' href='avaliacoesVerdeVermelho?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Histórico avaliações</a>
                                         </div>";

@@ -131,6 +131,7 @@
     }    
   }
   
+  #[\AllowDynamicProperties]
   class RtfReader
   {
     public $root = null;
@@ -343,7 +344,7 @@
       }
     }
   }
-  
+  #[\AllowDynamicProperties]
   class RtfState
   {
     public function __construct()
@@ -362,7 +363,7 @@
       $this->fontsize = 0;
     }
   }
-  
+  #[\AllowDynamicProperties]
   class RtfHtml
   {
     public function Format($root)
@@ -379,6 +380,9 @@
   
     protected function FormatGroup($group)
     {
+      if(empty($group->GetType())){
+        return;
+      }
       // Can we ignore this group?
       if ($group->GetType() == "fonttbl") return;
       if ($group->GetType() == "colortbl") return;

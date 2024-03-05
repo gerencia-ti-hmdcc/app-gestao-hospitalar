@@ -16,7 +16,8 @@ class MY_Controller extends CI_Controller {
         //VERIFICA SE EXISTE USUARIO LOGADO NA SESSÃO DO NAVEGADOR
         if (!$usuario){
             if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
-                header("Location: https://app.hmdcc.com.br");
+                // header("Location: https://app.hmdcc.com.br");
+                redirect("../");
             }else{
                 redirect("../app");
             }
@@ -30,7 +31,8 @@ class MY_Controller extends CI_Controller {
                     $this->session->set_flashdata("warning","<br />Token expirado. Efetue login novamente!");
                     $this->session->unset_userdata("usuario_logado");
                     if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
-                        header("Location: https://app.hmdcc.com.br");
+                        // header("Location: https://app.hmdcc.com.br");
+                        redirect("../");
                     }else{
                         redirect("../app");
                     }

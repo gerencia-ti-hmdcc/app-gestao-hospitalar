@@ -62,12 +62,14 @@ class Login extends CI_Controller {
                         }else{
                                 if($usuario["IE_STATUS"]=='A'){
                                         //exit(print_r($usuario));
+                                        //VENCIMENTO DE SESSAO NAVEGADOR
                                         if($usuario["TIPO_PERFIL"]=="P"){
                                                 $this->session->sess_expiration = 0;   
+                                                $this->session->set_userdata("usuario_logado",$usuario);
                                         }else{
                                                 $this->session->sess_expiration = 60*60*2;  
+                                                $this->session->set_tempdata('usuario_logado', $usuario, 60*60*2); // 2 HORAS
                                         }
-                                        $this->session->set_userdata("usuario_logado",$usuario);
                                         $_SESSION['usuario_logado']['TOKEN'] = $token;
                                         $this->login_model->atualizaToken($usuario["ID"],$data_atual,$token,$validade);
                                         $this->login_model->atualizaDisp($this->PegarDispositivo(),$usuario["ID"]);

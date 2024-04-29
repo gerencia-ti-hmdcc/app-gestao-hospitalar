@@ -31,17 +31,17 @@
                 <div class='card z-index-2'>
                     <div class='card-body text-end text-xs'>
                         <div class='row justify-center lead text-dark active breadcrumb-item font-weight-bolder'>
-                            Evoluções
+                            Exames laboratoriais
                         </div>
                     </div>
                 </div>
                 <div class='mt-3 flex flex-wrap'>
                     ".$botao_verdes_vermelhos."
                     <div class='w-full px-2 botoes-ocupacao-detalhada'>
-                        <a class='btn text-xs hmdcc-color-2 flex rounded text-white' href='historicoInterconsultasPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Últimas interconsultas</a>
+                        <a class='btn text-xs hmdcc-color-1 flex rounded text-white' href='historicoEvolucoesPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Últimas evoluções</a>
                     </div>
                     <div class='w-full px-2 botoes-ocupacao-detalhada'>
-                        <a class='btn text-xs hmdcc-color-3 flex rounded text-white' href='historicoExamesLabPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Exames laboratoriais</a>
+                        <a class='btn text-xs hmdcc-color-2 flex rounded text-white' href='historicoInterconsultasPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Interconsultas</a>
                     </div>
                     <!--
                     <div class='w-full px-2 botoes-ocupacao-detalhada'>
@@ -57,7 +57,7 @@
     ?>
     
     <?php
-        echo $html_evolucoes_paciente;
+        echo $html_exames_lab_paciente;
         
         echo "<input type='hidden' id='cd_setor_atendimento_id' name='cd_setor_atendimento_id' value='".$_GET["s"]."'/>";
         echo "<input type='hidden' id='linha_cuidado_id' name='linha_cuidado_id' value='".$_GET["l"]."'/>";

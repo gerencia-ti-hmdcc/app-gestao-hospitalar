@@ -12,9 +12,12 @@ class MY_Controller extends CI_Controller {
             '127.0.0.1',
             '::1'
         );
-        
+
+        $this->session->set_tempdata('usuario_logado', $usuario, 60*60*2); //SETANDO 2 HORAS DE SESSAO DE NAVEGADOR A CADA ATUALIZAÇÃO
+
         //VERIFICA SE EXISTE USUARIO LOGADO NA SESSÃO DO NAVEGADOR
         if (!$usuario){
+            $this->session->set_flashdata("warning","<br />Token expirado. Efetue login novamente!");
             if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
                 // header("Location: https://app.hmdcc.com.br");
                 redirect("../");

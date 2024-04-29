@@ -474,6 +474,38 @@ class Detalhada extends MY_Controller {
 
     }
 
+    public function encontraArquivosExamesLaboratoriaisExternos($nr_atendimento){
+        $whitelist = array(
+            '127.0.0.1',
+            '::1'
+        );
+        if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
+            $path1      = "assets/exames";
+        }else{
+            $path1      = "C:/laragon/www/app/assets/exames";
+        }
+
+        $diretorio1 = dir($path1);
+
+        while($arquivo1 = $diretorio1->read()){
+            $arquivos_externos_pasta[] = $arquivo1;
+        }
+
+        $diretorio1->close();
+        if(count($arquivos_externos_pasta)>0){
+            $arquivos_exames_externos_atendimento = [];
+            for($i=0;$i<count($arquivos_externos_pasta);$i++){
+                if(str_contains($arquivos_externos_pasta[$i],$nr_atendimento)){
+                    $arquivos_exames_externos_atendimento[] = $arquivos_externos_pasta[$i];
+                }
+            }
+            return $arquivos_exames_externos_atendimento; 
+        }else{
+            return [];
+        }
+    }
+
+
     public function historicoExamesLabPaciente(){
         // exit();
         $nr_atendimento = (int) $_GET["a"];
@@ -483,6 +515,36 @@ class Detalhada extends MY_Controller {
             // $dados["dados_leito_atual"]     = $this->detalhada_model->retornaDadosLeitoPorAtendimento($nr_atendimento);
             $historico_exames_lab            = $this->detalhada_model->retornaHistoricoExamesLaboratoriaisPaciente($nr_atendimento);
 
+            $exames_laboratoriais_externos_servidor = $this->encontraArquivosExamesLaboratoriaisExternos($nr_atendimento);
+
+            // SE EXISTE EXAME LABORATORIAL EXTERNO
+            $se_existe_exames_externos = "";
+            if($exames_laboratoriais_externos_servidor){
+                if(count($exames_laboratoriais_externos_servidor)>0){
+                    $se_existe_exames_externos = "<tr>
+                                                    <td colspan='2' class='text-center text-uppercase font-weight-bold text-wrap'>
+                                                        Externos
+                                                    </td>
+                                                </tr>";
+                    for($j=0;$j<count($exames_laboratoriais_externos_servidor);$j++){
+                        $se_existe_exames_externos  .=   "<tr> 
+                                                            <td class='text-wrap text-uppercase'>
+                                                                <b>".$exames_laboratoriais_externos_servidor[$j]."</b>
+                                                            </td>
+                                                            <td class='cor_solicitacao_interconsulta text-wrap text-center flex' style='color:#cb0c9f'>
+                                                                <a class='w-full' href='exameLaboratorialExternoPdf?ne=".$exames_laboratoriais_externos_servidor[$j]."'><div class='w-full btn btn-primary' style='margin:0px !important'><b>ABRIR EXAME</b></div></a>
+                                                            </td>
+                                                        </tr>";
+                    }
+                    $se_existe_exames_externos .= "<tr>
+                                                    <td colspan='2' class='text-center text-uppercase font-weight-bold text-wrap'>
+                                                        Internos
+                                                    </td>
+                                                </tr>";
+                }
+            }
+
+            // SE EXISTE EXAME LABORATORIAL INTERNO
             if(count($historico_exames_lab)>0){
                 $html_exames_lab_paciente =    
                         "<div class='flex flex-wrap'>
@@ -500,15 +562,22 @@ class Detalhada extends MY_Controller {
                                             <td colspan='2' class='text-center text-uppercase font-weight-bold text-wrap'>
                                                 Exames Laboratoriais
                                             </td>
-                                        </tr>";
+                                        </tr>
+                                        $se_existe_exames_externos";
                 $reader     = new RtfReader();
                 $formatter  = new RtfHtml();
                 for($i=0;$i<count($historico_exames_lab);$i++){
                     // if($i==3){
                     //     break;
                     // }
-                    $result     = $reader->Parse($historico_exames_lab[$i]["ds_resultado"]);
-                    $conteudo   = $formatter->Format($reader->root);
+                    if(str_contains($historico_exames_lab[$i]["ds_resultado"],'srvhmdccfiles')){
+                        $conteudo     = "Exame externo. Temporariamente disponível somente no Tasy.";
+                    }else{
+                        $result     = $reader->Parse($historico_exames_lab[$i]["ds_resultado"]);
+                        $conteudo   = $formatter->Format($reader->root);
+                    }
+                    // $result     = $reader->Parse($historico_exames_lab[$i]["ds_resultado"]);
+                    // $conteudo   = $formatter->Format($reader->root);
 
                     $info_prescricao = 
                     "<tr> 
@@ -594,19 +663,29 @@ class Detalhada extends MY_Controller {
                             </div>
                         </div>";
             }else{
-                $html_exames_lab_paciente = "<div class='flex flex-wrap'>
-                                                <div class='card z-index-2 w-full'>
-                                                    <div class='w-full flex card-header pb-0'>
-                                                        
-                                                    </div>
-                                                    <div class='w-full card-body' style='padding-top:0px !important; padding-bottom:0px !important;' id='info_principal' name='info_principal'>
-                                                        
-                                                    </div>
-                                                    <div class='card-body text-center' id='historico_exames_laboratoriais' name='historico_exames_laboratoriais'>
-                                                        O paciente ainda não possui exames laboratoriais para serem mostrados.
+                //ADICIONAR: EXAME LAB EXTERNO MESMO SE NÃO HOUVER INTERNO - VARIAVEL $se_existe_exames_externos
+
+                if(strlen($se_existe_exames_externos)>0){
+                    $html_exames_lab_paciente .= $se_existe_exames_externos;
+                    $html_exames_lab_paciente .=        "</table>
                                                     </div>
                                                 </div>
                                             </div>";
+                }else{
+                    $html_exames_lab_paciente = "<div class='flex flex-wrap'>
+                                                    <div class='card z-index-2 w-full'>
+                                                        <div class='w-full flex card-header pb-0'>
+                                                            
+                                                        </div>
+                                                        <div class='w-full card-body' style='padding-top:0px !important; padding-bottom:0px !important;' id='info_principal' name='info_principal'>
+                                                            
+                                                        </div>
+                                                        <div class='card-body text-center' id='historico_exames_laboratoriais' name='historico_exames_laboratoriais'>
+                                                            O paciente ainda não possui exames laboratoriais para serem mostrados.
+                                                        </div>
+                                                    </div>
+                                                </div>";
+                }
             }
             
             $dados["html_exames_lab_paciente"] = $html_exames_lab_paciente;
@@ -622,6 +701,127 @@ class Detalhada extends MY_Controller {
             header('Location: '.base_url('../').'detalhada');
         }
 
+    }
+
+    public function historicoExamesImagemPaciente(){
+        
+        $this->load->helper('url');
+        $nr_atendimento = (int) $_GET["a"];
+
+        if(strlen($nr_atendimento)>0){
+            $this->load->model('detalhada_model');
+            $dados["nr_prontuario"] = $this->detalhada_model->retornaProntuarioAtendimento($nr_atendimento);
+            $dados["html_exames_imagem_paciente"] = "<div class='flex flex-wrap'>
+                                                        <div class='card z-index-2 w-full'>
+                                                            <div class='w-full flex card-header pb-0'>
+                                                                
+                                                            </div>
+                                                            <div class='w-full card-body' style='padding-top:0px !important; padding-bottom:0px !important;' id='info_principal' name='info_principal'>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type='hidden' id='nr_prontuario_id' name='nr_prontuario_id' value='".$dados["nr_prontuario"]["nr_prontuario"]."'/>";
+
+            $dados['pagina']            = 'ocupacao_detalhada/setores/leitos/historico_exames_imagem_paciente.php';
+            $dados['nome_pagina']       = 'Exames de imagem';
+            $dados["link_pagina"]       = 'historicoExamesImagemPaciente';
+            unset($dados["diretorio_raiz"]);
+            $dados["diretorio_raiz"]    = '../';
+            $this->load->view('templates/template_padrao.php',$dados);   
+
+        }else{
+            header('Location: '.base_url('../').'detalhada');
+        }
+
+    }
+
+    public function retornaTabelaExames(){
+        $nr_prontuario  = (int) $_POST["nr_prontuario"];
+        $this->load->model('detalhada_model');
+        $exames_imagem  = $this->detalhada_model->retornaExamesImagemPaciente($nr_prontuario);
+        $tabela_exames  = "<table class='table align-items-center justify-content-center' width='100%'>
+                            <tr>
+                                <td class='text-xs font-weight-bold text-wrap'>
+                                    Exame
+                                </td>
+                                <td class='text-xs font-weight-bold text-wrap'>
+                                    Data
+                                </td>
+                                <td class='text-xs font-weight-bold text-wrap'>
+                                    Situação
+                                </td>
+                            <tr>";
+        $cont_exames = 0;
+        for($i = 0;$i<count($exames_imagem);$i++){
+            // $onclick_linha = "onclick='acessarExamePaciente(".$exames_imagem[$i]["nr_acesso_dicom"].")'";
+            $onclick_linha = "onclick='chamarFuncaoPhp(".$exames_imagem[$i]["nr_acesso_dicom"].")'";
+            $tabela_exames .=   "<tr>
+                                    <td class='cursor-pointer text-xs font-weight-bold text-wrap' $onclick_linha>".$exames_imagem[$i]["ds_exame"]."</td>
+                                    <td class='cursor-pointer text-xs font-weight-bold text-wrap' $onclick_linha>".date('d/m/Y H:i:s',strtotime($exames_imagem[$i]["dt_exame"]))."</td>
+                                    <td class='cursor-pointer text-xs font-weight-bold text-wrap' $onclick_linha>".$exames_imagem[$i]["ds_status"]."</td>
+                                </tr>";
+            $cont_exames ++;
+        }
+
+        $tabela_exames .= "<tr><td class='text-xs font-weight-bold text-wrap' colspan='2'><b>Total</b></td><td class='text-xs font-weight-bold text-wrap'><b>$cont_exames exames</b></td></tr></table>";
+        print json_encode($tabela_exames);
+    }
+
+    public function exameLaboratorialExternoPdf(){
+        $nome_exame_pdf = $_GET["ne"];
+        $this->load->helper('file');
+        // /assets/exames/$nome_exame_pdf
+
+        $usuario = $this->session->userdata("usuario_logado");
+        if($usuario){
+            // GARANTIR NOVAMENTE A SESSAO DE BANCO E DE NAVEGADOR
+            $this->load->model("my_model");
+            $us_token = $this->my_model->verificaToken($usuario['TOKEN']);
+
+            if(isset($us_token['ID']) && $us_token['ID']>0){
+                $whitelist = array(
+                    '127.0.0.1',
+                    '::1'
+                );
+                if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
+                    $filepath = "assets/exames/$nome_exame_pdf";
+                }else{
+                    $filepath = "C:/laragon/www/app/assets/exames/$nome_exame_pdf";
+                }
+                // print_r(scandir($filepath));
+                // exit();
+                $contents = read_file($filepath);
+                if (!file_exists($filepath)) {
+                    throw new Exception("O arquivo $filepath não existe!");
+                }
+                if (!is_readable($filepath)) {
+                    throw new Exception("Não foi possível ler o arquivo $filepath");
+                }
+                $contents = read_file($filepath);
+
+                /* PARA BAIXAR DIRETO O ARQUIVO
+                http_response_code(200);
+                header('Content-Length: '.filesize($filepath));
+                header("Content-Type: application/pdf");
+                header('Content-Disposition: attachment; filename="'.$nome_exame_pdf.'"'); // feel free to change the suggested filename
+                readfile($filepath);
+                */
+
+                //PARA VISUALIZAR O ARQUIVO
+                $this->output
+                    ->set_status_header(200)
+                    ->set_content_type('application/pdf')
+                    ->set_output($contents)
+                    ->_display();
+                exit;
+            }else{
+                return;
+            }
+        }else{
+            return;
+        }
+        
     }
 
     // public function percentuaisSetorOcupacao(){

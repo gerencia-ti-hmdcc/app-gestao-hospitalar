@@ -436,9 +436,9 @@
                                                                     "<a class='btn btn-primary rounded flex' href='avaliacoesVerdeVermelho?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Histórico de avaliações</a>"+
                                                                     "<a class='btn hmdcc-color-1 rounded text-white flex' href='historicoEvolucoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas evoluções</a>"+
                                                                     "<a class='btn hmdcc-color-2 rounded text-white flex' href='historicoInterconsultasPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas interconsultas</a>"+
-                                                                    // "<a class='btn hmdcc-color-3 rounded text-white flex' href='historicoExamesLabPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Exames laboratoriais</a>"+
+                                                                    "<a class='btn hmdcc-color-3 rounded text-white flex' href='historicoExamesLabPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Exames laboratoriais</a>"+
                                                                     // "<a class='btn hmdcc-color-4 rounded text-white flex' href='historicoPrescricoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas prescrições</a>"+
-                                                                    // "<a class='btn hmdcc-color-5 rounded text-white flex' href='historicoLaudosPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Laudos</a>"+
+                                                                    "<a class='btn hmdcc-color-5 rounded text-white flex' href='historicoExamesImagemPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Laudos</a>"+
                                                                 "</td>"+
                                                             "</tr>";
                                     // }else{
@@ -509,9 +509,9 @@
                                                                     "<td class='font-weight-bold text-wrap text-center' colspan='2'>"+
                                                                         "<a class='btn hmdcc-color-1 rounded text-white flex' href='historicoEvolucoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas evoluções</a>"+
                                                                         "<a class='btn hmdcc-color-2 rounded text-white flex' href='historicoInterconsultasPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas interconsultas</a>"+
-                                                                        // "<a class='btn hmdcc-color-3 rounded text-white flex' href='historicoExamesLabPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Exames laboratoriais</a>"+
+                                                                        "<a class='btn hmdcc-color-3 rounded text-white flex' href='historicoExamesLabPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Exames laboratoriais</a>"+
                                                                         // "<a class='btn hmdcc-color-4 rounded text-white flex' href='historicoPrescricoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas prescrições</a>"+
-                                                                        // "<a class='btn hmdcc-color-5 rounded text-white flex' href='historicoLaudosPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Laudos</a>"+
+                                                                        "<a class='btn hmdcc-color-5 rounded text-white flex' href='historicoExamesImagemPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Laudos</a>"+
                                                                     "</td>"+
                                                                 "</tr>";
                                     // }else{
@@ -910,10 +910,13 @@
                                                     "</td>" +
                                                 "</tr>";
 
-                    }else if(tipo_avaliacao=='leococitos'){
+                    }/*else if(tipo_avaliacao=='braden'){
                 
 
-                    }
+                    }else if(tipo_avaliacao=='morse'){
+                
+
+                    }*/
                 }
 
                 html_leito = "<table class='table align-items-center justify-content-center' width='100%'>" +

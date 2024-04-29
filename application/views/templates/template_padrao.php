@@ -873,7 +873,7 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                 alert('Não foi possível abrir o detalhamento. Confira sua conexão!');
             }
           });
-        }else if('<?php echo $link_pagina;?>'=='historicoEvolucoesPaciente' || '<?php echo $link_pagina;?>'=='historicoInterconsultasPaciente' || '<?php echo $link_pagina;?>'=='historicoExamesLabPaciente'){
+        }else if('<?php echo $link_pagina;?>'=='historicoEvolucoesPaciente' || '<?php echo $link_pagina;?>'=='historicoInterconsultasPaciente' || '<?php echo $link_pagina;?>'=='historicoExamesLabPaciente' || '<?php echo $link_pagina;?>'=='historicoExamesImagemPaciente'){
           let nr_atendimento  = $("#nr_atendimento_id").val();
           $.ajax({
             url : "<?php echo site_url('retornaDadosLeitoPorAtendimento');?>",
@@ -1094,7 +1094,27 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
                         conteudo_template_avaliacao+
                         html_movimentacoes_atendimento;
 
-                        $("#info_principal").html(html_leito);
+                        if('<?php echo $link_pagina;?>'=='historicoExamesImagemPaciente'){
+                          $.ajax({
+                            url : "<?php echo site_url('retornaTabelaExames');?>",
+                            type : 'POST',
+                            data: 
+                            {
+                                "nr_prontuario" : $("#nr_prontuario_id").val()
+                            },
+                            dataType: "json",
+                            success : function(resultadoTabelaExames){
+                              let html_adicional =  resultadoTabelaExames;
+                              html_leito+= resultadoTabelaExames;
+                              $("#info_principal").html(html_leito);
+                            },error: function(data){
+                                alert('Não foi possível abrir o detalhamento. Confira sua conexão!');
+                            }
+                          });
+                        }else{
+                          $("#info_principal").html(html_leito);
+                        }
+
                         // $("#modal_info").modal('show');
                     },
                     error : function(data){

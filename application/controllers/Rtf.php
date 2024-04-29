@@ -222,7 +222,10 @@
       $rtfword = new RtfControlWord();
       $rtfword->word = $word;
       $rtfword->parameter = $parameter;
-      array_push($this->group->children, $rtfword);
+      if(isset($this->group->children)){
+        array_push($this->group->children, $rtfword);
+      }
+      // array_push($this->group->children, $rtfword);
     }
   
     protected function ParseControlSymbol()
@@ -245,7 +248,9 @@
       $rtfsymbol = new RtfControlSymbol();
       $rtfsymbol->symbol = $symbol;
       $rtfsymbol->parameter = $parameter;
-      array_push($this->group->children, $rtfsymbol);
+      if(isset($this->group->children)){
+        array_push($this->group->children, $rtfsymbol);
+      }
     }
   
     protected function ParseControl()
@@ -306,7 +311,9 @@
   
       $rtftext = new RtfText();
       $rtftext->text = $text;
-      array_push($this->group->children, $rtftext);
+      if(isset($this->group->children)){
+        array_push($this->group->children, $rtftext);
+      }
     }
   
     public function Parse($rtf)
@@ -380,6 +387,9 @@
   
     protected function FormatGroup($group)
     {
+      if(!isset($group)){
+        return;
+      }
       if(empty($group->GetType())){
         return;
       }

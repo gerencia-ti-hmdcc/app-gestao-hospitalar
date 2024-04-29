@@ -40,17 +40,17 @@
                     <div class='w-full px-2 botoes-ocupacao-detalhada'>
                         <a class='btn text-xs hmdcc-color-1 flex rounded text-white' href='historicoEvolucoesPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Últimas evoluções</a>
                     </div>
-                    <!--
                     <div class='w-full px-2 botoes-ocupacao-detalhada'>
                         <a class='btn text-xs hmdcc-color-3 flex rounded text-white' href='historicoExamesLabPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Exames laboratoriais</a>
                     </div>
+                    <!--
                     <div class='w-full px-2 botoes-ocupacao-detalhada'>
                         <a class='btn text-xs hmdcc-color-4 flex rounded text-white' href='historicoPrescricoesPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Últimas prescrições</a>
                     </div>
-                    <div class='w-full px-2 botoes-ocupacao-detalhada'>
-                        <a class='btn text-xs hmdcc-color-5 flex rounded text-white' href='historicoLaudosPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Laudos</a>
-                    </div>
                     -->
+                    <div class='w-full px-2 botoes-ocupacao-detalhada'>
+                        <a class='btn text-xs hmdcc-color-5 flex rounded text-white' href='historicoExamesImagemPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Laudos</a>
+                    </div>
                 </div>
                 </div>";
             /*.date('d/m/Y H:i:s', strtotime($ultima_atualizacao["ultima_atualizacao"])).*/

@@ -1,4 +1,5 @@
 <?php
+#[\AllowDynamicProperties]
 class Detalhada_model extends CI_Model {
     
     public function retornaLinhasDeCuidado($usuario){
@@ -194,6 +195,27 @@ class Detalhada_model extends CI_Model {
                                     nr_atendimento = $nr_atendimento
                                 ORDER BY
                                     dt_baixa DESC, nr_prescricao DESC, nr_sequencia ASC")->result_array();
+    }
+
+    public function retornaProntuarioAtendimento($nr_atendimento){
+        return $this->db->query("SELECT 
+                                    nr_prontuario 
+                                FROM 
+                                    DETALHE_OCUPACAO 
+                               WHERE 
+                                    nr_atendimento = $nr_atendimento")->row_array();
+    }
+
+    public function retornaExamesImagemPaciente($nr_prontuario){
+        $this->site = $this->load->database('site', TRUE);
+        return $this->site->query("SELECT 
+                                    * 
+                                FROM 
+                                    HMDCC_EXAMES_IMAGEM 
+                                WHERE 
+                                    nr_prontuario = '$nr_prontuario'
+                                ORDER BY
+                                    nr_acesso_dicom DESC")->result_array();
     }
 
 }

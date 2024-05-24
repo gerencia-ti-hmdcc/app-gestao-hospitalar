@@ -23,7 +23,7 @@ jobs:
         server: app-hml.hmdcc.com.br
         username: ${{ secrets.MINASONLINE_FTP_USERNAME }}
         password: ${{ secrets.MINASONLINE_FTP_PASSWORD }}
-        server-dir: public_html/app-hml.hmdcc.com.br
+        server-dir: public_html/app-hml.hmdcc.com.br/
         exclude: |
           **/.git*
           **/.git*/**

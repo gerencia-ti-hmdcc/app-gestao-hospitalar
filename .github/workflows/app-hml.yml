@@ -1,10 +1,8 @@
 name: 'App HMDCC Homologação'
 on:
-  pull_request:
+  push:
     branches:
-      - 'main'
-    types:
-      - closed
+      - 'hml'
     paths:
       - './**'
       - '.github/workflows/app-hml.yml'
@@ -27,7 +25,7 @@ jobs:
         exclude: |
           **/.git*
           **/.git*/**
-          **/soft-ui-dashboard-main
+          soft-ui-dashboard-main/
           fileToExclude.txt
           readme.rst
           license.txt

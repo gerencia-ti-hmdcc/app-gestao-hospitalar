@@ -12,10 +12,10 @@ jobs:
     name: Deploy HML
     runs-on: ubuntu-latest
     steps:
-    - name: Get latest code
+    - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Sync files
+    - name: Sincronizando arquivos
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: app-hml.hmdcc.com.br

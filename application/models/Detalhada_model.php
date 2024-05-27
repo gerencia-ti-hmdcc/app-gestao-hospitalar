@@ -218,5 +218,48 @@ class Detalhada_model extends CI_Model {
                                     nr_acesso_dicom DESC")->result_array();
     }
 
+    public function retornaUltimasAvaliacoesBradenPaciente(){
+        return $this->db->query("SELECT
+                                    NR_ATENDIMENTO, 
+                                    CD_SETOR_ATENDIMENTO, 
+                                    DS_LEITO_ATUAL, 
+                                    DT_LIBERACAO_BRADEN, 
+                                    PONTOS_BRADEN, 
+                                    CLASSIFICACAO_BRADEN,
+                                    PROFISSIONAL_BRADEN,
+                                    SEQ_BRADEN
+                                FROM 
+                                    PACIENTE_DADOS_CLINICOS a
+                                WHERE
+                                    NR_ATENDIMENTO is not null
+                                    AND NR_ATENDIMENTO <> 0
+                                    AND SEQ_BRADEN is not null
+                                    AND SEQ_BRADEN <> 0
+                                    and DT_LIBERACAO_BRADEN = ( select max(x.DT_LIBERACAO_BRADEN) from PACIENTE_DADOS_CLINICOS x where x.NR_ATENDIMENTO=a.nr_atendimento)
+                                GROUP BY	
+                                    NR_ATENDIMENTO")->result_array();
+    }
+
+    public function retornaUltimasAvaliacoesMorsePaciente(){
+        return $this->db->query("SELECT
+                                    NR_ATENDIMENTO, 
+                                    CD_SETOR_ATENDIMENTO, 
+                                    DS_LEITO_ATUAL,
+                                    DT_LIBERACAO_MORSE,
+                                    PONTOS_MORSE, 
+                                    CLASSIFICACAO_MORSE,
+                                    PROFISSIONAL_MORSE,
+                                    SEQ_MORSE
+                                FROM 
+                                    PACIENTE_DADOS_CLINICOS a
+                                WHERE
+                                    NR_ATENDIMENTO is not null
+                                    AND NR_ATENDIMENTO <> 0
+                                    AND SEQ_MORSE is not null
+                                    AND SEQ_MORSE <> 0
+                                    and DT_LIBERACAO_MORSE = ( select max(x.DT_LIBERACAO_MORSE) from PACIENTE_DADOS_CLINICOS x where x.NR_ATENDIMENTO = a.nr_atendimento)
+                                GROUP BY	
+                                    NR_ATENDIMENTO")->result_array();
+    }
 }
 ?>

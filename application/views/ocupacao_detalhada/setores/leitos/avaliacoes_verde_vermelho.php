@@ -42,7 +42,7 @@
                     </div>
                     -->
                     <div class='w-full px-2 botoes-ocupacao-detalhada'>
-                        <a class='btn text-xs hmdcc-color-5 flex rounded text-white' href='historicoExamesImagemPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Laudos</a>
+                        <a class='btn text-xs hmdcc-color-5 flex rounded text-white' href='historicoExamesImagemPaciente?a=".$_GET["a"]."&l=".$_GET["l"]."&s=".$_GET["s"]."'>Imagens e laudos</a>
                     </div>
                 </div>
             </div>";

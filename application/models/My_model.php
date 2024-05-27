@@ -75,5 +75,36 @@ class My_model extends CI_Model {
                                 ORDER BY 
                                     M.ORDEM ASC, ID_FUNCAO ASC")->row_array();
     }
+
+    public function logAcaoUsuario($usuario, $tipo, $nr_atendimento, $funcao, $parametro, $data_hora, $link, $info_dispositivo){
+
+        if($nr_atendimento!=NULL){
+            $coluna_atendimento = "NR_ATENDIMENTO, ";
+            $valor_atendimento  = $nr_atendimento.",";
+        }else{
+            $coluna_atendimento = "";
+            $valor_atendimento  = "";
+        }
+
+        if($funcao!=NULL){
+            $coluna_funcao = "FUNCAO_ACESSO, ";
+            $valor_funcao  = "'".$funcao."',";
+        }else{
+            $coluna_funcao = "";
+            $valor_funcao  = "";
+        }
+        
+        if($parametro!=NULL){
+            $coluna_atendimento = "PARAMETRO_ADMIN, ";
+            $valor_parametro  = "'".$parametro."',";
+        }else{
+            $coluna_parametro = "";
+            $valor_parametro  = "";
+        }
+        return $this->db->query("INSERT INTO
+                                    LOG_ACESSO(ID_USUARIO, LINK_ACESSO, TIPO_LOG, $coluna_atendimento $coluna_funcao $coluna_parametro DATA_ACESSO, INFO_DISPOSITIVO)
+                                VALUES
+                                    ($usuario, '$link','$tipo', $valor_atendimento $valor_funcao $valor_parametro '$data_hora', '$info_dispositivo')");
+    }
 }
 ?>

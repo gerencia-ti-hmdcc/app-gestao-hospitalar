@@ -249,13 +249,20 @@ class Monitoramento extends MY_Controller {
         $dados["total_paciente_critico"]     = $dados["admissoes_internas_cti"] + $dados["admissoes_externas_cti"];
         $dados["total_clinica_cirurgica"]    = $dados["admissoes_externas_c_cirurgica"] /*+ $dados["admissoes_internas_c_cirurgica"]*/;
         $dados["total_avc"]                  = ($dados["admissoes_externas_avc"] /*+ $dados["admissoes_internas_avc"]*/); 
-        
-        $dados["meta_admissoes_internas_cti"]               = $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],1,'I')[0]["QUANTIDADE"];
-        $dados["meta_admissoes_externas_cti"]               = $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],1,'E')[0]["QUANTIDADE"];
-        $dados["meta_admissoes_externas_clinica_medica"]    = $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],10,'E')[0]["QUANTIDADE"];
-        $dados["meta_admissoes_externas_avc"]               = $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],9,'E')[0]["QUANTIDADE"];
-        $dados["meta_admissoes_externas_clinica_cirurgica"] = $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],11,'E')[0]["QUANTIDADE"];
-        $dados["meta_admissoes_hd"]                         = $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],13,'E')[0]["QUANTIDADE"];
+
+        $meta_admissoes_internas_cti                = count($this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],1,'I'))  == 0 ? 1 : $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],1,'I')[0]["QUANTIDADE"];
+        $meta_admissoes_externas_cti                = count($this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],1,'E'))  == 0 ? 1 : $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],1,'E')[0]["QUANTIDADE"];
+        $meta_admissoes_externas_clinica_medica     = count($this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],10,'E')) == 0 ? 1 : $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],10,'E')[0]["QUANTIDADE"];
+        $meta_admissoes_externas_avc                = count($this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],9,'E'))  == 0 ? 1 : $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],9,'E')[0]["QUANTIDADE"];
+        $meta_admissoes_externas_clinica_cirurgica  = count($this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],11,'E')) == 0 ? 1 : $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],11,'E')[0]["QUANTIDADE"];
+        $meta_admissoes_hd                          = count($this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],13,'E')) == 0 ? 1 : $this->monitoramento_model->retornaMetasAnuaisPorLinha($dados["ano_calendario"],$dados["quadrimestre"],13,'E')[0]["QUANTIDADE"];
+
+        $dados["meta_admissoes_internas_cti"]               = $meta_admissoes_internas_cti;
+        $dados["meta_admissoes_externas_cti"]               = $meta_admissoes_externas_cti;
+        $dados["meta_admissoes_externas_clinica_medica"]    = $meta_admissoes_externas_clinica_medica;
+        $dados["meta_admissoes_externas_avc"]               = $meta_admissoes_externas_avc;
+        $dados["meta_admissoes_externas_clinica_cirurgica"] = $meta_admissoes_externas_clinica_cirurgica;
+        $dados["meta_admissoes_hd"]                         = $meta_admissoes_hd;
         
         // $dados["meta_total_paciente_clinico"]               = ($dados["meta_admissoes_internas_clinica_medica"] + $dados["meta_admissoes_externas_clinica_medica"]) + ($dados["meta_admissoes_externas_avc"]); /* RETIRAR METAS INTERNAS DO CALCULO - JULIANA 01/2023*/
         $dados["meta_total_clinica_medica"]                 = $dados["meta_admissoes_externas_clinica_medica"]; 

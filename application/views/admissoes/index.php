@@ -187,7 +187,7 @@
         echo '<span class="text-sm font-weight-bold">Clínica Cirúrgica:</span>
                 <span class="text-xs">Meta: '.$meta_total_clinica_cirurgica.' - Realizado: '.$total_clinica_cirurgica.'</span>
                 <span class="text-xs">Admissões Internas: '.$admissoes_internas_c_cirurgica.' </span>
-                <span class="text-center text-xs">Porcentagemde 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.$porcentagem_realizado_cir.'%</b></span>
+                <span class="text-center text-xs">Porcentagem de 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.$porcentagem_realizado_cir.'%</b></span>
                 <span class="text-center text-xs">Ideal realizado de 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.(int)$ideal_realizado_atual_cir.'</b></span>
                 <div class="progress-wrapper w-75 mx-auto mb-4">
                     <div class="progress-info">

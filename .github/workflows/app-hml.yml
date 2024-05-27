@@ -1,14 +1,14 @@
 name: 'App HMDCC Producao'
 on:
   push:
-    branches:
-      - 'hml'
+    branches: ["hml"]
     paths:
       - './**'
       - '.github/workflows/app.yml'
+    workflow_dispatch
 
 jobs:
-  DEPLOY-HML:
+  HOMOLOGACAO:
     name: Deploy HML
     runs-on: ubuntu-latest
     steps:
@@ -32,10 +32,10 @@ jobs:
           contributing.md
           composer.json
   
-  Deploy-Produção:
+  PRODUCAO:
     name: Deploy de producao
     runs-on: ubuntu-latest
-    needs: [DEPLOY-HML]
+    needs: [HOMOLOGACAO]
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -56,3 +56,4 @@ jobs:
           license.txt
           contributing.md
           composer.json
+

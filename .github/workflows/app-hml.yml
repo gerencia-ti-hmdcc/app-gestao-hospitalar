@@ -4,7 +4,7 @@ on:
     branches: ["hml"]
     paths:
       - './**'
-      - '.github/workflows/app.yml'
+      - '.github/workflows/app-hml.yml'
     workflow_dispatch:
 
 jobs:

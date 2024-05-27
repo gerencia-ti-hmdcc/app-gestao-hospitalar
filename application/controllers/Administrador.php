@@ -10,7 +10,7 @@ class Administrador extends MY_Controller {
         if(!$usuario){
             header('Location: '.base_url('../').'login/logout');
         }else{
-            //REDIRECIONA USUARIO QUE TENTA ACESSAR O MÓDULO ADMINISTRADOR QUE NÃO É ADM
+            //REDIRECIONA USUARIO QUE TENTA ACESSAR O MÓDULO ADMINISTRADOR QUE NÃO É ADM.
             $this->load->model("my_model");
             $funcao_permitida = $this->my_model->retornaSeFuncaoPermitida($usuario["ID"],'administrador');
             if(!count($funcao_permitida)>0){

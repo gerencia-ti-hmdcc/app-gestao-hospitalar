@@ -1,0 +1,33 @@
+name: 'App HMDCC Homologação'
+on:
+  push:
+    branches:
+      - 'hml'
+    paths:
+      - './**'
+      - '.github/workflows/app-hml.yml'
+
+jobs:
+  web-deploy:
+    name: Deploy HML
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Sincronizando arquivos
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: app-hml.hmdcc.com.br
+        username: ${{ secrets.MINASONLINE_FTP_USERNAME }}
+        password: ${{ secrets.MINASONLINE_FTP_PASSWORD }}
+        server-dir: public_html/app-hml.hmdcc.com.br/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          soft-ui-dashboard-main/**
+          fileToExclude.txt
+          readme.rst
+          license.txt
+          contributing.md
+          composer.json

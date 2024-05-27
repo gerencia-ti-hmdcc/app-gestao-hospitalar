@@ -1,14 +1,14 @@
-name: 'App HMDCC Homologação'
+name: 'App HMDCC Produção'
 on:
   push:
     branches:
       - 'hml'
     paths:
       - './**'
-      - '.github/workflows/app-hml.yml'
+      - '.github/workflows/app.yml'
 
 jobs:
-  web-deploy:
+  DEPLOY-HML:
     name: Deploy HML
     runs-on: ubuntu-latest
     steps:
@@ -22,6 +22,32 @@ jobs:
         username: ${{ secrets.MINASONLINE_FTP_USERNAME }}
         password: ${{ secrets.MINASONLINE_FTP_PASSWORD }}
         server-dir: public_html/app-hml.hmdcc.com.br/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          soft-ui-dashboard-main/**
+          fileToExclude.txt
+          readme.rst
+          license.txt
+          contributing.md
+          composer.json
+  
+  Deploy-Produção:
+    name: Deploy de produção
+    runs-on: ubuntu-latest
+    environment: producao
+    needs: [DEPLOY-HML]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Sincronizando arquivos
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: app-hml.hmdcc.com.br
+        username: ${{ secrets.MINASONLINE_FTP_USERNAME }}
+        password: ${{ secrets.MINASONLINE_FTP_PASSWORD }}
+        server-dir: public_html/app-hml.hmdcc.com.br/stage/
         exclude: |
           **/.git*
           **/.git*/**

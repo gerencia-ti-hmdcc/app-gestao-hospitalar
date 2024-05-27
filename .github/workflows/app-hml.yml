@@ -1,4 +1,4 @@
-name: 'App HMDCC Produção'
+name: 'App HMDCC Producao'
 on:
   push:
     branches:
@@ -33,9 +33,8 @@ jobs:
           composer.json
   
   Deploy-Produção:
-    name: Deploy de produção
+    name: Deploy de producao
     runs-on: ubuntu-latest
-    environment: producao
     needs: [DEPLOY-HML]
     steps:
     - name: Checkout

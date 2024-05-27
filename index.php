@@ -53,6 +53,24 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
+
+	$whitelist = array(
+		'127.0.0.1',
+		'::1'
+	);
+	
+	if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
+		$_SERVER['CI_ENV'] 	= 'production';
+	}else{
+		$_SERVER['CI_ENV'] 	= 'development';
+	}
+
+	// if($_SERVER["HTTP_HOST"]!='localhost'){
+	// 	$_SERVER['CI_ENV'] 	= 'production';
+	// }else{
+	// 	$_SERVER['CI_ENV'] 	= 'development';
+	// }
+
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 /*

@@ -57,11 +57,13 @@
                 $cor_card_avaliacao_verde_vermelho  = "<div class='mt-2' style='height:15px;'></div>";
                 $tipo_de_body_card                  = "card-body-painel-leitos";
                 $tamanho_linha_card_painel          = 'style="height:33px"';
+                $tamanho_icones_dados_clinicos      = "100%";
             }else{
                 echo '<div class="card-wrapper responsividade_leitos p-2">';
                 $cor_card_avaliacao_verde_vermelho  = "<div class='mt-4' style='height:15px;'></div>";
                 $tipo_de_body_card                  = "card-body";
                 $tamanho_linha_card_painel          = "";
+                $tamanho_icones_dados_clinicos      = "95%";
             }
 
             $icone_fugulin          = "";
@@ -75,15 +77,15 @@
                     if($leitos[$i]["nr_seq_gradacao"]!=0){
                         $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'fugulin\')"';
                         if($leitos[$i]["nr_seq_gradacao"]==2){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Mínimo" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_minimo.png"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Mínimo" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_minimo.png"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==3){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Intermediário" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_intermediario.png"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Intermediário" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_intermediario.png"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==4){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Alta Dependência" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_alta_dependencia.png"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Alta Dependência" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_alta_dependencia.png"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==5){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Semi-Intensivo" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_semi_intensivo.png"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Semi-Intensivo" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_semi_intensivo.png"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==6){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Intensivo" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_intensivo.png"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Intensivo" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_intensivo.png"/></div>';
                         }
                     }
                 }
@@ -93,11 +95,11 @@
                         //SE HOUVE AVALIAÇÃO NEWS
                         $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'news\')"';
                         if($leitos[$i]["score"]>=0 && $leitos[$i]["score"]<=3){
-                            $icone_news = '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota <= 3" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\news_verde.png"/></div>';
+                            $icone_news = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota <= 3" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\news_verde.png"/></div>';
                         }else if($leitos[$i]["score"]>=4 && $leitos[$i]["score"]<=6){
-                            $icone_news = '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota >= 4 e <= 6" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\news_laranja.png"/></div>';
+                            $icone_news = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota >= 4 e <= 6" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\news_laranja.png"/></div>';
                         }else if($leitos[$i]["score"]>=7){
-                            $icone_news = '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota >= 7" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\news_vermelho.png"/></div>';
+                            $icone_news = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota >= 7" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\news_vermelho.png"/></div>';
                         }
                     }
                 }
@@ -116,12 +118,50 @@
                     }
                 }
             }
+
+            $icone_braden = "";
+            if(isset($leitos[$i]["braden"])){
+                //SE HÁ DADO CLÍNICO DE BRADEN
+                
+                if(count($leitos[$i]["braden"])>0){
+                    $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'braden\',\''.$leitos[$i]["braden"]["DT_LIBERACAO_BRADEN"].'\',\''.$leitos[$i]["braden"]["CLASSIFICACAO_BRADEN"].'\',\''.$leitos[$i]["braden"]["PROFISSIONAL_BRADEN"].'\','.$leitos[$i]["braden"]["PONTOS_BRADEN"].')"';
+                    
+                    if($leitos[$i]["braden"]["PONTOS_BRADEN"]<10){
+                        $icone_braden_nome = '\assets\img\icons\braden5.png';
+                    }else if($leitos[$i]["braden"]["PONTOS_BRADEN"]>=10 && $leitos[$i]["braden"]["PONTOS_BRADEN"]<=12){
+                        $icone_braden_nome = '\assets\img\icons\braden4.png';
+                    }else if($leitos[$i]["braden"]["PONTOS_BRADEN"]>12 && $leitos[$i]["braden"]["PONTOS_BRADEN"]<=14){
+                        $icone_braden_nome = '\assets\img\icons\braden3.png';
+                    }else if($leitos[$i]["braden"]["PONTOS_BRADEN"]>=15 && $leitos[$i]["braden"]["PONTOS_BRADEN"]<=18){
+                        $icone_braden_nome = '\assets\img\icons\braden2.png';
+                    }else if($leitos[$i]["braden"]["PONTOS_BRADEN"]>18){
+                        $icone_braden_nome = '\assets\img\icons\braden1.png';
+                    }
+                    $icone_braden = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Braden: '.mb_convert_case($leitos[$i]["braden"]["CLASSIFICACAO_BRADEN"], MB_CASE_TITLE, "UTF-8").'" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).$icone_braden_nome.'"/></div>';
+                }
+            }
+
+            $icone_morse = "";
+            if(isset($leitos[$i]["morse"])){
+                //SE HÁ DADO CLÍNICO DE MORSE
+                if(count($leitos[$i]["morse"])>0){
+                    $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'morse\',\''.$leitos[$i]["morse"]["DT_LIBERACAO_MORSE"].'\',\''.$leitos[$i]["morse"]["CLASSIFICACAO_MORSE"].'\',\''.$leitos[$i]["morse"]["PROFISSIONAL_MORSE"].'\','.$leitos[$i]["morse"]["PONTOS_MORSE"].')"';
+                    if($leitos[$i]["morse"]["PONTOS_MORSE"]<24){
+                        $icone_morse_nome   = '\assets\img\icons\morse1.png';
+                    }else if($leitos[$i]["morse"]["PONTOS_MORSE"]>=25 && $leitos[$i]["morse"]["PONTOS_MORSE"]<=44){
+                        $icone_morse_nome   = '\assets\img\icons\morse4.png';
+                    }else if($leitos[$i]["morse"]["PONTOS_MORSE"]>=45){
+                        $icone_morse_nome   = '\assets\img\icons\morse6.png';
+                    }
+                    $icone_morse = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Morse: '.mb_convert_case($leitos[$i]["morse"]["CLASSIFICACAO_MORSE"], MB_CASE_TITLE, "UTF-8").'" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).$icone_morse_nome.'"/></div>';
+                }
+            }
             
             if(isset($leitos[$i]["qt_freq_cardiac"])){
                 //SE HOUVE MEDIÇÃO CARDIACA
                 $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'cardiaca\')"';
                 if($leitos[$i]["qt_freq_cardiac"]>90){
-                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Cardíaca > 90 bpm" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\coracao.png"/></div>';
+                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Cardíaca > 90 bpm" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\coracao.png"/></div>';
                 }
             }
 
@@ -129,7 +169,7 @@
                 //SE HOUVE MEDIÇÃO RESPIRATORIA
                 $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'respiratoria\')"';
                 if($leitos[$i]["qt_freq_resp"]>20){
-                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Respiratória > 20 irpm" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\pulmao.png"/></div>';
+                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Respiratória > 20 irpm" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\pulmao.png"/></div>';
                 }
             }
 
@@ -138,9 +178,9 @@
                 $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'temperatura\')"';
                 if($leitos[$i]["qt_temp"]>0){
                     if($leitos[$i]["qt_temp"]<=35){
-                        $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Temperatura <= 35º" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\temperatura_azul.png"/></div>';
+                        $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Temperatura <= 35º" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\temperatura_azul.png"/></div>';
                     }else if($leitos[$i]["qt_temp"]>=37.8){
-                        $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-2"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Temperatura >= 37.8º" width="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\temperatura_vermelho.png"/></div>';
+                        $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Temperatura >= 37.8º" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\temperatura_vermelho.png"/></div>';
                     }
                 }
             }
@@ -198,6 +238,7 @@
                 $info_paciente = $leitos[$i]["ie_status_unidade"];
             }
 
+            //AQUI É FORMATADO O TIPO DE CARD
             if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P' && $mostrar_menus==0){
                 echo '<div class="h-full card-painel-leitos '.$classes_adicionais_card.' my-1">
                         <div class="'.$tipo_de_body_card.'">
@@ -211,7 +252,7 @@
                             </div> 
                             <div>
                                 <div class="col-12 gap-2 text-xs justify-content-start text-end flex">
-                                    '.$icone_fugulin.' '.$icone_news.' '.$icones_sinais_vitais.'
+                                    '.$icone_morse.' '.$icone_braden.' '.$icone_fugulin.' '.$icone_news.' '.$icones_sinais_vitais.'
                                 </div>
                                 '.$cor_card_avaliacao_verde_vermelho .'
                                 '.$total_dias_internacao_atendimento.'
@@ -223,12 +264,17 @@
                 echo '<div class="h-full card '.$classes_adicionais_card.' my-1">
                         <div class="'.$tipo_de_body_card.'">
                             <div class="flex" '.$tamanho_linha_card_painel.'>
-                                <div class="col-4">
-                                    <p class="lead font-weight-bolder" '.$gambsClick.'>' . $leitos[$i]["ds_leito_atual"] . '</p>
+                                <div class="col-12 pb-1">
+                                    <span class="lead font-weight-bolder" '.$gambsClick.'>' . $leitos[$i]["ds_leito_atual"] . '</span>
                                 </div>
+                                <!--
                                 <div class="col-8 gap-1 text-xs justify-content-end text-end flex">
-                                    '.$icone_fugulin.' '.$icone_news.' '.$icones_sinais_vitais.'
+                                    '.$icone_morse.' '.$icone_braden.' '.$icone_fugulin.' '.$icone_news.' '.$icones_sinais_vitais.'
                                 </div>
+                                -->
+                            </div>
+                            <div class="col-12 gap-meio text-xs flex pb-2">
+                                '.$icone_morse.' '.$icone_braden.' '.$icone_fugulin.' '.$icone_news.' '.$icones_sinais_vitais.'
                             </div> 
                             <div '.$gambsClick.'>
                                 '.$dados_atd.'
@@ -438,7 +484,7 @@
                                                                     "<a class='btn hmdcc-color-2 rounded text-white flex' href='historicoInterconsultasPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas interconsultas</a>"+
                                                                     "<a class='btn hmdcc-color-3 rounded text-white flex' href='historicoExamesLabPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Exames laboratoriais</a>"+
                                                                     // "<a class='btn hmdcc-color-4 rounded text-white flex' href='historicoPrescricoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas prescrições</a>"+
-                                                                    "<a class='btn hmdcc-color-5 rounded text-white flex' href='historicoExamesImagemPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Laudos</a>"+
+                                                                    "<a class='btn hmdcc-color-5 rounded text-white flex' href='historicoExamesImagemPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Imagens e laudos</a>"+
                                                                 "</td>"+
                                                             "</tr>";
                                     // }else{
@@ -511,7 +557,7 @@
                                                                         "<a class='btn hmdcc-color-2 rounded text-white flex' href='historicoInterconsultasPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas interconsultas</a>"+
                                                                         "<a class='btn hmdcc-color-3 rounded text-white flex' href='historicoExamesLabPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Exames laboratoriais</a>"+
                                                                         // "<a class='btn hmdcc-color-4 rounded text-white flex' href='historicoPrescricoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas prescrições</a>"+
-                                                                        "<a class='btn hmdcc-color-5 rounded text-white flex' href='historicoExamesImagemPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Laudos</a>"+
+                                                                        "<a class='btn hmdcc-color-5 rounded text-white flex' href='historicoExamesImagemPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Imagens e laudos</a>"+
                                                                     "</td>"+
                                                                 "</tr>";
                                     // }else{
@@ -712,7 +758,7 @@
         });
     }
 
-    function detalhesIsolados(nr_atendimento,leito_atual,tipo_avaliacao){
+    function detalhesIsolados(nr_atendimento,leito_atual,tipo_avaliacao,dt_ultima_avaliacao="",classificacao="",profissional="",pontos=""){
         $.ajax({
             url : "<?php echo site_url('retornaDadosLeito');?>",
             type : 'POST',
@@ -910,13 +956,85 @@
                                                     "</td>" +
                                                 "</tr>";
 
-                    }/*else if(tipo_avaliacao=='braden'){
-                
-
+                    }else if(tipo_avaliacao=='braden'){
+                        let hora_braden = dt_ultima_avaliacao.split(" ");
+                        hora_braden = hora_braden[1];
+                        let data_braden = dt_ultima_avaliacao.substr(0, 10).split('-').reverse().join('/')+" "+hora_braden;
+                        if(data_braden=="00/00/0000 00:00:00"){
+                            data_braden = " - ";
+                        }
+                        html_avaliacao_isolada = "<tr>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        "Pontuação Braden" +
+                                                    "</td>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        pontos+
+                                                    "</td>" +
+                                                "</tr>"+
+                                                "<tr>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        "Classificação Braden" +
+                                                    "</td>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        classificacao+
+                                                    "</td>" +
+                                                "</tr>"+
+                                                "<tr>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        "Profissional" +
+                                                    "</td>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        profissional+
+                                                    "</td>" +
+                                                "</tr>"+
+                                                "<tr>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        "Data Medição" +
+                                                    "</td>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        data_braden+
+                                                    "</td>" +
+                                                "</tr>";
                     }else if(tipo_avaliacao=='morse'){
-                
-
-                    }*/
+                        let hora_morse = dt_ultima_avaliacao.split(" ");
+                        hora_morse = hora_morse[1];
+                        let data_morse = dt_ultima_avaliacao.substr(0, 10).split('-').reverse().join('/')+" "+hora_morse;
+                        if(data_morse=="00/00/0000 00:00:00"){
+                            data_morse = " - ";
+                        }
+                        html_avaliacao_isolada = "<tr>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        "Pontuação Morse" +
+                                                    "</td>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        pontos+
+                                                    "</td>" +
+                                                "</tr>"+
+                                                "<tr>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        "Classificação Morse" +
+                                                    "</td>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        classificacao+
+                                                    "</td>" +
+                                                "</tr>"+
+                                                "<tr>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        "Profissional" +
+                                                    "</td>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        profissional+
+                                                    "</td>" +
+                                                "</tr>"+
+                                                "<tr>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        "Data Medição" +
+                                                    "</td>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        data_morse+
+                                                    "</td>" +
+                                                "</tr>";
+                    }
                 }
 
                 html_leito = "<table class='table align-items-center justify-content-center' width='100%'>" +

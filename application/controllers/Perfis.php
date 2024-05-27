@@ -92,6 +92,9 @@ class Perfis extends MY_Controller {
                         for($i = 0;$i<count($funcoes_liberadas);$i++){
                             $this->perfis_model->liberarFuncoesParaPerfil($id_perfil,$funcoes_liberadas[$i]);
                         }
+                        $this->logAcaoUsuario("atualização de perfil - id $id_perfil", NULL, NULL, NULL, $id_perfil);
+                        // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
                         $this->session->set_flashdata("success","<br />Perfil atualizado com sucesso!");
                         redirect("../perfis");
                     }else{
@@ -150,6 +153,9 @@ class Perfis extends MY_Controller {
                     for($i = 0;$i<count($funcoes_liberadas);$i++){
                         $this->perfis_model->liberarFuncoesParaPerfil($id_perfil_cadastrado,$funcoes_liberadas[$i]);
                     }
+                    $this->logAcaoUsuario("atualização de perfil - id $id_perfil_cadastrado", NULL, NULL, NULL, $id_perfil_cadastrado);
+                    // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
                     $this->session->set_flashdata("success","<br />Perfil cadastrado com sucesso!");
                     redirect("../perfis");
                 }

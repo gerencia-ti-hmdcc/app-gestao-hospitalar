@@ -977,6 +977,11 @@ progress {
   width: 8.333333%;
 }
 
+.col-1emeio{
+  flex: 0 0 auto;
+  width: 14.2857%;
+}
+
 .col-2 {
   flex: 0 0 auto;
   width: 16.666667%;
@@ -8352,6 +8357,10 @@ fieldset:disabled .btn {
 
 .gap-0 {
   gap: 0 !important;
+}
+
+.gap-meio{
+  gap: 0.15rem !important;
 }
 
 .gap-1 {

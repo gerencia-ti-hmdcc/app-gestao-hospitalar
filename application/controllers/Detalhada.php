@@ -27,6 +27,8 @@ class Detalhada extends MY_Controller {
         $dados['nome_pagina']       = 'Ocupação Detalhada';
         $dados["link_pagina"]       = 'detalhada';
         $dados["tipo_perfil"]       = $usuario["TIPO_PERFIL"];
+        $this->logAcaoUsuario("visualização - ocupação detalhada");
+        // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
         // if($dados["tipo_perfil"]=="P"){
         //     $this->load->model('dashboard_model');
         //     $ultimo_usuario_painel = $this->dashboard_model->retornaUltimoSetorGeralAtivo();
@@ -46,6 +48,8 @@ class Detalhada extends MY_Controller {
         $linha = $_GET["l"];
         if($linha){
             if(trim(strlen($linha))>0){
+                $this->logAcaoUsuario("visualização - setores");
+                // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
                 $this->load->model('detalhada_model');
                 $dados["setores"]           = $this->detalhada_model->retornaSetoresPorLinha($linha);
                 $dados["linha_cuidado"]     = $this->detalhada_model->retornaDadosLinhaCuidado($linha);
@@ -74,9 +78,29 @@ class Detalhada extends MY_Controller {
 
         if($linha && $cd_setor_atendimento){
             if(trim(strlen($linha))>0 && trim(strlen($cd_setor_atendimento))>0){
+                $this->logAcaoUsuario("visualização - leitos");
+                // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
                 $this->load->model('detalhada_model');
                 $dados["leitos"]            = $this->detalhada_model->retornaLeitosClassifSetor($linha,$cd_setor_atendimento);
                 $dados["setor_atend"]       = $this->detalhada_model->retornaDadosSetorAtendimento($cd_setor_atendimento);
+                $ultimas_avaliacoes_braden  = $this->detalhada_model->retornaUltimasAvaliacoesBradenPaciente();
+                $ultimas_avaliacoes_morse   = $this->detalhada_model->retornaUltimasAvaliacoesMorsePaciente();
+
+                for($j=0;$j<count($dados["leitos"]);$j++){
+                    $posicao_atendimento_braden = array_search($dados["leitos"][$j]['nr_atendimento'],array_column($ultimas_avaliacoes_braden,'NR_ATENDIMENTO'));
+                    $posicao_atendimento_morse  = array_search($dados["leitos"][$j]['nr_atendimento'],array_column($ultimas_avaliacoes_morse,'NR_ATENDIMENTO'));
+
+                    if(isset($posicao_atendimento_braden) && $posicao_atendimento_braden>=0){
+                        if($dados["leitos"][$j]["nr_atendimento"]==$ultimas_avaliacoes_braden[$posicao_atendimento_braden]["NR_ATENDIMENTO"]){
+                            $dados["leitos"][$j]["braden"]  = $ultimas_avaliacoes_braden[$posicao_atendimento_braden];
+                        }
+                    }
+                    if(isset($posicao_atendimento_morse) && $posicao_atendimento_morse>=0){
+                        if($dados["leitos"][$j]["nr_atendimento"]==$ultimas_avaliacoes_morse[$posicao_atendimento_morse]["NR_ATENDIMENTO"]){
+                            $dados["leitos"][$j]["morse"]   = $ultimas_avaliacoes_morse[$posicao_atendimento_morse];
+                        }
+                    }
+                }
 
                 for($i=0;$i<count($dados["leitos"]);$i++){  
                     $movimentacoes_atendimento  = $this->detalhada_model->retornaMovimentacoesAtendimento($dados["leitos"][$i]["nr_atendimento"]);
@@ -111,6 +135,8 @@ class Detalhada extends MY_Controller {
         $nr_atendimento         = $this->input->post("nr_atendimento");
         $leito_atual            = $this->input->post("leito_atual");
         $cd_setor_atendimento   = $this->input->post("cd_setor_atendimento");
+        $this->logAcaoUsuario("visualização - dados do leito - leito $leito_atual - nr_atendimento $nr_atendimento", $nr_atendimento);
+        // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
 
         if(strlen($nr_atendimento)>0 && strlen($leito_atual)>0 && strlen($cd_setor_atendimento)>0){
             $this->load->model('detalhada_model');
@@ -123,6 +149,9 @@ class Detalhada extends MY_Controller {
 
     public function retornaMovimentacoesAtendimento(){
         $nr_atendimento         = $this->input->post("nr_atendimento");
+        
+        $this->logAcaoUsuario("visualização - movimentações do paciente - nr_atendimento $nr_atendimento", $nr_atendimento);
+        // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
 
         if(strlen($nr_atendimento)>0){
             $this->load->model('detalhada_model');
@@ -137,6 +166,9 @@ class Detalhada extends MY_Controller {
         $nr_atendimento = (int) $_GET["a"];
 
         if(strlen($nr_atendimento)>0){
+            $this->logAcaoUsuario("visualização - avaliações verde/vermelho -  nr_atendimento $nr_atendimento", $nr_atendimento, 'avaliações verde/vermelho');
+            // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
             $this->load->model('detalhada_model');
             // $dados["avaliacoes_verde_vermelho"] = $this->detalhada_model->retornaAvaliacoesVerdeVermelho($nr_atendimento);
             // $dados["movimentacoes_atendimento"] = $this->detalhada_model->retornaMovimentacoesAtendimento($nr_atendimento);
@@ -184,6 +216,10 @@ class Detalhada extends MY_Controller {
         $nr_atendimento = (int) $_GET["a"];
         include 'Rtf.php';
         if(strlen($nr_atendimento)>0){
+            
+            $this->logAcaoUsuario("visualização - evoluções do paciente - nr_atendimento $nr_atendimento", $nr_atendimento, 'evoluções');
+            // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
             $this->load->model('detalhada_model');
             // $dados["dados_leito_atual"]     = $this->detalhada_model->retornaDadosLeitoPorAtendimento($nr_atendimento);
             $historico_evolucoes            = $this->detalhada_model->retornaHistoricoEvolucoesPaciente($nr_atendimento);
@@ -298,6 +334,10 @@ class Detalhada extends MY_Controller {
         $nr_atendimento = (int) $_GET["a"];
         include 'Rtf.php';
         if(strlen($nr_atendimento)>0){
+
+            $this->logAcaoUsuario("visualização - interconsultas do paciente - nr_atendimento $nr_atendimento", $nr_atendimento, 'interconsultas');
+            // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
             $this->load->model('detalhada_model');
             // $dados["dados_leito_atual"]     = $this->detalhada_model->retornaDadosLeitoPorAtendimento($nr_atendimento);
             $historico_interconsultas            = $this->detalhada_model->retornaHistoricoInterconsultasPaciente($nr_atendimento);
@@ -511,6 +551,10 @@ class Detalhada extends MY_Controller {
         $nr_atendimento = (int) $_GET["a"];
         include 'Rtf.php';
         if(strlen($nr_atendimento)>0){
+            
+            $this->logAcaoUsuario("visualização - exames laboratoriais do paciente - nr_atendimento $nr_atendimento", $nr_atendimento, 'exames laboratoriais');
+            // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
             $this->load->model('detalhada_model');
             // $dados["dados_leito_atual"]     = $this->detalhada_model->retornaDadosLeitoPorAtendimento($nr_atendimento);
             $historico_exames_lab            = $this->detalhada_model->retornaHistoricoExamesLaboratoriaisPaciente($nr_atendimento);
@@ -709,6 +753,9 @@ class Detalhada extends MY_Controller {
         $nr_atendimento = (int) $_GET["a"];
 
         if(strlen($nr_atendimento)>0){
+            $this->logAcaoUsuario("visualização - laudos e exames de imagem do paciente - nr_atendimento $nr_atendimento", $nr_atendimento, 'laudos e exames de imagem');
+            // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
             $this->load->model('detalhada_model');
             $dados["nr_prontuario"] = $this->detalhada_model->retornaProntuarioAtendimento($nr_atendimento);
             $dados["html_exames_imagem_paciente"] = "<div class='flex flex-wrap'>
@@ -780,6 +827,8 @@ class Detalhada extends MY_Controller {
             $us_token = $this->my_model->verificaToken($usuario['TOKEN']);
 
             if(isset($us_token['ID']) && $us_token['ID']>0){
+                $this->logAcaoUsuario("visualização de exame laboratorial- exames laboratoriais do paciente - nr_atendimento $nr_atendimento - exame $nome_exame_pdf", $nr_atendimento, 'exames laboratoriais');
+                // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
                 $whitelist = array(
                     '127.0.0.1',
                     '::1'

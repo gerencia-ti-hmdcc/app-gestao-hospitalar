@@ -169,6 +169,9 @@ class Administrador extends MY_Controller {
                 $atualizado = $this->administrador_model->atualizaUsuario($id,$nome,$email,$status,$tipo_perfil);
                 
                 if($atualizado==true){
+                    $this->logAcaoUsuario("atualização de usuário - id_usuario $id", NULL, NULL, $id);
+                    // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
                     if($this->input->post("resetar_senha")){
                         $this->administrador_model->resetaSenha($id);
                     }
@@ -241,6 +244,9 @@ class Administrador extends MY_Controller {
                 $cadastrado = $this->administrador_model->cadastraUsuario($nome,$email,$status,$tipo_perfil);
                 
                 if($cadastrado==true){
+                    $this->logAcaoUsuario("cadastro de usuário - email $email", NULL, NULL, $email);
+                    // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
                     $this->session->set_flashdata("success","<br />Usuário cadastrado com sucesso!");
                     redirect("../administrador");
                 }

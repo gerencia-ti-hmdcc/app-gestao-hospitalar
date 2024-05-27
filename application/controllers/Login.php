@@ -12,6 +12,16 @@ class Login extends CI_Controller {
     		}*/
         }
 
+        public function logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL){
+                $this->load->model("my_model");
+                $data_hora          = date('Y-m-d H:i:s');
+                $link               = $_SERVER["REQUEST_URI"];
+                $info_dispositivo   = $this->PegarDispositivo();
+                $usuario            = $this->session->userdata("usuario_logado");
+        
+                $this->my_model->logAcaoUsuario($usuario["ID"], $tipo, $nr_atendimento, $funcao, $parametro, $data_hora, $link, $info_dispositivo);
+        }
+
 	public function index()
 	{
                 //$this->load->model('login_model');
@@ -75,6 +85,9 @@ class Login extends CI_Controller {
                                         $this->login_model->atualizaDisp($this->PegarDispositivo(),$usuario["ID"]);
                                         //$this->session->set_flashdata("success","Usuário logado!");
                                         //LOGANDO PAINEL DE ACORDO COM SUA ESPECIFICIDADE
+                                        
+                                        $this->logAcaoUsuario("login");
+                        
                                         $this->load->model("my_model");
                                         if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P'){
                                                 $painel_acesso = $this->my_model->retornaLinkPainel($_SESSION["usuario_logado"]["ID"]);

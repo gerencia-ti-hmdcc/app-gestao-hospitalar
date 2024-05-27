@@ -82,6 +82,9 @@ class Metas extends MY_Controller {
             $cadastrado = $this->metas_model->cadastraMeta($ano,$quadrimestre,$tipo,$linha,$quantidade);
             
             if($cadastrado==true){
+                $this->logAcaoUsuario("cadastro de meta de admissão - ano $ano - quadrimestre $quadrimestre - tipo $tipo - linha $linha - quantidade $quantidade");
+                // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
                 $this->session->set_flashdata("success","<br />Meta cadastrada com sucesso!");
                 redirect("../metas");
             }
@@ -148,6 +151,9 @@ class Metas extends MY_Controller {
             $atualizado = $this->metas_model->atualizaMeta($id,$ano,$quadrimestre,$tipo,$linha,$quantidade);
             
             if($atualizado==true){
+                $this->logAcaoUsuario("atualização de meta de admissão - ano $ano - quadrimestre $quadrimestre - tipo $tipo - linha $linha - quantidade $quantidade");
+                // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
+
                 $this->session->set_flashdata("success","<br />Meta atualizada com sucesso!");
                 redirect("../metas");
             }

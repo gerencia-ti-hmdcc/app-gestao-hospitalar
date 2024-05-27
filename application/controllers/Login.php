@@ -35,7 +35,6 @@ class Login extends CI_Controller {
                         }else{
                                 redirect('dashboard');
                         }
-                        
                 }else{
                         $this->load->helper('form');
                         $this->load->view('login/index.php');   

@@ -1,15 +1,17 @@
-name: 'App HMDCC Homologação'
+name: 'App HMDCC Producão'
 on:
-  push:
-    branches: ["hml"]
+  pull_request:
+    branches: ["main"]
+    types:
+      - closed
     paths:
       - './**'
-      - '.github/workflows/app-hml.yml'
+      - '.github/workflows/app.yml'
     workflow_dispatch:
 
 jobs:
-  HOMOLOGACAO:
-    name: Deploy HML
+  PRODUCAO:
+    name: Deploy de producao
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -18,10 +20,10 @@ jobs:
     - name: Sincronizando arquivos
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: app-hml.hmdcc.com.br
+        server: app.hmdcc.com.br
         username: ${{ secrets.MINASONLINE_FTP_USERNAME }}
         password: ${{ secrets.MINASONLINE_FTP_PASSWORD }}
-        server-dir: public_html/app-hml.hmdcc.com.br/
+        server-dir: public_html/app.hmdcc.com.br/stage/
         exclude: |
           **/.git*
           **/.git*/**

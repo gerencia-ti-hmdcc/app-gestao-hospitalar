@@ -37,7 +37,7 @@
                             <tr>
                                 <th colspan="2" class="text-uppercase text-secondary text-xxs font-weight-bolder">
                                     <input required='true' class="form-control" type="month" id="data1_log" name='data1_log'/>
-                                    <span class="text-xxs">*Se vazio, o valor assumido será 05/2024</span>
+                                    <span class="text-xxs">*Se vazio, o valor assumido será 05/2024.</span>
                                 </th>
                             </tr>
                             <tr>
@@ -46,7 +46,7 @@
                             <tr>
                                 <th colspan="2" class="text-uppercase text-secondary text-xxs font-weight-bolder">
                                     <input required='true' class="form-control" type="month" id='data2_log' name='data2_log'/>
-                                    <span class="text-xxs">*Se vazio, o valor assumido será o mês atual</span>
+                                    <span class="text-xxs">*Se vazio, o valor assumido será o mês atual.</span>
                                 </th>
                             </tr>
                             <tr>

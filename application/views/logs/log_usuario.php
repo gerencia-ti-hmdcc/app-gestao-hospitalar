@@ -83,7 +83,7 @@
         }
 
         if(data2.length<1){
-            data2 = dataAtual.getFullYear()+"-"+(dataAtual.getMonth()+1)+"-"+dataAtual.getDate();
+            data2 = dataAtual.getFullYear()+"-"+(dataAtual.getMonth()+1)+"-31";
         }else{
             data2 = data2+"-31";
         }

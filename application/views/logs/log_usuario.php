@@ -26,7 +26,7 @@
                             </tr>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Último Login</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder"><?php echo $dados_usuario["ULTIMO_LOGIN"];?></th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder"><?php echo date('d/m/Y H:i:s', strtotime($dados_usuario["ULTIMO_LOGIN"]));?></th>
                             </tr>
                             <tr>
                                 <th colspan="2" class="text-uppercase text-secondary text-xxs font-weight-bolder text-center">Período de pesquisas de logs</th>

@@ -576,7 +576,7 @@ class Detalhada extends MY_Controller {
                                                                 <b>".$exames_laboratoriais_externos_servidor[$j]."</b>
                                                             </td>
                                                             <td class='cor_solicitacao_interconsulta text-wrap text-center flex' style='color:#cb0c9f'>
-                                                                <a class='w-full' href='exameLaboratorialExternoPdf?ne=".$exames_laboratoriais_externos_servidor[$j]."'><div class='w-full btn btn-primary' style='margin:0px !important'><b>ABRIR EXAME</b></div></a>
+                                                                <a class='w-full' href='exameLaboratorialExternoPdf?ne=".$exames_laboratoriais_externos_servidor[$j]."&na=".$nr_atendimento."'><div class='w-full btn btn-primary' style='margin:0px !important'><b>ABRIR EXAME</b></div></a>
                                                             </td>
                                                         </tr>";
                     }
@@ -817,6 +817,7 @@ class Detalhada extends MY_Controller {
 
     public function exameLaboratorialExternoPdf(){
         $nome_exame_pdf = $_GET["ne"];
+        $nr_atendimento = $_GET["na"];
         $this->load->helper('file');
         // /assets/exames/$nome_exame_pdf
 

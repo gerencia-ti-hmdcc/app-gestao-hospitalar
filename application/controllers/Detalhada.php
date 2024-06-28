@@ -545,7 +545,6 @@ class Detalhada extends MY_Controller {
         }
     }
 
-
     public function historicoExamesLabPaciente(){
         // exit();
         $nr_atendimento = (int) $_GET["a"];

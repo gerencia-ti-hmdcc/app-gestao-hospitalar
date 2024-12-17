@@ -1,20 +1,17 @@
 .DS_Store
 
-application/cache/*
-!application/cache/index.html
+app/cache/*
+!app/cache/index.html
 
-application/logs/*
-!application/logs/index.html
+app/logs/*
+!app/logs/index.html
 
-!application/*/.htaccess
+!app/*/.htaccess
+.htaccess
 
 composer.lock
+composer.json
 
-user_guide_src/build/*
-user_guide_src/cilexer/build/*
-user_guide_src/cilexer/dist/*
-user_guide_src/cilexer/pycilexer.egg-info/*
-/vendor/
 
 # IDE Files
 #-------------------------
@@ -31,6 +28,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/results/
 
 # Inclusões manuais
-application/config/database.php
-soft-ui-dashboard-main/ 
-assets/exames/*
+app/Config/Database.php
+public/soft-ui-dashboard-main/ 
+public/assets/exames/*
+writable/*

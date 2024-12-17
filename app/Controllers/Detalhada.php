@@ -685,7 +685,7 @@ class Detalhada extends BaseController {
                         </div>";
             }else{
                 //ADICIONAR: EXAME LAB EXTERNO MESMO SE NÃO HOUVER INTERNO - VARIAVEL $se_existe_exames_externos
-                
+
                 if(strlen($se_existe_exames_externos)>0){
                     $html_exames_lab_paciente .= $se_existe_exames_externos;
                     $html_exames_lab_paciente .=        "</table>
@@ -725,7 +725,6 @@ class Detalhada extends BaseController {
     }
 
     public function historicoExamesImagemPaciente(){
-        
         helper('url');
         $nr_atendimento = (int) $_GET["a"];
 

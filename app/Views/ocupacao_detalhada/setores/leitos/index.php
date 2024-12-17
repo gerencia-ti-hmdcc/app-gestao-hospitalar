@@ -1503,7 +1503,7 @@
                             "<div class='cotainer border-top pergunta-ia'>"+
                                 "<div class='row align-items-center'>"+
                                     "<div class='col-10 textarea-ia'><textarea type='text' id='mensagem-input' class='form-control flex-fill' placeholder='Faça uma pergunta...'></textarea></div>"+
-                                    "<div class='col-2 mx-auto div-btn'><button id='btn-submit' class='btn-ia'><img src=<?php echo base_url("public/")."assets/img/icons/arrow-right.svg";?> alt=''></button></div>"+
+                                    "<div class='col-2 mx-auto div-btn'><button id='btn-submit' class='btn-ia'><img src=<?php echo base_url("assets/img/icons/arrow-right.svg");?> alt=''></button></div>"+
                                 "</div>"+
                             "</div>"+
                         "</div>";

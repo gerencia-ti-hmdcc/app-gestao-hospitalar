@@ -831,6 +831,7 @@ class Detalhada extends BaseController {
                 header("Content-Type: application/pdf");
                 header('Content-Disposition: attachment; filename="'.$nome_exame_pdf.'"'); // feel free to change the suggested filename
                 readfile($filepath);
+                
                 */
 
                 //PARA VISUALIZAR O ARQUIVO

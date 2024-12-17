@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'http://app.hmdcc.com.br/';
+    public string $baseURL = 'http://app-hml.hmdcc.com.br/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.

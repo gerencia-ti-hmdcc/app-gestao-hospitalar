@@ -1,7 +1,7 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header" style="text-align:center">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <img src="<?php echo base_url()."assets/img/logo/logo_hmdcc.svg";?>" width="50%" class="h-100 m-0">
+        <img src="<?php echo base_url("public/")."assets/img/logo/logo_hmdcc.svg";?>" width="50%" class="h-100 m-0">
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">

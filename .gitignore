@@ -12,7 +12,6 @@ app/logs/*
 composer.lock
 composer.json
 
-.env 
 
 # IDE Files
 #-------------------------
@@ -33,3 +32,5 @@ app/Config/Database.php
 public/soft-ui-dashboard-main/ 
 public/assets/exames/*
 writable/*
+app/Config/App.php
+.env 

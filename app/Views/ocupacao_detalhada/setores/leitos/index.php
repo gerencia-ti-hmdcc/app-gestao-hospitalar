@@ -403,7 +403,7 @@
         echo "<input type='hidden' id='cd_setor_atendimento_id' name='cd_setor_atendimento_id' value='".$_GET["s"]."'/>";
         echo "<input type='hidden' id='tipo_perfil_logado' name='tipo_perfil_logado' value='".$_SESSION["usuario_logado"]["TIPO_PERFIL"]."'/>";
         echo "<input type='hidden' id='linha_cuidado_id' name='linha_cuidado_id' value='".$_GET["l"]."'/>";
-        echo "<input type='hidden' id='usuario_ad' name='usuario_ad' value='".$_SESSION["usuario_logado"]["USUARIO_AD"] ? $_SESSION["usuario_logado"]["USUARIO_AD"] : ' '."'/>";
+        // echo "<input type='hidden' id='usuario_ad' name='usuario_ad' value='".$_SESSION["usuario_logado"]["USUARIO_AD"] ? $_SESSION["usuario_logado"]["USUARIO_AD"] : ' '."'/>";
     ?>
 </div>
 

@@ -57,8 +57,8 @@
     </div>
 </div>
 
-<script src="js/jquery-3.1.0.js"></script>
-<script src="js/jquery.js"></script>
+<script src="<?php echo base_url("public/js/jquery-3.1.0.js");?>"></script>
+<script src="<?php echo base_url("public/js/jquery.js");?>"></script>
 
 <script>
     function logUsuario(id){

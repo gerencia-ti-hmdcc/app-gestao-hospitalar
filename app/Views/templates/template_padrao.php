@@ -160,13 +160,13 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
       </div>
     </div> -->
   <!--   Core JS Files   -->
-  <script src=<?php echo base_url("public/js/core/popper.min.js");?>></script>
+  <script src=<?php echo base_url("public/assets/js/core/popper.min.js");?>></script>
   <script src=<?php echo base_url("public/assets/js/core/bootstrap.min.js");?>></script> 
   <script src=<?php echo base_url("public/assets/js/plugins/perfect-scrollbar.min.js");?>></script>
   <script src=<?php echo base_url("public/assets/js/plugins/smooth-scrollbar.min.js");?>></script>
   <script src=<?php echo base_url("public/assets/js/plugins/chartjs.min.js");?>></script> 
-  <script src=<?php echo base_url("js/jquery-3.1.0.js");?> ></script>
-  <script src=<?php echo base_url("js/jquery.js");?>></script>
+  <script src=<?php echo base_url("public/js/jquery-3.1.0.js");?> ></script>
+  <script src=<?php echo base_url("public/js/jquery.js");?>></script>
   <script>
     $(document).ready(function(){
         //$("#cor_padrao_icone").click();

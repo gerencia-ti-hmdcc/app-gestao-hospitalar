@@ -12,6 +12,7 @@ app/logs/*
 composer.lock
 composer.json
 
+.env 
 
 # IDE Files
 #-------------------------

@@ -65,8 +65,8 @@ function retornaTokenPacs($nr_acesso_dicom){
 
     $url_completa = $portal_vue_motion_base_url.str_replace('"',"",$resultado);
 
-    header("Location: $url_completa"); 
-    // RedirectGo($url_completa, false);
+    // header("Location: $url_completa"); 
+    RedirectGo($url_completa, false);
 }
 
 if(isset($_GET["nr_acesso_dicom"])){

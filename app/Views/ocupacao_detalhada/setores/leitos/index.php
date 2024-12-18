@@ -82,7 +82,7 @@
                         }else if($leitos[$i]["nr_seq_gradacao"]==3){
                             $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Intermediário" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/fugulin_intermediario.png").'"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==4){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Alta Dependência" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets*img/icons/fugulin_alta_dependencia.png").'"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Alta Dependência" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/fugulin_alta_dependencia.png").'"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==5){
                             $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Semi-Intensivo" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/fugulin_semi_intensivo.png").'"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==6){
@@ -96,11 +96,11 @@
                         //SE HOUVE AVALIAÇÃO NEWS
                         $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'news\')"';
                         if($leitos[$i]["score"]>=0 && $leitos[$i]["score"]<=3){
-                            $icone_news = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota <= 3" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\news_verde.png"/></div>';
+                            $icone_news = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota <= 3" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/news_verde.png").'"/></div>';
                         }else if($leitos[$i]["score"]>=4 && $leitos[$i]["score"]<=6){
-                            $icone_news = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota >= 4 e <= 6" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\news_laranja.png"/></div>';
+                            $icone_news = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota >= 4 e <= 6" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/news_laranja.png").'"/></div>';
                         }else if($leitos[$i]["score"]>=7){
-                            $icone_news = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota >= 7" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\news_vermelho.png"/></div>';
+                            $icone_news = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="News: nota >= 7" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/news_vermelho.png").'"/></div>';
                         }
                     }
                 }
@@ -154,7 +154,7 @@
                     }else if($leitos[$i]["morse"]["PONTOS_MORSE"]>=45){
                         $icone_morse_nome   = 'public\assets\img\icons\morse6.png';
                     }
-                    $icone_morse = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Morse: '.mb_convert_case($leitos[$i]["morse"]["CLASSIFICACAO_MORSE"], MB_CASE_TITLE, "UTF-8").'" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/$icone_morse_nome").'"/></div>';
+                    $icone_morse = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Morse: '.mb_convert_case($leitos[$i]["morse"]["CLASSIFICACAO_MORSE"], MB_CASE_TITLE, "UTF-8").'" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("$icone_morse_nome").'"/></div>';
                 }
             }
             
@@ -162,7 +162,7 @@
                 //SE HOUVE MEDIÇÃO CARDIACA
                 $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'cardiaca\')"';
                 if($leitos[$i]["qt_freq_cardiac"]>90){
-                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Cardíaca > 90 bpm" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public\assets\img\icons\coracao.png").'"/></div>';
+                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Cardíaca > 90 bpm" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/coracao.png").'"/></div>';
                 }
             }
 
@@ -170,7 +170,7 @@
                 //SE HOUVE MEDIÇÃO RESPIRATORIA
                 $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'respiratoria\')"';
                 if($leitos[$i]["qt_freq_resp"]>20){
-                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Respiratória > 20 irpm" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public\assets\img\icons\pulmao.png").'"/></div>';
+                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Respiratória > 20 irpm" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/pulmao.png").'"/></div>';
                 }
             }
 

@@ -44,7 +44,7 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
   <!-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> -->
   <link href="<?php echo base_url("public/assets/css/nucleo-svg.css");?>" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="<? echo base_url("public/assets/css/soft-ui-dashboard.css?v=1.0.3");?>" rel="stylesheet" />
+  <link id="pagestyle" href="<?php echo base_url("public/assets/css/soft-ui-dashboard.css?v=1.0.3");?>" rel="stylesheet" />
   <style>
     <?php if($link_pagina=='dashboard'){?>
       th:first-child, td:first-child{

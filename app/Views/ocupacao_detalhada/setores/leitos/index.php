@@ -128,17 +128,17 @@
                     $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'braden\',\''.$leitos[$i]["braden"]["DT_LIBERACAO_BRADEN"].'\',\''.$leitos[$i]["braden"]["CLASSIFICACAO_BRADEN"].'\',\''.$leitos[$i]["braden"]["PROFISSIONAL_BRADEN"].'\','.$leitos[$i]["braden"]["PONTOS_BRADEN"].')"';
 
                     if($leitos[$i]["braden"]["PONTOS_BRADEN"]<10){
-                        $icone_braden_nome = '\assets\img\icons\braden5.png';
+                        $icone_braden_nome = 'public\assets\img\icons\braden5.png';
                     }else if($leitos[$i]["braden"]["PONTOS_BRADEN"]>=10 && $leitos[$i]["braden"]["PONTOS_BRADEN"]<=12){
-                        $icone_braden_nome = '\assets\img\icons\braden4.png';
+                        $icone_braden_nome = 'public\assets\img\icons\braden4.png';
                     }else if($leitos[$i]["braden"]["PONTOS_BRADEN"]>12 && $leitos[$i]["braden"]["PONTOS_BRADEN"]<=14){
-                        $icone_braden_nome = '\assets\img\icons\braden3.png';
+                        $icone_braden_nome = 'public\assets\img\icons\braden3.png';
                     }else if($leitos[$i]["braden"]["PONTOS_BRADEN"]>=15 && $leitos[$i]["braden"]["PONTOS_BRADEN"]<=18){
-                        $icone_braden_nome = '\assets\img\icons\braden2.png';
+                        $icone_braden_nome = 'public\assets\img\icons\braden2.png';
                     }else if($leitos[$i]["braden"]["PONTOS_BRADEN"]>18){
-                        $icone_braden_nome = '\assets\img\icons\braden1.png';
+                        $icone_braden_nome = 'public\assets\img\icons\braden1.png';
                     }
-                    $icone_braden = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Braden: '.mb_convert_case($leitos[$i]["braden"]["CLASSIFICACAO_BRADEN"], MB_CASE_TITLE, "UTF-8").'" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).$icone_braden_nome.'"/></div>';
+                    $icone_braden = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Braden: '.mb_convert_case($leitos[$i]["braden"]["CLASSIFICACAO_BRADEN"], MB_CASE_TITLE, "UTF-8").'" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/$icone_braden_nome").'"/></div>';
                 }
             }
 
@@ -148,13 +148,13 @@
                 if(count($leitos[$i]["morse"])>0){
                     $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'morse\',\''.$leitos[$i]["morse"]["DT_LIBERACAO_MORSE"].'\',\''.$leitos[$i]["morse"]["CLASSIFICACAO_MORSE"].'\',\''.$leitos[$i]["morse"]["PROFISSIONAL_MORSE"].'\','.$leitos[$i]["morse"]["PONTOS_MORSE"].')"';
                     if($leitos[$i]["morse"]["PONTOS_MORSE"]<24){
-                        $icone_morse_nome   = '\assets\img\icons\morse1.png';
+                        $icone_morse_nome   = 'public\assets\img\icons\morse1.png';
                     }else if($leitos[$i]["morse"]["PONTOS_MORSE"]>=25 && $leitos[$i]["morse"]["PONTOS_MORSE"]<=44){
-                        $icone_morse_nome   = '\assets\img\icons\morse4.png';
+                        $icone_morse_nome   = 'public\assets\img\icons\morse4.png';
                     }else if($leitos[$i]["morse"]["PONTOS_MORSE"]>=45){
-                        $icone_morse_nome   = '\assets\img\icons\morse6.png';
+                        $icone_morse_nome   = 'public\assets\img\icons\morse6.png';
                     }
-                    $icone_morse = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Morse: '.mb_convert_case($leitos[$i]["morse"]["CLASSIFICACAO_MORSE"], MB_CASE_TITLE, "UTF-8").'" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).$icone_morse_nome.'"/></div>';
+                    $icone_morse = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Morse: '.mb_convert_case($leitos[$i]["morse"]["CLASSIFICACAO_MORSE"], MB_CASE_TITLE, "UTF-8").'" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/$icone_morse_nome").'"/></div>';
                 }
             }
             
@@ -162,7 +162,7 @@
                 //SE HOUVE MEDIÇÃO CARDIACA
                 $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'cardiaca\')"';
                 if($leitos[$i]["qt_freq_cardiac"]>90){
-                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Cardíaca > 90 bpm" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\coracao.png"/></div>';
+                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Cardíaca > 90 bpm" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public\assets\img\icons\coracao.png").'"/></div>';
                 }
             }
 
@@ -170,7 +170,7 @@
                 //SE HOUVE MEDIÇÃO RESPIRATORIA
                 $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'respiratoria\')"';
                 if($leitos[$i]["qt_freq_resp"]>20){
-                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Respiratória > 20 irpm" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\pulmao.png"/></div>';
+                    $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Frequência Respiratória > 20 irpm" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public\assets\img\icons\pulmao.png").'"/></div>';
                 }
             }
 
@@ -179,9 +179,9 @@
                 $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'temperatura\')"';
                 if($leitos[$i]["qt_temp"]>0){
                     if($leitos[$i]["qt_temp"]<=35){
-                        $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Temperatura <= 35º" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\temperatura_azul.png"/></div>';
+                        $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Temperatura <= 35º" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/temperatura_azul.png").'"/></div>';
                     }else if($leitos[$i]["qt_temp"]>=37.8){
-                        $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Temperatura >= 37.8º" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\temperatura_vermelho.png"/></div>';
+                        $icones_sinais_vitais .= '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Temperatura >= 37.8º" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/temperatura_vermelho.png").'"/></div>';
                     }
                 }
             }

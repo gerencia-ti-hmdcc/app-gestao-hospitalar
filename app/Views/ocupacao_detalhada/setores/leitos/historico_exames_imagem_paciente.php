@@ -43,23 +43,29 @@ function retornaTokenPacs($nr_acesso_dicom){
 
     $resultado = curl_exec($ch);
 
-    if ($resultado === false) {
-        die('Erro cURL: ' . curl_error($ch));
-    }
+    // if ($resultado === false) {
+    //     die('Erro cURL: ' . curl_error($ch));
+    // }
 
+    // curl_close($ch);
+
+    // // Validação e debug da resposta
+    // $decodedResult = json_decode($resultado, true);
+    // if ($decodedResult === null) {
+    //     die('Erro na resposta da API (resposta não é JSON válido): ' . $resultado);
+    // }
+
+    // if (!isset($decodedResult['EncryptedText'])) {
+    //     die('Erro: chave "EncryptedText" ausente na resposta: ' . json_encode($decodedResult));
+    // }
+
+    // $url_completa = $portal_vue_motion_base_url . $decodedResult['EncryptedText'];
+    
     curl_close($ch);
 
-    // Validação e debug da resposta
-    $decodedResult = json_decode($resultado, true);
-    if ($decodedResult === null) {
-        die('Erro na resposta da API (resposta não é JSON válido): ' . $resultado);
-    }
+    $url_completa = $portal_vue_motion_base_url.str_replace('"',"",$resultado);
 
-    if (!isset($decodedResult['EncryptedText'])) {
-        die('Erro: chave "EncryptedText" ausente na resposta: ' . json_encode($decodedResult));
-    }
-
-    $url_completa = $portal_vue_motion_base_url . $decodedResult['EncryptedText'];
+    // header("Location: $url_completa"); 
     RedirectGo($url_completa, false);
 }
 

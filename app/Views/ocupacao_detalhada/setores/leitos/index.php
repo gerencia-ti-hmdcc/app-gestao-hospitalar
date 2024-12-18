@@ -456,7 +456,7 @@
         historicoScroll.scrollTop = historicoScroll.scrollHeight;
     }
 
-    let usuario_ad = document.getElementById("usuario_ad").value : document.getElementById("usuario_ad").value ? '';
+    let usuario_ad = document.getElementById("usuario_ad").value ? document.getElementById("usuario_ad").value : '';
         
     async function enviarmensagem(nr_atendimento){
 

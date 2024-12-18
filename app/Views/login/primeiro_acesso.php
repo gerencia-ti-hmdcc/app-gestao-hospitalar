@@ -19,21 +19,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url('../');?>assets/img/hmdcc2.ico">
-  <link rel="icon" type="image/png" href="<?php echo base_url('../');?>assets/img/hmdcc2.ico">
+  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url('public/assets/img/hmdcc2.ico');?>">
+  <link rel="icon" type="image/png" href="<?php echo base_url('public/assets/img/hmdcc2.ico');?>">
   <title>HMDCC</title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="<?php echo base_url('../');?>/assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="<?php echo base_url('../');?>/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="<?php echo base_url('public/assets/css/nucleo-icons.css');?>" rel="stylesheet" />
+  <link href="<?php echo base_url('public/assets/css/nucleo-svg.css');?>" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> -->
-  <link href="<?php echo base_url('../');?>/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="<?php echo base_url('public/assets/css/nucleo-svg.css');?>" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="<?php echo base_url('../');?>assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <link id="pagestyle" href="<?php echo base_url('.public/assets/css/soft-ui-dashboard.css?v=1.0.3');?>" rel="stylesheet" />
   <style>
     :root {
       --largura: 100%;
@@ -69,7 +69,7 @@
               <div class="card card-plain mt-6">
                 <div class="card-header pb-0 text-left bg-transparent">
                   <!-- <h3 class="font-weight-bolder text-info text-gradient">App HMDCC</h3> -->
-                  <img src="<?php echo base_url('../')."assets/img/logo/logo1.jpg";?>">
+                  <img src="<?php echo base_url('.public/assets/img/logo/logo1.jpg')."";?>">
                   <p class="mb-0">A senha que você utilizou é provisória.<br />Escolha uma senha para acessar o sistema.</p>
                 </div>
                 <div class="card-body">
@@ -99,7 +99,7 @@
             </div>
             <div class="col-md-6">
               <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('<?php echo base_url('../')?>assets/img/1.jpg')"></div>
+                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('<?php echo base_url('public/assets/img/1.jpg')?>')"></div>
               </div>
             </div>
           </div>
@@ -123,10 +123,10 @@
   </footer>
   <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
   <!--   Core JS Files   -->
-  <script src="<?php echo base_url('../');?>assets/js/core/popper.min.js"></script>
-  <script src="<?php echo base_url('../');?>assets/js/core/bootstrap.min.js"></script>
-  <script src="<?php echo base_url('../');?>assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="<?php echo base_url('../');?>assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="<?php echo base_url('public/assets/js/core/popper.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/js/core/bootstrap.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/js/plugins/perfect-scrollbar.min.js');?>"></script>
+  <script src="<?php echo base_url('public/assets/js/plugins/smooth-scrollbar.min.js');?>"></script>
   <script>
     // var win = navigator.platform.indexOf('Win') > -1;
     // if (win && document.querySelector('#sidenav-scrollbar')) {

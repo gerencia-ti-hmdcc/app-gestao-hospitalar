@@ -54,8 +54,8 @@
     </div>
 </div>
 
-<script src="<?php echo base_url('../');?>js/jquery-3.1.0.js"></script>
-<script src="<?php echo base_url('../');?>js/jquery.js"></script>
+<script src="<?php echo base_url('public/js/jquery-3.1.0.js');?>"></script>
+<script src="<?php echo base_url('public/js/jquery.js');?>"></script>
 
 <script>
     function novoPerfil(){

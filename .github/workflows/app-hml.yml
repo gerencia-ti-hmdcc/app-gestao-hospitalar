@@ -1,4 +1,4 @@
-name: 'App HMDCC Homologação'
+name: 'App-HMDCC Homologação'
 on:
   push:
     branches: ["hml"]

@@ -138,7 +138,7 @@
                     }else if($leitos[$i]["braden"]["PONTOS_BRADEN"]>18){
                         $icone_braden_nome = 'public/assets/img/icons/braden1.png';
                     }
-                    $icone_braden = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Braden: '.mb_convert_case($leitos[$i]["braden"]["CLASSIFICACAO_BRADEN"], MB_CASE_TITLE, "UTF-8").'" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/$icone_braden_nome").'"/></div>';
+                    $icone_braden = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Braden: '.mb_convert_case($leitos[$i]["braden"]["CLASSIFICACAO_BRADEN"], MB_CASE_TITLE, "UTF-8").'" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("$icone_braden_nome").'"/></div>';
                 }
             }
 

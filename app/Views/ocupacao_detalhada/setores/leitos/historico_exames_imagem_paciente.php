@@ -8,9 +8,9 @@ function RedirectGo($url, $permanent = false){
 function retornaTokenPacs($nr_acesso_dicom){
     $portal_vue_motion_base_url = "https://paciente.hmdcc.com.br/portal/?urlToken=";
     # ALGAR
-    $algar_encrypt_base_url     = "https://177.69.134.49/portal/CSPublicQueryService/CSPublicQueryService.svc/json/Encrypt";
+    $algar_encrypt_base_url     = "https://177.69.134.51/portal/CSPublicQueryService/CSPublicQueryService.svc/json/Encrypt";
     # PRODABEL
-    $prodabel_encrypt_base_url  = "https://177.69.134.49/portal/CSPublicQueryService/CSPublicQueryService.svc/json/Encrypt";
+    $prodabel_encrypt_base_url  = "https://177.69.134.51/portal/CSPublicQueryService/CSPublicQueryService.svc/json/Encrypt";
 
     $vue_motion_username        = "usr_myvue";
     $vue_motion_password        = "v2rw16rw";

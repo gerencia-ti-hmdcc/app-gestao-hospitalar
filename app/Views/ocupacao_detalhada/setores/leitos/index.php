@@ -78,15 +78,15 @@
                     if($leitos[$i]["nr_seq_gradacao"]!=0){
                         $funcao_isolada = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'fugulin\')"';
                         if($leitos[$i]["nr_seq_gradacao"]==2){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Mínimo" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_minimo.png"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Mínimo" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/fugulin_minimo.png").'"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==3){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Intermediário" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_intermediario.png"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Intermediário" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/fugulin_intermediario.png").'"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==4){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Alta Dependência" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_alta_dependencia.png"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Alta Dependência" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets*img/icons/fugulin_alta_dependencia.png").'"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==5){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Semi-Intensivo" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_semi_intensivo.png"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Semi-Intensivo" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/fugulin_semi_intensivo.png").'"/></div>';
                         }else if($leitos[$i]["nr_seq_gradacao"]==6){
-                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Intensivo" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url($diretorio_raiz).'\assets\img\icons\fugulin_intensivo.png"/></div>';
+                            $icone_fugulin = '<div '.$funcao_isolada.' class="col-1emeio"><img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip" title="Fugulin: Intensivo" width="'.$tamanho_icones_dados_clinicos.'" src ="'.base_url("public/assets/img/icons/fugulin_intensivo.png").'"/></div>';
                         }
                     }
                 }
@@ -207,19 +207,19 @@
                     $funcao_isolada     = 'onclick="detalhesIsolados('.$leitos[$i]["nr_atendimento"].',\''.$leitos[$i]["ds_leito_atual"].'\',\'precaucoes_isolamento\')"';
                     $icones_precaucoes  = '<div '.$funcao_isolada.' class="d-flex">';
                     if($leitos[$i]["ds_precaucao_isolamento"]=="Precaução de contato"){
-                        $icones_precaucoes .= '<img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip icone-precaucao" '.$tamanho_icone_precaucao_painel.' title="Precaução de contato " width="100%" height="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\contato.png"/>';
+                        $icones_precaucoes .= '<img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip icone-precaucao" '.$tamanho_icone_precaucao_painel.' title="Precaução de contato " width="100%" height="100%" src ="'.base_url("public/assets/img/icons/contato.png").'"/>';
                         $nomes_precaucoes .= "Contato"."<br />";
                     }else if($leitos[$i]["ds_precaucao_isolamento"]=="Precaução de contato e aerossol"){
-                        $icones_precaucoes .= '<img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip icone-precaucao" '.$tamanho_icone_precaucao_painel.' title="Precaução de contato e aerossol " width="100%" height="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\contato_aerossol.png"/>';
+                        $icones_precaucoes .= '<img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip icone-precaucao" '.$tamanho_icone_precaucao_painel.' title="Precaução de contato e aerossol " width="100%" height="100%" src ="'.base_url("public/assets/img/icons/contato_aerossol.png").'"/>';
                         $nomes_precaucoes .= "Contato e aerossol"."<br />";
                     }else if($leitos[$i]["ds_precaucao_isolamento"]=="Precaução para gotículas"){
-                        $icones_precaucoes .= '<img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip icone-precaucao" '.$tamanho_icone_precaucao_painel.' title="Precaução para gotículas " width="100%" height="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\goticulas.png"/>';
+                        $icones_precaucoes .= '<img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip icone-precaucao" '.$tamanho_icone_precaucao_painel.' title="Precaução para gotículas " width="100%" height="100%" src ="'.base_url("public/assets/img/icons/goticulas.png").'"/>';
                         $nomes_precaucoes .= "Gotículas"."<br />";
                     }else if($leitos[$i]["ds_precaucao_isolamento"]=="Precaução de contato e gotículas"){
-                        $icones_precaucoes .= '<img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip icone-precaucao" '.$tamanho_icone_precaucao_painel.' title="Precaução de contato e gotículas " width="100%" height="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\contato_goticulas"/>';
+                        $icones_precaucoes .= '<img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip icone-precaucao" '.$tamanho_icone_precaucao_painel.' title="Precaução de contato e gotículas " width="100%" height="100%" src ="'.base_url("public/assets/img/icons/contato_goticulas").'"/>';
                         $nomes_precaucoes .= "Contato e gotículas"."<br />";
                     }else if($leitos[$i]["ds_precaucao_isolamento"]=="Precaução para aerossóis"){
-                        $icones_precaucoes .= '<img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip icone-precaucao" '.$tamanho_icone_precaucao_painel.' title="Precaução para aerossóis " width="100%" height="100%" src ="'.base_url($diretorio_raiz).'\assets\img\icons\aerossol.png"/>';
+                        $icones_precaucoes .= '<img data-bs-toggle="tooltip" data-bs-placement="top" class="btn-tooltip icone-precaucao" '.$tamanho_icone_precaucao_painel.' title="Precaução para aerossóis " width="100%" height="100%" src ="'.base_url("public/assets/img/icons/aerossol.png").'"/>';
                         $nomes_precaucoes .= "Aerossóis"."<br />";
                     }
                     $icones_precaucoes .="</div>";

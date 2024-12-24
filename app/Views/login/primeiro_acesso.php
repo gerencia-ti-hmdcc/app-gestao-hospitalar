@@ -33,7 +33,7 @@
   <!-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> -->
   <link href="<?php echo base_url('public/assets/css/nucleo-svg.css');?>" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="<?php echo base_url('.public/assets/css/soft-ui-dashboard.css?v=1.0.3');?>" rel="stylesheet" />
+  <link id="pagestyle" href="<?php echo base_url('public/assets/css/soft-ui-dashboard.css?v=1.0.3');?>" rel="stylesheet" />
   <style>
     :root {
       --largura: 100%;
@@ -69,7 +69,7 @@
               <div class="card card-plain mt-6">
                 <div class="card-header pb-0 text-left bg-transparent">
                   <!-- <h3 class="font-weight-bolder text-info text-gradient">App HMDCC</h3> -->
-                  <img src="<?php echo base_url('.public/assets/img/logo/logo1.jpg')."";?>">
+                  <img src="<?php echo base_url('public/assets/img/logo/logo1.jpg')."";?>">
                   <p class="mb-0">A senha que você utilizou é provisória.<br />Escolha uma senha para acessar o sistema.</p>
                 </div>
                 <div class="card-body">

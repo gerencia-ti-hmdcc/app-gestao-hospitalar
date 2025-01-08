@@ -26,6 +26,9 @@ jobs:
           **/.git*
           **/.git*/**
           soft-ui-dashboard-main/**
+          app/Config/App.php
+          app/Config/Database.php
+          .env
           fileToExclude.txt
           readme.rst
           license.txt

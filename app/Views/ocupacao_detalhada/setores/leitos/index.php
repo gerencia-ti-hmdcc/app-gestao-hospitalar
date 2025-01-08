@@ -1300,6 +1300,36 @@
                                                 "</tr>";
 
                     }else if(tipo_avaliacao=='precaucoes_isolamento'){
+                        let hora_precaucao = result["dt_atualizacao_precaucao"].split(" ");
+                        hora_precaucao = hora_precaucao[1];
+                        let data_precaucao = result["dt_atualizacao_precaucao"].substr(0, 10).split('-').reverse().join('/')+" "+hora_precaucao;
+                        if(data_precaucao=="00/00/0000 00:00:00"){
+                            data_precaucao = " - ";
+                        }
+
+                        let cuidados_precaucao = "";
+                        if(result['ds_cuidado_isolamento'].length>1){
+                           cuidados_precaucao = "<tr>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        "Cuidados" +
+                                                    "</td>" +
+                                                    "<td class=' text-wrap'>" +
+                                                        result['ds_cuidado_isolamento']+
+                                                    "</td>" +
+                                                "</tr>"; 
+                        }
+
+                        let observacao_precaucao = "";
+                        if(result['ds_observacao_isolamento'].length>1){
+                            observacao_precaucao = "<tr>" +
+                                "<td class='font-weight-bold text-wrap'>" +
+                                    "Observação" +
+                                "</td>" +
+                                "<td class=' text-wrap'>" +
+                                    result['ds_observacao_isolamento']+
+                                "</td>" +
+                            "</tr>"
+                        }
                         
                         html_avaliacao_isolada = "<tr>" +
                                                     "<td class='font-weight-bold text-wrap'>" +
@@ -1319,22 +1349,54 @@
                                                 "</tr>"+
                                                 "<tr>" +
                                                     "<td class='font-weight-bold text-wrap'>" +
-                                                        "Cuidados" +
+                                                        "Profissional" +
                                                     "</td>" +
                                                     "<td class=' text-wrap'>" +
-                                                        result['ds_cuidado_isolamento']+
+                                                        result['nome_profissional_precaucao']+
                                                     "</td>" +
                                                 "</tr>"+
                                                 "<tr>" +
                                                     "<td class='font-weight-bold text-wrap'>" +
-                                                        "Observação" +
+                                                        "Data" +
                                                     "</td>" +
                                                     "<td class=' text-wrap'>" +
-                                                        result['ds_observacao_isolamento']+
+                                                        data_precaucao+
                                                     "</td>" +
-                                                "</tr>";
+                                                "</tr>"+
+                                                cuidados_precaucao +
+                                                observacao_precaucao;
+
                     }else if(tipo_avaliacao=='precaucoes_isolamento_2'){
-                        
+                        let hora_precaucao = result["dt_atualizacao_precaucao_2"].split(" ");
+                        hora_precaucao = hora_precaucao[1];
+                        let data_precaucao = result["dt_atualizacao_precaucao_2"].substr(0, 10).split('-').reverse().join('/')+" "+hora_precaucao;
+                        if(data_precaucao=="00/00/0000 00:00:00"){
+                            data_precaucao = " - ";
+                        }
+
+                        let cuidados_precaucao = "";
+                        if(result['ds_cuidado_isolamento_2'].length>1){
+                            cuidados_precaucao = "<tr>" +
+                                                    "<td class='font-weight-bold text-wrap'>" +
+                                                        "Cuidados" +
+                                                    "</td>" +
+                                                    "<td class=' text-wrap'>" +
+                                                        result['ds_cuidado_isolamento_2']+
+                                                    "</td>" +
+                                                "</tr>"; 
+                        }
+
+                        let observacao_precaucao = "";
+                        if(result['ds_observacao_isolamento_2'].length>1){
+                            observacao_precaucao = "<tr>" +
+                                "<td class='font-weight-bold text-wrap'>" +
+                                    "Observação" +
+                                "</td>" +
+                                "<td class=' text-wrap'>" +
+                                    result['ds_observacao_isolamento_2']+
+                                "</td>" +
+                            "</tr>"
+                        }
                         html_avaliacao_isolada = "<tr>" +
                                                     "<td class='font-weight-bold text-wrap'>" +
                                                         "Tipo de Precaução" +
@@ -1353,20 +1415,22 @@
                                                 "</tr>"+
                                                 "<tr>" +
                                                     "<td class='font-weight-bold text-wrap'>" +
-                                                        "Cuidados" +
+                                                        "Profissional" +
                                                     "</td>" +
                                                     "<td class=' text-wrap'>" +
-                                                        result['ds_cuidado_isolamento_2']+
+                                                        result['nome_profissional_precaucao_2']+
                                                     "</td>" +
                                                 "</tr>"+
                                                 "<tr>" +
                                                     "<td class='font-weight-bold text-wrap'>" +
-                                                        "Observação" +
+                                                        "Data" +
                                                     "</td>" +
                                                     "<td class=' text-wrap'>" +
-                                                        result['ds_observacao_isolamento_2']+
+                                                        data_precaucao+
                                                     "</td>" +
-                                                "</tr>";
+                                                "</tr>"+
+                                                cuidados_precaucao +
+                                                observacao_precaucao;
                     }
                 }
 

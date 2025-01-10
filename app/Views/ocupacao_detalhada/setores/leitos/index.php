@@ -947,7 +947,6 @@
                                 
                                 /*FIM PROCESSAMENTO MOVIMENTAÇÕES*/ 
                                 
-
                                 html_leito = "<table class='table align-items-center justify-content-center' width='100%'>" +
                                     "<tr>" +
                                         "<td class='font-weight-bold text-wrap'>" +

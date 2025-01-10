@@ -1,0 +1,558 @@
+INFO - 2024-06-21 15:36:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 15:36:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 15:36:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 15:36:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 15:36:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 15:36:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 15:38:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:02:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:08:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:09:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:20:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:31:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:31:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-06-21 16:31:25 --> mysqli_sql_exception: Table 'hmdcc_backend.LINHA_CUIDADO' doesn't exist in C:\laragon\www\novo_app\system\Database\MySQLi\Connection.php:308
+Stack trace:
+#0 C:\laragon\www\novo_app\system\Database\MySQLi\Connection.php(308): mysqli->query('SELECT \r\n      ...', 0)
+#1 C:\laragon\www\novo_app\system\Database\BaseConnection.php(722): CodeIgniter\Database\MySQLi\Connection->execute('SELECT \r\n      ...')
+#2 C:\laragon\www\novo_app\system\Database\BaseConnection.php(636): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT \r\n      ...')
+#3 C:\laragon\www\novo_app\app\Models\DetalhadaModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT \r\n      ...')
+#4 C:\laragon\www\novo_app\app\Controllers\Detalhada.php(42): App\Models\DetalhadaModel->retornaLinhasDeCuidado(Array)
+#5 C:\laragon\www\novo_app\system\CodeIgniter.php(933): App\Controllers\Detalhada->index()
+#6 C:\laragon\www\novo_app\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Detalhada))
+#7 C:\laragon\www\novo_app\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\novo_app\system\Boot.php(312): CodeIgniter\CodeIgniter->run()
+#9 C:\laragon\www\novo_app\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\laragon\www\novo_app\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2024-06-21 16:31:25 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'hmdcc_backend.LINHA_CUIDADO' doesn't exist
+[Method: GET, Route: detalhada]
+in SYSTEMPATH\Database\BaseConnection.php on line 676.
+ 1 APPPATH\Models\DetalhadaModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT 
+                                    * 
+                                FROM 
+                                    LINHA_CUIDADO 
+                                WHERE 
+                                    1=1
+                                ORDER BY 
+                                    ds_linha_cuidado ASC')
+ 2 APPPATH\Controllers\Detalhada.php(42): App\Models\DetalhadaModel->retornaLinhasDeCuidado([...])
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Detalhada->index()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Detalhada))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-06-21 16:31:25 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'hmdcc_backend.LINHA_CUIDADO' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 313.
+ 1 SYSTEMPATH\Database\BaseConnection.php(722): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                                    * 
+                                FROM 
+                                    LINHA_CUIDADO 
+                                WHERE 
+                                    1=1
+                                ORDER BY 
+                                    ds_linha_cuidado ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(636): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                                    * 
+                                FROM 
+                                    LINHA_CUIDADO 
+                                WHERE 
+                                    1=1
+                                ORDER BY 
+                                    ds_linha_cuidado ASC')
+ 3 APPPATH\Models\DetalhadaModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT 
+                                    * 
+                                FROM 
+                                    LINHA_CUIDADO 
+                                WHERE 
+                                    1=1
+                                ORDER BY 
+                                    ds_linha_cuidado ASC')
+ 4 APPPATH\Controllers\Detalhada.php(42): App\Models\DetalhadaModel->retornaLinhasDeCuidado([...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Detalhada->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Detalhada))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-06-21 16:31:25 --> [Caused by] mysqli_sql_exception: Table 'hmdcc_backend.LINHA_CUIDADO' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 308.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(308): mysqli->query('SELECT 
+                                    * 
+                                FROM 
+                                    LINHA_CUIDADO 
+                                WHERE 
+                                    1=1
+                                ORDER BY 
+                                    ds_linha_cuidado ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(722): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                                    * 
+                                FROM 
+                                    LINHA_CUIDADO 
+                                WHERE 
+                                    1=1
+                                ORDER BY 
+                                    ds_linha_cuidado ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(636): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                                    * 
+                                FROM 
+                                    LINHA_CUIDADO 
+                                WHERE 
+                                    1=1
+                                ORDER BY 
+                                    ds_linha_cuidado ASC')
+ 4 APPPATH\Models\DetalhadaModel.php(21): CodeIgniter\Database\BaseConnection->query('SELECT 
+                                    * 
+                                FROM 
+                                    LINHA_CUIDADO 
+                                WHERE 
+                                    1=1
+                                ORDER BY 
+                                    ds_linha_cuidado ASC')
+ 5 APPPATH\Controllers\Detalhada.php(42): App\Models\DetalhadaModel->retornaLinhasDeCuidado([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Detalhada->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Detalhada))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 16:31:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:31:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 16:31:35 --> ErrorException: Undefined array key 0
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 215.
+ 1 APPPATH\Controllers\Admissoes.php(215): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 215)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 16:34:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:34:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:34:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:34:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 16:34:50 --> CodeIgniter\Database\Exceptions\DatabaseException: You must set the database table to be used with your query.
+[Method: GET, Route: perfis]
+in SYSTEMPATH\Database\BaseConnection.php on line 913.
+ 1 SYSTEMPATH\Model.php(705): CodeIgniter\Database\BaseConnection->table(null)
+ 2 SYSTEMPATH\Model.php(911): CodeIgniter\Model->builder()
+ 3 APPPATH\Controllers\Perfis.php(40): CodeIgniter\Model->__call('model', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Perfis->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Perfis))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 16:35:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:35:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:35:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:39:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:39:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:47:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:49:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:50:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:51:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 16:51:29 --> ErrorException: Array to string conversion
+[Method: POST, Route: login/autenticar]
+in APPPATH\Controllers\Login.php on line 121.
+ 1 APPPATH\Controllers\Login.php(121): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Login.php', 121)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->autenticar()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 16:52:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:52:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:52:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:52:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:52:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:52:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:52:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:53:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:57:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:57:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:57:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 16:57:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:09:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2024-06-21 17:09:05 --> [DEPRECATED] md5(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Login.php on line 64.
+ 1 APPPATH\Controllers\Login.php(64): md5(null)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->autenticar()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 17:09:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:09:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:09:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:09:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:19:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:19:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:19:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 17:19:36 --> CodeIgniter\HTTP\Exceptions\HTTPException: The route for "../dashboard" cannot be found.
+[Method: POST, Route: login/autenticar]
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 64.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(64): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('../dashboard')
+ 2 APPPATH\Controllers\Login.php(122): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->autenticar()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 17:19:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 17:20:00 --> CodeIgniter\HTTP\Exceptions\HTTPException: The route for "dashboard" cannot be found.
+[Method: POST, Route: login/autenticar]
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 64.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(64): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('dashboard')
+ 2 APPPATH\Controllers\Login.php(122): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->autenticar()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 17:20:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 17:20:35 --> CodeIgniter\HTTP\Exceptions\HTTPException: The route for "http://localhost/novo_app/dashboard" cannot be found.
+[Method: POST, Route: login/autenticar]
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 64.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(64): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('http://localhost/novo_app/dashboard')
+ 2 APPPATH\Controllers\Login.php(122): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->autenticar()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 17:22:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 17:22:19 --> CodeIgniter\HTTP\Exceptions\HTTPException: The route for "../dashboard" cannot be found.
+[Method: POST, Route: login/autenticar]
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 64.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(64): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('../dashboard')
+ 2 SYSTEMPATH\Common.php(853): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Login.php(122): redirect('../dashboard')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->autenticar()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 17:39:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:39:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:39:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 17:39:34 --> CodeIgniter\HTTP\Exceptions\HTTPException: The route for "../dashboard" cannot be found.
+[Method: POST, Route: login/autenticar]
+in SYSTEMPATH\HTTP\RedirectResponse.php on line 64.
+ 1 SYSTEMPATH\HTTP\RedirectResponse.php(64): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute('../dashboard')
+ 2 SYSTEMPATH\Common.php(853): CodeIgniter\HTTP\RedirectResponse->route(false)
+ 3 APPPATH\Controllers\Login.php(122): redirect('../dashboard')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->autenticar()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 17:42:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:42:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:43:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:47:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:47:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:47:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:47:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 17:47:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:20:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:21:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:21:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:21:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:21:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:21:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:21:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:22:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:22:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:22:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:22:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:22:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:22:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:22:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:39:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:40:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:40:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:40:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:40:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:40:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:42:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:42:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:43:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:45:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:45:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:46:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 19:46:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:03:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:05:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:06:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:07:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:09:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:14:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:14:09 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard.php"
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('dashboard.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('dashboard', [], true)
+ 3 APPPATH\Views\templates\template_padrao.php(88): view('dashboard')
+ 4 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 5 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 7 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:14:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:15:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:16:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:16:01 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "dashboard/.php"
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('dashboard/.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('dashboard/', [], true)
+ 3 APPPATH\Views\templates\template_padrao.php(88): view('dashboard/')
+ 4 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 5 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 7 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:16:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:17:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:17:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:17:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:18:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:20:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:21:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:22:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:23:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:27:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:29:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:29:18 --> ErrorException: include(views/dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(views/dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:29:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:29:33 --> ErrorException: include(views/dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(views/dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:30:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:30:02 --> ErrorException: include(views/dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(views/dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:30:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:30:14 --> ErrorException: require(views/dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(views/dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): require()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:30:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:30:25 --> ErrorException: require(views/dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(views/dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): require()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:30:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:30:37 --> ErrorException: require(Views/dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(Views/dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): require()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:31:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:31:22 --> ErrorException: require(../dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'require(../dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): require()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:31:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:31:49 --> ErrorException: include(../dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:32:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:32:15 --> ErrorException: include(../dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(../dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:38:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:38:04 --> ErrorException: include(dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(61): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:48:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:48:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-21 20:49:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-21 20:49:14 --> ErrorException: include(dashboard/index.php): Failed to open stream: No such file or directory
+[Method: GET, Route: dashboard]
+in APPPATH\Views\templates\template_padrao.php on line 88.
+ 1 APPPATH\Views\templates\template_padrao.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(dashboard/index.php): Failed to open stream: No such file or directory', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 88)
+ 2 APPPATH\Views\templates\template_padrao.php(88): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao', [], true)
+ 6 APPPATH\Controllers\Dashboard.php(60): view('templates/template_padrao', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Dashboard->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-21 20:49:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

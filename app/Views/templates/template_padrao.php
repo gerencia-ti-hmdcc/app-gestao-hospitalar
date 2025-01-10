@@ -27,8 +27,8 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="public/assets/img/hmdcc2.ico">
-  <link rel="icon" type="image/png" href="<?php echo base_url("public/assets/img/hmdcc2.ico");?>">
+  <link rel="apple-touch-icon" sizes="76x76" href="public/assets/img/hmdcc_amarelo.ico">
+  <link rel="icon" type="image/png" href="<?php echo base_url("public/assets/img/hmdcc_amarelo.ico");?>">
   <title>
     HMDCC
 </title>

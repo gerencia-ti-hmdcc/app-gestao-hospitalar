@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-gestao-hospitalar-deployment
+spec:
+  replicas: 2 # Update the replicas from 2 to 4
+  selector:
+    matchLabels:
+      app: app-gestao-hospitalar
+  template:
+    metadata:
+      labels:
+        app: app-gestao-hospitalar
+    spec:
+      imagePullSecrets:
+        - name: dockerhub-secret # O nome do Secret que você criou
+      containers:
+      - name: app-gestao-hospitalar
+        image: gerenciatihmdcc/hmdcc:app-gestao-hospitalar-v1.${TAG}
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        env:
+          - name: CI_ENVIRONMENT
+            value: "development"
+          - name: CI_BASE_URL
+            value: "https://app.hmdcc.org.br/" # URL base do aplicativo
+          - name: DB_DEFAULT_GROUP
+            value: "default" 
+          - name: MYSQL_HOST
+            value: "192.168.5.70" # O IP privado do seu MySQL
+          - name: MYSQL_DATABASE
+            value: "hmdcc_app_prod" # Substitua pelo nome do seu banco de dados
+          - name: MYSQL_USERNAME
+            valueFrom: # Obtém o valor do Secret
+              secretKeyRef:
+                name: app-mysql-credentials
+                key: MYSQL_USERNAME
+          - name: MYSQL_PASSWORD
+            valueFrom: # Obtém o valor do Secret
+              secretKeyRef:
+                name: app-mysql-credentials
+                key: MYSQL_PASSWORD
+        resources:
+          requests:
+            memory: "260Mi"
+            cpu: "500m"
+          limits:
+            memory: "1024Mi"
+            cpu: "1000m"
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-app-gestao-hospitalar
+spec:
+  selector:
+    app: app-gestao-hospitalar
+  ports:
+    - port: 80
+      name: web
+      protocol: TCP
+      targetPort: 80 #Refere-se a porta containerPort
+  type: ClusterIP

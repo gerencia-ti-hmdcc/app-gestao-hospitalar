@@ -1,0 +1,72 @@
+name: 'APP Gestão Hospitalar'
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+    types:
+      - closed
+
+jobs:
+  container:
+    name: 'APP Gestão Hospitalar'
+    runs-on: ubuntu-latest
+    env:
+      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
+      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
+      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+       
+    steps:
+
+    - if: github.event_name == 'pull_request'
+      name: Generate build number
+      id: buildnumber
+      uses: onyxmueller/build-tag-number@v1
+      with:
+        token: ${{secrets.BUILD_GITHUB_TOKEN}}    
+   
+    - name: Check Out Repo 
+      if: github.event_name == 'pull_request'
+      uses: actions/checkout@v2
+
+    - name: Login to Docker Hub
+      if: github.event_name == 'pull_request'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Set up Docker Buildx
+      if: github.event_name == 'pull_request'
+      id: buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build and push
+      if: github.event_name == 'pull_request'
+      id: docker_build
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/hmdcc:app-gestao-hospitalar-v1.${{ steps.buildnumber.outputs.build_number }}
+
+    - name: Configure Kubectl
+      uses: oracle-actions/configure-kubectl-oke@v1.5.0
+      id: Configure-kubectl-oke-action
+      with:
+        cluster: ${{ secrets.OKE_CLUSTER_OCID }}
+
+    - name: Replace image tag in deployment manifest
+      if: github.event_name == 'pull_request'
+      run: |
+        export TAG=${{ steps.buildnumber.outputs.build_number }}
+        envsubst < k8s/app-gestao-hospitalar-deployment.yml > k8s/app-gestao-hospitalar-deployment-final.yml
+
+    - name: Deploy to OCI Kubernetes
+      if: github.event_name == 'pull_request'
+      run: |
+        export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
+        kubectl apply -f k8s/app-gestao-hospitalar-deployment-final.yml

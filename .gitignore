@@ -29,7 +29,7 @@ composer.json
 /tests/results/
 
 # Inclusões manuais
-app/Config/Database.php
+
 public/soft-ui-dashboard-main/ 
 public/assets/exames/*
 writable/*

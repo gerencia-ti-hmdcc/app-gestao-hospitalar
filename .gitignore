@@ -7,10 +7,6 @@ app/logs/*
 !app/logs/index.html
 
 !app/*/.htaccess
-.htaccess
-
-composer.lock
-composer.json
 
 .env 
 
@@ -29,7 +25,8 @@ composer.json
 /tests/results/
 
 # Inclusões manuais
-
 public/soft-ui-dashboard-main/ 
 public/assets/exames/*
-writable/*
+writable/**/*.json
+writable/**/*.log
+writable/**/ci_*

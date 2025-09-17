@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^(.*)$ public/$1 [L]
+    # Se o arquivo ou diretório solicitado existir, serve diretamente
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Caso contrário, redireciona para o index.php
+
+</IfModule>
+
+<FilesMatch "^\.">
+    Require all denied
+    Satisfy All
+</FilesMatch>

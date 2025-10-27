@@ -54,6 +54,10 @@
         for($i = 0; $i < count($leitos); $i++) {
             
             if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P' && $mostrar_menus==0){
+                if(strpos($leitos[$i]["ds_leito_atual"]," X") !== false){ 
+                    //SOLICITAÇÃO MARIA IZABELLA EMAIL - OUTUBRO/2025 - IGNORAR LEITOS X NO MODO PAINEL
+                    continue;
+                }
                 echo '<div class="card-wrapper responsividade_leitos_painel p-2">';
                 $cor_card_avaliacao_verde_vermelho  = "<div class='mt-2' style='height:15px;'></div>";
                 $tipo_de_body_card                  = "card-body-painel-leitos";
@@ -320,11 +324,15 @@
                         }
                     }
                 }
-                if($_SESSION["usuario_logado"]["TIPO_PERFIL"]=='P' && $mostrar_menus==0){
-                    $total_dias_internacao_atendimento = '<div class="text-xxs mt-1">*'.$leitos[$i]["tempo_internacao"].' dia(s) de internação</div>';
+
+                if(isset($leitos[$i]["dt_previsao_alta"]) && strlen($leitos[$i]["dt_previsao_alta"])>0 && $leitos[$i]["dt_previsao_alta"]!="0000-00-00"){
+                    $texto_previsao_alta = date("d/m/Y", strtotime($leitos[$i]["dt_previsao_alta"]));
+                    $total_dias_internacao_atendimento = '<div class="w-full flex text-xxxs mt-1"><div class="w-55">'.$leitos[$i]["tempo_internacao"].' dia(s) de internação</div><div class="text-end w-45">Prev. alta: '.$texto_previsao_alta.'</div></div>';
                 }else{
-                    $total_dias_internacao_atendimento = '<div class="text-xs mt-1">*'.$leitos[$i]["tempo_internacao"].' dia(s) de internação</div>';
+                    $texto_previsao_alta = "N/A";
+                    $total_dias_internacao_atendimento = '<div class="w-full flex text-xxxs mt-1"><div class="w-100">'.$leitos[$i]["tempo_internacao"].' dia(s) de internação</div></div>';
                 }
+
             } else {
                 $classes_adicionais_card    = "bg-card-leito-livre text-white";
                 $gambsClick                 = "";

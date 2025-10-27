@@ -23243,6 +23243,10 @@
   .text-xxs {
     font-size: 0.65rem !important;
   }
+
+  .text-xxxs {
+    font-size: 0.55rem !important;
+  }
   
   p {
     line-height: 1.625;

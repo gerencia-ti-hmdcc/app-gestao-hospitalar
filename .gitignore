@@ -31,6 +31,6 @@ composer.json
 app/Config/Database.php
 public/soft-ui-dashboard-main/ 
 public/assets/exames/*
-#writable/*
+writable/*
 app/Config/App.php
 .env 

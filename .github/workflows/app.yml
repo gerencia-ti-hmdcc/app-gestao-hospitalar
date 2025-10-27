@@ -1,4 +1,4 @@
-name: 'App HMDCC-Producão'
+name: 'App HMDCC Producão'
 on:
   pull_request:
     branches: ["main"]

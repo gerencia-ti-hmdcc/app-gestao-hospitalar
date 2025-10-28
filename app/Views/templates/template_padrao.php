@@ -1130,7 +1130,12 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
             error : function(data){
                 alert('Não foi possível abrir o detalhamento. Confira sua conexão!');
             }
-        });
+          });
+        }else if('<?php echo $link_pagina;?>'=='leitos'){
+          <?php if(!isset($tipo_perfil)){$tipo_perfil = "";}?>
+          if('<?php echo $tipo_perfil;?>'=='P'){
+            $("#div_pagina_geral").removeClass('py-4');
+          }
         }
     });
 

@@ -37,7 +37,12 @@ class Detalhada extends BaseController {
 	}
 
     public function setores(){
+        $redirect = $this->verificaPerfilUsuario('detalhada');
+        if ($redirect instanceof \CodeIgniter\HTTP\RedirectResponse) {
+            return $redirect;
+        }
         $linha = $_GET["l"];
+        $dados["tipo_perfil"]       = $_SESSION["usuario_logado"]["TIPO_PERFIL"];
         if($linha){
             if(trim(strlen($linha))>0){
                 $this->logAcaoUsuario("visualização - setores");
@@ -58,6 +63,11 @@ class Detalhada extends BaseController {
     }
 
     public function leitos(){
+        $redirect = $this->verificaPerfilUsuario('detalhada');
+        if ($redirect instanceof \CodeIgniter\HTTP\RedirectResponse) {
+            return $redirect;
+        }
+        $usuario  = $_SESSION["usuario_logado"];
         $cd_setor_atendimento   = $_GET["s"];
         $linha                  = $_GET["l"];
 
@@ -105,6 +115,8 @@ class Detalhada extends BaseController {
                     }
                     $dados["leitos"][$i]["permanencia_linha_cuidado"] = $somatoria_dias_linha_cuidado_atendimento;
                 }
+                
+                $dados["tipo_perfil"]       = $_SESSION["usuario_logado"]["TIPO_PERFIL"];
 
                 $dados["ultima_atualizacao"] = $this->detalhadaModel->retornaUltimaAtualizacaoLeitos();
                 $dados['pagina']            = 'ocupacao_detalhada/setores/leitos/index.php';

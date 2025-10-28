@@ -58,7 +58,7 @@
                     //SOLICITAÇÃO MARIA IZABELLA EMAIL - OUTUBRO/2025 - IGNORAR LEITOS X NO MODO PAINEL
                     continue;
                 }
-                echo '<div class="card-wrapper responsividade_leitos_painel p-2">';
+                echo '<div class="card-wrapper responsividade_leitos_painel p-1">';
                 $cor_card_avaliacao_verde_vermelho  = "<div class='mt-2' style='height:15px;'></div>";
                 $tipo_de_body_card                  = "card-body-painel-leitos";
                 $tamanho_linha_card_painel          = 'style="height:33px"';

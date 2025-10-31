@@ -19,7 +19,7 @@
     $usuario_logado = $this->session->get("usuario_logado");
     if($usuario_logado["TIPO_PERFIL"]=='P'){ 
         $variavel_controle_margem_tv = 2;
-        echo '<meta http-equiv="refresh" content="300" />';
+        // echo '<meta http-equiv="refresh" content="300" />';
     } 
 ?>
 
@@ -38,13 +38,13 @@
                                 ".$setor_atend["DS_SETOR_ATENDIMENTO"]."
                             </div>
                         </div>
-                        <div class='card-body pt-2 text-end text-xs'>
+                        <div id='ultima_atualizacao_div' class='card-body pt-2 text-end text-xs'>
                             Última Atualização: ".date('d/m/Y H:i:s', strtotime($ultima_atualizacao["ultima_atualizacao"]))."
                         </div>
                     </div>
                 </div>";
         }else{
-            echo "<div class='text-xs'>Última Atualização: ".date('d/m/Y H:i:s', strtotime($ultima_atualizacao["ultima_atualizacao"]))."</div>";
+            echo "<div id='ultima_atualizacao_div' class='text-xs'>Última Atualização: ".date('d/m/Y H:i:s', strtotime($ultima_atualizacao["ultima_atualizacao"]))."</div>";
         }
     ?>
     

@@ -1134,7 +1134,20 @@ if(isset($diretorio_raiz) && strlen($diretorio_raiz)>0){
         }else if('<?php echo $link_pagina;?>'=='leitos'){
           <?php if(!isset($tipo_perfil)){$tipo_perfil = "";}?>
           if('<?php echo $tipo_perfil;?>'=='P'){
-            $("#div_pagina_geral").removeClass('py-4');
+              $("#div_pagina_geral").removeClass('py-4');
+              // --- Início da Solução ---
+              // 1. Define a função de recarregar a página
+              function recarregarComAncora() {
+                  // window.location.hash = 'ultima_atualizacao_div';
+                  window.location.reload(true);
+              }
+
+              // 2. Chama a função a cada 5 minutos (300.000 milissegundos)
+              setInterval(recarregarComAncora, 300000);
+              var target_offset = $("#ultima_atualizacao_div").offset();
+              var target_top = target_offset.top;
+              $('html, body').animate({ scrollTop: target_top }, 0);
+              // --- Fim da Solução ---
           }
         }
     });

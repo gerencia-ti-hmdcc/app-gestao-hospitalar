@@ -40,5 +40,4 @@ public/assets/exames/*
 **/**/**/*.json
 **/**/**/ci_session*
 app/Config/App.php
-.env 
-env
+.env

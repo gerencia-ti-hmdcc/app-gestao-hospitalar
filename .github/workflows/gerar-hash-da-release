@@ -1,0 +1,30 @@
+name: Gerar Hash da Release
+
+on:
+  release:
+    types: [created] # Dispara quando você cria um novo Release
+
+jobs:
+  build-hash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Criar arquivo ZIP do projeto
+        run: zip -r WebApp-Gestao-Hospitalar.zip . -x "*.git*" # Compacta tudo exceto a pasta .git
+
+      - name: Gerar SHA-256
+        id: generate_hash
+        run: |
+          HASH=$(sha256sum WebApp-Gestao-Hospitalar.zip | awk '{ print $1 }')
+          echo "HASH_RELEASE=$HASH" >> $GITHUB_ENV
+          echo "O hash gerado é: $HASH"
+
+      - name: Adicionar Hash às notas do Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body: |
+            **Resumo Digital (Hash SHA-256) da Release:**
+            `${{ env.HASH_RELEASE }}`
+          files: WebApp-Gestao-Hospitalar.zip

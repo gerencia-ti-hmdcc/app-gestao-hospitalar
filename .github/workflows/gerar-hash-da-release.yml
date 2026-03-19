@@ -3,6 +3,7 @@ name: Gerar Hash da Release
 on:
   release:
     types: [created] # Dispara quando você cria um novo Release
+    
 permissions:
   contents: write
 

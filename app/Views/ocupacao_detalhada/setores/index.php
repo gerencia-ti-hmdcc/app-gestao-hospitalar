@@ -13,7 +13,30 @@ if ($link_pagina == 'dashboard') {
         <meta http-equiv="refresh" content="180" />
         <?php
     }
-} ?>
+}
+
+function iniciais($str){
+
+    if (mb_strpos(strtoupper(substr($str, 0, 4)), 'SIC ') !== false) {
+        $str = substr($str, 3);
+    }
+
+    $pos = 0;
+    $saida = '';
+
+    while (($pos = strpos($str, ' ', $pos)) !== false) {
+        if (isset($str[$pos + 1]) && $str[$pos + 1] != ' ') {
+            $saida .= substr($str, $pos + 1, 1);
+        }
+        $pos++;
+    }
+    
+    return $str[0] . $saida;
+}
+   
+?>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="row">
     <!-- <div class="col-lg-12 mb-<?php echo $variavel_controle_margem_tv; ?>">
@@ -86,7 +109,7 @@ if ($link_pagina == 'dashboard') {
 <script>
     function abrirSetorAtendimento(cd_setor_atendimento) {
         let cd_agrupamento = $("#cd_agrupamento").val();
-        // console.log(cd_setor_atendimento);
+
         window.location.href = "leitos?l=" + cd_agrupamento + "&s=" + cd_setor_atendimento;
     }
 </script>

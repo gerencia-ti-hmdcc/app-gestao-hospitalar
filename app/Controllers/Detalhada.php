@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\MyModel;
 use App\Models\DetalhadaModel;
+use App\Models\MetasModel;
 use RtfHtml;
 use RtfReader;
 
@@ -10,12 +11,14 @@ class Detalhada extends BaseController
 
     protected $myModel;
     protected $detalhadaModel;
+    protected $metasModel;
 
     public function __construct()
     {
 
         $this->myModel = new MyModel();
         $this->detalhadaModel = new DetalhadaModel();
+        $this->metasModel = new MetasModel();
     }
 
     public function index()
@@ -28,11 +31,14 @@ class Detalhada extends BaseController
         $usuario = $_SESSION["usuario_logado"];
         helper('form');
 
+
         $dados["linhas_de_cuidado"] = $this->detalhadaModel->retornaLinhasDeCuidado($usuario);
         $dados['pagina'] = 'ocupacao_detalhada/index.php';
         $dados['nome_pagina'] = 'Ocupação Detalhada';
         $dados["link_pagina"] = 'detalhada';
         $dados["tipo_perfil"] = $usuario["TIPO_PERFIL"];
+        $dados["detalhes_leito"] = $this->detalhadaModel->retornaDadosLeitoTodos();
+        $dados["linha"]      = $this->metasModel->retornaTodosAgrupamentos();
         $this->logAcaoUsuario("visualização - ocupação detalhada");
 
         return view('templates/template_padrao.php', $dados);
@@ -51,6 +57,7 @@ class Detalhada extends BaseController
                 $this->logAcaoUsuario("visualização - setores");
 
                 $dados["setores"] = $this->detalhadaModel->retornaSetoresPorLinha($linha);
+                $dados["detalhes_leito"] = $this->detalhadaModel->retornaDadosLeitoTodos();
                 $dados["linha_cuidado"] = $this->detalhadaModel->retornaDadosLinhaCuidado($linha);
                 $dados['pagina'] = 'ocupacao_detalhada/setores/index.php';
                 $dados['nome_pagina'] = 'Setores de atendimento';

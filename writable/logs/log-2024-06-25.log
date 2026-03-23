@@ -1,0 +1,281 @@
+INFO - 2024-06-25 15:21:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:21:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:21:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:21:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:21:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:25:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:25:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:25:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:25:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:25:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:27:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:39:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:40:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:41:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:41:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:41:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:41:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:42:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:42:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 15:42:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 15:42:09 --> ErrorException: Undefined array key 0
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 211.
+ 1 APPPATH\Controllers\Admissoes.php(211): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 211)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 15:53:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 15:53:54 --> ErrorException: Undefined array key 0
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 211.
+ 1 APPPATH\Controllers\Admissoes.php(211): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 211)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 15:55:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 15:55:30 --> ErrorException: Undefined array key 0
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 210.
+ 1 APPPATH\Controllers\Admissoes.php(210): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 210)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 15:55:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 15:55:37 --> ErrorException: Undefined array key 0
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 210.
+ 1 APPPATH\Controllers\Admissoes.php(210): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 210)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 15:55:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 15:55:39 --> ErrorException: Undefined array key 0
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 210.
+ 1 APPPATH\Controllers\Admissoes.php(210): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 210)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 15:58:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 15:58:36 --> ErrorException: Undefined array key 0
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 210.
+ 1 APPPATH\Controllers\Admissoes.php(210): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 210)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 17:07:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 17:07:55 --> ErrorException: Undefined array key 0
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 210.
+ 1 APPPATH\Controllers\Admissoes.php(210): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 210)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 17:07:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 17:08:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 17:08:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 17:09:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 17:09:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 17:16:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-06-25 20:45:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:45:10 --> ErrorException: Undefined array key "usuario_logado"
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 46.
+ 1 APPPATH\Controllers\Admissoes.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "usuario_logado"', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 46)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:45:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:45:59 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 51.
+ 1 APPPATH\Controllers\Admissoes.php(51): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 51)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:48:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:48:31 --> ErrorException: Undefined array key "usuario_logado"
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 46.
+ 1 APPPATH\Controllers\Admissoes.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "usuario_logado"', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 46)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:49:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:49:34 --> ErrorException: Undefined array key "usuario_logado"
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 46.
+ 1 APPPATH\Controllers\Admissoes.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "usuario_logado"', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 46)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:49:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:49:38 --> ErrorException: Undefined array key "usuario_logado"
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 46.
+ 1 APPPATH\Controllers\Admissoes.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "usuario_logado"', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 46)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:49:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:49:39 --> ErrorException: Undefined array key "usuario_logado"
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 46.
+ 1 APPPATH\Controllers\Admissoes.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "usuario_logado"', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 46)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:49:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:49:40 --> ErrorException: Undefined array key "usuario_logado"
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 46.
+ 1 APPPATH\Controllers\Admissoes.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "usuario_logado"', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 46)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:50:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:50:56 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 52.
+ 1 APPPATH\Controllers\Admissoes.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 52)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:51:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:51:14 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 46.
+ 1 APPPATH\Controllers\Admissoes.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 46)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:52:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:52:11 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 52.
+ 1 APPPATH\Controllers\Admissoes.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 52)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:52:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:52:55 --> ErrorException: Undefined variable $link_pagina
+[Method: GET, Route: admissoes]
+in APPPATH\Views\templates\template_padrao.php on line 46.
+ 1 APPPATH\Views\templates\template_padrao.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $link_pagina', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php', 46)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 5 APPPATH\Controllers\Admissoes.php(280): view('templates/template_padrao.php', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:57:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:57:36 --> ErrorException: Undefined array key "usuario_logado"
+[Method: GET, Route: admissoes]
+in APPPATH\Views\templates\template_menu_lateral.php on line 14.
+ 1 APPPATH\Views\templates\template_menu_lateral.php(14): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "usuario_logado"', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_menu_lateral.php', 14)
+ 2 APPPATH\Views\templates\template_padrao.php(72): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_menu_lateral.php')
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Admissoes.php(282): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 20:59:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 20:59:06 --> ErrorException: Undefined property: CodeIgniter\View\View::$session
+[Method: GET, Route: admissoes]
+in APPPATH\Views\templates\template_menu_lateral.php on line 14.
+ 1 APPPATH\Views\templates\template_menu_lateral.php(14): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$session', 'C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_menu_lateral.php', 14)
+ 2 APPPATH\Views\templates\template_padrao.php(72): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_menu_lateral.php')
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\laragon\\www\\novo_app\\app\\Views\\templates\\template_padrao.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('templates/template_padrao.php', [], true)
+ 6 APPPATH\Controllers\Admissoes.php(282): view('templates/template_padrao.php', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 21:00:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 21:00:29 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 53.
+ 1 APPPATH\Controllers\Admissoes.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 53)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-06-25 21:00:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-06-25 21:00:47 --> ErrorException: Undefined array key "usuario_logado"
+[Method: GET, Route: admissoes]
+in APPPATH\Controllers\Admissoes.php on line 46.
+ 1 APPPATH\Controllers\Admissoes.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "usuario_logado"', 'C:\\laragon\\www\\novo_app\\app\\Controllers\\Admissoes.php', 46)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admissoes->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admissoes))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(312): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

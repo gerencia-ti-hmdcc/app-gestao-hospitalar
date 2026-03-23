@@ -26,6 +26,9 @@ app/logs/*
 # Inclusões manuais
 public/soft-ui-dashboard-main/ 
 public/assets/exames/*
-writable/**/*.json
-writable/**/*.log
-writable/**/ci_*
+writable/cache/*
+writable/logs/*
+writable/session/ci_session*
+writable/uploads/*
+writable/debugbar/**.log
+writable/debugbar/**.json

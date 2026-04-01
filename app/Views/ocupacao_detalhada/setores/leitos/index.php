@@ -254,11 +254,13 @@ if ($usuario_logado["TIPO_PERFIL"] == 'P') {
                 $icones_precaucao_html = str_replace("icone-fundo-iluminado", "icone-fundo-iluminado-alta-permanencia", $icones_precaucao_html);
             }
 
-            //COLOCAR FUNDO DO CARD AMARELO CASO O NEWS SEJA MAIOR QUE 6 DE SCORE ------------- A DESENVOLVER
-            // if ($paciente_codigo_amarelo == 1) {
-            //     $bg_class = "bg-yellow";
-            // }
-    
+            //COLOCAR FUNDO DO CARD AMARELO CASO O NEWS SEJA MAIOR QUE 6 DE SCORE
+            if ($leitos[$i]["cd_agrupamento"] != 4 && isset($leitos[$i]["score"]) && strlen($leitos[$i]["score"]) > 0) {
+                if ($paciente_codigo_amarelo == 1) {
+                    $bg_class = "bg-color-royal-yellow";
+                }
+            }
+
             //LÓGICA PARA VERIFICAR SE PACIENTE ESTÁ EM CUIDADO PALIATIVO
             if ($leitos[$i]["cuidado_paliativo"] == 1) {
                 $bg_class .= " cuidados-paliativos";

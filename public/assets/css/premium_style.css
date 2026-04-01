@@ -68,7 +68,7 @@ body {
 }
 
 .bg-color-royal-yellow {
-  background-color: var(--color-royal-yellow);
+  background-color: var(--color-royal-yellow) !important;
 }
 
 .btn-premium {

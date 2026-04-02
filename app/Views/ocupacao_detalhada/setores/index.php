@@ -41,7 +41,7 @@ if ($link_pagina == 'dashboard') {
 
     <?php
 
-    echo '<div class="flex flex-wrap col-12 pt-2">';
+    echo '<div class="flex flex-wrap col-12 pt-personalizado">';
     for ($i = 0; $i < count($setores); $i++) {
         echo '<div class="w-full md:w-1/2 mb-2 px-2">
                     <div class="card glass-card cursor-pointer w-full h-100 hover-scale" onclick="abrirSetorAtendimento(' . $setores[$i]["CD_SETOR_ATENDIMENTO"] . ')">

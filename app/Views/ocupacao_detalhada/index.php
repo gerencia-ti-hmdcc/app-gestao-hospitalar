@@ -39,7 +39,7 @@ if ($link_pagina == 'dashboard') {
         // print_r($detalhes_leito);
         // echo '</pre>';
     
-    echo '<div class="flex flex-wrap col-12 mb-auto pt-2">';
+    echo '<div class="flex flex-wrap col-12 mb-auto pt-personalizado">';
     for ($i = 0; $i < count($linhas_de_cuidado); $i++) {
 
         echo '<div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-2 px-2">

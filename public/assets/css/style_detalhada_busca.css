@@ -12,7 +12,7 @@ div.row{
 
 div.secaoBusca{
 
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 div.secaoBusca > div.busca{
@@ -24,7 +24,6 @@ div.secaoBusca > div.busca{
     background-color: #3E3E3E;
     padding: 20px;
     border-radius: 20px;
-    margin-bottom: 20px;
     align-items: end;
     width: 100%;
 }
@@ -50,7 +49,6 @@ div.busca > div.campo > input{
     border: none;
     border-radius: 20px;
     padding: 10px;
-    
 }
 
 div.busca > button{
@@ -201,11 +199,6 @@ div.resultadoBusca div.item hr{
 
 @media screen and (max-width:600px) {
 
-    div.secaoBusca{
-
-        margin-top: 10px;
-    }
-
     div.row > div.resultadoBusca{
 
         top: 300px;
@@ -255,11 +248,6 @@ div.resultadoBusca div.item hr{
 }
 
 @media screen and (min-width:601px) and (max-width:768px) {
-
-    div.secaoBusca{
-
-        margin-top: 20px;
-    }
 
     div.row > div.resultadoBusca{
 
@@ -317,11 +305,6 @@ div.resultadoBusca div.item hr{
 
 @media screen and (min-width:769px) and (max-width:900px) {
 
-    div.secaoBusca{
-
-        margin-top: 20px;
-    }
-
     div.row > div.resultadoBusca{
 
         top: 300px;
@@ -376,11 +359,6 @@ div.resultadoBusca div.item hr{
 
 @media screen and (min-width:901px) and (max-width:1000px) {
 
-    div.secaoBusca{
-
-        margin-top: 20px;
-    }
-
     div.row > div.resultadoBusca{
 
         top: 180px;
@@ -422,11 +400,6 @@ div.resultadoBusca div.item hr{
 }
 
 @media screen and (min-width:1001px) and (max-width:1365px) {
-
-    div.secaoBusca{
-
-        margin-top: 20px;
-    }
 
     div.row > div.resultadoBusca{
 
@@ -470,11 +443,6 @@ div.resultadoBusca div.item hr{
 
 @media screen and (min-width:1366px) and (max-width:1680px) {
 
-    div.secaoBusca{
-
-        margin-top: 20px;
-    }
-
     div.row > div.resultadoBusca{
 
         top: 180px;
@@ -517,11 +485,6 @@ div.resultadoBusca div.item hr{
 
 @media screen and (min-width:1681px) and (max-width:1920px) {
 
-    div.row > div.secaoBusca{
-
-        margin-top: 20px;
-    }
-
     div.row > div.resultadoBusca{
 
         top: 180px;
@@ -560,4 +523,8 @@ div.resultadoBusca div.item hr{
         width: 20%;
     }
 
+}
+
+.pt-personalizado{
+    padding-top: 1rem;
 }

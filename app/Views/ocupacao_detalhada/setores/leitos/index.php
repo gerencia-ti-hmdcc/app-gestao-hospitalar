@@ -633,6 +633,16 @@ if ($usuario_logado["TIPO_PERFIL"] == 'P') {
             return quantos_anos < 0 ? 0 : quantos_anos;
         }
 
+        document.addEventListener("DOMContentLoaded", function(){
+
+            const urlParams = new URLSearchParams(window.location.search)
+            const nr_atendimento = urlParams.get('a')
+            const leito_atual = urlParams.get('lei')
+
+            if(nr_atendimento != null && leito_atual != null)
+                detalhesDoLeito(nr_atendimento, leito_atual) 
+        })
+
         function detalhesDoLeito(nr_atendimento, leito_atual) {
             let html_leito = "";
             $.ajax({

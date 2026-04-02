@@ -33,6 +33,8 @@ class Detalhada extends BaseController
         $dados['nome_pagina'] = 'Ocupação Detalhada';
         $dados["link_pagina"] = 'detalhada';
         $dados["tipo_perfil"] = $usuario["TIPO_PERFIL"];
+        $dados["detalhes_leito"] = $this->detalhadaModel->retornaDadosLeitoTodos();
+        $dados["linha"] = $this->detalhadaModel->retornaTodosAgrupamentos();
         $this->logAcaoUsuario("visualização - ocupação detalhada");
 
         return view('templates/template_padrao.php', $dados);
@@ -51,6 +53,7 @@ class Detalhada extends BaseController
                 $this->logAcaoUsuario("visualização - setores");
 
                 $dados["setores"] = $this->detalhadaModel->retornaSetoresPorLinha($linha);
+                $dados["detalhes_leito"] = $this->detalhadaModel->retornaDadosLeitoTodos();
                 $dados["linha_cuidado"] = $this->detalhadaModel->retornaDadosLinhaCuidado($linha);
                 $dados['pagina'] = 'ocupacao_detalhada/setores/index.php';
                 $dados['nome_pagina'] = 'Setores de atendimento';

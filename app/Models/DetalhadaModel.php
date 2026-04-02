@@ -62,6 +62,22 @@ class DetalhadaModel extends Model
                                     AND cd_setor_atendimento = $cd_setor_atendimento")->getRowArray();
     }
 
+    public function retornaDadosLeitoTodos()
+    {
+        return $this->db->query("SELECT 
+                                    cd_setor_atendimento, ds_setor_atendimento,
+                                    ds_leito_atual, 
+                                    nr_atendimento, ds_nome_paciente, cd_agrupamento
+                                FROM 
+                                    DETALHE_OCUPACAO ORDER BY ds_setor_atendimento, ds_nome_paciente
+                            ")->getResultArray();
+
+    }
+    public function retornaTodosAgrupamentos()
+    {
+        return $this->db->query("SELECT * FROM CONFIG_AGRUPAMENTO WHERE ID not in (2,3,4,5,6,7,8)")->getResultArray();
+    }
+
     public function retornaDadosLinhaCuidado($linha_cuidado)
     {
         return $this->db->query("SELECT 

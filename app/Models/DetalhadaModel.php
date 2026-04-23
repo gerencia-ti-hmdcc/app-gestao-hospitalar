@@ -66,7 +66,7 @@ class DetalhadaModel extends Model
     {
         return $this->db->query("SELECT 
                                     cd_setor_atendimento, ds_setor_atendimento,
-                                    ds_leito_atual, 
+                                    ds_leito_atual, ie_status_unidade,
                                     nr_atendimento, ds_nome_paciente, cd_agrupamento
                                 FROM 
                                     DETALHE_OCUPACAO ORDER BY ds_setor_atendimento, ds_nome_paciente

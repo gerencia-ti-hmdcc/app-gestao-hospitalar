@@ -12,20 +12,20 @@ div.row{
 
 div.secaoBusca{
 
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
-div.busca{
+div.secaoBusca > div.busca{
 
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
-    gap: 20px;
+    justify-content: space-around;
+    gap: 0px;
     background-color: #3E3E3E;
     padding: 20px;
     border-radius: 20px;
-    margin-bottom: 20px;
     align-items: end;
+    width: 100%;
 }
 
 div.busca > div.campo{
@@ -49,7 +49,6 @@ div.busca > div.campo > input{
     border: none;
     border-radius: 20px;
     padding: 10px;
-    
 }
 
 div.busca > button{
@@ -76,18 +75,18 @@ div.row > div.resultadoBusca{
     justify-content: space-evenly;
     gap: 10px;
     position: absolute !important;
-    top: 250px;
+    top: 52%;
     left: 1%;
     z-index: 99;
     padding: 20px;
     padding-top: 70px;
 
-    background: rgba(55, 183, 186, 0.33);
+    background: #3e3e3e49;
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.366);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(55, 183, 186, 0.45);
+    border: 1px solid #3e3e3e76;
 }
 
 div.resultadoBusca i{
@@ -110,7 +109,7 @@ div.resultadoBusca div.item{
     width: 20%;
     display: grid;
     grid-template-columns: 1fr 3px .5fr;
-    grid-template-rows: 25px 75px;
+    grid-template-rows: 50px 75px;
     gap: 10px;
     padding: 15px 10px 5px 10px;
     border-left: 5px solid #57BFCF;
@@ -122,6 +121,21 @@ div.resultadoBusca div.item{
 div.resultadoBusca div.item:hover{
 
     border-left: 15px solid #57BFCF;
+}
+
+div.resultadoBusca div.item.inative{
+
+    background-color: #E9ECEF;
+    color:#344767;
+    border-left: 5px solid #D0D1D1;
+    cursor: not-allowed;
+    pointer-events:none;
+    opacity: 0.9; 
+}
+
+div.resultadoBusca div.item.inative:hover{
+
+    border-left: 15px solid #D0D1D1;
 }
 
 div.resultadoBusca div.item div.campoNome{
@@ -185,18 +199,12 @@ div.resultadoBusca div.item hr{
 
 @media screen and (max-width:600px) {
 
-    div.secaoBusca{
-
-        margin-top: 10px;
-    }
-
     div.row > div.resultadoBusca{
 
-        top: 360px;
-        padding-top: 50px;
+        top: 300px;
     }
     
-    div.busca{
+    div.secaoBusca > div.busca{
 
         display: flex;
         flex-flow: column wrap;
@@ -223,8 +231,7 @@ div.resultadoBusca div.item hr{
 
         border: none;
         border-radius: 20px;
-        padding: 7px 10px;
-        
+        padding: 7px 10px;   
     }
     
     div.busca > button{
@@ -238,35 +245,44 @@ div.resultadoBusca div.item hr{
 
         width: 100%;
     }
-
 }
 
 @media screen and (min-width:601px) and (max-width:768px) {
 
-    div.secaoBusca{
-
-        margin-top: 20px;
-    }
-
     div.row > div.resultadoBusca{
 
-        top: 330px;
+        top: 300px;
     }
     
-    div.busca{
+    div.secaoBusca > div.busca{
 
         display: flex;
-        flex-flow: row wrap;
-        align-items: end;
-        justify-content: center;
+        flex-flow: column wrap;
+        align-items: center;
+        padding: 5px 20px 10px 20px;
         margin: 0;
+        gap: 5px;
     }
 
     div.busca > div.campo{
 
         display: flex;
         flex-flow: column;
-        width: 40%;
+        width: 100%;
+    }
+
+    div.busca > div.campo > label{
+
+        padding-bottom: 0px;
+        margin-bottom: 0;
+    }
+
+    div.busca > div.campo > input{
+
+        border: none;
+        border-radius: 20px;
+        padding: 7px 10px;
+        
     }
 
     
@@ -289,33 +305,41 @@ div.resultadoBusca div.item hr{
 
 @media screen and (min-width:769px) and (max-width:900px) {
 
-    div.secaoBusca{
-
-        margin-top: 20px;
-    }
-
     div.row > div.resultadoBusca{
 
-        top: 330px;
+        top: 300px;
     }
     
-    div.busca{
+    div.secaoBusca > div.busca{
 
         display: flex;
-        flex-flow: row wrap;
-        align-items: end;
-        justify-content: center;
+        flex-flow: column wrap;
+        align-items: center;
         margin: 0;
         padding: 5px 20px 10px 20px;
+        gap: 5px;
     }
 
     div.busca > div.campo{
 
         display: flex;
         flex-flow: column;
-        width: 40%;
+        width: 100%;
     }
 
+    div.busca > div.campo > label{
+
+        padding-bottom: 0px;
+        margin-bottom: 0;
+    }
+    
+    div.busca > div.campo > input{
+
+        border: none;
+        border-radius: 20px;
+        padding: 7px 10px;
+        
+    }
     
     div.busca > button{
 
@@ -331,19 +355,13 @@ div.resultadoBusca div.item hr{
 
         width: 45%;
     }
-
 }
 
 @media screen and (min-width:901px) and (max-width:1000px) {
 
-    div.secaoBusca{
-
-        margin-top: 20px;
-    }
-
     div.row > div.resultadoBusca{
 
-        top: 320px;
+        top: 180px;
     }
     
     div.busca{
@@ -360,7 +378,7 @@ div.resultadoBusca div.item hr{
 
         display: flex;
         flex-flow: column;
-        width: 40%;
+        width: 30%;
     }
 
     
@@ -383,14 +401,9 @@ div.resultadoBusca div.item hr{
 
 @media screen and (min-width:1001px) and (max-width:1365px) {
 
-    div.secaoBusca{
-
-        margin-top: 20px;
-    }
-
     div.row > div.resultadoBusca{
 
-        top: 220px;
+        top: 180px;
     }
     
     div.busca{
@@ -430,14 +443,9 @@ div.resultadoBusca div.item hr{
 
 @media screen and (min-width:1366px) and (max-width:1680px) {
 
-    div.secaoBusca{
-
-        margin-top: 20px;
-    }
-
     div.row > div.resultadoBusca{
 
-        top: 220px;
+        top: 180px;
     }
     
     div.busca{
@@ -477,14 +485,9 @@ div.resultadoBusca div.item hr{
 
 @media screen and (min-width:1681px) and (max-width:1920px) {
 
-    div.row > div.secaoBusca{
-
-        margin-top: 20px;
-    }
-
     div.row > div.resultadoBusca{
 
-        top: 220px;
+        top: 180px;
        
     }
     
@@ -520,4 +523,8 @@ div.resultadoBusca div.item hr{
         width: 20%;
     }
 
+}
+
+.pt-personalizado{
+    padding-top: 1rem;
 }

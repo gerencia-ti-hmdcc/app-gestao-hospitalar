@@ -176,7 +176,7 @@ class Detalhada extends BaseController
             if ($existe_cuidado_paliativo) {
                 $dados_leito["cuidados_paliativos"] = $existe_cuidado_paliativo;
             } else {
-                $dados_leito["cuidados_paliativos"] = "";
+                $dados_leito["cuidados_paliativos"] = [];
             }
             print json_encode($dados_leito);
         } else {

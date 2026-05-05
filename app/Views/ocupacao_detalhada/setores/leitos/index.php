@@ -303,6 +303,7 @@ if ($usuario_logado["TIPO_PERFIL"] == 'P') {
                 $classes_leito_sem_paciente = "text-center";
 
             }
+            $text_list_card_time = "";
 
             $bg_class = "bg-gray-200"; // Leito Livre visual
             if ($status_u != "Livre" && $status_u != "Paciente") {
@@ -633,14 +634,14 @@ if ($usuario_logado["TIPO_PERFIL"] == 'P') {
             return quantos_anos < 0 ? 0 : quantos_anos;
         }
 
-        document.addEventListener("DOMContentLoaded", function(){
+        document.addEventListener("DOMContentLoaded", function () {
 
             const urlParams = new URLSearchParams(window.location.search)
             const nr_atendimento = urlParams.get('a')
             const leito_atual = urlParams.get('lei')
 
-            if(nr_atendimento != null && leito_atual != null)
-                detalhesDoLeito(nr_atendimento, leito_atual) 
+            if (nr_atendimento != null && leito_atual != null)
+                detalhesDoLeito(nr_atendimento, leito_atual)
         })
 
         function detalhesDoLeito(nr_atendimento, leito_atual) {

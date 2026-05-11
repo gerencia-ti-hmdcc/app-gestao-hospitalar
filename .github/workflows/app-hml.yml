@@ -1,11 +1,10 @@
-name: 'App HMDCC Homologação'
+name: 'App HMDCC-Homologação'
 on:
   push:
-    branches: ["hml"]
-    paths:
-      - './**'
-      - '.github/workflows/app-hml.yml'
-    workflow_dispatch:
+    branches:
+      - hml
+  workflow_dispatch:
+
 
 jobs:
   HOMOLOGACAO:

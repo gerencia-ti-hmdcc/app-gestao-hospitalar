@@ -1,4 +1,4 @@
-name: 'App HMDCC-Producão'
+name: 'App HMDCC Producão'
 on:
   pull_request:
     branches: ["main"]
@@ -7,7 +7,7 @@ on:
     paths:
       - './**'
       - '.github/workflows/app.yml'
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   PRODUCAO:

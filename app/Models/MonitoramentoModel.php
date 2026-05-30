@@ -3,26 +3,29 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class MonitoramentoModel extends Model {
+class MonitoramentoModel extends Model
+{
 
-    public function retornaAdmissoesMes($mes,$ano){
-        if($mes==0 || $ano==0){
+    public function retornaAdmissoesMes($mes, $ano)
+    {
+        if ($mes == 0 || $ano == 0) {
             $mes = date('m');
             $ano = date("Y");
         }
         return $this->db->query("SELECT * FROM ADMISSOES_DIARIAS WHERE MES_REFERENCIA='$mes' AND IE_TIPO_ADMISSAO <> 'D' AND ANO_REFERENCIA='$ano'")->getResultArray();
     }
-    
-    public function retornaQuantAdmissoesMes($mes,$ano,$pagina='periodica'){
-        if($mes==0 || $ano==0){
+
+    public function retornaQuantAdmissoesMes($mes, $ano, $pagina = 'periodica')
+    {
+        if ($mes == 0 || $ano == 0) {
             $mes = date('m');
             $ano = date("Y");
         }
         $dia = date('d');
 
-        if($mes == date("m") && $ano == date("Y") && $pagina=='periodica'){
+        if ($mes == date("m") && $ano == date("Y") && $pagina == 'periodica') {
             $condicao_periodica = "AND DIA_REFERENCIA <> '$dia'";
-        }else{
+        } else {
             $condicao_periodica = "";
         }
 
@@ -40,16 +43,17 @@ class MonitoramentoModel extends Model {
                                     DIA_REFERENCIA,MES_REFERENCIA,ANO_REFERENCIA,IE_TIPO_ADMISSAO")->getResultArray();
     }
 
-    public function retornaQuantAdmissoesMesPorLinha($mes,$ano,$agrupamento){
-        if($mes==0 || $ano==0){
+    public function retornaQuantAdmissoesMesPorLinha($mes, $ano, $agrupamento)
+    {
+        if ($mes == 0 || $ano == 0) {
             $mes = date('m');
             $ano = date("Y");
         }
 
-        if($agrupamento==1){
+        if ($agrupamento == 1) {
             //AGRUPAMENTOS CTI
             $cond_agrupamento = "AND AGRUPAMENTO_ATUAL in ($agrupamento,2,3,4,5,6,7,8)";
-        }else{
+        } else {
             $cond_agrupamento = "AND AGRUPAMENTO_ATUAL=$agrupamento";
         }
 
@@ -68,8 +72,9 @@ class MonitoramentoModel extends Model {
                                     DIA_REFERENCIA,MES_REFERENCIA,ANO_REFERENCIA,IE_TIPO_ADMISSAO")->getResultArray();
     }
 
-    public function retornaDetalhesAdmissoesMes($dia,$mes,$ano){
-        if($mes==0 || $ano==0 || $dia==0){
+    public function retornaDetalhesAdmissoesMes($dia, $mes, $ano)
+    {
+        if ($mes == 0 || $ano == 0 || $dia == 0) {
             $dia = date('d');
             $mes = date('m');
             $ano = date("Y");
@@ -96,17 +101,18 @@ class MonitoramentoModel extends Model {
                                     QUANTIDADE")->getResultArray();
     }
 
-    public function retornaDetalhesAdmissoesMesPorLinha($dia,$mes,$ano,$agrupamento){
-        if($mes==0 || $ano==0 || $dia==0){
+    public function retornaDetalhesAdmissoesMesPorLinha($dia, $mes, $ano, $agrupamento)
+    {
+        if ($mes == 0 || $ano == 0 || $dia == 0) {
             $dia = date('d');
             $mes = date('m');
             $ano = date("Y");
         }
 
-        if($agrupamento==1){
+        if ($agrupamento == 1) {
             //AGRUPAMENTOS CTI
             $cond_agrupamento = "AND AGRUPAMENTO_ATUAL in ($agrupamento,2,3,4,5,6,7,8)";
-        }else{
+        } else {
             $cond_agrupamento = "AND AGRUPAMENTO_ATUAL=$agrupamento";
         }
 
@@ -133,16 +139,17 @@ class MonitoramentoModel extends Model {
                                     QUANTIDADE")->getResultArray();
     }
 
-    public function retornaTotaisMesSemCTI($mes,$ano,$pagina='periodica'){
-        if($mes==0 || $ano==0){
+    public function retornaTotaisMesSemCTI($mes, $ano, $pagina = 'periodica')
+    {
+        if ($mes == 0 || $ano == 0) {
             $mes = date('m');
             $ano = date("Y");
         }
         $dia = date("d");
 
-        if($mes == date("m") && $ano == date("Y") && $pagina=='periodica'){
+        if ($mes == date("m") && $ano == date("Y") && $pagina == 'periodica') {
             $condicao_periodica = "AND DIA_REFERENCIA <> '$dia'";
-        }else{
+        } else {
             $condicao_periodica = "";
         }
 
@@ -170,16 +177,17 @@ class MonitoramentoModel extends Model {
                                     QUANTIDADE")->getResultArray();
     }
 
-    public function retornaTotaisMesCTI($mes,$ano,$pagina='periodica'){
-        if($mes==0 || $ano==0){
+    public function retornaTotaisMesCTI($mes, $ano, $pagina = 'periodica')
+    {
+        if ($mes == 0 || $ano == 0) {
             $mes = date('m');
             $ano = date("Y");
         }
         $dia = date("d");
         // ESTÁ VINDO DUPLICADO O DIA ATUAL
-        if($mes == date("m") && $ano == date("Y") && $pagina=='periodica'){
+        if ($mes == date("m") && $ano == date("Y") && $pagina == 'periodica') {
             $condicao_periodica = "AND DIA_REFERENCIA <> '$dia'";
-        }else{
+        } else {
             $condicao_periodica = "";
         }
 
@@ -205,16 +213,17 @@ class MonitoramentoModel extends Model {
                                     QUANTIDADE")->getResultArray();
     }
 
-    public function retornaTotaisMesPorLinha($mes,$ano,$agrupamento){
-        if($mes==0 || $ano==0){
+    public function retornaTotaisMesPorLinha($mes, $ano, $agrupamento)
+    {
+        if ($mes == 0 || $ano == 0) {
             $mes = date('m');
             $ano = date("Y");
         }
 
-        if($agrupamento==1){
+        if ($agrupamento == 1) {
             //AGRUPAMENTOS CTI
             $cond_agrupamento = "AND AD.AGRUPAMENTO_ATUAL in ($agrupamento,2,3,4,5,6,7,8)";
-        }else{
+        } else {
             $cond_agrupamento = "AND AD.AGRUPAMENTO_ATUAL=$agrupamento";
         }
         $dia = date("d");
@@ -239,14 +248,15 @@ class MonitoramentoModel extends Model {
                                     QUANTIDADE")->getResultArray();
     }
 
-    public function retornaMetasAnuaisPorLinha($ano,$quadrimestre,$agrupamento,$tipo_admissao=''){
-        if($ano==0){
+    public function retornaMetasAnuaisPorLinha($ano, $quadrimestre, $agrupamento, $tipo_admissao = '')
+    {
+        if ($ano == 0) {
             $ano = date("Y");
         }
 
-        if(strlen($tipo_admissao)>0){
+        if (strlen($tipo_admissao) > 0) {
             $and_tipo_admissao = "AND TIPO_ADMISSAO='$tipo_admissao'";
-        }else{
+        } else {
             $and_tipo_admissao = "";
         }
 
@@ -260,8 +270,9 @@ class MonitoramentoModel extends Model {
                                     AND ANO = '$ano' $and_tipo_admissao")->getResultArray();
     }
 
-    public function retornaOfertasDiarias($mes,$ano){
-        if($ano==0 || $mes==0){
+    public function retornaOfertasDiarias($mes, $ano)
+    {
+        if ($ano == 0 || $mes == 0) {
             $ano = date("Y");
             $mes = date("m");
         }
@@ -285,8 +296,9 @@ class MonitoramentoModel extends Model {
                                     dia, mes, ano, ds_setor_solicitado ASC, quantidade DESC")->getResultArray();
     }
 
-    public function retornaDetalhesOfertasDiarias($ano,$mes,$dia){
-        if($ano==0 || $mes==0 || $dia==0){
+    public function retornaDetalhesOfertasDiarias($ano, $mes, $dia)
+    {
+        if ($ano == 0 || $mes == 0 || $dia == 0) {
             $ano = date("Y");
             $mes = date("m");
             $dia = date('d');
@@ -311,8 +323,9 @@ class MonitoramentoModel extends Model {
                                     ds_setor_solicitado ASC, quantidade DESC")->getResultArray();
     }
 
-    public function retornaTotaisOfertasMes($ano,$mes){
-        if($ano==0 || $mes==0){
+    public function retornaTotaisOfertasMes($ano, $mes)
+    {
+        if ($ano == 0 || $mes == 0) {
             $ano = date("Y");
             $mes = date("m");
         }
@@ -334,8 +347,9 @@ class MonitoramentoModel extends Model {
                                     ds_setor_solicitado ASC, quantidade DESC")->getResultArray();
     }
 
-    public function retornaTotalOfertasMes($ano,$mes){
-        if($ano==0 || $mes==0){
+    public function retornaTotalOfertasMes($ano, $mes)
+    {
+        if ($ano == 0 || $mes == 0) {
             $ano = date("Y");
             $mes = date("m");
         }
@@ -356,8 +370,9 @@ class MonitoramentoModel extends Model {
                                     ds_setor_solicitado ASC, quantidade DESC")->getResultArray();
     }
 
-    public function retornaTotaisOfertasPorDia($mes,$ano){
-        if($ano==0 || $mes==0){
+    public function retornaTotaisOfertasPorDia($mes, $ano)
+    {
+        if ($ano == 0 || $mes == 0) {
             $ano = date("Y");
             $mes = date("m");
         }
@@ -379,8 +394,9 @@ class MonitoramentoModel extends Model {
                                     dia, mes, ano, ds_setor_solicitado ASC, quantidade DESC")->getResultArray();
     }
 
-    public function retornaAdmissoesDiaPeriodicas($dia,$mes,$ano){
-        if($mes==0 || $ano==0 || $dia==0){
+    public function retornaAdmissoesDiaPeriodicas($dia, $mes, $ano)
+    {
+        if ($mes == 0 || $ano == 0 || $dia == 0) {
             $dia = date('d');
             $mes = date('m');
             $ano = date("Y");
@@ -401,8 +417,9 @@ class MonitoramentoModel extends Model {
                                     DIA_REFERENCIA,MES_REFERENCIA,ANO_REFERENCIA,IE_TIPO_ADMISSAO")->getResultArray();
     }
 
-    public function retornaOfertasDiaPeriodicas($dia,$mes,$ano){
-        if($mes==0 || $ano==0 || $dia==0){
+    public function retornaOfertasDiaPeriodicas($dia, $mes, $ano)
+    {
+        if ($mes == 0 || $ano == 0 || $dia == 0) {
             $dia = date('d');
             $mes = date('m');
             $ano = date("Y");
@@ -426,8 +443,9 @@ class MonitoramentoModel extends Model {
                                     dia, mes, ano, ds_setor_solicitado ASC, quantidade DESC")->getResultArray();
     }
 
-    public function retornaDetalhesAdmissoesMesPeriodicas($dia,$mes,$ano){
-        if($mes==0 || $ano==0 || $dia==0){
+    public function retornaDetalhesAdmissoesMesPeriodicas($dia, $mes, $ano)
+    {
+        if ($mes == 0 || $ano == 0 || $dia == 0) {
             $dia = date('d');
             $mes = date('m');
             $ano = date("Y");
@@ -454,8 +472,9 @@ class MonitoramentoModel extends Model {
                                     QUANTIDADE")->getResultArray();
     }
 
-    public function retornaDetalhesOfertasDiariasPeriodicas($ano,$mes,$dia){
-        if($ano==0 || $mes==0 || $dia==0){
+    public function retornaDetalhesOfertasDiariasPeriodicas($ano, $mes, $dia)
+    {
+        if ($ano == 0 || $mes == 0 || $dia == 0) {
             $ano = date("Y");
             $mes = date("m");
             $dia = date('d');
@@ -480,8 +499,9 @@ class MonitoramentoModel extends Model {
                                     ds_setor_solicitado ASC, quantidade DESC")->getResultArray();
     }
 
-    public function retornaTotaisMesSemCTIPeriodicas($dia=0,$mes=0,$ano=0){
-        if($mes==0 || $ano==0 || $dia==0){
+    public function retornaTotaisMesSemCTIPeriodicas($dia = 0, $mes = 0, $ano = 0)
+    {
+        if ($mes == 0 || $ano == 0 || $dia == 0) {
             $mes = date('m');
             $ano = date("Y");
             $dia = date("d");
@@ -509,8 +529,9 @@ class MonitoramentoModel extends Model {
                                     QUANTIDADE")->getResultArray();
     }
 
-    public function retornaTotaisMesCTIPeriodicas($dia=0,$mes=0,$ano=0){
-        if($mes==0 || $ano==0 || $dia==0){
+    public function retornaTotaisMesCTIPeriodicas($dia = 0, $mes = 0, $ano = 0)
+    {
+        if ($mes == 0 || $ano == 0 || $dia == 0) {
             $mes = date('m');
             $ano = date("Y");
             $dia = date("d");
@@ -536,7 +557,8 @@ class MonitoramentoModel extends Model {
                                     QUANTIDADE")->getResultArray();
     }
 
-    public function retornaUltimaHoraAdmissoesOuOfertas(){
+    public function retornaUltimaHoraAdmissoesOuOfertas()
+    {
         $ano = date("Y");
         $mes = date("m");
         $dia = date('d');
@@ -570,7 +592,8 @@ class MonitoramentoModel extends Model {
                                 LIMIT 1")->getRowArray();
     }
 
-    public function retornaUltimaHoraAdmissoesPeriodicas(){
+    public function retornaUltimaHoraAdmissoesPeriodicas()
+    {
         $ano = date("Y");
         $mes = date("m");
         $dia = date('d');
@@ -625,7 +648,8 @@ class MonitoramentoModel extends Model {
                                     ULTIMA_ATUALIZACAO DESC")->getResultArray();
     }
 
-    public function retornaUltimaHoraOfertas(){
+    public function retornaUltimaHoraOfertas()
+    {
         $ano = date("Y");
         $mes = date("m");
         $dia = date('d');

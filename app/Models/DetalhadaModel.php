@@ -3,12 +3,14 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class DetalhadaModel extends Model {
-    
-    public function retornaLinhasDeCuidado($usuario){
-        if($usuario["TIPO_PERFIL"]=="A" || $usuario["TIPO_PERFIL"]=="E" || $usuario["TIPO_PERFIL"]=="D"){
+class DetalhadaModel extends Model
+{
+
+    public function retornaLinhasDeCuidado($usuario)
+    {
+        if ($usuario["TIPO_PERFIL"] == "A" || $usuario["TIPO_PERFIL"] == "E" || $usuario["TIPO_PERFIL"] == "D") {
             $condicao = "1=1";
-        }else{
+        } else {
             $condicao = "IE_STATUS=1";
         }
         return $this->db->query("SELECT 
@@ -21,7 +23,8 @@ class DetalhadaModel extends Model {
                                     ds_linha_cuidado ASC")->getResultArray();
     }
 
-    public function retornaSetoresPorLinha($linha_cuidado){
+    public function retornaSetoresPorLinha($linha_cuidado)
+    {
         return $this->db->query("SELECT 
                                     * 
                                 FROM 
@@ -34,7 +37,8 @@ class DetalhadaModel extends Model {
                                     ds_setor_atendimento ASC")->getResultArray();
     }
 
-    public function retornaLeitosClassifSetor($linha_cuidado, $cd_setor_atendimento){
+    public function retornaLeitosClassifSetor($linha_cuidado, $cd_setor_atendimento)
+    {
         return $this->db->query("SELECT 
                                     * 
                                 FROM 
@@ -46,7 +50,8 @@ class DetalhadaModel extends Model {
                                     ds_leito_atual asc")->getResultArray();
     }
 
-    public function retornaDadosLeito($nr_atendimento,$leito_atual,$cd_setor_atendimento){
+    public function retornaDadosLeito($nr_atendimento, $leito_atual, $cd_setor_atendimento)
+    {
         return $this->db->query("SELECT 
                                     * 
                                 FROM 
@@ -55,9 +60,26 @@ class DetalhadaModel extends Model {
                                     nr_atendimento = $nr_atendimento
                                     AND ds_leito_atual = '$leito_atual'
                                     AND cd_setor_atendimento = $cd_setor_atendimento")->getRowArray();
-    } 
+    }
 
-    public function retornaDadosLinhaCuidado($linha_cuidado){
+    public function retornaDadosLeitoTodos()
+    {
+        return $this->db->query("SELECT 
+                                    cd_setor_atendimento, ds_setor_atendimento,
+                                    ds_leito_atual, ie_status_unidade,
+                                    nr_atendimento, ds_nome_paciente, cd_agrupamento
+                                FROM 
+                                    DETALHE_OCUPACAO ORDER BY ds_setor_atendimento, ds_nome_paciente
+                            ")->getResultArray();
+
+    }
+    public function retornaTodosAgrupamentos()
+    {
+        return $this->db->query("SELECT * FROM CONFIG_AGRUPAMENTO WHERE ID not in (2,3,4,5,6,7,8)")->getResultArray();
+    }
+
+    public function retornaDadosLinhaCuidado($linha_cuidado)
+    {
         return $this->db->query("SELECT 
                                     * 
                                 FROM 
@@ -66,7 +88,8 @@ class DetalhadaModel extends Model {
                                     cd_classif_setor=$linha_cuidado")->getRowArray();
     }
 
-    public function retornaDadosSetorAtendimento($cd_setor_atendimento){
+    public function retornaDadosSetorAtendimento($cd_setor_atendimento)
+    {
         return $this->db->query("SELECT 
                                     * 
                                 FROM 
@@ -75,7 +98,8 @@ class DetalhadaModel extends Model {
                                     cd_setor_atendimento=$cd_setor_atendimento")->getRowArray();
     }
 
-    public function retornaMovimentacoesAtendimento($nr_atendimento){
+    public function retornaMovimentacoesAtendimento($nr_atendimento)
+    {
         return $this->db->query("SELECT
                                     *
                                 FROM
@@ -87,11 +111,13 @@ class DetalhadaModel extends Model {
                                     dt_saida_unidade asc")->getResultArray();
     }
 
-    public function retornaUltimaAtualizacaoLeitos(){
+    public function retornaUltimaAtualizacaoLeitos()
+    {
         return $this->db->query("SELECT MAX(ultima_atualizacao) as ultima_atualizacao FROM `DETALHE_OCUPACAO` WHERE 1")->getRowArray();
     }
 
-    public function retornaDadosLeitoPorAtendimento($nr_atendimento){
+    public function retornaDadosLeitoPorAtendimento($nr_atendimento)
+    {
         return $this->db->query("SELECT 
                                     * 
                                 FROM 
@@ -100,7 +126,8 @@ class DetalhadaModel extends Model {
                                     nr_atendimento = $nr_atendimento")->getRowArray();
     }
 
-    public function retornaHistoricoAvaliacoesVerdeVermelho($nr_atendimento){
+    public function retornaHistoricoAvaliacoesVerdeVermelho($nr_atendimento)
+    {
         return $this->db->query("SELECT 
                                     * 
                                 FROM 
@@ -111,7 +138,8 @@ class DetalhadaModel extends Model {
                                     dt_liberacao DESC")->getResultArray();
     }
 
-    public function retornaTotaisAvaliacoesVerdeVermelho($nr_atendimento){
+    public function retornaTotaisAvaliacoesVerdeVermelho($nr_atendimento)
+    {
         return $this->db->query("SELECT 
                                     (SELECT    
                                         COUNT(ds_verde_ou_vermelho)
@@ -167,7 +195,8 @@ class DetalhadaModel extends Model {
                                     dual")->getRowArray();
     }
 
-    public function retornaHistoricoEvolucoesPaciente($nr_atendimento){
+    public function retornaHistoricoEvolucoesPaciente($nr_atendimento)
+    {
         return $this->db->query("SELECT 
                                     * 
                                 FROM 
@@ -178,7 +207,8 @@ class DetalhadaModel extends Model {
                                     dt_liberacao_evolucao DESC")->getResultArray();
     }
 
-    public function retornaHistoricoInterconsultasPaciente($nr_atendimento){
+    public function retornaHistoricoInterconsultasPaciente($nr_atendimento)
+    {
         return $this->db->query("SELECT 
                                     * 
                                 FROM 
@@ -189,7 +219,8 @@ class DetalhadaModel extends Model {
                                     nr_parecer DESC, ds_tipo DESC")->getResultArray();
     }
 
-    public function retornaHistoricoExamesLaboratoriaisPaciente($nr_atendimento){
+    public function retornaHistoricoExamesLaboratoriaisPaciente($nr_atendimento)
+    {
         return $this->db->query("SELECT 
                                     * 
                                 FROM 
@@ -200,7 +231,8 @@ class DetalhadaModel extends Model {
                                     dt_baixa DESC, nr_prescricao DESC, nr_sequencia ASC")->getResultArray();
     }
 
-    public function retornaProntuarioAtendimento($nr_atendimento){
+    public function retornaProntuarioAtendimento($nr_atendimento)
+    {
         return $this->db->query("SELECT 
                                     nr_prontuario 
                                 FROM 
@@ -215,11 +247,12 @@ class DetalhadaModel extends Model {
     {
         $site = \Config\Database::connect($this->site1);
 
-        $query = $site->query("SELECT * FROM HMDCC_EXAMES_IMAGEM WHERE nr_prontuario = ?", [$nr_prontuario]);
+        $query = $site->query("SELECT * FROM HMDCC_EXAMES_IMAGEM WHERE nr_prontuario = ? ORDER BY dt_exame DESC", [$nr_prontuario]);
         return $query->getResultArray();
     }
 
-    public function retornaUltimasAvaliacoesBradenPaciente(){
+    public function retornaUltimasAvaliacoesBradenPaciente()
+    {
         return $this->db->query("SELECT
                                     NR_ATENDIMENTO, 
                                     CD_SETOR_ATENDIMENTO, 
@@ -241,7 +274,8 @@ class DetalhadaModel extends Model {
                                     NR_ATENDIMENTO")->getResultArray();
     }
 
-    public function retornaUltimasAvaliacoesMorsePaciente(){
+    public function retornaUltimasAvaliacoesMorsePaciente()
+    {
         return $this->db->query("SELECT
                                     NR_ATENDIMENTO, 
                                     CD_SETOR_ATENDIMENTO, 
@@ -261,6 +295,16 @@ class DetalhadaModel extends Model {
                                     and DT_LIBERACAO_MORSE = ( select max(x.DT_LIBERACAO_MORSE) from PACIENTE_DADOS_CLINICOS x where x.NR_ATENDIMENTO = a.nr_atendimento)
                                 GROUP BY	
                                     NR_ATENDIMENTO")->getResultArray();
+    }
+
+    public function retornaSePacienteCuidadosPaliativos($nr_atendimento)
+    {
+        return $this->db->query("SELECT
+                                    *
+                                FROM 
+                                    PACIENTE_CUIDADO_PALIATIVO
+                                WHERE
+                                    nr_atendimento = $nr_atendimento")->getResultArray();
     }
 }
 ?>

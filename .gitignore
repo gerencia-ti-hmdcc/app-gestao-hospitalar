@@ -24,6 +24,12 @@ app/logs/*
 /tests/results/
 
 # Inclusões manuais
+/writable/session/ci_session*
+# !/writable/index.html
+# !/writable/.htaccess
+# !/writable/**/index.html
+# !/writable/**/.htaccess
+app/Config/Database.php
 public/soft-ui-dashboard-main/ 
 public/assets/exames/*
 writable/cache/*

@@ -1,233 +1,250 @@
 <?php
-    $variavel_controle_margem_tv = 4;
-    if($link_pagina=='dashboard'){ 
-        if($tipo_perfil=='P'){
-            $variavel_controle_margem_tv = 2;
-            $usuario_logado = $this->session->get("usuario_logado");
-            if(isset($usuario_logado["painel_variavel_controle"])){
-                $usuario_logado["painel_variavel_controle"] = $usuario_logado["painel_variavel_controle"];
-            }else{
-                $usuario_logado["painel_variavel_controle"] = $setor_ultimo_painel;
-            }
-?>
-            <meta http-equiv="refresh" content="180" />
-<?php 
-        } 
-    } 
+$variavel_controle_margem_tv = 4;
+if ($link_pagina == 'dashboard') {
+    if ($tipo_perfil == 'P') {
+        $variavel_controle_margem_tv = 2;
+        $usuario_logado = $this->session->get("usuario_logado");
+        if (isset($usuario_logado["painel_variavel_controle"])) {
+            $usuario_logado["painel_variavel_controle"] = $usuario_logado["painel_variavel_controle"];
+        } else {
+            $usuario_logado["painel_variavel_controle"] = $setor_ultimo_painel;
+        }
+        ?>
+                    <meta http-equiv="refresh" content="180" />
+    <?php
+    }
+}
 ?>
 
 <div class="row">
+    <div class="col-12">
+        <div class="card glass-card">
+            <div class="card-body">
     <?php
-        //echo $calendario1;
-        // echo $calendario->display(date('2022-01-01')); 
-        // echo $calendario->display(date('2022-02-01')); 
-        if(isset($_GET["a"])){
-            if((int)$_GET["a"]==0){
-                $ano_consulta = date("Y");
-            }else{
-                $ano_consulta = $_GET["a"];
-            }
-        }else{
+    if (isset($_GET["a"])) {
+        if ((int) $_GET["a"] == 0) {
             $ano_consulta = date("Y");
+        } else {
+            $ano_consulta = $_GET["a"];
         }
+    } else {
+        $ano_consulta = date("Y");
+    }
 
-        if(isset($_GET["m"])){
-            if((int)$_GET["m"]==0){
-                $mes_consulta = date("m");
-            }else{
-                $mes_consulta = $_GET["m"];
-            }
-        }else{
+    if (isset($_GET["m"])) {
+        if ((int) $_GET["m"] == 0) {
             $mes_consulta = date("m");
+        } else {
+            $mes_consulta = $_GET["m"];
         }
+    } else {
+        $mes_consulta = date("m");
+    }
 
-        echo "<span class='text-center font-weight-bold'>$linha_cuidado</span>";
-        echo "<span class='text-center text-sm font-weight-bold'>METAS GERAIS</span>";
-        
-        $porcentagem_arredondado    = (int)$porcentagem_geral;
-        $porcentagem_grafico        = ceil($porcentagem_arredondado/5)*5;
-
-        if($porcentagem_arredondado<75){
-            $cor_grafico = "danger";
-            $cor_grafico = 'bg-gradient-'."$cor_grafico";
-        }else if($porcentagem_arredondado>=75 && $porcentagem_arredondado<=85){
-            $cor_grafico = "bg-warning";
-        }else if($porcentagem_arredondado>85){
-            $cor_grafico = "success";
-            $cor_grafico = 'bg-gradient-'."$cor_grafico";
+    // ---- Helper functions (guard against redeclaration) ----
+    if (!function_exists('getCorMetaLinha')) {
+        function getCorMetaLinha($porcentagem)
+        {
+            if ($porcentagem < 75)
+                return 'bg-gradient-danger';
+            else if ($porcentagem >= 75 && $porcentagem <= 85)
+                return 'bg-warning';
+            else
+                return 'bg-gradient-success';
         }
-        
-        if($_GET["s"]==13){
-            if($porcentagem_grafico>100){
-                $porcentagem_grafico = 100;
-            }
-            $admissoes_condicao_linha = '<span class="mt-4 text-xs">Meta: '.$meta_externa.' - Realizado: '.$total_realizado.'</span>
-                                        <span class="text-center text-xs">Porcentagem de 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.$porcentagem_realizado_externo.'%</b></span>
-                                        <span class="text-center text-xs">Ideal realizado de 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.(int)$ideal_realizado_externo.'</b></span>
-                                        <div class="progress-wrapper w-75 mx-auto mb-4">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">'. number_format($porcentagem_geral, 2,',','').'%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar '.$cor_grafico.' w-'.$porcentagem_grafico.'" role="progressbar" aria-valuenow="'.$porcentagem_grafico.'" aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                        </div>';
-        }else if($_GET["s"]==1){
-            $porcentagem_arredondado_interna    = ($admissoes_internas_gerais/$meta_interna)*100;
-            $porcentagem_arredondado_externa    = ($admissoes_externas_gerais/$meta_externa)*100;
-            $porcentagem_grafico_interna        = ceil($porcentagem_arredondado_interna/5)*5;
-            $porcentagem_grafico_externa        = ceil($porcentagem_arredondado_externa/5)*5;
-
-            if($porcentagem_grafico_externa>100){
-                $porcentagem_grafico_externa = 100;
-            }
-
-            if($porcentagem_grafico_interna>100){
-                $porcentagem_grafico_interna = 100;
-            }
-
-            if($porcentagem_arredondado_interna<75){
-                $cor_grafico_interna = "danger";
-                $cor_grafico_interna = 'bg-gradient-'."$cor_grafico_interna";
-            }else if($porcentagem_arredondado_interna>=75 && $porcentagem_arredondado_interna<=85){
-                $cor_grafico_interna = "bg-warning";
-            }else if($porcentagem_arredondado_interna>85){
-                $cor_grafico_interna = "success";
-                $cor_grafico_interna = 'bg-gradient-'."$cor_grafico_interna";
-            }
-
-            if($porcentagem_arredondado_externa<75){
-                $cor_grafico_externa = "danger";
-                $cor_grafico_externa = 'bg-gradient-'."$cor_grafico_externa";
-            }else if($porcentagem_arredondado_externa>=75 && $porcentagem_arredondado_externa<=85){
-                $cor_grafico_externa = "bg-warning";
-            }else if($porcentagem_arredondado_externa>85){
-                $cor_grafico_externa = "success";
-                $cor_grafico_externa = 'bg-gradient-'."$cor_grafico_externa";
-            }
-
-            $admissoes_condicao_linha = '<span class="mt-4 text-xs">Meta interna: '.$meta_interna.' - Realizado: '.$admissoes_internas_gerais.'</span>
-                                        <span class="text-center text-xs">Porcentagem de 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.$porcentagem_realizado_interno.'%</b></span>
-                                        <span class="text-center text-xs">Ideal realizado de 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.(int)$ideal_realizado_interno.'</b></span>
-                                        <div class="progress-wrapper w-75 mx-auto mb-4">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">'. number_format($porcentagem_arredondado_interna, 2,',','').'%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar '.$cor_grafico_interna.' w-'.$porcentagem_grafico_interna.'" role="progressbar" aria-valuenow="'.$porcentagem_grafico_interna.'" aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <span class="mt-4 text-xs">Meta externa: '.$meta_externa.' - Realizado: '.$admissoes_externas_gerais.'</span>
-                                        <span class="text-center text-xs">Porcentagem de 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.$porcentagem_realizado_externo.'%</b></span>
-                                        <span class="text-center text-xs">Ideal realizado de 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.(int)$ideal_realizado_externo.'</b></span>
-                                        <div class="progress-wrapper w-75 mx-auto mb-4">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">'. number_format($porcentagem_arredondado_externa, 2,',','').'%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar '.$cor_grafico_externa.' w-'.$porcentagem_grafico_externa.'" role="progressbar" aria-valuenow="'.$porcentagem_grafico_externa.'" aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                        </div>';
-        }else{
-            if($porcentagem_grafico>100){
-                $porcentagem_grafico = 100;
-            }
-            $admissoes_condicao_linha = '<span class="mt-4 text-xs">Meta: '.$meta_externa.' - Realizado: '.$total_realizado.'</span>
-                                        <span class="text-xs">Admissões Internas: '.$admissoes_internas_gerais.' </span>
-                                        <span class="text-xs">Admissões Externas: '.$admissoes_externas_gerais.' </span>
-                                        <span class="text-center text-xs">Porcentagem de 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.$porcentagem_realizado_externo.'%</b></span>
-                                        <span class="text-center text-xs">Ideal realizado de 1/'.$mes_consulta.' à '.$dia_atual_realizado.'/'.$mes_consulta.': <b>'.(int)$ideal_realizado_externo.'</b></span>
-                                        <div class="progress-wrapper w-75 mx-auto mb-4">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">'. number_format($porcentagem_geral, 2,',','').'%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar '.$cor_grafico.' w-'.$porcentagem_grafico.'" role="progressbar" aria-valuenow="'.$porcentagem_grafico.'" aria-valuemin="0" aria-valuemax="100">
-                                                </div>
-                                            </div>
-                                        </div>';
+        function clampProgressLinha($val)
+        {
+            $rounded = (int) $val;
+            $stepped = ceil($rounded / 5) * 5;
+            return min($stepped, 100);
         }
-        echo    $admissoes_condicao_linha;
-
-        
-        if($ano_calendario==0 || $mes_calendario==0){
-            $calendario->display();
-        }else{
-            $calendario->stylesheet();
-            echo($calendario->draw($ano_calendario.'-'.$mes_calendario.'-01'));
-        }
-        
-        echo '<a href="'.$diretorio_raiz.'admissoes/meses?a='.$ano_consulta.'" class="mt-4 azul-hospital botao-inverso-hospital btn btn-rounded">Calendário anual</a>';
-        
-        // echo    '<h3><b>Setembro 2022</b></h3>
-        //         <h5 style="text-align: right;color: green">Meta mês: -</h5>
-        //         <h5 style="text-align: right;color: green">Meta realizado: -</h5>
-        //         <div class="w-full flex justify-center flex-wrap">';
-        // for($i = 1; $i<=27; $i++){
-        //     echo "<div class='card w-1/7 mx-2 my-2 flex'>
-        //                 <div class='card-header'>
-        //                     <div class='row'>
-        //                         <div class='col-lg-6 col-7'>
-        //                             <h6>Dia $i</h6>
-        //                         </div>
-        //                         <div class='col-lg-6 col-5 my-auto text-end'>
-        //                             <div class='dropdown float-lg-end pe-4'>
-        //                                 <a class='cursor-pointer' onclick='abrirModalInformacoes(\"modal_grafico_geral\")' aria-expanded='false'>
-        //                                     <i class='fa fa-question-circle text-secondary'></i>
-        //                                 </a>
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //                 <div class='card-body p-3'>
-        //                     <span>Ofertadas: 10</span><br />
-        //                     <span>Admissoes: 9</span><br />
-        //                     <span>Saldo: - </span>
-        //                 </div>
-        //             </div>";
-        // }
-        // echo '</div>';
+    }
     ?>
-    <!--<div class="col-lg-12 mb-<?php /*echo $variavel_controle_margem_tv;*/?>">
-         <div class="card z-index-2">
-            <div class="card-header pb-0">
-                <div class="row">
-                    <div class="col-lg-6 col-7">
-                        <h6>Gráfico Geral de Ocupação - <span style='font-size: 12px' id='data_ult_att' name='data_ult_att'></span></h6>
-                    </div>
-                    <div class="col-lg-6 col-5 my-auto text-end">
-                        <div class="dropdown float-lg-end pe-4">
-                            <a class="cursor-pointer" onclick="abrirModalInformacoes('modal_grafico_geral')" aria-expanded="false">
-                                <i class="fa fa-question-circle text-secondary"></i>
-                            </a>
-                        </div>
-                    </div>
+                <!-- Header -->
+                <div class="d-flex align-items-center mb-3">
+                    <div class="me-2" style="width:4px; height:24px; background: var(--premium-gradient); border-radius:2px;"></div>
+                    <h6 class="mb-0 text-uppercase font-weight-bold text-petroleum" style="letter-spacing:0.5px; font-size:0.85rem;">
+                        <?= $linha_cuidado ?> — Metas Gerais
+                    </h6>
                 </div>
-            </div>
-            <div class="card-body p-3">
-                <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
-                    <div class="chart">
-                    <canvas id="chart-bars" class="chart-canvas" height="<?php /*echo $tamanho_grafico;*/?>"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div> 
-    </div>
-    <div class="row" id="divPercentualGeral" name="divPercentualGeral">
 
-    </div>-->
-    
+    <?php
+    $porcentagem_arredondado = (int) $porcentagem_geral;
+    $porcentagem_grafico = ceil($porcentagem_arredondado / 5) * 5;
+
+    if ($porcentagem_arredondado < 75) {
+        $cor_grafico = 'bg-gradient-danger';
+    } else if ($porcentagem_arredondado >= 75 && $porcentagem_arredondado <= 85) {
+        $cor_grafico = "bg-warning";
+    } else if ($porcentagem_arredondado > 85) {
+        $cor_grafico = 'bg-gradient-success';
+    }
+    ?>
+
+                <!-- Goals Cards -->
+                <div class="row">
+    <?php if ($_GET["s"] == 13): // Hospital Dia
+            $porcentagem_grafico = clampProgressLinha($porcentagem_geral);
+            ?>
+                        <div class="col-lg-6 col-12 mb-3">
+                            <div class="list-card meta-goal-card">
+                                <div class="list-card-strip strip-orange"></div>
+                                <div class="list-card-body" style="padding: 16px 20px 12px 24px; display:block;">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="font-weight-bold" style="font-size:0.95rem; color: var(--color-petroleum-blue);">
+                                            <i class="ni ni-calendar-grid-61 me-1 opacity-6" style="font-size:0.85rem;"></i>
+                                            Hospital Dia
+                                        </span>
+                                        <span class="font-weight-bolder" style="font-size:1.2rem; color: var(--color-petroleum-blue);">
+                                            <?= number_format($porcentagem_geral, 1, ',', '') ?>%
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2 mb-2" style="font-size:0.78rem; color:#8898aa;">
+                                        <span><b style="color:var(--color-dark-grey);"><?= $meta_externa ?></b> Meta</span>
+                                        <span>•</span>
+                                        <span><b style="color:var(--color-dark-grey);"><?= $total_realizado ?></b> Realizado</span>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-3 mb-2" style="font-size:0.75rem; color:#8898aa;">
+                                        <span>Realizado 1/<?= $mes_consulta ?> - <?= $dia_atual_realizado ?>/<?= $mes_consulta ?>: <b style="color:var(--color-dark-grey);"><?= $porcentagem_realizado_externo ?>%</b></span>
+                                        <span>Ideal: <b style="color:var(--color-dark-grey);"><?= (int) $ideal_realizado_externo ?></b></span>
+                                    </div>
+                                    <div class="progress" style="height:6px; border-radius:3px; background:#eef0f3;">
+                                        <div class="progress-bar <?= $cor_grafico ?>" role="progressbar"
+                                             style="width:<?= $porcentagem_grafico ?>%; border-radius:3px; transition: width 0.6s ease;"
+                                             aria-valuenow="<?= $porcentagem_grafico ?>" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+    <?php elseif ($_GET["s"] == 1): // CTI - internal + external
+            $porcentagem_arredondado_interna = ($admissoes_internas_gerais / $meta_interna) * 100;
+            $porcentagem_arredondado_externa = ($admissoes_externas_gerais / $meta_externa) * 100;
+            $porcentagem_grafico_interna = clampProgressLinha($porcentagem_arredondado_interna);
+            $porcentagem_grafico_externa = clampProgressLinha($porcentagem_arredondado_externa);
+            $cor_grafico_interna = getCorMetaLinha((int) $porcentagem_arredondado_interna);
+            $cor_grafico_externa = getCorMetaLinha((int) $porcentagem_arredondado_externa);
+            ?>
+                        <!-- Internal Goal -->
+                        <div class="col-lg-6 col-12 mb-3">
+                            <div class="list-card meta-goal-card">
+                                <div class="list-card-strip strip-red"></div>
+                                <div class="list-card-body" style="padding: 16px 20px 12px 24px; display:block;">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="font-weight-bold" style="font-size:0.95rem; color: var(--color-petroleum-blue);">
+                                            <i class="ni ni-ambulance me-1 opacity-6" style="font-size:0.85rem;"></i>
+                                            Meta Interna
+                                        </span>
+                                        <span class="font-weight-bolder" style="font-size:1.2rem; color: var(--color-petroleum-blue);">
+                                            <?= number_format($porcentagem_arredondado_interna, 1, ',', '') ?>%
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2 mb-2" style="font-size:0.78rem; color:#8898aa;">
+                                        <span><b style="color:var(--color-dark-grey);"><?= $meta_interna ?></b> Meta</span>
+                                        <span>•</span>
+                                        <span><b style="color:var(--color-dark-grey);"><?= $admissoes_internas_gerais ?></b> Realizado</span>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-3 mb-2" style="font-size:0.75rem; color:#8898aa;">
+                                        <span>Realizado 1/<?= $mes_consulta ?> - <?= $dia_atual_realizado ?>/<?= $mes_consulta ?>: <b style="color:var(--color-dark-grey);"><?= $porcentagem_realizado_interno ?>%</b></span>
+                                        <span>Ideal: <b style="color:var(--color-dark-grey);"><?= (int) $ideal_realizado_interno ?></b></span>
+                                    </div>
+                                    <div class="progress" style="height:6px; border-radius:3px; background:#eef0f3;">
+                                        <div class="progress-bar <?= $cor_grafico_interna ?>" role="progressbar"
+                                             style="width:<?= $porcentagem_grafico_interna ?>%; border-radius:3px; transition: width 0.6s ease;"
+                                             aria-valuenow="<?= $porcentagem_grafico_interna ?>" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- External Goal -->
+                        <div class="col-lg-6 col-12 mb-3">
+                            <div class="list-card meta-goal-card">
+                                <div class="list-card-strip strip-blue"></div>
+                                <div class="list-card-body" style="padding: 16px 20px 12px 24px; display:block;">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="font-weight-bold" style="font-size:0.95rem; color: var(--color-petroleum-blue);">
+                                            <i class="ni ni-ambulance me-1 opacity-6" style="font-size:0.85rem;"></i>
+                                            Meta Externa
+                                        </span>
+                                        <span class="font-weight-bolder" style="font-size:1.2rem; color: var(--color-petroleum-blue);">
+                                            <?= number_format($porcentagem_arredondado_externa, 1, ',', '') ?>%
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2 mb-2" style="font-size:0.78rem; color:#8898aa;">
+                                        <span><b style="color:var(--color-dark-grey);"><?= $meta_externa ?></b> Meta</span>
+                                        <span>•</span>
+                                        <span><b style="color:var(--color-dark-grey);"><?= $admissoes_externas_gerais ?></b> Realizado</span>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-3 mb-2" style="font-size:0.75rem; color:#8898aa;">
+                                        <span>Realizado 1/<?= $mes_consulta ?> - <?= $dia_atual_realizado ?>/<?= $mes_consulta ?>: <b style="color:var(--color-dark-grey);"><?= $porcentagem_realizado_externo ?>%</b></span>
+                                        <span>Ideal: <b style="color:var(--color-dark-grey);"><?= (int) $ideal_realizado_externo ?></b></span>
+                                    </div>
+                                    <div class="progress" style="height:6px; border-radius:3px; background:#eef0f3;">
+                                        <div class="progress-bar <?= $cor_grafico_externa ?>" role="progressbar"
+                                             style="width:<?= $porcentagem_grafico_externa ?>%; border-radius:3px; transition: width 0.6s ease;"
+                                             aria-valuenow="<?= $porcentagem_grafico_externa ?>" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+    <?php else: // Default (CLM, AVC, CIR)
+            $porcentagem_grafico = clampProgressLinha($porcentagem_geral);
+            ?>
+                        <div class="col-lg-6 col-12 mb-3">
+                            <div class="list-card meta-goal-card">
+                                <div class="list-card-strip strip-green"></div>
+                                <div class="list-card-body" style="padding: 16px 20px 12px 24px; display:block;">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="font-weight-bold" style="font-size:0.95rem; color: var(--color-petroleum-blue);">
+                                            <i class="ni ni-building me-1 opacity-6" style="font-size:0.85rem;"></i>
+                                            <?= $linha_cuidado ?>
+                                        </span>
+                                        <span class="font-weight-bolder" style="font-size:1.2rem; color: var(--color-petroleum-blue);">
+                                            <?= number_format($porcentagem_geral, 1, ',', '') ?>%
+                                        </span>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2 mb-2" style="font-size:0.78rem; color:#8898aa;">
+                                        <span><b style="color:var(--color-dark-grey);"><?= $meta_externa ?></b> Meta</span>
+                                        <span>•</span>
+                                        <span><b style="color:var(--color-dark-grey);"><?= $total_realizado ?></b> Realizado</span>
+                                        <span>•</span>
+                                        <span><b style="color:var(--color-dark-grey);"><?= $admissoes_internas_gerais ?></b> Internas</span>
+                                        <span>•</span>
+                                        <span><b style="color:var(--color-dark-grey);"><?= $admissoes_externas_gerais ?></b> Externas</span>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-3 mb-2" style="font-size:0.75rem; color:#8898aa;">
+                                        <span>Realizado 1/<?= $mes_consulta ?> - <?= $dia_atual_realizado ?>/<?= $mes_consulta ?>: <b style="color:var(--color-dark-grey);"><?= $porcentagem_realizado_externo ?>%</b></span>
+                                        <span>Ideal: <b style="color:var(--color-dark-grey);"><?= (int) $ideal_realizado_externo ?></b></span>
+                                    </div>
+                                    <div class="progress" style="height:6px; border-radius:3px; background:#eef0f3;">
+                                        <div class="progress-bar <?= $cor_grafico ?>" role="progressbar"
+                                             style="width:<?= $porcentagem_grafico ?>%; border-radius:3px; transition: width 0.6s ease;"
+                                             aria-valuenow="<?= $porcentagem_grafico ?>" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    <?php endif; ?>
+                </div>
+
+    <?php
+    if ($ano_calendario == 0 || $mes_calendario == 0) {
+        $calendario->display();
+    } else {
+        $calendario->stylesheet();
+        echo ($calendario->draw($ano_calendario . '-' . $mes_calendario . '-01'));
+    }
+
+    echo '<a href="' . $diretorio_raiz . 'admissoes/meses?a=' . $ano_consulta . '" class="mt-4 btn bg-gradient-hmdcc text-white btn-rounded">Calendário anual</a>';
+    ?>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -235,7 +252,7 @@
 
 
 <!-- <div class="row my-4">
-    <div class="col-lg-12 col-md-12 mb-<?php /*echo $variavel_controle_margem_tv;*/?>" id="divGeral" name="divGeral">
+    <div class="col-lg-12 col-md-12 mb-<?php /*echo $variavel_controle_margem_tv;*/ ?>" id="divGeral" name="divGeral">
         <div class="card" id="tabela_detalhes" name="tabela_detalhes">
             <div class="card-header pb-0">
                 <div class="row">
@@ -274,7 +291,7 @@
                         </tbody>
                     </table>
                 </div>
-                <input type='hidden' value='<?php /*echo $usuario_logado["painel_variavel_controle"];*/?>' id='painel_variavel_controle' name='painel_variavel_controle'/>
+                <input type='hidden' value='<?php /*echo $usuario_logado["painel_variavel_controle"];*/ ?>' id='painel_variavel_controle' name='painel_variavel_controle'/>
             </div>
         </div>
     </div>
@@ -304,7 +321,7 @@
 <script>
     function abrirModalInformacoes(dia,mes,ano,agrupamento){
         $.ajax({
-            url : "<?php echo site_url('retornaDetalhesAdmissoesMesPorLinha');?>",
+            url : "<?php echo site_url('retornaDetalhesAdmissoesMesPorLinha'); ?>",
             type : 'POST',
             dataType: "JSON",
             data : {
@@ -369,7 +386,7 @@
     //     }else{*/
     //         $("#tabela_detalhes2").remove();
     //         $.ajax({
-    //             url : "<?php /*echo site_url('/dashboard/percentuaisSetorOcupacao');*/?>",
+    //             url : "<?php /*echo site_url('/dashboard/percentuaisSetorOcupacao');*/ ?>",
     //             type : 'POST',
     //             dataType: "JSON",
     //             data : {

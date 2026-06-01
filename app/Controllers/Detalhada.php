@@ -593,35 +593,36 @@ class Detalhada extends BaseController
             // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
 
             $historico_exames_lab = $this->detalhadaModel->retornaHistoricoExamesLaboratoriaisPaciente($nr_atendimento);
-
-            $exames_laboratoriais_externos_servidor = $this->encontraArquivosExamesLaboratoriaisExternos($nr_atendimento);
+            
+            // Implementar solução com exames externos dentro da OCI
+            //$exames_laboratoriais_externos_servidor = $this->encontraArquivosExamesLaboratoriaisExternos($nr_atendimento);
 
             // SE EXISTE EXAME LABORATORIAL EXTERNO
             $se_existe_exames_externos = "";
-            if ($exames_laboratoriais_externos_servidor) {
-                if (count($exames_laboratoriais_externos_servidor) > 0) {
-                    $se_existe_exames_externos = "<tr>
-                                                    <td colspan='2' class='text-center text-uppercase font-weight-bold text-wrap'>
-                                                        Externos
-                                                    </td>
-                                                </tr>";
-                    for ($j = 0; $j < count($exames_laboratoriais_externos_servidor); $j++) {
-                        $se_existe_exames_externos .= "<tr> 
-                                                            <td class='text-wrap text-uppercase'>
-                                                                <b>" . $exames_laboratoriais_externos_servidor[$j] . "</b>
-                                                            </td>
-                                                            <td class='cor_solicitacao_interconsulta text-wrap text-center flex' style='color:#cb0c9f'>
-                                                                <a class='w-full' href='exameLaboratorialExternoPdf?ne=" . $exames_laboratoriais_externos_servidor[$j] . "&na=" . $nr_atendimento . "'><div class='w-full btn btn-primary' style='margin:0px !important'><b>ABRIR EXAME</b></div></a>
-                                                            </td>
-                                                        </tr>";
-                    }
-                    $se_existe_exames_externos .= "<tr>
-                                                    <td colspan='2' class='text-center text-uppercase font-weight-bold text-wrap'>
-                                                        Internos
-                                                    </td>
-                                                </tr>";
-                }
-            }
+            // if ($exames_laboratoriais_externos_servidor) {
+            //     if (count($exames_laboratoriais_externos_servidor) > 0) {
+            //         $se_existe_exames_externos = "<tr>
+            //                                         <td colspan='2' class='text-center text-uppercase font-weight-bold text-wrap'>
+            //                                             Externos
+            //                                         </td>
+            //                                     </tr>";
+            //         for ($j = 0; $j < count($exames_laboratoriais_externos_servidor); $j++) {
+            //             $se_existe_exames_externos .= "<tr> 
+            //                                                 <td class='text-wrap text-uppercase'>
+            //                                                     <b>" . $exames_laboratoriais_externos_servidor[$j] . "</b>
+            //                                                 </td>
+            //                                                 <td class='cor_solicitacao_interconsulta text-wrap text-center flex' style='color:#cb0c9f'>
+            //                                                     <a class='w-full' href='exameLaboratorialExternoPdf?ne=" . $exames_laboratoriais_externos_servidor[$j] . "&na=" . $nr_atendimento . "'><div class='w-full btn btn-primary' style='margin:0px !important'><b>ABRIR EXAME</b></div></a>
+            //                                                 </td>
+            //                                             </tr>";
+            //         }
+            //         $se_existe_exames_externos .= "<tr>
+            //                                         <td colspan='2' class='text-center text-uppercase font-weight-bold text-wrap'>
+            //                                             Internos
+            //                                         </td>
+            //                                     </tr>";
+            //     }
+            // }
 
             // SE EXISTE EXAME LABORATORIAL INTERNO
             if (count($historico_exames_lab) > 0) {

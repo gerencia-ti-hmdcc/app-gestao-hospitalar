@@ -87,10 +87,10 @@ class Database extends Config
 
         $this->site = [
             'DSN'          => '',
-            'hostname'     => '',
-            'username'     => '',
-            'password'     => '',
-            'database'     => '',
+            'hostname'     => '192.168.5.70',
+            'username'     => 'hmdcc',
+            'password'     => 'wLe)_2B#TMm)a=n',
+            'database'     => 'hmdcc_backend',
             'DBDriver'     => 'MySQLi',
             'DBPrefix'     => '',
             'pConnect'     => false,

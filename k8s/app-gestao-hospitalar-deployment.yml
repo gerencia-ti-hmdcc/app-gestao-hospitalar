@@ -22,7 +22,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: CI_ENVIRONMENT
-            value: "development"
+            value: "production"
           - name: CI_BASE_URL
             value: "https://app.hmdcc.com.br/" # URL base do aplicativo
           - name: DB_DEFAULT_GROUP

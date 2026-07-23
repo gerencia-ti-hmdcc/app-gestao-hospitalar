@@ -539,7 +539,7 @@ $(document).ready(function () {
     });
 
     // --- HISTORICO PAGES ---
-  } else if (['historicoEvolucoesPaciente', 'historicoInterconsultasPaciente', 'historicoExamesLabPaciente', 'historicoExamesImagemPaciente'].includes(config.currentPage)) {
+  } else if (['historicoEvolucoesPaciente', 'historicoInterconsultasPaciente', 'historicoExamesLabPaciente', 'historicoExamesImagemPaciente', 'historicoGridExamesPaciente'].includes(config.currentPage)) {
     let nr_atendimento = $("#nr_atendimento_id").val();
     if (!nr_atendimento) return;
 

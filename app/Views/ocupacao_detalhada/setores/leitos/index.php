@@ -796,6 +796,7 @@ if ($usuario_logado["TIPO_PERFIL"] == 'P') {
                                             "<a class='btn hmdcc-color-3 rounded text-white flex' href='historicoExamesLabPaciente?a=" + nr_atendimento + "&l=" + $("#linha_cuidado_id").val() + "&s=" + $("#cd_setor_atendimento_id").val() + "'>Exames laboratoriais</a>" +
                                             // "<a class='btn hmdcc-color-4 rounded text-white flex' href='historicoPrescricoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas prescrições</a>"+
                                             "<a class='btn hmdcc-color-5 rounded text-white flex' href='historicoExamesImagemPaciente?a=" + nr_atendimento + "&l=" + $("#linha_cuidado_id").val() + "&s=" + $("#cd_setor_atendimento_id").val() + "'>Imagens e laudos</a>" +
+                                            "<a style='background-color:var(--color-dark-grey) !important;' class='btn rounded text-white flex' href='historicoGridExamesPaciente?a=" + nr_atendimento + "&l=" + $("#linha_cuidado_id").val() + "&s=" + $("#cd_setor_atendimento_id").val() + "'>Grid de exames</a>" +
                                             "</td>" +
                                             "</tr>";
                                         // }else{
@@ -869,6 +870,7 @@ if ($usuario_logado["TIPO_PERFIL"] == 'P') {
                                             "<a class='btn hmdcc-color-3 rounded text-white flex' href='historicoExamesLabPaciente?a=" + nr_atendimento + "&l=" + $("#linha_cuidado_id").val() + "&s=" + $("#cd_setor_atendimento_id").val() + "'>Exames laboratoriais</a>" +
                                             // "<a class='btn hmdcc-color-4 rounded text-white flex' href='historicoPrescricoesPaciente?a="+nr_atendimento+"&l="+$("#linha_cuidado_id").val()+"&s="+$("#cd_setor_atendimento_id").val()+"'>Últimas prescrições</a>"+
                                             "<a class='btn hmdcc-color-5 rounded text-white flex' href='historicoExamesImagemPaciente?a=" + nr_atendimento + "&l=" + $("#linha_cuidado_id").val() + "&s=" + $("#cd_setor_atendimento_id").val() + "'>Imagens e laudos</a>" +
+                                            "<a style='background-color:var(--color-dark-grey) !important;' class='btn rounded text-white flex' href='historicoGridExamesPaciente?a=" + nr_atendimento + "&l=" + $("#linha_cuidado_id").val() + "&s=" + $("#cd_setor_atendimento_id").val() + "'>Grid de exames</a>" +
                                             "</td>" +
                                             "</tr>";
                                         // }else{

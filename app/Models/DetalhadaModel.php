@@ -306,5 +306,46 @@ class DetalhadaModel extends Model
                                 WHERE
                                     nr_atendimento = $nr_atendimento")->getResultArray();
     }
+
+    public function retornaGridExamePaciente($nr_atendimento)
+    {
+        return $this->db->query("SELECT 
+                                    nr_atendimento,
+                                    nr_seq_resultado,
+                                    nr_prescricao,
+                                    dt_coleta,
+                                    dt_resultado,
+                                    nr_seq_grupo_exame,
+                                    desc_grupo_exame,
+                                    desc_exame,
+                                    desc_unidade,
+                                    desc_referencia_exame,
+                                    desc_material,
+                                    desc_metodo,
+                                    ordem_item,
+                                    resultado_valor
+                                FROM 
+                                    HMDCC_LAB_RESULTADOS_GRID
+                                WHERE 
+                                    nr_atendimento = $nr_atendimento
+                                    
+                                    -- Correção: Agora checamos a combinação exata de prescrição e horário de coleta
+                                    AND (nr_prescricao, dt_coleta) IN (
+                                        SELECT nr_prescricao, dt_coleta FROM (
+                                            -- Busca os 10 últimos horários de coleta únicos
+                                            SELECT DISTINCT nr_prescricao, dt_coleta
+                                            FROM HMDCC_LAB_RESULTADOS_GRID
+                                            WHERE nr_atendimento = $nr_atendimento
+                                            AND nr_prescricao IS NOT NULL
+                                            ORDER BY dt_coleta DESC
+                                            LIMIT 20
+                                        ) AS ultimas_coletas
+                                    )
+                                ORDER BY 
+                                    desc_grupo_exame DESC,
+                                    desc_exame ASC,
+                                    ordem_item ASC,
+                                    dt_coleta DESC")->getResultArray();
+    }
 }
 ?>

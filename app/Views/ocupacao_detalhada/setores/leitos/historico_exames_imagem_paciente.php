@@ -115,6 +115,9 @@ if (isset($_GET["nr_acesso_dicom"])) {
                         <a class='btn text-xs hmdcc-color-4 flex rounded text-white' href='historicoPrescricoesPaciente?a=" . $_GET["a"] . "&l=" . $_GET["l"] . "&s=" . $_GET["s"] . "'>Últimas prescrições</a>
                     </div>
                     -->
+                    <div class='w-full px-2 botoes-ocupacao-detalhada'>
+                        <a style='background-color: var(--color-dark-grey) !important' class='btn text-xs flex rounded text-white' href='historicoGridExamesPaciente?a=" . $_GET["a"] . "&l=" . $_GET["l"] . "&s=" . $_GET["s"] . "'>Grid de exames</a>
+                    </div>
                 </div>
             </div>";
     /*.date('d/m/Y H:i:s', strtotime($ultima_atualizacao["ultima_atualizacao"])).*/

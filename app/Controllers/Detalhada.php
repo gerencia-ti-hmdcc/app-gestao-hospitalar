@@ -593,7 +593,7 @@ class Detalhada extends BaseController
             // $this->logAcaoUsuario($tipo, $nr_atendimento=NULL, $funcao=NULL, $parametro=NULL);
 
             $historico_exames_lab = $this->detalhadaModel->retornaHistoricoExamesLaboratoriaisPaciente($nr_atendimento);
-            
+
             // Implementar solução com exames externos dentro da OCI
             //$exames_laboratoriais_externos_servidor = $this->encontraArquivosExamesLaboratoriaisExternos($nr_atendimento);
 
@@ -905,6 +905,291 @@ class Detalhada extends BaseController
             }
         } else {
             return;
+        }
+    }
+
+    public function historicoGridExamesPaciente()
+    {
+        $nr_atendimento = (int) $_GET["a"];
+
+        if ($nr_atendimento > 0) {
+            $this->logAcaoUsuario("visualização - grid de exames do paciente - nr_atendimento $nr_atendimento", $nr_atendimento, 'grid_exames');
+
+            // Busca os dados normalizados vindo da View
+            $historico_grid_exames = $this->detalhadaModel->retornaGridExamePaciente($nr_atendimento);
+
+            if (count($historico_grid_exames) > 0) {
+
+                $colunas_coletas = []; // Armazenará no máximo 10 cabeçalhos
+                $grid_exames = []; // Armazenará a matriz estruturada
+
+                // 1. Processamento e Montagem da Matriz com limite de 10 colunas
+                foreach ($historico_grid_exames as $row) {
+                    $id_coleta = $row["nr_prescricao"];
+
+                    // Armazena a coleta (a query já limitou aos 10 mais recentes)
+                    if (!isset($colunas_coletas[$id_coleta])) {
+                        $colunas_coletas[$id_coleta] = [
+                            'data_hora' => date("d/m/y H:i", strtotime($row["dt_coleta"])),
+                            'sequencial' => $row["nr_prescricao"],
+                            'timestamp' => strtotime($row["dt_coleta"])
+                        ];
+                    }
+
+                    $grupo = $row["desc_grupo_exame"];
+                    $exame = trim($row["desc_exame"]);
+                    $item_chave = $exame;
+
+                    if (!isset($grid_exames[$grupo][$item_chave])) {
+                        $grid_exames[$grupo][$item_chave] = [
+                            'nome_exame' => $exame,
+                            'unidade' => $row["desc_unidade"],
+                            'referencia' => $row["desc_referencia_exame"],
+                            'material' => $row["desc_material"],
+                            'metodo' => $row["desc_metodo"],
+                            'valores' => []
+                        ];
+                    }
+
+                    // Vincula o resultado
+                    $grid_exames[$grupo][$item_chave]['valores'][$id_coleta] = $row["resultado_valor"];
+                }
+
+                // Ordena as colunas por data decrescente (mais recente à esquerda)
+                uasort($colunas_coletas, function ($a, $b) {
+                    return $b['timestamp'] <=> $a['timestamp'];
+                });
+
+                // Helper: retorna true se o valor numérico estiver fora do intervalo de referência
+                $foraReferencia = function ($valorBruto, $referencia) {
+                    if ($valorBruto === null || empty(trim($referencia))) {
+                        return false;
+                    }
+
+                    // Normaliza número no formato BR para float comparável:
+                    //   Com vírgula  → vírgula é decimal, ponto é milhar (ex: 1.000,5 → 1000.5)
+                    //   Sem vírgula  → ponto seguido de 3 dígitos é milhar  (ex: 4.500  → 4500)
+                    //                  ponto com outro nº de dígitos é decimal (ex: 4.5   → 4.5)
+                    $normNum = function ($n) {
+                        $n = trim($n);
+                        if (strpos($n, ',') !== false) {
+                            $n = str_replace('.', '', $n);   // remove pontos de milhar
+                            $n = str_replace(',', '.', $n);  // vírgula vira ponto decimal
+                        } else {
+                            // ponto + exatamente 3 dígitos → milhar → remove o ponto
+                            $n = preg_replace('/\.(\d{3})(?!\d)/', '$1', $n);
+                        }
+                        return $n;
+                    };
+
+                    $valorNormalizado = $normNum($valorBruto);
+                    if (!is_numeric($valorNormalizado)) {
+                        return false;
+                    }
+
+                    $val = (float) $valorNormalizado;
+                    $ref = trim($referencia);
+
+                    // Range: "X a Y" | "X - Y" | "X – Y"
+                    if (preg_match('/^(-?[\d.,]+)\s*[-–a]\s*(-?[\d.,]+)$/i', $ref, $m)) {
+                        $min = (float) $normNum($m[1]);
+                        $max = (float) $normNum($m[2]);
+                        return $val < $min || $val > $max;
+                    }
+                    // Máximo: "< X" | "<= X" | "até X" | "ate X"
+                    if (preg_match('/^(?:até|ate|<=?|menor\s+(?:que|ou\s+igual\s+a))\s*(-?[\d.,]+)$/i', $ref, $m)) {
+                        return $val > (float) $normNum($m[1]);
+                    }
+                    // Mínimo: "> X" | ">= X" | "acima de X" | "maior que X"
+                    if (preg_match('/^(?:>=?|acima\s+de|maior\s+(?:que|ou\s+igual\s+a))\s*(-?[\d.,]+)$/i', $ref, $m)) {
+                        return $val < (float) $normNum($m[1]);
+                    }
+                    return false;
+                };
+
+
+                // 2. Construção do HTML do Grid
+                $html_grid_exames_paciente = "
+            <div class='flex flex-wrap'>
+                <div class='card z-index-2 w-full'>
+                    <div class='card-body' style='padding: 15px !important;' id='historico_grid_exames' name='historico_grid_exames'>
+                        <div class='table-responsive' style='overflow: auto; max-height: 80vh; max-width: 100%;'>
+                            <table class='table align-items-center mb-0' style='border-collapse: collapse; font-size: 12px; width:100%;' border='1' bordercolor='#e2e8f0'>
+                                <thead>
+                                    <tr style='background-color: #f8fafc; text-align: center; font-weight: bold;'>
+                                        <th style='position:sticky; top:0; left:0; z-index:30; background:#f8fafc; padding: 8px; text-align: left; min-width: 200px;'>Exame</th>
+                                        <th style='position:sticky; top:0; z-index:20; background:#f8fafc; padding: 8px; min-width: 100px;'>Referência</th>";
+
+                // Renderiza as colunas de data (resultados) — sticky top
+                foreach ($colunas_coletas as $coleta) {
+                    $html_grid_exames_paciente .= "
+                                        <th style='position:sticky; top:0; z-index:20; background:#f1f5f9; padding: 6px 12px; font-size: 11px; text-align: center; white-space: nowrap;'>
+                                            " . $coleta['data_hora'] . "<br>
+                                            <span style='font-weight: normal; color: #64748b; font-size: 10px;'>" . $coleta['sequencial'] . "</span>
+                                        </th>";
+                }
+
+                // Material e Método vêm por último
+                $html_grid_exames_paciente .= "
+                                        <th style='position:sticky; top:0; z-index:20; background:#f8fafc; padding: 8px;'>Material</th>
+                                        <th style='position:sticky; top:0; z-index:20; background:#f8fafc; padding: 8px;'>Método</th>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+
+                foreach ($grid_exames as $nome_grupo => $exames) {
+                    $html_grid_exames_paciente .= "
+                                    <tr style='background-color: var(--color-dark-grey) !important; font-weight: bold;'>
+                                        <td colspan='" . (4 + count($colunas_coletas)) . "' style='padding: 8px 12px; text-transform: uppercase; color: white !important'>
+                                            " . htmlspecialchars($nome_grupo) . "
+                                        </td>
+                                    </tr>";
+                    $coluna_unidade = "";
+                    foreach ($exames as $dados) {
+                        if (strlen($dados['unidade']) > 1) {
+                            $coluna_unidade = "<br /> (" . htmlspecialchars($dados['unidade']) . ")";
+                        } else {
+                            $coluna_unidade = "";
+                        }
+                        // Monta JSON do gráfico com todos os pontos (ordenação cronológica crescente — mais antigo → mais recente)
+                        $chart_points = [];
+                        foreach (array_reverse($colunas_coletas, true) as $col_id => $col_info) {
+                            $v_raw = $dados['valores'][$col_id] ?? null;
+                            $chart_points[] = ['label' => $col_info['data_hora'], 'raw' => $v_raw];
+                        }
+                        $chart_json = json_encode($chart_points, JSON_UNESCAPED_UNICODE);
+
+                        // Coluna Exame — sticky left, TR com dados do gráfico
+                        $html_grid_exames_paciente .= "
+                                        <tr class='tr-exame-grafico' style='border-bottom: 1px solid #e2e8f0;' data-chart-exame='" . htmlspecialchars($dados['nome_exame'], ENT_QUOTES) . "' data-chart-ref='" . htmlspecialchars($dados['referencia'], ENT_QUOTES) . "' data-chart-points='" . htmlspecialchars($chart_json, ENT_QUOTES) . "'>
+                                            <td style='position:sticky; left:0; z-index:10; background:#ffffff; padding: 6px 12px; font-weight: 500; color: #1e293b; white-space: nowrap;'>" . htmlspecialchars($dados['nome_exame']) . " $coluna_unidade</td>
+                                            <td style='padding: 6px 12px; text-align: center; color: #64748b; font-size: 11px; max-width: 250px; text-wrap: wrap;'>" . htmlspecialchars($dados['referencia']) . "</td>";
+
+                        // Colunas de resultados
+                        foreach ($colunas_coletas as $id_coleta => $info_coleta) {
+                            $valor_bruto = $dados['valores'][$id_coleta] ?? null;
+                            $valor_resultado = ($valor_bruto !== null) ? htmlspecialchars($valor_bruto) : '-';
+
+                            $is_num = is_numeric(str_replace(',', '.', $valor_resultado));
+
+                            // Formata números com separador de milhar e decimal padrão BR (ex: 1000.5 → 1.000,5)
+                            if ($is_num && $valor_resultado !== '-') {
+                                $partes = explode('.', str_replace(',', '.', $valor_resultado));
+                                $decimais = isset($partes[1]) ? strlen($partes[1]) : 0;
+                                $valor_resultado = number_format((float) str_replace(',', '.', $valor_resultado), $decimais, ',', '.');
+                            }
+
+                            // Trunca resultados textuais longos para preservar a largura da tabela
+                            $exibir_valor = $valor_resultado;
+                            $data_full_text = "";
+                            $class_texto = "";
+                            if (!$is_num && $valor_resultado !== '-' && mb_strlen($valor_resultado) > 3) {
+                                $data_full_text = "data-full-text='" . htmlspecialchars($valor_resultado, ENT_QUOTES) . "'";
+                                $exibir_valor = mb_substr($valor_resultado, 0, 3) . '...';
+                                $class_texto = "cell-texto-completo";
+                            }
+
+                            // Destaca em amarelo se o valor estiver fora da referência
+                            $bg_alerta = $foraReferencia($valor_bruto, $dados['referencia'])
+                                ? "background-color: #fef08a;"
+                                : "";
+                            // Atributos de dados para o gráfico (duplo-clique)
+                            $is_valid = ($valor_bruto !== null && $valor_resultado !== '-');
+                            $cursor = $is_valid || !empty($class_texto) ? "cursor:pointer;" : "";
+                            $data_attrs = $is_valid
+                                ? "class='cell-resultado {$class_texto}' {$data_full_text} data-exame='" . htmlspecialchars($dados['nome_exame'], ENT_QUOTES) . "' data-label='" . htmlspecialchars($info_coleta['data_hora'], ENT_QUOTES) . "' data-valor-bruto='" . htmlspecialchars($valor_bruto, ENT_QUOTES) . "' data-referencia='" . htmlspecialchars($dados['referencia'], ENT_QUOTES) . "'"
+                                : "";
+                            $html_grid_exames_paciente .= "<td {$data_attrs} style='padding: 6px 12px; text-align: center; font-weight: 600; color: #0f172a; {$bg_alerta} {$cursor}'>" . $exibir_valor . "</td>";
+                        }
+
+                        // Material e Método — por último
+                        $html_grid_exames_paciente .= "
+                                            <td style='padding: 6px 12px; color: #475569; white-space: nowrap;'>" . htmlspecialchars($dados['material']) . "</td>
+                                            <td style='padding: 6px 12px; color: #64748b; font-size: 11px; white-space: nowrap;'>" . htmlspecialchars($dados['metodo']) . "</td>
+                                        </tr>";
+                    }
+                }
+
+
+
+                $html_grid_exames_paciente .= "
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <style>
+                .cross-selected {
+                    box-shadow: inset 0 0 0 2px #3b82f6 !important;
+                }
+            </style>
+            <script>
+                document.querySelectorAll(\"#historico_grid_exames table td, #historico_grid_exames table th\").forEach(cell => {
+                    cell.addEventListener(\"click\", function() {
+                        const table = this.closest(\"table\");
+                        
+                        // Remove seleção anterior
+                        table.querySelectorAll(\".cross-selected\").forEach(el => el.classList.remove(\"cross-selected\"));
+                        
+                        // Adiciona seleção na linha atual
+                        const row = this.closest(\"tr\");
+                        if (row) {
+                            row.querySelectorAll(\"td, th\").forEach(el => el.classList.add(\"cross-selected\"));
+                        }
+                        
+                        // Adiciona seleção na coluna atual
+                        const colIndex = this.cellIndex;
+                        if (colIndex !== undefined) {
+                            table.querySelectorAll('tr > *:nth-child(' + (colIndex + 1) + ')').forEach(el => el.classList.add(\"cross-selected\"));
+                        }
+
+                        // Se for uma célula com texto longo, abre o modal_info com o texto completo
+                        if (this.classList.contains('cell-texto-completo')) {
+                            const fullText = this.dataset.fullText;
+                            const exameNome = this.dataset.exame || 'Resultado de Exame';
+                            
+                            const modalLabel = document.getElementById('exampleModalLabel');
+                            const corpoModal = document.getElementById('corpo_modal');
+                            
+                            if (modalLabel && corpoModal) {
+                                modalLabel.textContent = exameNome;
+                                corpoModal.innerHTML = '<p style=\"font-size: 14px; white-space: pre-wrap; word-break: break-all; color: #1e293b;\">' + fullText + '</p>';
+                                
+                                var modalInfo = new bootstrap.Modal(document.getElementById('modal_info'));
+                                modalInfo.show();
+                            }
+                        }
+                    });
+                });
+            </script>";
+
+
+
+            } else {
+                $html_grid_exames_paciente = "
+            <div class='flex flex-wrap'>
+                <div class='card z-index-2 w-full mb-3'>
+                    <div class='card-body text-center' style='padding: 30px !important;' id='historico_grid_exames' name='historico_grid_exames'>
+                        O paciente ainda não possui exames laboratoriais estruturados para este atendimento.
+                    </div>
+                </div>
+            </div>";
+            }
+
+            $dados["html_grid_exames_paciente"] = $html_grid_exames_paciente;
+
+            $dados['pagina'] = 'ocupacao_detalhada/setores/leitos/historico_grid_exames_paciente.php';
+            $dados['nome_pagina'] = 'Grid de Exames do Paciente';
+            $dados["link_pagina"] = 'historicoGridExamesPaciente';
+            unset($dados["diretorio_raiz"]);
+            $dados["diretorio_raiz"] = '../';
+
+            return view('templates/template_padrao.php', $dados);
+
+        } else {
+            return redirect()->to(base_url('../') . 'detalhada');
         }
     }
 

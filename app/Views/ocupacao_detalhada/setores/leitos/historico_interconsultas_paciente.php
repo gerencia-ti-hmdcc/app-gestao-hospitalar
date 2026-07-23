@@ -103,5 +103,4 @@
         return quantos_anos < 0 ? 0 : quantos_anos;
     }
 
-
 </script>

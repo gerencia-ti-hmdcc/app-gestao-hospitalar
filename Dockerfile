@@ -1,6 +1,6 @@
 # Use the official PHP 8 Apache image
 # FROM shinsenter/codeigniter4:latest
-FROM php:8.2-apache
+FROM php:8.2.35-apache
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -82,7 +82,7 @@ RUN apt-get clean && rm -r /var/lib/apt/lists/* \
 		/root/.cache
         
 ENV CI_ENVIRONMENT='production'
-ENV CI_BASE_URL='http://hmdcc-lap3020/'
+ENV CI_BASE_URL='http://hmdcc1003/'
 ENV DB_DEFAULT_GROUP='default'
 
 ENV MYSQL_HOST='mysql'
